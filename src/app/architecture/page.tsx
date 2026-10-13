@@ -18,6 +18,8 @@ import {
 } from 'lucide-react';
 import { Logo } from '../../components/Logo';
 
+import { Navbar } from '../../components/Navbar';
+
 export const metadata = {
   title: 'Axonwall Architecture | Technical Overview & System Design',
   description:
@@ -31,43 +33,7 @@ export default function StandaloneArchitecturePage() {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[650px] radial-glow pointer-events-none -z-10" />
 
       {/* Navigation */}
-      <header className="sticky top-0 z-50 backdrop-blur-md bg-[#080c14]/80 border-b border-slate-800/80">
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-3">
-            <Logo variant="badge" size="sm" showSubtext={false} />
-            <div className="flex items-baseline gap-1.5">
-              <span className="font-bold text-lg text-white tracking-tight">Axonwall</span>
-              <span className="text-[10px] text-emerald-400 font-mono uppercase px-1.5 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20 font-semibold">
-                Architecture
-              </span>
-            </div>
-          </Link>
-
-          <nav className="hidden md:flex items-center gap-7 text-sm text-slate-400 font-medium">
-            <Link href="/" className="hover:text-emerald-400 transition">Home</Link>
-            <Link href="/docs" className="hover:text-emerald-400 transition">Documentation</Link>
-            <Link href="/docs/high-availability" className="hover:text-emerald-400 transition">High Availability</Link>
-            <Link href="/docs/migration" className="hover:text-emerald-400 transition">Migration</Link>
-            <a
-              href="https://github.com/axonwall/axonwall_monorepo"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-white transition flex items-center gap-1"
-            >
-              GitHub <ExternalLink className="w-3.5 h-3.5 text-slate-500" />
-            </a>
-          </nav>
-
-          <div className="flex items-center gap-3">
-            <Link
-              href="/docs"
-              className="px-4 py-1.5 rounded-lg text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white transition shadow-lg shadow-emerald-950/60 flex items-center gap-1.5"
-            >
-              Browse Docs <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
-          </div>
-        </div>
-      </header>
+      <Navbar />
 
       {/* Main Architecture Content */}
       <main className="max-w-5xl mx-auto px-6 py-16 space-y-16">

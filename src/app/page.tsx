@@ -31,6 +31,7 @@ import { HeroSecurityHUD } from '../components/HeroSecurityHUD';
 import { PersonalPerimeterVisual } from '../components/PersonalPerimeterVisual';
 import { CostSavingsCalculator } from '../components/CostSavingsCalculator';
 import { ThemeSwitcher } from '../components/ThemeSwitcher';
+import { Navbar } from '../components/Navbar';
 
 export default function HomePage() {
   const [activeTab, setActiveTab] = useState<'firewall' | 'vpn' | 'ha' | 'observability'>('firewall');
@@ -41,71 +42,7 @@ export default function HomePage() {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[650px] radial-glow pointer-events-none -z-10" />
 
       {/* Navigation */}
-      <header className="sticky top-0 z-50 backdrop-blur-md bg-[#080c14]/80 border-b border-slate-800/80">
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <a href="#" className="flex items-center gap-3">
-            <Logo variant="badge" size="sm" showSubtext={false} />
-            <div className="flex items-baseline gap-1.5">
-              <span className="font-bold text-lg text-white tracking-tight">Axonwall</span>
-              <span className="text-[10px] text-emerald-400 font-mono uppercase px-1.5 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20 font-semibold">
-                Linux + nftables
-              </span>
-            </div>
-          </a>
-
-          <nav className="hidden lg:flex items-center gap-6 text-sm text-slate-400 font-medium">
-            <a href="#why-axonwall" className="hover:text-emerald-400 transition">Why Linux</a>
-            <a href="#personal-sovereignty" className="hover:text-emerald-400 transition flex items-center gap-1">
-              <EyeOff className="w-3.5 h-3.5 text-emerald-400" /> Individual Defense
-            </a>
-            <a href="#features" className="hover:text-emerald-400 transition">Features</a>
-            <a href="#cost-savings" className="hover:text-emerald-400 transition flex items-center gap-1">
-              <TrendingDown className="w-3.5 h-3.5 text-emerald-400" /> Save Money
-            </a>
-            <a href="/architecture" className="hover:text-emerald-400 transition">Architecture</a>
-            <a href="/docs" className="hover:text-emerald-400 transition">Docs</a>
-            <Link href="/demo/" className="hover:text-emerald-300 transition flex items-center gap-1.5 font-semibold text-emerald-400">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              Live Demo
-            </Link>
-            <a href="#appliances" className="hover:text-emerald-400 transition">Appliances</a>
-            <a href="#pricing" className="hover:text-emerald-400 transition">Pricing</a>
-            <a
-              href="https://github.com/axonwall/axonwall_monorepo"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-white transition flex items-center gap-1"
-            >
-              GitHub <ExternalLink className="w-3.5 h-3.5 text-slate-500" />
-            </a>
-          </nav>
-
-          <div className="flex items-center gap-3">
-            <ThemeSwitcher />
-            <Link
-              href="/demo/"
-              className="hidden sm:inline-flex px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/40 transition items-center gap-1.5 shadow-sm"
-            >
-              <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Live Demo</span>
-            </Link>
-            <a
-              href="#appliances"
-              className="hidden md:inline-flex px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800/80 hover:bg-slate-700 text-slate-200 border border-slate-700 transition"
-            >
-              Order Appliance
-            </a>
-            <a
-              href="https://github.com/axonwall/axonwall_monorepo/releases"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 py-1.5 rounded-lg text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white transition shadow-lg shadow-emerald-950/60 flex items-center gap-1.5"
-            >
-              <Download className="w-3.5 h-3.5" /> Download ISO
-            </a>
-          </div>
-        </div>
-      </header>
+      <Navbar />
 
       {/* Hero Section */}
       <section className="relative pt-20 pb-24 overflow-hidden">
