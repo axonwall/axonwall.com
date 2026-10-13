@@ -199,8 +199,17 @@ export default function DocsOverviewPage() {
             code={`# Replace /dev/sdX with your destination USB drive
 sudo dd if=axonwall-v0.1.7-amd64.iso of=/dev/sdX bs=4M status=progress conv=fsync`}
           />
-          <Callout type="tip" title="Automatic Disk Partitioning">
-            The installer automatically formats your disk with the A/B Dual-Root Partition Scheme (two 16 GB root filesystems + persistent encrypted data volume) to support fail-safe OS updates.
+          <Callout type="tip" title="Interactive A/B Dual-Root Partitioning">
+            During installation, the installer prompts you to select your target disk and choose your preferred system partition size:
+            <ul className="list-disc list-inside mt-2 space-y-1 text-slate-300">
+              <li><strong>Standard (16 GB per slot):</strong> Recommended default for SSD appliances.</li>
+              <li><strong>Compact (8 GB per slot):</strong> For embedded systems, eMMC, or 16-32 GB flash drives.</li>
+              <li><strong>Expanded (32 GB per slot):</strong> For enterprise systems with high telemetry or container loads.</li>
+              <li><strong>Custom:</strong> User-defined size in gigabytes.</li>
+            </ul>
+            <p className="mt-2 text-slate-400">
+              <strong>Why Two Identical Slots?</strong> Axonwall maintains an active and standby system slot (<code className="text-emerald-300 font-mono">axon_root_a</code> and <code className="text-emerald-300 font-mono">axon_root_b</code>). When firmware upgrades are installed, they are flashed to the inactive slot. If an upgrade encounters a kernel panic or failure, the watchdog automatically falls back to the alternate slot, preventing appliance lockouts. The chosen size is allocated twice, and the rest of the disk is dedicated to persistent storage (<code className="text-emerald-300 font-mono">/var/lib/axonwall</code>).
+            </p>
           </Callout>
 
           <h3 className="text-base font-semibold text-white pt-4">Option 2: Proxmox VE / KVM Virtual Machine</h3>

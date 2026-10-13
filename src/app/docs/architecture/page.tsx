@@ -136,8 +136,8 @@ export default function ArchitectureDocPage() {
         <h2 className="text-2xl font-bold text-white flex items-center gap-2">
           <RefreshCw className="w-6 h-6 text-emerald-400" /> A/B Dual-Root Partitioning & Watchdog
         </h2>
-        <p className="text-sm text-slate-300 leading-relaxed">
-          Firmware and OS updates should never leave a physical appliance bricked or stranded in a remote datacenter. Axonwall implements an enterprise A/B Dual-Root partitioning layout managed by GRUB boot-counting.
+        <p className="text-xs text-slate-400 leading-relaxed">
+          <strong>Why Two Identical Slots?</strong> In traditional firewalls, updates are applied directly to the running rootfs. If a kernel panic occurs or drivers break, the device is bricked. Axonwall stages updates onto the alternate inactive slot in the background. Because either slot can run the complete operating system and serve as active or fallback, both partitions must be identical in size and capabilities.
         </p>
 
         <CodeBlock
@@ -146,13 +146,26 @@ export default function ArchitectureDocPage() {
           code={`+-----------------------------------------------------------------------------------------+
 | Partition 1: EFI System Partition (ESP)  | /boot/efi       | FAT32 | 512 MB             |
 +-----------------------------------------------------------------------------------------+
-| Partition 2: rootfsA (Active / Standby)   | /               | ext4  | 16 GB [axon_root_a]|
+| Partition 2: rootfsA (Active / Standby)   | /               | ext4  | 8-32 GB [axon_root_a]|
 +-----------------------------------------------------------------------------------------+
-| Partition 3: rootfsB (Active / Standby)   | /               | ext4  | 16 GB [axon_root_b]|
+| Partition 3: rootfsB (Active / Standby)   | /mnt/standby    | ext4  | 8-32 GB [axon_root_b]|
 +-----------------------------------------------------------------------------------------+
-| Partition 4: Persistent Data & Logs      | /var/lib/axonwall| ext4  | Rest of Disk       |
+| Partition 4: Swap (Optional)             | [SWAP]          | swap  | 0-8 GB             |
++-----------------------------------------------------------------------------------------+
+| Partition 5: Persistent Data & Logs      | /var/lib/axonwall| ext4  | Rest of Disk [axon_data]|
 +-----------------------------------------------------------------------------------------+`}
         />
+
+        <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-300 space-y-2">
+          <span className="font-bold text-white text-sm">Installer Partition Sizing Profiles</span>
+          <p className="text-slate-400">During ISO installation, the administrator chooses the rootfs size per slot:</p>
+          <ul className="list-disc list-inside space-y-1 ml-2 text-slate-300">
+            <li><strong>Compact (8 GB per slot):</strong> 16 GB total system allocation; ideal for eMMC, embedded CFast, and small 32 GB disks.</li>
+            <li><strong>Standard (16 GB per slot):</strong> 32 GB total system allocation; default for modern SSDs with room for IDS rules and updates.</li>
+            <li><strong>Expanded (32 GB per slot):</strong> 64 GB total system allocation; designed for enterprise appliances with container engines.</li>
+            <li><strong>Custom:</strong> User-defined size in gigabytes (minimum 6 GB).</li>
+          </ul>
+        </div>
 
         <div className="space-y-3 text-xs sm:text-sm text-slate-300">
           <h3 className="text-base font-semibold text-white">Three-Step Autonomous Health Quorum</h3>
