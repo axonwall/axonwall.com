@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import {
   Shield,
   Zap,
@@ -23,6 +24,7 @@ import {
   HelpCircle,
   EyeOff,
   TrendingDown,
+  Sparkles,
 } from 'lucide-react';
 import { Logo } from '../components/Logo';
 import { HeroSecurityHUD } from '../components/HeroSecurityHUD';
@@ -62,6 +64,10 @@ export default function HomePage() {
             </a>
             <a href="/architecture" className="hover:text-emerald-400 transition">Architecture</a>
             <a href="/docs" className="hover:text-emerald-400 transition">Docs</a>
+            <Link href="/demo/" className="hover:text-emerald-300 transition flex items-center gap-1.5 font-semibold text-emerald-400">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              Live Demo
+            </Link>
             <a href="#appliances" className="hover:text-emerald-400 transition">Appliances</a>
             <a href="#pricing" className="hover:text-emerald-400 transition">Pricing</a>
             <a
@@ -76,9 +82,16 @@ export default function HomePage() {
 
           <div className="flex items-center gap-3">
             <ThemeSwitcher />
+            <Link
+              href="/demo/"
+              className="hidden sm:inline-flex px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/40 transition items-center gap-1.5 shadow-sm"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
+              <span>Live Demo</span>
+            </Link>
             <a
               href="#appliances"
-              className="hidden sm:inline-flex px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800/80 hover:bg-slate-700 text-slate-200 border border-slate-700 transition"
+              className="hidden md:inline-flex px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800/80 hover:bg-slate-700 text-slate-200 border border-slate-700 transition"
             >
               Order Appliance
             </a>
@@ -115,17 +128,23 @@ export default function HomePage() {
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-            <a
-              href="https://github.com/axonwall/axonwall_monorepo/releases"
+            <Link
+              href="/demo/"
               className="w-full sm:w-auto px-6 py-3.5 rounded-xl text-sm font-semibold bg-emerald-600 hover:bg-emerald-500 text-white shadow-xl shadow-emerald-950/80 transition flex items-center justify-center gap-2"
             >
-              Download Community Edition (Free) <ArrowRight className="w-4 h-4" />
+              <Sparkles className="w-4 h-4 text-emerald-300" /> Launch Interactive Web Console (Sandbox)
+            </Link>
+            <a
+              href="https://github.com/axonwall/axonwall_monorepo/releases"
+              className="w-full sm:w-auto px-6 py-3.5 rounded-xl text-sm font-semibold bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-slate-800 transition flex items-center justify-center gap-2"
+            >
+              <Download className="w-4 h-4 text-emerald-400" /> Download ISO (Free)
             </a>
             <a
               href="#appliances"
               className="w-full sm:w-auto px-6 py-3.5 rounded-xl text-sm font-semibold bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-slate-800 transition flex items-center justify-center gap-2"
             >
-              <Server className="w-4 h-4 text-emerald-400" /> Explore Hardware Appliances
+              <Server className="w-4 h-4 text-emerald-400" /> Hardware Appliances
             </a>
           </div>
 
