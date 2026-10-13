@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { Shield, Menu, X, ExternalLink, Github, ArrowLeft } from 'lucide-react';
 import { DocsSidebar } from './components/DocsSidebar';
+import { Logo } from '../../components/Logo';
 
 export default function DocsLayout({ children }: { children: React.ReactNode }) {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -22,11 +23,9 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
           </button>
 
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-9 h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shadow-lg shadow-emerald-500/10 group-hover:border-emerald-500/50 transition">
-              <Shield className="w-5 h-5" />
-            </div>
+            <Logo variant="badge" size="sm" showSubtext={false} />
             <div className="flex items-baseline gap-2">
-              <span className="font-bold text-lg text-white tracking-tight">Axonwall</span>
+              <span className="font-bold text-lg text-white tracking-tight group-hover:text-emerald-400 transition">Axonwall</span>
               <span className="text-xs font-semibold text-emerald-400 font-mono uppercase px-1.5 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20">
                 Docs
               </span>

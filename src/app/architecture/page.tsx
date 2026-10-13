@@ -16,6 +16,7 @@ import {
   Server,
   Download,
 } from 'lucide-react';
+import { Logo } from '../../components/Logo';
 
 export const metadata = {
   title: 'Axonwall Architecture | Technical Overview & System Design',
@@ -33,9 +34,7 @@ export default function StandaloneArchitecturePage() {
       <header className="sticky top-0 z-50 backdrop-blur-md bg-[#080c14]/80 border-b border-slate-800/80">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shadow-lg shadow-emerald-500/10">
-              <Shield className="w-5 h-5" />
-            </div>
+            <Logo variant="badge" size="sm" showSubtext={false} />
             <div className="flex items-baseline gap-1.5">
               <span className="font-bold text-lg text-white tracking-tight">Axonwall</span>
               <span className="text-[10px] text-emerald-400 font-mono uppercase px-1.5 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20 font-semibold">

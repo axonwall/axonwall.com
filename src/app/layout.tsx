@@ -42,6 +42,11 @@ export const metadata: Metadata = {
     title: 'Axonwall | Next-Gen Linux Router & Firewall',
     description: 'Wire-speed Linux nftables, commit-confirm rollback, and reactive Next.js console.',
   },
+  icons: {
+    icon: '/favicon.svg',
+    shortcut: '/favicon.svg',
+    apple: '/logo-icon.svg',
+  },
 };
 
 export default function RootLayout({

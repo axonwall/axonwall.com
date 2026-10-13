@@ -21,7 +21,13 @@ import {
   ExternalLink,
   ChevronRight,
   HelpCircle,
+  EyeOff,
+  TrendingDown,
 } from 'lucide-react';
+import { Logo } from '../components/Logo';
+import { HeroSecurityHUD } from '../components/HeroSecurityHUD';
+import { PersonalPerimeterVisual } from '../components/PersonalPerimeterVisual';
+import { CostSavingsCalculator } from '../components/CostSavingsCalculator';
 
 export default function HomePage() {
   const [activeTab, setActiveTab] = useState<'firewall' | 'vpn' | 'ha' | 'observability'>('firewall');
@@ -34,26 +40,29 @@ export default function HomePage() {
       {/* Navigation */}
       <header className="sticky top-0 z-50 backdrop-blur-md bg-[#080c14]/80 border-b border-slate-800/80">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shadow-lg shadow-emerald-500/10">
-              <Shield className="w-5 h-5" />
-            </div>
+          <a href="#" className="flex items-center gap-3">
+            <Logo variant="badge" size="sm" showSubtext={false} />
             <div className="flex items-baseline gap-1.5">
               <span className="font-bold text-lg text-white tracking-tight">Axonwall</span>
               <span className="text-[10px] text-emerald-400 font-mono uppercase px-1.5 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20 font-semibold">
                 Linux + nftables
               </span>
             </div>
-          </div>
+          </a>
 
-          <nav className="hidden md:flex items-center gap-6 text-sm text-slate-400 font-medium">
-            <a href="#why-axonwall" className="hover:text-emerald-400 transition">Why Axonwall</a>
+          <nav className="hidden lg:flex items-center gap-6 text-sm text-slate-400 font-medium">
+            <a href="#why-axonwall" className="hover:text-emerald-400 transition">Why Linux</a>
+            <a href="#personal-sovereignty" className="hover:text-emerald-400 transition flex items-center gap-1">
+              <EyeOff className="w-3.5 h-3.5 text-emerald-400" /> Individual Defense
+            </a>
             <a href="#features" className="hover:text-emerald-400 transition">Features</a>
+            <a href="#cost-savings" className="hover:text-emerald-400 transition flex items-center gap-1">
+              <TrendingDown className="w-3.5 h-3.5 text-emerald-400" /> Save Money
+            </a>
             <a href="/architecture" className="hover:text-emerald-400 transition">Architecture</a>
-            <a href="/docs" className="hover:text-emerald-400 transition">Documentation</a>
-            <a href="#appliances" className="hover:text-emerald-400 transition">Hardware Appliances</a>
-            <a href="#pricing" className="hover:text-emerald-400 transition">Editions & Pricing</a>
-            <a href="/docs/migration" className="hover:text-emerald-400 transition">Migration</a>
+            <a href="/docs" className="hover:text-emerald-400 transition">Docs</a>
+            <a href="#appliances" className="hover:text-emerald-400 transition">Appliances</a>
+            <a href="#pricing" className="hover:text-emerald-400 transition">Pricing</a>
             <a
               href="https://github.com/axonwall/axonwall_monorepo"
               target="_blank"
@@ -138,61 +147,8 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Interactive UI Mockup Showcase */}
-          <div className="pt-12 max-w-5xl mx-auto">
-            <div className="rounded-2xl bg-slate-900/90 border border-slate-800 shadow-2xl p-6 text-left relative overflow-hidden backdrop-blur-xl">
-              {/* Window Controls */}
-              <div className="flex items-center justify-between pb-4 border-b border-slate-800 mb-6">
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-rose-500/80" />
-                  <div className="w-3 h-3 rounded-full bg-amber-500/80" />
-                  <div className="w-3 h-3 rounded-full bg-emerald-500/80" />
-                  <span className="text-xs font-mono text-slate-500 ml-2">https://axonwall.internal/firewall</span>
-                </div>
-                {/* Commit Confirm Banner Mockup */}
-                <div className="flex items-center gap-2 bg-amber-950/60 border border-amber-500/30 px-3 py-1 rounded-lg text-xs text-amber-300 font-mono">
-                  <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
-                  Commit-Confirm: 00:48 auto-rollback
-                  <button className="px-2 py-0.5 rounded bg-emerald-600 text-white font-sans font-semibold text-[11px] ml-2">
-                    Confirm
-                  </button>
-                  <button className="px-2 py-0.5 rounded bg-rose-600/80 text-white font-sans font-semibold text-[11px]">
-                    Rollback
-                  </button>
-                </div>
-              </div>
-
-              {/* Grid content */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="p-4 rounded-xl bg-slate-950/80 border border-slate-800">
-                  <div className="text-xs text-slate-500 font-mono mb-1">TABLE INET AXONWALL</div>
-                  <div className="text-lg font-bold text-white font-mono">28,450 pkts/s</div>
-                  <div className="text-xs text-emerald-400 mt-1 flex items-center gap-1">
-                    <CheckCircle2 className="w-3.5 h-3.5" /> 0 dropped packets on LAN
-                  </div>
-                </div>
-                <div className="p-4 rounded-xl bg-slate-950/80 border border-slate-800">
-                  <div className="text-xs text-slate-500 font-mono mb-1">SMART QOS (CAKE)</div>
-                  <div className="text-lg font-bold text-sky-400 font-mono">A+ Bufferbloat Grade</div>
-                  <div className="text-xs text-slate-400 mt-1">DiffServ Prioritization Active</div>
-                </div>
-                <div className="p-4 rounded-xl bg-slate-950/80 border border-slate-800">
-                  <div className="text-xs text-slate-500 font-mono mb-1">SURICATA IDS/IPS</div>
-                  <div className="text-lg font-bold text-purple-400 font-mono">NFQUEUE Fail-Open</div>
-                  <div className="text-xs text-emerald-400 mt-1">Zero downtime on reload</div>
-                </div>
-              </div>
-
-              <div className="mt-4 p-4 rounded-xl bg-slate-950 border border-slate-800 font-mono text-xs text-emerald-400 overflow-x-auto">
-                <span className="text-slate-500"># nft -f /etc/axonwall/candidate.nft (atomic transaction)</span><br />
-                table inet axonwall &#123;<br />
-                &nbsp;&nbsp;chain forward &#123; type filter hook forward priority 0; policy drop; &#125;<br />
-                &nbsp;&nbsp;chain postrouting &#123; type nat hook postrouting priority srcnat; oifname &quot;eth0&quot; masquerade; &#125;<br />
-                &#125;<br />
-                <span className="text-sky-400">✓ Atomic transaction completed in 1.4ms. Commit-confirm timer armed.</span>
-              </div>
-            </div>
-          </div>
+          {/* Dynamic Real-Time Security HUD Showcase */}
+          <HeroSecurityHUD />
         </div>
       </section>
 
@@ -250,6 +206,26 @@ export default function HomePage() {
               </p>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Personal Sovereignty & Individual Defense */}
+      <section id="personal-sovereignty" className="py-24 border-t border-slate-800/80 bg-slate-950/70 relative overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-6xl h-[500px] radial-subtle pointer-events-none -z-10" />
+        <div className="max-w-7xl mx-auto px-6 space-y-16">
+          <div className="text-center max-w-3xl mx-auto space-y-4">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 uppercase tracking-wider">
+              <EyeOff className="w-3.5 h-3.5" /> Guarding the Individual User
+            </span>
+            <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+              Reclaim Your Digital Bastion
+            </h2>
+            <p className="text-sm sm:text-base text-slate-400 leading-relaxed">
+              Your home network shouldn&apos;t be an open book for commercial data harvesters, ISP profiling, or vulnerable smart appliances. Axonwall establishes uncompromising digital sovereignty for the individual user.
+            </p>
+          </div>
+
+          <PersonalPerimeterVisual />
         </div>
       </section>
 
@@ -327,6 +303,14 @@ export default function HomePage() {
               </p>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Cost Savings & Stop Paying Enterprise Tax */}
+      <section id="cost-savings" className="py-24 border-t border-slate-800/80 bg-slate-950/60 relative overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-6xl h-[500px] radial-glow pointer-events-none -z-10" />
+        <div className="max-w-7xl mx-auto px-6">
+          <CostSavingsCalculator />
         </div>
       </section>
 
@@ -594,19 +578,20 @@ export default function HomePage() {
       {/* Footer */}
       <footer className="border-t border-slate-800 py-12 bg-slate-950 text-xs text-slate-500">
         <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
-              <Shield className="w-3.5 h-3.5" />
+          <div className="flex items-center gap-3">
+            <Logo size="sm" variant="icon" />
+            <div className="flex items-center gap-2">
+              <span className="font-bold text-white text-sm">Axonwall</span>
+              <span className="hidden sm:inline">— The Modern Linux Router & Next-Gen Firewall.</span>
             </div>
-            <span className="font-bold text-white">Axonwall</span>
-            <span>— The Modern Linux Router & Next-Gen Firewall.</span>
           </div>
 
-          <div className="flex items-center gap-6">
-            <a href="/docs" className="hover:text-slate-300 transition">Documentation</a>
+          <div className="flex flex-wrap items-center gap-6">
+            <a href="#personal-sovereignty" className="hover:text-slate-300 transition">Individual Defense</a>
+            <a href="#cost-savings" className="hover:text-slate-300 transition">Cost Savings</a>
+            <a href="/docs" className="hover:text-slate-300 transition">Docs</a>
             <a href="/architecture" className="hover:text-slate-300 transition">Architecture</a>
             <a href="https://github.com/axonwall/axonwall_monorepo" className="hover:text-slate-300 transition">GitHub</a>
-            <a href="#features" className="hover:text-slate-300 transition">Features</a>
             <a href="#appliances" className="hover:text-slate-300 transition">Appliances</a>
             <a href="#pricing" className="hover:text-slate-300 transition">Pricing</a>
             <a href="https://github.com/axonwall/axonwall_monorepo/blob/main/LICENSE" className="hover:text-slate-300 transition">License</a>
