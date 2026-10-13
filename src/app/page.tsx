@@ -46,12 +46,14 @@ export default function HomePage() {
             </div>
           </div>
 
-          <nav className="hidden md:flex items-center gap-7 text-sm text-slate-400 font-medium">
+          <nav className="hidden md:flex items-center gap-6 text-sm text-slate-400 font-medium">
             <a href="#why-axonwall" className="hover:text-emerald-400 transition">Why Axonwall</a>
             <a href="#features" className="hover:text-emerald-400 transition">Features</a>
+            <a href="/architecture" className="hover:text-emerald-400 transition">Architecture</a>
+            <a href="/docs" className="hover:text-emerald-400 transition">Documentation</a>
             <a href="#appliances" className="hover:text-emerald-400 transition">Hardware Appliances</a>
             <a href="#pricing" className="hover:text-emerald-400 transition">Editions & Pricing</a>
-            <a href="#migration" className="hover:text-emerald-400 transition">Migration</a>
+            <a href="/docs/migration" className="hover:text-emerald-400 transition">Migration</a>
             <a
               href="https://github.com/axonwall/axonwall_monorepo"
               target="_blank"
@@ -601,6 +603,8 @@ export default function HomePage() {
           </div>
 
           <div className="flex items-center gap-6">
+            <a href="/docs" className="hover:text-slate-300 transition">Documentation</a>
+            <a href="/architecture" className="hover:text-slate-300 transition">Architecture</a>
             <a href="https://github.com/axonwall/axonwall_monorepo" className="hover:text-slate-300 transition">GitHub</a>
             <a href="#features" className="hover:text-slate-300 transition">Features</a>
             <a href="#appliances" className="hover:text-slate-300 transition">Appliances</a>
