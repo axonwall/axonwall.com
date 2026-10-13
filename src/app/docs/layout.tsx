@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Shield, Menu, X, ExternalLink, Github, ArrowLeft } from 'lucide-react';
 import { DocsSidebar } from './components/DocsSidebar';
 import { Logo } from '../../components/Logo';
+import { ThemeSwitcher } from '../../components/ThemeSwitcher';
 
 export default function DocsLayout({ children }: { children: React.ReactNode }) {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -33,7 +34,8 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
           </Link>
         </div>
 
-        <div className="flex items-center gap-4 text-xs font-medium">
+        <div className="flex items-center gap-3 text-xs font-medium">
+          <ThemeSwitcher />
           <Link
             href="/"
             className="hidden sm:flex items-center gap-1.5 text-slate-400 hover:text-white transition px-2.5 py-1.5 rounded-lg hover:bg-slate-800/50"

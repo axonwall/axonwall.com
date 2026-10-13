@@ -28,6 +28,7 @@ import { Logo } from '../components/Logo';
 import { HeroSecurityHUD } from '../components/HeroSecurityHUD';
 import { PersonalPerimeterVisual } from '../components/PersonalPerimeterVisual';
 import { CostSavingsCalculator } from '../components/CostSavingsCalculator';
+import { ThemeSwitcher } from '../components/ThemeSwitcher';
 
 export default function HomePage() {
   const [activeTab, setActiveTab] = useState<'firewall' | 'vpn' | 'ha' | 'observability'>('firewall');
@@ -74,6 +75,7 @@ export default function HomePage() {
           </nav>
 
           <div className="flex items-center gap-3">
+            <ThemeSwitcher />
             <a
               href="#appliances"
               className="hidden sm:inline-flex px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800/80 hover:bg-slate-700 text-slate-200 border border-slate-700 transition"

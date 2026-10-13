@@ -18,6 +18,7 @@ import {
   Search,
   X,
   ChevronRight,
+  Palette,
 } from 'lucide-react';
 
 export interface DocItem {
@@ -129,6 +130,17 @@ export const DOCS_NAVIGATION: DocCategory[] = [
       { title: 'Web PTY Terminal API', href: '/docs/api-reference#terminal' },
       { title: 'GitOps Revisions API', href: '/docs/api-reference#gitops' },
       { title: 'Privileged Agent Socket IPC', href: '/docs/api-reference#agent-socket' },
+    ],
+  },
+  {
+    title: 'Theming & Ecosystem',
+    icon: Palette,
+    items: [
+      { title: 'Theme Architecture & Engine', href: '/docs/themes' },
+      { title: 'Creating Custom Themes', href: '/docs/themes#creating-themes' },
+      { title: 'Building a Theme Repository', href: '/docs/themes#theme-repositories' },
+      { title: 'Importing via Repo URL / File', href: '/docs/themes#importing' },
+      { title: 'Winnegans Compatibility', href: '/docs/themes#winnegans-compatibility' },
     ],
   },
 ];

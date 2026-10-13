@@ -55,7 +55,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="dark" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                var tid = localStorage.getItem('axonwall_theme_id') || 'axonwall-emerald';
+                document.documentElement.setAttribute('data-theme', tid);
+              } catch (e) {}
+            `,
+          }}
+        />
+      </head>
       <body className="antialiased selection:bg-emerald-500 selection:text-black">
         {children}
       </body>
