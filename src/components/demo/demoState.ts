@@ -19,7 +19,7 @@ export type DemoViewKey =
 export interface DemoFirewallRule {
   id: string;
   action: 'pass' | 'block' | 'reject';
-  interface: 'all' | 'wan' | 'lan' | 'dmz' | 'wg0';
+  interface: 'all' | 'wan' | 'lan' | 'opt1' | 'opt2' | 'dmz' | 'wg0';
   protocol: 'tcp' | 'udp' | 'icmp' | 'any';
   source: string;
   destination: string;
@@ -153,6 +153,32 @@ export const INITIAL_FIREWALL_RULES: DemoFirewallRule[] = [
     enabled: true,
     packets: 62410,
     bytes: '48.9 MB',
+  },
+  {
+    id: 'rule-07',
+    action: 'pass',
+    interface: 'opt1',
+    protocol: 'any',
+    source: 'OPT1 Subnet',
+    destination: 'any',
+    destinationPort: 'any',
+    description: 'Allow OPT1 Attached Subnet Outbound to Internet',
+    enabled: true,
+    packets: 12040,
+    bytes: '14.2 MB',
+  },
+  {
+    id: 'rule-08',
+    action: 'block',
+    interface: 'opt1',
+    protocol: 'any',
+    source: 'OPT1 Subnet',
+    destination: 'LAN Subnet',
+    destinationPort: 'any',
+    description: 'Isolate OPT1 Attached Subnet from Corporate LAN',
+    enabled: true,
+    packets: 840,
+    bytes: '68 KB',
   },
 ];
 

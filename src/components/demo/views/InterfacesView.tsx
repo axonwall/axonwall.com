@@ -43,10 +43,11 @@ export function InterfacesView() {
             </thead>
             <tbody className="divide-y divide-slate-800 font-mono text-slate-200">
               {[
-                { name: 'WAN', dev: 'eth0', ip: '198.51.100.22/24 (DHCP)', mac: '52:54:00:1a:2b:01', speed: '10,000 Mbps Full', mtu: 1500, status: 'UP' },
-                { name: 'LAN', dev: 'eth1', ip: '192.168.100.1/24 (Static)', mac: '52:54:00:1a:2b:02', speed: '1,000 Mbps Full', mtu: 1500, status: 'UP' },
-                { name: 'DMZ', dev: 'eth2', ip: '10.0.50.1/24 (Static)', mac: '52:54:00:1a:2b:03', speed: '1,000 Mbps Full', mtu: 1500, status: 'UP' },
-                { name: 'WG0', dev: 'wg0 (crypto)', ip: '10.10.0.1/24 (WireGuard)', mac: 'Virtual Tunnel', speed: 'Virtual Line-Rate', mtu: 1420, status: 'UP' },
+                { name: 'WAN', dev: 'eth0', ip: '198.51.100.22/24 (DHCP Gateway)', role: 'Internet Uplink', mac: '52:54:00:1a:2b:01', speed: '10,000 Mbps Full', mtu: 1500, status: 'UP' },
+                { name: 'LAN', dev: 'eth1', ip: '192.168.100.1/24 (Static)', role: 'Authoritative DHCP', mac: '52:54:00:1a:2b:02', speed: '1,000 Mbps Full', mtu: 1500, status: 'UP' },
+                { name: 'OPT1', dev: 'eth2', ip: '10.0.50.45/24 (DHCP Client)', role: 'Non-Authoritative Attached', mac: '52:54:00:1a:2b:03', speed: '1,000 Mbps Full', mtu: 1500, status: 'UP' },
+                { name: 'OPT2', dev: 'eth3', ip: '172.16.20.10/24 (Static)', role: 'Non-Authoritative Attached', mac: '52:54:00:1a:2b:04', speed: '1,000 Mbps Full', mtu: 1500, status: 'UP' },
+                { name: 'WG0', dev: 'wg0', ip: '10.10.0.1/24 (WireGuard)', role: 'Crypto Tunnel', mac: 'Virtual Mesh', speed: 'Line-Rate', mtu: 1420, status: 'UP' },
               ].map((nic) => (
                 <tr key={nic.name} className="hover:bg-slate-800/40">
                   <td className="p-3 pl-4 font-bold text-white font-sans flex items-center gap-2">
@@ -54,7 +55,10 @@ export function InterfacesView() {
                     {nic.name}
                   </td>
                   <td className="p-3 text-cyan-400">{nic.dev}</td>
-                  <td className="p-3 font-semibold text-slate-200">{nic.ip}</td>
+                  <td className="p-3 font-semibold text-slate-200">
+                    <div>{nic.ip}</div>
+                    <div className="text-[10px] text-slate-400 font-sans">{nic.role}</div>
+                  </td>
                   <td className="p-3 text-slate-400">{nic.mac}</td>
                   <td className="p-3 text-slate-300 font-sans">{nic.speed}</td>
                   <td className="p-3 text-slate-400">{nic.mtu}</td>
