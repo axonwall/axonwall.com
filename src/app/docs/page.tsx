@@ -272,7 +272,7 @@ sudo systemctl status axonwalld axonwall-ui axonwall-controller`}
           <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
             <div>
               <span className="text-slate-500 font-medium">Default Web Console:</span>
-              <p className="font-mono text-emerald-400 font-semibold mt-0.5">https://192.168.1.1:8443</p>
+              <p className="font-mono text-emerald-400 font-semibold mt-0.5">https://192.168.1.1:2966</p>
             </div>
             <div>
               <span className="text-slate-500 font-medium">Default Credentials:</span>

@@ -87,7 +87,7 @@ export default function ArchitectureDocPage() {
     type filter hook input priority 0; policy drop;
     ct state established,related accept
     iif "lo" accept
-    tcp dport 8443 accept # Web Console
+    tcp dport 2966 accept # Web Console
     tcp dport 22 accept   # SSH Administration
   }
 

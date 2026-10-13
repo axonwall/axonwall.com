@@ -99,7 +99,7 @@ export default function ObservabilityDocPage() {
           title="Streaming Example"
           language="bash"
           code={`# Stream live TCP packets on interface eth0 with SYN or RST flags
-curl -N "https://192.168.1.1:8443/api/v1/events/packets?iface=eth0&proto=tcp"`}
+curl -N "https://192.168.1.1:2966/api/v1/events/packets?iface=eth0&proto=tcp"`}
         />
 
         <div className="space-y-2">
