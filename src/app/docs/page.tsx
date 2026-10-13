@@ -223,7 +223,25 @@ sudo dd if=axonwall-v0.1.7-amd64.iso of=/dev/sdX bs=4M status=progress conv=fsyn
             <li><strong>Network:</strong> VirtIO (net0 mapped to WAN bridge, net1 mapped to LAN bridge)</li>
           </ul>
 
-          <h3 className="text-base font-semibold text-white pt-4">Option 3: Docker Compose Testing Container</h3>
+          <h3 className="text-base font-semibold text-white pt-4">Option 3: Debian / Ubuntu Package (.deb)</h3>
+          <p className="text-xs text-slate-400">
+            For existing Debian 12 (Bookworm) / 13 (Trixie) or Ubuntu 24.04 LTS servers, install Axonwall directly using the official standalone package:
+          </p>
+          <CodeBlock
+            title="Install Debian Package"
+            language="bash"
+            code={`# Download the latest .deb release artifact from GitHub Releases
+wget https://github.com/axonwall/axonwall/releases/latest/download/axonwall_0.1.7_amd64.deb
+
+# Install package with dependencies
+sudo apt-get update
+sudo apt-get install -y ./axonwall_0.1.7_amd64.deb
+
+# Verify running services
+sudo systemctl status axonwalld axonwall-ui axonwall-controller`}
+          />
+
+          <h3 className="text-base font-semibold text-white pt-4">Option 4: Docker Compose Testing Container</h3>
           <CodeBlock
             title="compose.yaml"
             language="yaml"
