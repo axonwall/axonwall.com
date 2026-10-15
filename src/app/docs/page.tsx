@@ -50,6 +50,70 @@ export default function DocsOverviewPage() {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <Link
+            href="/docs/modular-architecture"
+            className="p-5 rounded-xl bg-slate-900/60 border border-emerald-500/40 hover:border-emerald-500 hover:bg-slate-900 transition group block"
+          >
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2.5 font-bold text-white text-base">
+                <Cpu className="w-4 h-4 text-emerald-400" />
+                <span>Modular Core Roles (FW, ZFS, K3s)</span>
+              </div>
+              <ArrowRight className="w-4 h-4 text-slate-500 group-hover:text-emerald-400 transition transform group-hover:translate-x-1" />
+            </div>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              Run Axonwall as a dedicated NGFW, a pure TrueNAS-grade ZFS NAS, or a hyper-converged Kubernetes (K3s) node.
+            </p>
+          </Link>
+
+          <Link
+            href="/docs/zfs-nas-storage"
+            className="p-5 rounded-xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/40 hover:bg-slate-900 transition group block"
+          >
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2.5 font-bold text-white text-base">
+                <Layers className="w-4 h-4 text-emerald-400" />
+                <span>ZFS NAS Storage Management</span>
+              </div>
+              <ArrowRight className="w-4 h-4 text-slate-500 group-hover:text-emerald-400 transition transform group-hover:translate-x-1" />
+            </div>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              OpenZFS Stripe/Mirror/RAID-Z pools, datasets, POSIX ACLs, Samba SMB3 with VSS shadow copies, and NFSv4/iSCSI.
+            </p>
+          </Link>
+
+          <Link
+            href="/docs/k3s-kubernetes"
+            className="p-5 rounded-xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/40 hover:bg-slate-900 transition group block"
+          >
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2.5 font-bold text-white text-base">
+                <Server className="w-4 h-4 text-emerald-400" />
+                <span>Kubernetes (K3s) & OpenEBS</span>
+              </div>
+              <ArrowRight className="w-4 h-4 text-slate-500 group-hover:text-emerald-400 transition transform group-hover:translate-x-1" />
+            </div>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              WireGuard flannel mesh, 2-node HA automatic cluster join over mTLS, and OpenEBS replicated Mayastor NVMe-oF storage.
+            </p>
+          </Link>
+
+          <Link
+            href="/docs/installer-raid-zfs"
+            className="p-5 rounded-xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/40 hover:bg-slate-900 transition group block"
+          >
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2.5 font-bold text-white text-base">
+                <Download className="w-4 h-4 text-emerald-400" />
+                <span>Multi-Disk RAID & ZFS Install</span>
+              </div>
+              <ArrowRight className="w-4 h-4 text-slate-500 group-hover:text-emerald-400 transition transform group-hover:translate-x-1" />
+            </div>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              mdadm RAID-1 system disk mirroring across Slot A, Slot B, Swap, and Data, plus dedicated ZFS storage partitioning.
+            </p>
+          </Link>
+
+          <Link
             href="/docs/architecture"
             className="p-5 rounded-xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/40 hover:bg-slate-900 transition group block"
           >

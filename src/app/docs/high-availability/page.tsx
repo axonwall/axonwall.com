@@ -30,14 +30,14 @@ export default function HighAvailabilityDocPage() {
       {/* HA Topology Overview */}
       <section className="space-y-6">
         <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-          <Network className="w-6 h-6 text-emerald-400" /> Cluster Architecture & Topology
+          <Network className="w-6 h-6 text-emerald-400" /> Cluster Architecture & Full-State Synchronization
         </h2>
         <p className="text-sm text-slate-300 leading-relaxed">
-          In an active/passive Axonwall cluster, two appliances share a virtual IP (VIP) on each network interface (WAN, LAN, DMZ). All active TCP sessions, WireGuard tunnels, and UDP pseudo-states are continuously streamed from the Master to the Backup node in real time.
+          Axonwall implements comprehensive 2-node High Availability. Beyond VRRP virtual IPs and conntrackd TCP/UDP state replication, Axonwall replicates all configuration state (<code className="text-emerald-400 font-mono">/api/v1/sync/state</code>), SQLite databases (Headscale, CrowdSec), incremental OpenZFS dataset snapshots (<code className="text-emerald-400 font-mono">/api/v1/sync/zfs</code>), and automated K3s cluster join tokens (<code className="text-emerald-400 font-mono">/api/v1/sync/k3s-token</code>).
         </p>
 
         <CodeBlock
-          title="High Availability Network Topology"
+          title="High Availability Full-Stack Sync Topology"
           language="text"
           code={`+-------------------------------------------------------------------------+
 |                              WAN Switch / ISP                           |
@@ -49,12 +49,15 @@ export default function HighAvailabilityDocPage() {
        |   Axonwall Node 1       |       |   Axonwall Node 2       |
        |     [ MASTER ]          |       |     [ BACKUP ]          |
        |  VRRP Priority: 110     |       |  VRRP Priority: 100     |
+       |  ZFS: Read-Write        |       |  ZFS: Readonly Target   |
        +-------------------------+       +-------------------------+
                     ^                                 ^
                     |      Dedicated Sync Link (eth3) |
                     +<===============================>+
-                    |     conntrackd FTFW Replication |
-                    |      (Multicast or Unicast)     |
+                    | 1. conntrackd FTFW Kernel Sync  |
+                    | 2. SQLite DB Stream (:9876)     |
+                    | 3. ZFS Send/Recv Deltas (:8443) |
+                    | 4. K3s Token & OpenEBS NVMe-oF  |
                     v                                 v
        +-------------------------+       +-------------------------+
                     |                                 |

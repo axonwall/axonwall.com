@@ -19,6 +19,8 @@ import {
   X,
   ChevronRight,
   Palette,
+  Database,
+  HardDrive,
 } from 'lucide-react';
 
 export interface DocItem {
@@ -40,6 +42,7 @@ export const DOCS_NAVIGATION: DocCategory[] = [
     items: [
       { title: 'Overview & Introduction', href: '/docs' },
       { title: 'Installation Guide (ISO, KVM, Docker)', href: '/docs#installation' },
+      { title: 'Multi-Disk RAID & ZFS Install', href: '/docs/installer-raid-zfs', badge: 'New' },
       { title: 'Quickstart & First Boot', href: '/docs#quickstart' },
       { title: 'Hardware Compatibility List', href: '/docs#hardware' },
     ],
@@ -49,6 +52,7 @@ export const DOCS_NAVIGATION: DocCategory[] = [
     icon: Cpu,
     items: [
       { title: 'Linux nftables Architecture', href: '/docs/architecture' },
+      { title: 'Modular Roles (FW, ZFS, K3s)', href: '/docs/modular-architecture', badge: 'Core' },
       { title: 'Multi-Core vs FreeBSD pf', href: '/docs/architecture#comparison' },
       { title: 'Junos Commit-Confirm Rollback', href: '/docs/architecture#commit-confirm' },
       { title: 'A/B Dual-Root Partitioning', href: '/docs/architecture#ab-dual-root' },
@@ -56,13 +60,36 @@ export const DOCS_NAVIGATION: DocCategory[] = [
     ],
   },
   {
+    title: 'ZFS NAS Storage',
+    icon: Database,
+    items: [
+      { title: 'ZFS Storage Management', href: '/docs/zfs-nas-storage' },
+      { title: 'ZFS Pools & RAID Topologies', href: '/docs/zfs-nas-storage#pools' },
+      { title: 'Datasets, Quotas & Zvols', href: '/docs/zfs-nas-storage#datasets' },
+      { title: 'Samba SMB3 & VSS Shadow Copies', href: '/docs/zfs-nas-storage#smb' },
+      { title: 'NFSv4 Exports & iSCSI Targets', href: '/docs/zfs-nas-storage#nfs-iscsi' },
+      { title: 'Snapshot Retention & HA Send/Recv', href: '/docs/zfs-nas-storage#snapshots' },
+    ],
+  },
+  {
+    title: 'Kubernetes (K3s)',
+    icon: Layers,
+    items: [
+      { title: 'K3s & OpenEBS Overview', href: '/docs/k3s-kubernetes' },
+      { title: 'WireGuard Flannel Mesh', href: '/docs/k3s-kubernetes#wireguard' },
+      { title: 'Automated 2-Node HA Join', href: '/docs/k3s-kubernetes#ha-join', badge: 'HA' },
+      { title: 'OpenEBS ZFS-LocalPV CSI', href: '/docs/k3s-kubernetes#zfs-localpv' },
+      { title: 'OpenEBS Mayastor NVMe-oF HA', href: '/docs/k3s-kubernetes#mayastor' },
+    ],
+  },
+  {
     title: 'High Availability (HA)',
     icon: ArrowRightLeft,
     items: [
-      { title: 'Cluster Overview & Topology', href: '/docs/high-availability' },
+      { title: 'Cluster Overview & Full Sync', href: '/docs/high-availability' },
       { title: 'Keepalived VRRP v2/v3', href: '/docs/high-availability#keepalived' },
       { title: 'conntrackd Stateful Sync', href: '/docs/high-availability#conntrackd' },
-      { title: 'FTFW Multicast & Unicast Links', href: '/docs/high-availability#ftfw' },
+      { title: 'ZFS Snapshot Stream & K3s Token', href: '/docs/high-availability#zfs-k3s-sync', badge: 'HA' },
       { title: 'Zero-Drop TCP & VoIP Failover', href: '/docs/high-availability#failover' },
     ],
   },
