@@ -16,7 +16,7 @@ import {
 import { DemoCrowdSecAlert, INITIAL_CROWDSEC_ALERTS } from '../demoState';
 
 export function ThreatDefenseView() {
-  const [activeTab, setActiveTab] = useState<'sinkhole' | 'geoip' | 'crowdsec'>('sinkhole');
+  const [activeTab, setActiveTab] = useState<'sinkhole' | 'geoip' | 'crowdsec' | 'rootkit'>('sinkhole');
 
   // DNS Sinkhole Test State
   const [testDomain, setTestDomain] = useState('');
@@ -124,6 +124,18 @@ export function ThreatDefenseView() {
         >
           <Radio className="w-4 h-4" />
           <span>CrowdSec Bouncer</span>
+        </button>
+
+        <button
+          onClick={() => setActiveTab('rootkit')}
+          className={`pb-3 flex items-center gap-2 transition-colors border-b-2 ${
+            activeTab === 'rootkit'
+              ? 'border-emerald-400 text-emerald-400'
+              : 'border-transparent text-slate-400 hover:text-slate-200'
+          }`}
+        >
+          <Lock className="w-4 h-4" />
+          <span>Ghost-in-the-Ring & Rootkit Hunter</span>
         </button>
       </div>
 
@@ -328,6 +340,82 @@ export function ThreatDefenseView() {
                 ))}
               </tbody>
             </table>
+          </div>
+        </div>
+      )}
+
+      {/* TAB 4: GHOST-IN-THE-RING & 6-ENGINE ROOTKIT HUNTER */}
+      {activeTab === 'rootkit' && (
+        <div className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div className="p-4 rounded-xl bg-slate-900 border border-emerald-500/30">
+              <span className="text-xs text-slate-400 font-medium">Ring-0 BPF_LSM Lockdown</span>
+              <div className="text-xl font-bold font-mono text-emerald-400 mt-1">ENFORCED</div>
+              <span className="text-[11px] text-slate-500 font-mono mt-1 block">SYS_BPF &amp; io_uring SQPOLL gated</span>
+            </div>
+            <div className="p-4 rounded-xl bg-slate-900 border border-slate-800">
+              <span className="text-xs text-slate-400 font-medium">/proc/kcore XArray Walk</span>
+              <div className="text-xl font-bold font-mono text-emerald-400 mt-1">0 Hidden BPF</div>
+              <span className="text-[11px] text-slate-500 font-mono mt-1 block">prog_idr matches bpftool (14/14)</span>
+            </div>
+            <div className="p-4 rounded-xl bg-slate-900 border border-slate-800">
+              <span className="text-xs text-slate-400 font-medium">Silicon PMU LBR Telemetry</span>
+              <div className="text-xl font-bold font-mono text-cyan-400 mt-1">CLEAN</div>
+              <span className="text-[11px] text-slate-500 font-mono mt-1 block">0 NOP-sled / kretprobe trampolines</span>
+            </div>
+            <div className="p-4 rounded-xl bg-slate-900 border border-slate-800">
+              <span className="text-xs text-slate-400 font-medium">6-Engine Malware Suite</span>
+              <div className="text-xl font-bold font-mono text-emerald-400 mt-1">6 / 6 PASS</div>
+              <span className="text-[11px] text-slate-500 font-mono mt-1 block">Lynis Hardening Index: 92/100</span>
+            </div>
+          </div>
+
+          <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+            <div className="p-4 border-b border-slate-800 flex items-center justify-between">
+              <div>
+                <h3 className="font-semibold text-sm text-white">Host Malware &amp; Ring-0 Rootkit Engines</h3>
+                <p className="text-xs text-slate-400">
+                  Combined userland forensic scanners and hardware-assisted kernel telemetry (`security-rootkit-hunter`)
+                </p>
+              </div>
+              <span className="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-md border border-emerald-500/20">
+                All Engines Clean
+              </span>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 text-xs">
+              {[
+                {
+                  name: 'Ghost-in-the-Ring Telemetry (Ring-0)',
+                  status: 'VERIFIED',
+                  detail: 'Blocks syscall-less io_uring SQPOLL worker implants (iou-sqp-*), audits /proc/kcore prog_idr XArray for DKOM-hidden eBPF programs, and inspects CPU PMU Last Branch Records (LBR).',
+                },
+                {
+                  name: 'rkhunter + chkrootkit',
+                  status: 'CLEAN',
+                  detail: '248 known Linux kernel rootkit signatures, hidden /proc PID cross-checks, LKM table inspection, and promiscuous packet-sniffer hooks.',
+                },
+                {
+                  name: 'ClamAV Real-Time Guard (clamonacc)',
+                  status: 'ACTIVE',
+                  detail: 'fanotify kernel mount guard scanning newly written ELF binaries on /tmp, /var/tmp, /dev/shm, and /root before execution.',
+                },
+                {
+                  name: 'AIDE + YARA + Lynis CIS Audit',
+                  status: 'HARDENED',
+                  detail: 'SHA-512 + xattr integrity verification on /boot and /usr/sbin, YARA live process memory sweeps for C2 beacons, and automated Lynis sysctl scoring.',
+                },
+              ].map((engine) => (
+                <div key={engine.name} className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-1.5">
+                  <div className="flex items-center justify-between">
+                    <span className="font-bold text-white">{engine.name}</span>
+                    <span className="px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 font-mono text-[10px]">
+                      {engine.status}
+                    </span>
+                  </div>
+                  <p className="text-slate-400 leading-relaxed">{engine.detail}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       )}

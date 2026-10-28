@@ -50,14 +50,50 @@ Satellite Fleet    : 4 micro-edge nodes synchronized (v24)`,
       case 'help':
       case '?':
         out = `Available Appliance Shell Commands:
-  nft list ruleset   - Dump active Linux kernel nftables ruleset
-  axonwall status    - Display core system health and management ports
-  ip addr            - List network interfaces and assigned IP subnets
-  cat /etc/issue     - Display system issue banner
-  uname -a           - Print Linux kernel architecture and version
-  ping <host>        - Send ICMP echo requests
-  uptime             - Display appliance uptime and load averages
-  clear              - Clear terminal display buffer`;
+  nft list ruleset          - Dump active Linux kernel nftables ruleset
+  axonwall status           - Display core system health and management ports
+  axonwall-config           - Launch 11-domain Neovim Super Configurator TUI
+  axonwallctl rootkit-scan  - Run 6-engine Malware Suite + Ring-0 Ghost-in-the-Ring audit
+  axonwallctl ha-status     - Display 2-Host High Availability VRRP, Conntrack & ZFS sync
+  ip addr                   - List network interfaces and assigned IP subnets
+  cat /etc/issue            - Display system issue banner
+  uname -a                  - Print Linux kernel architecture and version
+  ping <host>               - Send ICMP echo requests
+  uptime                    - Display appliance uptime and load averages
+  clear                     - Clear terminal display buffer`;
+        break;
+
+      case 'axonwall-config':
+        out = `[Axonwall Neovim Super Configurator v0.11.28]
+Loaded 11 Interactive Lua Form Domains (/usr/share/axonwall/nvim/init.lua):
+  [1] Interfaces & VLANs     [5] Rosenpass PQ-VPN      [9]  Rootkit & Ring-0 Hunter
+  [2] nftables Firewall      [6] 2-Host HA Cluster     [10] Suricata / Zeek / CrowdSec
+  [3] NAT & Port Forwards    [7] BGP / OSPF (FRR)      [11] K3s & Vigilant Octo Waffle
+  [4] Unbound DNS & Kea      [8] ZFS Pools & Snapshots
+Keymaps: <Tab> Next Field | <Space> Toggle | <leader>w Stage | <leader>c Commit-Confirm (60s Rollback)`;
+        break;
+
+      case 'axonwallctl':
+        if (parts[1] === 'rootkit-scan') {
+          out = `[Ghost-in-the-Ring & 6-Engine Malware Hunter Audit]
+[PASS] BPF_LSM Kernel Guard    : Unprivileged BPF_PROG_LOAD & IORING_SETUP_SQPOLL blocked
+[PASS] /proc/kcore XArray Walk : 14 active bpf_prog structs in prog_idr (matches bpftool: 14/14, 0 hidden)
+[PASS] Silicon PMU LBR Audit   : 0 anomalous branch deltas / 0 kretprobe trampolines on sys_getdents64
+[PASS] rkhunter & chkrootkit   : 248 rootkit signatures checked, 0 suspect LKM or hidden /proc PIDs
+[PASS] ClamAV + AIDE + YARA    : clamonacc active; SHA-512 /boot & /usr/sbin verified; 0 YARA memory hits
+[PASS] Lynis Hardening Index   : 92 / 100 (CIS / NIST 800-53 Appliance Profile)`;
+        } else if (parts[1] === 'ha-status') {
+          out = `[Axonwall 2-Host High Availability Cluster Status]
+Local Node         : axonwall-fw01 (PRIMARY / MASTER)
+Peer Node          : axonwall-fw02 (172.16.254.2 - HEALTHY, 0.28ms RTT)
+mTLS PKI Link      : Verified (Serial #04A9F1, TLS 1.3 ECDHE-ECDSA-AES256-GCM)
+VRRP VIPs          : WAN 203.0.113.10/24 (MASTER) | LAN 192.168.100.1/24 (MASTER)
+conntrackd FTFW    : Synchronized (2,419 active flows mirrored over eth2)
+Chrony Stratum-1   : Peer offset +0.000012s (interleaved symmetric mode)
+State Replication  : OpenLDAP syncrepl OK | SQLite WAL OK | ZFS tank/config @ha-sync-0942 OK`;
+        } else {
+          out = `Usage: axonwallctl <rootkit-scan | ha-status | tui | status>`;
+        }
         break;
 
       case 'clear':
@@ -198,7 +234,15 @@ rtt min/avg/max/mdev = 3.980/4.040/4.120/0.052 ms`;
       {/* Suggestion Chips */}
       <div className="flex flex-wrap items-center gap-2 text-xs font-mono">
         <span className="text-slate-500 font-sans text-[11px]">Quick Commands:</span>
-        {['nft list ruleset', 'axonwall status', 'ip addr', 'ping 1.1.1.1', 'uptime', 'cat /etc/issue'].map((c) => (
+        {[
+          'nft list ruleset',
+          'axonwall status',
+          'axonwall-config',
+          'axonwallctl rootkit-scan',
+          'axonwallctl ha-status',
+          'ip addr',
+          'uptime',
+        ].map((c) => (
           <button
             key={c}
             onClick={() => executeCommand(c)}

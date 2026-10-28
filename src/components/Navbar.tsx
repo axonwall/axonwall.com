@@ -22,6 +22,10 @@ import {
   Menu,
   X,
   Shield,
+  KeyRound,
+  Bug,
+  Database,
+  GitBranch,
 } from 'lucide-react';
 import { Logo } from './Logo';
 import { ThemeSwitcher } from './ThemeSwitcher';
@@ -37,73 +41,102 @@ interface DropdownItem {
 
 const PRODUCT_ITEMS: DropdownItem[] = [
   {
-    title: 'Why Linux',
-    desc: 'Replacing legacy BSD packet filters with Linux 6.12 LTS multi-core performance',
+    title: 'Why Linux & nftables',
+    desc: 'Replacing legacy BSD packet filters with Linux 6.12 LTS multi-core scaling',
     href: '/#why-axonwall',
     icon: Layers,
   },
   {
-    title: 'Core Features',
-    desc: 'Line-rate nftables, 60s rollback, WireGuard, and Next.js reactive console',
+    title: 'Enterprise & Ring-0 Features',
+    desc: '12-subsystem stack: nftables, Rosenpass PQ-KEM, Ghost-in-the-Ring, ZFS, K3s & VOW',
     href: '/#features',
     icon: Zap,
   },
   {
-    title: 'Kernel Architecture',
-    desc: 'In-kernel flowtable fastpath, conntrack offloading, and packet traversal',
+    title: 'Ghost-in-the-Ring & rkhunter',
+    desc: '6-engine malware suite + BPF_LSM & Silicon PMU LBR rootkit detection',
+    href: '/docs/ghost-in-the-ring-rootkits',
+    icon: Bug,
+    badge: 'Ring-0',
+  },
+  {
+    title: 'Post-Quantum Rosenpass VPN',
+    desc: 'Classic McEliece 460896 + Kyber-768 hybrid WireGuard PSK rotation',
+    href: '/docs/post-quantum-rosenpass',
+    icon: KeyRound,
+    badge: 'PQ-KEM',
+  },
+  {
+    title: 'Modular ZFS NAS, K3s & VOW',
+    desc: 'Converged OpenZFS NAS, 2-node K3s + OpenEBS, and Vigilant Octo Waffle SOC',
+    href: '/docs/modular-architecture',
+    icon: Database,
+  },
+  {
+    title: 'Kernel & System Architecture',
+    desc: 'In-kernel flowtable fastpath, Commit-Confirm rollback, and B-14 PKI CA',
     href: '/architecture',
     icon: Cpu,
   },
   {
-    title: 'Individual Defense',
-    desc: 'Guarding personal perimeters, smart home IoT containment, and privacy',
+    title: 'Individual Defense & Savings',
+    desc: 'Personal perimeter sovereignty and TCO calculator vs. proprietary firewalls',
     href: '/#personal-sovereignty',
     icon: EyeOff,
-  },
-  {
-    title: 'Save Money',
-    desc: 'Calculate annual hardware and licensing cost savings over proprietary firewalls',
-    href: '/#cost-savings',
-    icon: TrendingDown,
   },
 ];
 
 const DOCS_ITEMS: DropdownItem[] = [
   {
-    title: 'Documentation Hub',
-    desc: 'Complete operating system guide, CLI reference, and first-boot setup',
+    title: 'Documentation Hub (v0.11.28)',
+    desc: 'Complete operating system guide, installation modes, and quickstart',
     href: '/docs',
     icon: FileText,
   },
   {
-    title: 'Threat Defense',
-    desc: 'DNS Sinkhole (RPZ), MaxMind GeoIP filtering, and CrowdSec bouncer',
-    href: '/docs/threat-defense',
+    title: '2-Host High Availability Guide',
+    desc: 'Step-by-step 2-host setup: VRRP, conntrackd, mTLS PKI, NTP, LDAP & ZFS sync',
+    href: '/docs/high-availability#two-host-setup',
+    icon: ArrowRightLeft,
+    badge: 'Guide',
+  },
+  {
+    title: 'Ghost-in-the-Ring & Malware Hunter',
+    desc: 'rkhunter, ClamAV, AIDE, YARA, Lynis, io_uring & eBPF rootkit telemetry',
+    href: '/docs/ghost-in-the-ring-rootkits',
+    icon: Bug,
+    badge: 'New',
+  },
+  {
+    title: 'Post-Quantum Rosenpass VPN',
+    desc: 'Dual-KEM Classic McEliece + Kyber-768 WireGuard tunnel configuration',
+    href: '/docs/post-quantum-rosenpass',
+    icon: KeyRound,
+  },
+  {
+    title: 'Neovim Super Configurator & ZSH',
+    desc: 'Form-driven Lua TUI (axonwall-config) with native Vim motions & NastyMap',
+    href: '/docs/cli-super-configurator',
+    icon: Terminal,
+    badge: 'TUI',
+  },
+  {
+    title: 'Vigilant Octo Waffle & K3s',
+    desc: 'Turnkey K3s GitOps stack (Gitea, Tekton, Vault, Wazuh) & Vigilante SOC',
+    href: '/docs/vigilant-octo-waffle',
+    icon: GitBranch,
+  },
+  {
+    title: 'ZFS NAS, RAID & Threat Defense',
+    desc: 'OpenZFS pools, multi-disk RAID install, Unbound RPZ sinkhole & Suricata 7+',
+    href: '/docs/zfs-nas-storage',
     icon: ShieldAlert,
   },
   {
-    title: 'High Availability',
-    desc: 'CARP/VRRP virtual IPs, stateful conntrackd, and distributed SQLite sync',
-    href: '/docs/high-availability',
-    icon: ArrowRightLeft,
-  },
-  {
-    title: 'Theme Customization',
-    desc: '20 built-in color palettes, theme authoring guide, and repo hosting',
-    href: '/docs/themes',
-    icon: Palette,
-  },
-  {
-    title: 'Hardware & Telemetry',
-    desc: 'Network interfaces, multi-queue RSS, and real-time performance telemetry',
-    href: '/docs/hardware-telemetry',
-    icon: Activity,
-  },
-  {
-    title: 'API Reference',
-    desc: 'Declarative JSON desired state schema, REST API, and WebSocket streaming',
+    title: 'REST API & Theme Engine',
+    desc: 'Declarative DesiredState schema, Unix socket IPC, and 20 console themes',
     href: '/docs/api-reference',
-    icon: Terminal,
+    icon: Palette,
   },
 ];
 

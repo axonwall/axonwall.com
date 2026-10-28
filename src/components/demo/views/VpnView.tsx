@@ -20,11 +20,47 @@ export function VpnView() {
       <div>
         <h1 className="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
           <KeyRound className="w-6 h-6 text-emerald-400" />
-          <span>VPN & Zero-Trust Mesh (WireGuard + Headscale)</span>
+          <span>VPN & Post-Quantum Zero-Trust Mesh (WireGuard + Rosenpass + Headscale)</span>
         </h1>
         <p className="text-xs sm:text-sm text-slate-400 mt-1">
-          High-performance ChaCha20-Poly1305 kernel encryption and self-hosted Tailscale mesh coordination.
+          High-performance ChaCha20-Poly1305 kernel encryption hardened with Post-Quantum Rosenpass Dual-KEM (Classic McEliece 460896 + Kyber-768) and Headscale mesh coordination.
         </p>
+      </div>
+
+      {/* Post-Quantum Rosenpass Dual-KEM Status Card */}
+      <div className="bg-slate-900 border border-emerald-500/30 rounded-xl p-5 space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div>
+            <h3 className="font-semibold text-sm text-white flex items-center gap-2">
+              <Shield className="w-4 h-4 text-emerald-400" />
+              <span>Post-Quantum Rosenpass Dual-KEM Sidecar (vpn-rosenpass)</span>
+            </h3>
+            <p className="text-xs text-slate-400">
+              Hybrid Classic McEliece 460896 + Kyber-768 (ML-KEM) key exchange rotating kernel WireGuard PSKs every 120 seconds on UDP :9999.
+            </p>
+          </div>
+          <span className="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-md border border-emerald-500/20 self-start sm:self-auto">
+            PQ-KEM Epoch #1,492 • Rotation 120s
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-mono">
+          <div className="p-3 rounded-lg bg-slate-950 border border-slate-800">
+            <div className="text-slate-400 text-[10px] font-sans uppercase tracking-wider">Static KEM (Long-Term Identity)</div>
+            <div className="text-emerald-400 font-bold mt-1">Classic McEliece 460896</div>
+            <div className="text-[11px] text-slate-500 mt-0.5">524 KB Public Key • Code-Based</div>
+          </div>
+          <div className="p-3 rounded-lg bg-slate-950 border border-slate-800">
+            <div className="text-slate-400 text-[10px] font-sans uppercase tracking-wider">Ephemeral KEM (Forward Secrecy)</div>
+            <div className="text-cyan-400 font-bold mt-1">Kyber-768 (NIST FIPS 203 ML-KEM)</div>
+            <div className="text-[11px] text-slate-500 mt-0.5">Module-Lattice Ephemeral Keying</div>
+          </div>
+          <div className="p-3 rounded-lg bg-slate-950 border border-slate-800">
+            <div className="text-slate-400 text-[10px] font-sans uppercase tracking-wider">Kernel Data Plane Injection</div>
+            <div className="text-white font-bold mt-1">wg set wg0 peer &lt;pub&gt; psk</div>
+            <div className="text-[11px] text-emerald-400 mt-0.5">Zero Throughput Penalty (Line-Rate)</div>
+          </div>
+        </div>
       </div>
 
       {/* WireGuard Peer Management */}
