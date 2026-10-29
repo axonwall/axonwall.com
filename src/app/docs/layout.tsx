@@ -49,7 +49,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
             Architecture
           </Link>
           <a
-            href="https://github.com/axonwall/axonwall_monorepo"
+            href="https://github.com/axonwall/axonwall"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 text-slate-400 hover:text-white transition px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 hover:border-slate-700"

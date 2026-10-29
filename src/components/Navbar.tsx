@@ -157,14 +157,14 @@ const EXPLORE_ITEMS: DropdownItem[] = [
   {
     title: 'Download ISO',
     desc: 'Free community installation media for x86_64 servers and mini-PCs',
-    href: 'https://github.com/axonwall/axonwall_monorepo/releases',
+    href: 'https://github.com/axonwall/axonwall/releases',
     icon: Download,
     external: true,
   },
   {
-    title: 'GitHub Monorepo',
+    title: 'GitHub Repository',
     desc: 'Open-source source code, issues, PRs, and community roadmap',
-    href: 'https://github.com/axonwall/axonwall_monorepo',
+    href: 'https://github.com/axonwall/axonwall',
     icon: ExternalLink,
     external: true,
   },

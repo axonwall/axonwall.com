@@ -258,7 +258,7 @@ export default function StandaloneArchitecturePage() {
               2-Host HA Setup Guide
             </Link>
             <a
-              href="https://github.com/axonwall/axonwall_monorepo/releases"
+              href="https://github.com/axonwall/axonwall/releases"
               target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-2.5 rounded-xl font-semibold text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition"
@@ -284,7 +284,7 @@ export default function StandaloneArchitecturePage() {
             <Link href="/" className="hover:text-slate-300 transition">Home</Link>
             <Link href="/docs" className="hover:text-slate-300 transition">Docs</Link>
             <Link href="/architecture" className="hover:text-slate-300 transition">Architecture</Link>
-            <a href="https://github.com/axonwall/axonwall_monorepo" className="hover:text-slate-300 transition">GitHub</a>
+            <a href="https://github.com/axonwall/axonwall" className="hover:text-slate-300 transition">GitHub</a>
           </div>
         </div>
       </footer>

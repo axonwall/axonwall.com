@@ -276,7 +276,7 @@ export const CostSavingsCalculator: React.FC = () => {
             </div>
           </div>
           <a
-            href="https://github.com/axonwall/axonwall_monorepo/releases"
+            href="https://github.com/axonwall/axonwall/releases"
             className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold transition shrink-0"
           >
             Start Saving Today <ArrowRight className="w-3.5 h-3.5" />

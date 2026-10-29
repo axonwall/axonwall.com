@@ -90,7 +90,7 @@ export default function HomePage() {
               <BookOpen className="w-4 h-4 text-emerald-400" /> Explore Documentation &amp; 2-Host HA Guide
             </Link>
             <a
-              href="https://github.com/axonwall/axonwall_monorepo/releases"
+              href="https://github.com/axonwall/axonwall/releases"
               className="w-full sm:w-auto px-6 py-3.5 rounded-xl text-sm font-semibold bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-slate-800 transition flex items-center justify-center gap-2"
             >
               <Download className="w-4 h-4 text-emerald-400" /> Download ISO (Free)
@@ -658,7 +658,7 @@ export default function HomePage() {
               </ul>
 
               <a
-                href="https://github.com/axonwall/axonwall_monorepo"
+                href="https://github.com/axonwall/axonwall"
                 className="w-full py-3 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition border border-slate-700 block text-center"
               >
                 Download Community ISO
@@ -807,7 +807,7 @@ export default function HomePage() {
             <Link href="/docs/ghost-in-the-ring-rootkits" className="hover:text-slate-300 transition">Ring-0 Hunter</Link>
             <Link href="/docs/post-quantum-rosenpass" className="hover:text-slate-300 transition">Post-Quantum VPN</Link>
             <Link href="/architecture" className="hover:text-slate-300 transition">Architecture</Link>
-            <a href="https://github.com/axonwall/axonwall_monorepo" className="hover:text-slate-300 transition">GitHub</a>
+            <a href="https://github.com/axonwall/axonwall" className="hover:text-slate-300 transition">GitHub</a>
             <a href="#appliances" className="hover:text-slate-300 transition">Appliances</a>
             <a href="#pricing" className="hover:text-slate-300 transition">Pricing</a>
           </div>
