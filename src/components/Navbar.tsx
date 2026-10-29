@@ -53,6 +53,20 @@ const PRODUCT_ITEMS: DropdownItem[] = [
     icon: Zap,
   },
   {
+    title: 'Super-Slim Edge NGFW (UEFI UKI)',
+    desc: 'Zero-surface single-file EFI UKI with pure-Go PID 1 (/init) & CONFIG_MODULES=n',
+    href: '/docs/edge-uki-ngfw',
+    icon: Cpu,
+    badge: 'UKI',
+  },
+  {
+    title: 'Eluvix Sovereign AI Router & DLP',
+    desc: 'Switchyard 4-tier routing, PrivacyGuard PII/secret DLP, and 8 agent harnesses',
+    href: '/docs/eluvix-ai-router',
+    icon: Sparkles,
+    badge: 'New',
+  },
+  {
     title: 'Ghost-in-the-Ring & rkhunter',
     desc: '6-engine malware suite + BPF_LSM & Silicon PMU LBR rootkit detection',
     href: '/docs/ghost-in-the-ring-rootkits',
@@ -68,15 +82,9 @@ const PRODUCT_ITEMS: DropdownItem[] = [
   },
   {
     title: 'Modular ZFS NAS, K3s & VOW',
-    desc: 'Converged OpenZFS NAS, 2-node K3s + OpenEBS, and Vigilant Octo Waffle SOC',
+    desc: 'Converged OpenZFS NAS, ZFSBootMenu, 2-node K3s + OpenEBS, and VOW SOC',
     href: '/docs/modular-architecture',
     icon: Database,
-  },
-  {
-    title: 'Kernel & System Architecture',
-    desc: 'In-kernel flowtable fastpath, Commit-Confirm rollback, and B-14 PKI CA',
-    href: '/architecture',
-    icon: Cpu,
   },
   {
     title: 'Individual Defense & Savings',
@@ -88,14 +96,28 @@ const PRODUCT_ITEMS: DropdownItem[] = [
 
 const DOCS_ITEMS: DropdownItem[] = [
   {
-    title: 'Documentation Hub (v0.11.28)',
+    title: 'Documentation Hub (v0.11.32)',
     desc: 'Complete operating system guide, installation modes, and quickstart',
     href: '/docs',
     icon: FileText,
   },
   {
+    title: 'Super-Slim Edge NGFW (UEFI UKI)',
+    desc: 'Single-file EFI UKI, pure-Go PID 1, Cloud-Init, Dual-Stack IPv6 & Edge HA',
+    href: '/docs/edge-uki-ngfw',
+    icon: Cpu,
+    badge: 'New',
+  },
+  {
+    title: 'Eluvix Sovereign AI Router & DLP',
+    desc: 'Switchyard 4-tier routing, reversible PII/secret tokenization & agent harnesses',
+    href: '/docs/eluvix-ai-router',
+    icon: Sparkles,
+    badge: 'New',
+  },
+  {
     title: '2-Host High Availability Guide',
-    desc: 'Step-by-step 2-host setup: VRRP, conntrackd, mTLS PKI, NTP, LDAP & ZFS sync',
+    desc: 'Step-by-step 2-host setup: VRRP, conntrackd, CSR mTLS PKI, NTP, LDAP & ZFS',
     href: '/docs/high-availability#two-host-setup',
     icon: ArrowRightLeft,
     badge: 'Guide',
@@ -105,13 +127,14 @@ const DOCS_ITEMS: DropdownItem[] = [
     desc: 'rkhunter, ClamAV, AIDE, YARA, Lynis, io_uring & eBPF rootkit telemetry',
     href: '/docs/ghost-in-the-ring-rootkits',
     icon: Bug,
-    badge: 'New',
+    badge: 'Ring-0',
   },
   {
-    title: 'Post-Quantum Rosenpass VPN',
-    desc: 'Dual-KEM Classic McEliece + Kyber-768 WireGuard tunnel configuration',
-    href: '/docs/post-quantum-rosenpass',
-    icon: KeyRound,
+    title: 'ZFSBootMenu, RAID-1 & ZFS NAS',
+    desc: 'Root-on-ZFS Boot Environments (v3.1.x), mdadm RAID-1 A/B & OpenZFS NAS',
+    href: '/docs/installer-raid-zfs',
+    icon: Database,
+    badge: 'ZBM',
   },
   {
     title: 'Neovim Super Configurator & ZSH',
@@ -121,26 +144,21 @@ const DOCS_ITEMS: DropdownItem[] = [
     badge: 'TUI',
   },
   {
-    title: 'Vigilant Octo Waffle & K3s',
-    desc: 'Turnkey K3s GitOps stack (Gitea, Tekton, Vault, Wazuh) & Vigilante SOC',
-    href: '/docs/vigilant-octo-waffle',
-    icon: GitBranch,
-  },
-  {
-    title: 'ZFS NAS, RAID & Threat Defense',
-    desc: 'OpenZFS pools, multi-disk RAID install, Unbound RPZ sinkhole & Suricata 7+',
-    href: '/docs/zfs-nas-storage',
-    icon: ShieldAlert,
-  },
-  {
-    title: 'REST API & Theme Engine',
-    desc: 'Declarative DesiredState schema, Unix socket IPC, and 20 console themes',
-    href: '/docs/api-reference',
-    icon: Palette,
+    title: 'Post-Quantum Rosenpass & VOW K3s',
+    desc: 'McEliece + Kyber-768 WireGuard mesh & Vigilant Octo Waffle K3s SecOps',
+    href: '/docs/post-quantum-rosenpass',
+    icon: KeyRound,
   },
 ];
 
 const EXPLORE_ITEMS: DropdownItem[] = [
+  {
+    title: 'Releases & Downloads (v0.11.32)',
+    desc: 'ISO, Super-Slim Edge UKI (.efi), Cloud QCOW2, Vault ISO, .deb & SHA-256 hashes',
+    href: '/releases',
+    icon: Download,
+    badge: 'v0.11.32',
+  },
   {
     title: 'Live Web Console Demo',
     desc: 'Full-featured interactive appliance sandbox running in your browser',
@@ -153,13 +171,6 @@ const EXPLORE_ITEMS: DropdownItem[] = [
     desc: 'Turnkey 1U/2U rackmount and mini-desktop appliances with port 2966',
     href: '/#appliances',
     icon: Server,
-  },
-  {
-    title: 'Download ISO',
-    desc: 'Free community installation media for x86_64 servers and mini-PCs',
-    href: 'https://github.com/axonwall/axonwall/releases',
-    icon: Download,
-    external: true,
   },
   {
     title: 'GitHub Repository',
@@ -369,6 +380,18 @@ export function Navbar() {
               </div>
             )}
           </div>
+
+          {/* Direct link: Releases */}
+          <Link
+            href="/releases"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-850/60 transition-colors"
+          >
+            <Download className="w-3.5 h-3.5 text-emerald-400" />
+            <span>Releases</span>
+            <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+              v0.11.32
+            </span>
+          </Link>
         </nav>
 
         {/* Right Actions: Theme Switcher & Order Button at the end */}

@@ -257,14 +257,12 @@ export default function StandaloneArchitecturePage() {
             >
               2-Host HA Setup Guide
             </Link>
-            <a
-              href="https://github.com/axonwall/axonwall/releases"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/releases"
               className="px-6 py-2.5 rounded-xl font-semibold text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition"
             >
-              Download ISO (v0.11.28)
-            </a>
+              Releases &amp; Download ISO (v0.11.32)
+            </Link>
           </div>
         </section>
       </main>
