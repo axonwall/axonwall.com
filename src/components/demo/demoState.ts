@@ -11,6 +11,9 @@ export type DemoViewKey =
   | 'routing'
   | 'vpn'
   | 'fleet'
+  | 'storage'
+  | 'compute'
+  | 'migration'
   | 'diagnostics'
   | 'terminal'
   | 'system'
@@ -190,7 +193,9 @@ export const INITIAL_SERVICES: DemoServiceStatus[] = [
   { name: 'Suricata IDS/IPS', unit: 'suricata.service', description: 'Next-Gen Intrusion Prevention Engine', status: 'active', memory: '412.0 MB', uptime: '14d 6h' },
   { name: 'Headscale', unit: 'headscale.service', description: 'Self-Hosted Zero-Trust Tailscale Hub', status: 'active', memory: '48.6 MB', uptime: '14d 6h' },
   { name: 'CrowdSec', unit: 'crowdsec.service', description: 'Collaborative Intrusion Detection Bouncer', status: 'active', memory: '64.2 MB', uptime: '14d 6h' },
-  { name: 'Axonwalld', unit: 'axonwalld.service', description: 'Appliance Daemon & Port 2966 REST Core', status: 'active', memory: '28.9 MB', uptime: '14d 6h' },
+  { name: 'BPF-LSM Guard', unit: 'axonwall-bpf-lsm.service', description: '5-Hook CO-RE Guard + Linux 6.9+ BPF_TOKEN Mediator', status: 'active', memory: '4.8 MB', uptime: '14d 6h' },
+  { name: 'Coroot APM', unit: 'coroot-node-agent.service', description: 'Zero-Instrumentation eBPF + OpenZFS ARC/ZIL Telemetry', status: 'active', memory: '31.4 MB', uptime: '14d 6h' },
+  { name: 'Axonwalld', unit: 'axonwalld.service', description: 'Appliance Daemon, Port 2966 REST & 25-Tool MCP Server', status: 'active', memory: '28.9 MB', uptime: '14d 6h' },
 ];
 
 export const INITIAL_SATELLITES: DemoSatelliteNode[] = [

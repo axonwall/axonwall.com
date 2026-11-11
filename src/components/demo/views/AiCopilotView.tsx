@@ -77,6 +77,14 @@ This blocks IoT cameras and smart bulbs from probing your workstations or NAS, w
 - Standard Linux packet processing passes every packet through the full Netfilter traversal stack.
 - Once a bidirectional connection is established (e.g. TCP handshake complete), Axonwall offloads that connection's tuple into the kernel **flowtable fastpath**.
 - Subsequent packets bypass layer 3/4 filtering routines and are directly forwarded by the network driver, slashing latency to microseconds!`;
+      } else if (lower.includes('bpf_token') || lower.includes('token') || lower.includes('lsm')) {
+        reply = `Axonwall v0.11.64 implements **Linux 6.9+ \`BPF_TOKEN_CREATE\` Delegation** mediated by **5 CO-RE BPF-LSM hooks**:
+- Isolated \`bpffs\` instances mounted at \`/run/axonwall/bpffs-tokens/<profile>\` delegate verified networking eBPF (\`XDP\`, \`SCHED_CLS\`, \`CGROUP_SKB\`) into rootless K3s (\`hostUsers: false\`) pods and unprivileged LXC (\`CLONE_NEWUSER\`) containers without host \`CAP_BPF\`.
+- Simultaneously, \`SEC("lsm/bpf_token_create")\` and \`SEC("lsm/bpf_token_cmd")\` enforce \`FORBIDDEN_RING0_TOKEN_PROG_MASK\`, returning \`-EPERM\` if any UserNS tenant attempts to load \`kprobe\`, \`tracepoint\`, \`perf_event\`, or \`lsm\` programs capable of calling \`bpf_probe_read_kernel()\` on host RAM.`;
+      } else if (lower.includes('mcp') || lower.includes('25') || lower.includes('22')) {
+        reply = `The **Axonwall MCP Server (\`axonwall-mcp\`)** ships **disabled by default** behind a hard kill switch and exposes **16 capability scopes, 16 read-only resources, and 25 guardrailed tools** across all 5 duties:
+- **Firewall & Ring-0 eBPF**: Tactical TTL leases in \`table inet axonwall_mcp\` plus pre-\`sk_buff\` Dual-Stack IPv4/IPv6 + LPM Trie CIDR \`mcp_xdp_fast_drop\` bans, SYN-flood PPS rate limiting, and \`BPF_TOKEN\` management.
+- **Virtualization, K3s, OpenZFS NAS & Migration**: KVM/Libvirt/LXC lifecycle & live migration, K3s Cilium eBPF & etcd snapshots, OpenZFS checkpoints/encryption/S.M.A.R.T./Cloud Sync (\`mcp_manage_zfs_nas\`), and 9-vendor migration (\`mcp_import_competitor_config\`).`;
       } else if (lower.includes('ssh') || lower.includes('rate-limit') || lower.includes('rate limit')) {
         reply = `Here is a production-grade **nftables rate-limiting snippet** for port 22 (SSH):
 \`\`\`nftables
@@ -86,7 +94,7 @@ tcp dport 22 ct state new counter accept comment "Accept SSH within rate limit"
 \`\`\`
 This defeats automated brute-force scripts before they can stress system authentication services.`;
       } else {
-        reply = `I have analyzed your request regarding **"${q}"** against the Axonwall 2026.4 security policy engine. All configuration rules compile to native \`nftables\` data plane tables on port **2966**, maintaining zero-downtime reliability and enterprise A/B partition integrity.`;
+        reply = `I have analyzed your request regarding **"${q}"** against the Axonwall v0.11.64 security policy engine and MCP tactical lease guard (\`table inet axonwall_mcp\`). All configuration rules compile to native \`nftables\` data plane tables on port **2966**, maintaining 60s commit-confirm safety and A/B dual-root integrity.`;
       }
 
       setMessages((prev) => [
@@ -118,8 +126,9 @@ This defeats automated brute-force scripts before they can stress system authent
       <div className="flex flex-wrap gap-2 text-xs flex-shrink-0">
         {[
           'How do I isolate my IoT VLAN?',
+          'How does Linux 6.9+ BPF_TOKEN work with BPF-LSM?',
+          'What can the 25-tool MCP Server control?',
           'Explain the 60-second Commit-Confirm timer',
-          'What is nftables Flowtable fastpath offload?',
           'Rate-limit SSH brute-force attempts',
         ].map((q) => (
           <button

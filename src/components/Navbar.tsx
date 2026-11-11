@@ -8,12 +8,9 @@ import {
   Zap,
   Cpu,
   EyeOff,
-  TrendingDown,
   FileText,
   ShieldAlert,
   ArrowRightLeft,
-  Palette,
-  Activity,
   Terminal,
   Sparkles,
   Server,
@@ -21,11 +18,13 @@ import {
   ExternalLink,
   Menu,
   X,
-  Shield,
   KeyRound,
   Bug,
   Database,
-  GitBranch,
+  Lock,
+  Boxes,
+  Bot,
+  Users,
 } from 'lucide-react';
 import { Logo } from './Logo';
 import { ThemeSwitcher } from './ThemeSwitcher';
@@ -47,10 +46,32 @@ const PRODUCT_ITEMS: DropdownItem[] = [
     icon: Layers,
   },
   {
-    title: 'Enterprise & Ring-0 Features',
-    desc: '12-subsystem stack: nftables, Rosenpass PQ-KEM, Ghost-in-the-Ring, ZFS, K3s & VOW',
+    title: '5 Modular Core Roles & Ring-0 Defense',
+    desc: 'core-firewall, core-nas, core-k3s, core-virt, core-vigilante & CO-RE BPF-LSM',
     href: '/#features',
     icon: Zap,
+    badge: '5 Roles',
+  },
+  {
+    title: 'Vigilante Autonomous SOC & SOAR',
+    desc: 'Autonomous containment, honeynet deception mesh, PCAP forensics & data lake',
+    href: '/docs/vigilante-cyber-ops',
+    icon: ShieldAlert,
+    badge: 'SOC',
+  },
+  {
+    title: 'MCP Security AI & Tactical Leases',
+    desc: 'Disabled-by-default kill switch, blast-radius guardrails & TTL nftables leases',
+    href: '/docs/mcp-ai-control',
+    icon: Bot,
+    badge: 'MCP',
+  },
+  {
+    title: 'KVM & LXC Hypervisor Compute',
+    desc: 'Virtual machines, LXC containers, VFIO GPU/PCIe passthrough & VXLAN SDN',
+    href: '/docs/kvm-lxc-hypervisor',
+    icon: Boxes,
+    badge: 'KVM/LXC',
   },
   {
     title: 'Super-Slim Edge NGFW (UEFI UKI)',
@@ -61,33 +82,27 @@ const PRODUCT_ITEMS: DropdownItem[] = [
   },
   {
     title: 'Eluvix Sovereign AI Router & DLP',
-    desc: 'Switchyard 4-tier routing, PrivacyGuard PII/secret DLP, and 8 agent harnesses',
+    desc: 'Switchyard 4-tier routing, PrivacyGuard PII/secret DLP & 8 agent harnesses',
     href: '/docs/eluvix-ai-router',
     icon: Sparkles,
-    badge: 'New',
-  },
-  {
-    title: 'Ghost-in-the-Ring & rkhunter',
-    desc: '6-engine malware suite + BPF_LSM & Silicon PMU LBR rootkit detection',
-    href: '/docs/ghost-in-the-ring-rootkits',
-    icon: Bug,
-    badge: 'Ring-0',
+    badge: 'AI DLP',
   },
   {
     title: 'Post-Quantum Rosenpass VPN',
-    desc: 'Classic McEliece 460896 + Kyber-768 hybrid WireGuard PSK rotation',
+    desc: 'Classic McEliece 460896 + ML-KEM-512 (Kyber-512) hybrid WireGuard PSK rotation',
     href: '/docs/post-quantum-rosenpass',
     icon: KeyRound,
     badge: 'PQ-KEM',
   },
   {
-    title: 'Modular ZFS NAS, K3s & VOW',
-    desc: 'Converged OpenZFS NAS, ZFSBootMenu, 2-node K3s + OpenEBS, and VOW SOC',
-    href: '/docs/modular-architecture',
-    icon: Database,
+    title: 'Unified OpenLDAP & OIDC SSO',
+    desc: 'Zero-touch RBAC & directory federation across Web UI, K3s, VOW, Vigilante & RADIUS',
+    href: '/docs/identity-openldap-sso',
+    icon: Users,
+    badge: 'SSO',
   },
   {
-    title: 'Individual Defense & Savings',
+    title: 'Individual Defense & TCO Savings',
     desc: 'Personal perimeter sovereignty and TCO calculator vs. proprietary firewalls',
     href: '/#personal-sovereignty',
     icon: EyeOff,
@@ -96,68 +111,84 @@ const PRODUCT_ITEMS: DropdownItem[] = [
 
 const DOCS_ITEMS: DropdownItem[] = [
   {
-    title: 'Documentation Hub (v0.11.32)',
-    desc: 'Complete operating system guide, installation modes, and quickstart',
+    title: 'Documentation Hub (v0.11.64)',
+    desc: 'All 24 technical guides: OS setup, 12 YAML domains, HA, Ring-0 & API reference',
     href: '/docs',
     icon: FileText,
+    badge: '24 Guides',
+  },
+  {
+    title: 'MCP Security AI & Guardrails',
+    desc: 'Model Context Protocol kill switch, table inet axonwall_mcp & TTL tactical leases',
+    href: '/docs/mcp-ai-control',
+    icon: Bot,
+    badge: 'New',
+  },
+  {
+    title: 'Vigilante Autonomous SOC',
+    desc: 'SOAR active containment, deception mesh, PCAP forensics & 12 SOC packages',
+    href: '/docs/vigilante-cyber-ops',
+    icon: ShieldAlert,
+    badge: 'New',
+  },
+  {
+    title: 'KVM & LXC Hypervisor',
+    desc: 'QEMU/KVM VMs, LXC containers, VFIO passthrough, Cloud-Init & Hosted Edge UKI',
+    href: '/docs/kvm-lxc-hypervisor',
+    icon: Boxes,
+    badge: 'New',
+  },
+  {
+    title: 'OpenLDAP & Enterprise SSO',
+    desc: 'Multi-provider syncrepl, OIDC/SAML SSO, FreeRADIUS & cross-stack federation',
+    href: '/docs/identity-openldap-sso',
+    icon: Users,
+    badge: 'SSO',
+  },
+  {
+    title: 'Eluvix Sovereign AI Router',
+    desc: 'Switchyard 4-tier routing, reversible PII/secret tokenization & agent harnesses',
+    href: '/docs/eluvix-ai-router',
+    icon: Sparkles,
+    badge: 'AI',
   },
   {
     title: 'Super-Slim Edge NGFW (UEFI UKI)',
     desc: 'Single-file EFI UKI, pure-Go PID 1, Cloud-Init, Dual-Stack IPv6 & Edge HA',
     href: '/docs/edge-uki-ngfw',
     icon: Cpu,
-    badge: 'New',
+    badge: 'UKI',
   },
   {
-    title: 'Eluvix Sovereign AI Router & DLP',
-    desc: 'Switchyard 4-tier routing, reversible PII/secret tokenization & agent harnesses',
-    href: '/docs/eluvix-ai-router',
-    icon: Sparkles,
-    badge: 'New',
-  },
-  {
-    title: '2-Host High Availability Guide',
-    desc: 'Step-by-step 2-host setup: VRRP, conntrackd, CSR mTLS PKI, NTP, LDAP & ZFS',
-    href: '/docs/high-availability#two-host-setup',
-    icon: ArrowRightLeft,
-    badge: 'Guide',
-  },
-  {
-    title: 'Ghost-in-the-Ring & Malware Hunter',
-    desc: 'rkhunter, ClamAV, AIDE, YARA, Lynis, io_uring & eBPF rootkit telemetry',
+    title: 'Ghost-in-the-Ring & BPF-LSM Guard',
+    desc: 'CVE-2026-31431 Copy Fail block, io_uring lockdown, PMU LBR & 6 malware engines',
     href: '/docs/ghost-in-the-ring-rootkits',
     icon: Bug,
     badge: 'Ring-0',
   },
   {
-    title: 'ZFSBootMenu, RAID-1 & ZFS NAS',
-    desc: 'Root-on-ZFS Boot Environments (v3.1.x), mdadm RAID-1 A/B & OpenZFS NAS',
+    title: 'ZFSBootMenu v3.1.0 & 2-Host HA',
+    desc: 'Pure UEFI ZFS Boot Environments (axonwallctl zbm), RAID-1 A/B & 2-Host HA cluster',
     href: '/docs/installer-raid-zfs',
     icon: Database,
     badge: 'ZBM',
   },
   {
-    title: 'Neovim Super Configurator & ZSH',
-    desc: 'Form-driven Lua TUI (axonwall-config) with native Vim motions & NastyMap',
+    title: 'Neovim Super Configurator & CLI',
+    desc: 'Form-driven Lua TUI (axonwall-config), axonwall-opshell & Etckeeper Git diffs',
     href: '/docs/cli-super-configurator',
     icon: Terminal,
     badge: 'TUI',
-  },
-  {
-    title: 'Post-Quantum Rosenpass & VOW K3s',
-    desc: 'McEliece + Kyber-768 WireGuard mesh & Vigilant Octo Waffle K3s SecOps',
-    href: '/docs/post-quantum-rosenpass',
-    icon: KeyRound,
   },
 ];
 
 const EXPLORE_ITEMS: DropdownItem[] = [
   {
-    title: 'Releases & Downloads (v0.11.32)',
-    desc: 'ISO, Super-Slim Edge UKI (.efi), Cloud QCOW2, Vault ISO, .deb & SHA-256 hashes',
+    title: 'Releases & Downloads (v0.11.64)',
+    desc: 'Unified NGFW + Vault ISO, Super-Slim Edge UKI (.efi), Cloud QCOW2 & Debian .deb',
     href: '/releases',
     icon: Download,
-    badge: 'v0.11.32',
+    badge: 'v0.11.64',
   },
   {
     title: 'Live Web Console Demo',
@@ -167,14 +198,20 @@ const EXPLORE_ITEMS: DropdownItem[] = [
     badge: 'Sandbox',
   },
   {
+    title: 'System Architecture Blueprint',
+    desc: '5 core roles, 12 /etc/axonwall/*.yaml files, BPF-LSM Ring-0 & data plane design',
+    href: '/architecture',
+    icon: Lock,
+  },
+  {
     title: 'Hardware Appliances',
-    desc: 'Turnkey 1U/2U rackmount and mini-desktop appliances with port 2966',
+    desc: 'Turnkey 1U/2U rackmount and fanless mini-desktop appliances with port 2966',
     href: '/#appliances',
     icon: Server,
   },
   {
     title: 'GitHub Repository',
-    desc: 'Open-source source code, issues, PRs, and community roadmap',
+    desc: 'Open-source GPLv2 source code, issues, PRs, and community roadmap',
     href: 'https://github.com/axonwall/axonwall',
     icon: ExternalLink,
     external: true,
@@ -229,7 +266,7 @@ export function Navbar() {
 
         {/* Center: Simplified Dropdown Menus */}
         <nav className="hidden md:flex items-center gap-1 sm:gap-2">
-          {/* Dropdown 1: Product */}
+          {/* Dropdown 1: Product / Platform */}
           <div className="relative">
             <button
               onClick={() => toggleDropdown('product')}
@@ -239,7 +276,7 @@ export function Navbar() {
                   : 'text-slate-300 hover:text-white hover:bg-slate-850/60'
               }`}
             >
-              <span>Product</span>
+              <span>Platform</span>
               <ChevronDown
                 className={`w-3.5 h-3.5 transition-transform duration-200 ${
                   openMenu === 'product' ? 'rotate-180 text-emerald-400' : 'text-slate-500'
@@ -248,7 +285,7 @@ export function Navbar() {
             </button>
 
             {openMenu === 'product' && (
-              <div className="absolute left-0 mt-2 w-80 p-2 rounded-2xl bg-slate-900 border border-slate-800 shadow-2xl space-y-1 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
+              <div className="absolute left-0 mt-2 w-96 max-h-[80vh] overflow-y-auto p-2 rounded-2xl bg-slate-900 border border-slate-800 shadow-2xl space-y-1 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
                 {PRODUCT_ITEMS.map((item) => {
                   const Icon = item.icon;
                   return (
@@ -258,12 +295,19 @@ export function Navbar() {
                       onClick={() => setOpenMenu(null)}
                       className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-slate-800/70 transition-colors group"
                     >
-                      <div className="p-2 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 group-hover:bg-emerald-500 group-hover:text-slate-950 transition-colors mt-0.5">
+                      <div className="p-2 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 group-hover:bg-emerald-500 group-hover:text-slate-950 transition-colors mt-0.5 shrink-0">
                         <Icon className="w-4 h-4" />
                       </div>
-                      <div>
-                        <div className="text-xs font-semibold text-white group-hover:text-emerald-300 transition-colors">
-                          {item.title}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-1.5 flex-wrap">
+                          <span className="text-xs font-semibold text-white group-hover:text-emerald-300 transition-colors">
+                            {item.title}
+                          </span>
+                          {item.badge && (
+                            <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+                              {item.badge}
+                            </span>
+                          )}
                         </div>
                         <div className="text-[11px] text-slate-400 leading-snug mt-0.5">
                           {item.desc}
@@ -295,7 +339,7 @@ export function Navbar() {
             </button>
 
             {openMenu === 'docs' && (
-              <div className="absolute left-0 mt-2 w-80 p-2 rounded-2xl bg-slate-900 border border-slate-800 shadow-2xl space-y-1 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
+              <div className="absolute left-0 mt-2 w-96 max-h-[80vh] overflow-y-auto p-2 rounded-2xl bg-slate-900 border border-slate-800 shadow-2xl space-y-1 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
                 {DOCS_ITEMS.map((item) => {
                   const Icon = item.icon;
                   return (
@@ -305,12 +349,19 @@ export function Navbar() {
                       onClick={() => setOpenMenu(null)}
                       className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-slate-800/70 transition-colors group"
                     >
-                      <div className="p-2 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 group-hover:bg-cyan-500 group-hover:text-slate-950 transition-colors mt-0.5">
+                      <div className="p-2 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 group-hover:bg-cyan-500 group-hover:text-slate-950 transition-colors mt-0.5 shrink-0">
                         <Icon className="w-4 h-4" />
                       </div>
-                      <div>
-                        <div className="text-xs font-semibold text-white group-hover:text-cyan-300 transition-colors">
-                          {item.title}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-1.5 flex-wrap">
+                          <span className="text-xs font-semibold text-white group-hover:text-cyan-300 transition-colors">
+                            {item.title}
+                          </span>
+                          {item.badge && (
+                            <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">
+                              {item.badge}
+                            </span>
+                          )}
                         </div>
                         <div className="text-[11px] text-slate-400 leading-snug mt-0.5">
                           {item.desc}
@@ -356,11 +407,11 @@ export function Navbar() {
                       {...(extraProps as any)}
                       className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-slate-800/70 transition-colors group"
                     >
-                      <div className="p-2 rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 group-hover:bg-indigo-500 group-hover:text-slate-950 transition-colors mt-0.5">
+                      <div className="p-2 rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 group-hover:bg-indigo-500 group-hover:text-slate-950 transition-colors mt-0.5 shrink-0">
                         <Icon className="w-4 h-4" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-1.5">
+                        <div className="flex items-center gap-1.5 flex-wrap">
                           <span className="text-xs font-semibold text-white group-hover:text-indigo-300 transition-colors">
                             {item.title}
                           </span>
@@ -389,7 +440,7 @@ export function Navbar() {
             <Download className="w-3.5 h-3.5 text-emerald-400" />
             <span>Releases</span>
             <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
-              v0.11.32
+              v0.11.64
             </span>
           </Link>
         </nav>
@@ -420,19 +471,24 @@ export function Navbar() {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-slate-800 bg-slate-950/95 backdrop-blur-xl px-4 py-4 space-y-4 animate-in fade-in duration-150">
+        <div className="md:hidden border-t border-slate-800 bg-slate-950/95 backdrop-blur-xl px-4 py-4 max-h-[82vh] overflow-y-auto space-y-4 animate-in fade-in duration-150">
           <div className="space-y-1">
             <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block px-2">
-              Product
+              Platform
             </span>
             {PRODUCT_ITEMS.map((item) => (
               <Link
                 key={item.title}
                 href={item.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="block px-3 py-1.5 rounded-lg text-xs font-medium text-slate-200 hover:bg-slate-800"
+                className="flex items-center justify-between px-3 py-1.5 rounded-lg text-xs font-medium text-slate-200 hover:bg-slate-800"
               >
-                {item.title}
+                <span>{item.title}</span>
+                {item.badge && (
+                  <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+                    {item.badge}
+                  </span>
+                )}
               </Link>
             ))}
           </div>
@@ -446,16 +502,21 @@ export function Navbar() {
                 key={item.title}
                 href={item.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="block px-3 py-1.5 rounded-lg text-xs font-medium text-slate-200 hover:bg-slate-800"
+                className="flex items-center justify-between px-3 py-1.5 rounded-lg text-xs font-medium text-slate-200 hover:bg-slate-800"
               >
-                {item.title}
+                <span>{item.title}</span>
+                {item.badge && (
+                  <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">
+                    {item.badge}
+                  </span>
+                )}
               </Link>
             ))}
           </div>
 
           <div className="space-y-1 border-t border-slate-800/60 pt-3">
             <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block px-2">
-              Explore & Demo
+              Explore &amp; Demo
             </span>
             {EXPLORE_ITEMS.map((item) => {
               const Comp = item.external ? 'a' : Link;
@@ -466,9 +527,14 @@ export function Navbar() {
                   href={item.href}
                   onClick={() => setMobileMenuOpen(false)}
                   {...(extra as any)}
-                  className="block px-3 py-1.5 rounded-lg text-xs font-medium text-slate-200 hover:bg-slate-800"
+                  className="flex items-center justify-between px-3 py-1.5 rounded-lg text-xs font-medium text-slate-200 hover:bg-slate-800"
                 >
-                  {item.title}
+                  <span>{item.title}</span>
+                  {item.badge && (
+                    <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+                      {item.badge}
+                    </span>
+                  )}
                 </Comp>
               );
             })}

@@ -56,7 +56,7 @@ export const HeroSecurityHUD: React.FC = () => {
               LIVE TELEMETRY
             </span>
             <span className="text-xs font-mono text-slate-400 hidden sm:inline">
-              Linux 6.12.18-lts • nftables v1.1.0 • x86_64
+              Axonwall v0.11.64 • Linux 6.12 LTS • Dual-Stack XDP + 5-Hook BPF-LSM + BPF_TOKEN
             </span>
           </div>
         </div>
@@ -188,7 +188,7 @@ export const HeroSecurityHUD: React.FC = () => {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-[11px] text-slate-400 pt-1">
               <div className="flex items-center justify-between p-2 rounded bg-slate-900/80 border border-slate-800/60">
                 <span>Kernel BPF Bypass:</span>
-                <span className="text-emerald-400 font-bold">ACTIVE (XDP Offload)</span>
+                <span className="text-emerald-400 font-bold">Dual-Stack VLAN XDP + LRU</span>
               </div>
               <div className="flex items-center justify-between p-2 rounded bg-slate-900/80 border border-slate-800/60">
                 <span>WireGuard Peers:</span>
@@ -259,9 +259,9 @@ export const HeroSecurityHUD: React.FC = () => {
                 <span className="text-emerald-400 font-bold">0.0ms nxdomain</span>
               </div>
               <div className="flex items-center justify-between p-1.5 rounded bg-slate-900/60">
-                <span className="text-slate-200">SYN Flood & Portscan Heuristics</span>
-                <span className="text-purple-400 font-mono">nft synproxy active</span>
-                <span className="text-emerald-400 font-bold">Shielded</span>
+                <span className="text-slate-200">5-Hook CO-RE BPF-LSM + BPF_TOKEN (6.9+)</span>
+                <span className="text-purple-400 font-mono">AF_ALG / SQPOLL / UserNS gated</span>
+                <span className="text-emerald-400 font-bold">Ring-0 Enforced</span>
               </div>
             </div>
           </div>

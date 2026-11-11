@@ -14,20 +14,20 @@ export function TerminalView() {
     {
       command: 'cat /etc/issue',
       output: `================================================================================
-Axonwall Appliance (Debian 13)
+Axonwall v0.11.64 Appliance (Debian 13 Trixie)
 Web Console: https://192.168.100.1:2966
 Appliance Console: Login with administrator credentials
 ================================================================================`,
     },
     {
       command: 'axonwall status',
-      output: `[Axonwall System Report]
+      output: `[Axonwall System Report — v0.11.64]
 Appliance Hostname : axonwall-core
-OS Release         : Debian 13 (Trixie) Linux 6.12.10-amd64
+OS Release         : Axonwall v0.11.64 • Debian 13 (Trixie) Linux 6.12.10-amd64
 Web Management     : Listening on https://0.0.0.0:2966 [TLS 1.3]
-Data Plane Engine  : nftables 1.1.2 (Flowtable HW Offload Active)
+Data Plane Engine  : nftables 1.1.2 + XDP Fastpath + CO-RE BPF-LSM Guard
 Active Conntrack   : 2,419 / 2,000,000 states (0.12%)
-WireGuard Peers    : 3 connected (wg0)
+WireGuard Peers    : 3 connected (wg0 • Rosenpass McEliece + ML-KEM-512)
 Satellite Fleet    : 4 micro-edge nodes synchronized (v24)`,
     },
   ]);
@@ -51,10 +51,13 @@ Satellite Fleet    : 4 micro-edge nodes synchronized (v24)`,
       case '?':
         out = `Available Appliance Shell Commands:
   nft list ruleset          - Dump active Linux kernel nftables ruleset
-  axonwall status           - Display core system health and management ports
-  axonwall-config           - Launch 11-domain Neovim Super Configurator TUI
-  axonwallctl rootkit-scan  - Run 6-engine Malware Suite + Ring-0 Ghost-in-the-Ring audit
-  axonwallctl ha-status     - Display 2-Host High Availability VRRP, Conntrack & ZFS sync
+  axonwallctl status        - Display core system, HA, and Commit-Confirm health
+  axonwall-config           - Launch 12-domain Neovim Super Configurator TUI
+  axonwall-tui              - Launch 11-tab interactive terminal dashboard & NastyMap
+  axonwall-hunt-rootkits    - Run 8-engine Malware Suite + 5-hook CO-RE BPF-LSM audit
+  axonwallctl ebpf overview - Inspect Dual-Stack VLAN XDP, BPF-LSM & BPF_TOKEN mounts
+  axonwallctl kubeconfig    - Export non-root HA K3s credentials to ~/.kube/config
+  axonwallctl mcp status    - Inspect 16-scope / 25-tool MCP AI kill-switch & leases
   ip addr                   - List network interfaces and assigned IP subnets
   cat /etc/issue            - Display system issue banner
   uname -a                  - Print Linux kernel architecture and version
@@ -64,35 +67,61 @@ Satellite Fleet    : 4 micro-edge nodes synchronized (v24)`,
         break;
 
       case 'axonwall-config':
-        out = `[Axonwall Neovim Super Configurator v0.11.28]
-Loaded 11 Interactive Lua Form Domains (/usr/share/axonwall/nvim/init.lua):
-  [1] Interfaces & VLANs     [5] Rosenpass PQ-VPN      [9]  Rootkit & Ring-0 Hunter
-  [2] nftables Firewall      [6] 2-Host HA Cluster     [10] Suricata / Zeek / CrowdSec
-  [3] NAT & Port Forwards    [7] BGP / OSPF (FRR)      [11] K3s & Vigilant Octo Waffle
-  [4] Unbound DNS & Kea      [8] ZFS Pools & Snapshots
-Keymaps: <Tab> Next Field | <Space> Toggle | <leader>w Stage | <leader>c Commit-Confirm (60s Rollback)`;
+        out = `[Axonwall Neovim Super Configurator v0.11.64]
+Loaded 12 Declarative YAML Domains (/etc/axonwall/*.yaml):
+  [1] system.yaml          [5] services.yaml        [9]  storage.yaml
+  [2] interfaces.yaml      [6] vpn.yaml             [10] k3s.yaml
+  [3] firewall.yaml        [7] security.yaml        [11] virt.yaml
+  [4] routing.yaml         [8] ha.yaml              [12] vigilante.yaml
+Keymaps: <Tab> Switch Pane | <C-d> Live Diff | <C-s> Validate & Save | :AxonApply Commit-Confirm (120s)`;
+        break;
+
+      case 'axonwall-tui':
+        out = `[Axonwall Interactive TUI Dashboard — v0.11.64]
+Tabs: [1] Dashboard [2] Interfaces [3] Firewall [4] Routing [5] Services & PQ
+      [6] Storage [7] Compute & SOC [8] Plugins [9] NastyMap [u] ZBM/Boot [0] System & Ops
+Tip: Run 'axonwall-tui --nastymap' over SSH for full interactive 6-view topology & Nmap simulator.`;
+        break;
+
+      case 'axonwall-hunt-rootkits':
+        out = `[Ghost-in-the-Ring & 8-Engine Malware Hunter Audit — v0.11.64]
+[PASS] 5-Hook CO-RE BPF-LSM    : socket_bind (CVE-2026-31431), bpf, uring_sqpoll, bpf_token_create & bpf_token_cmd ENFORCED
+[PASS] Linux 6.9+ BPF_TOKEN    : 3 bpffs token superblocks active; FORBIDDEN_RING0_TOKEN_PROG_MASK (kprobe/lsm) VETOED
+[PASS] /proc/kcore XArray Walk : 16 active bpf_prog structs in prog_idr (matches bpftool: 16/16, 0 hidden)
+[PASS] io_uring Ring Audit     : 0 unprivileged SQPOLL threads (iou-sqp-*), kernel.io_uring_disabled=2
+[PASS] 8-Engine Malware Suite  : rkhunter, chkrootkit, ClamAV, AIDE, YARA, Lynis, unhide, debsums — 8/8 CLEAN
+[PASS] Lynis Hardening Index   : 94 / 100 -> Report written to /var/lib/axonwall/rootkit-audit.json`;
         break;
 
       case 'axonwallctl':
-        if (parts[1] === 'rootkit-scan') {
-          out = `[Ghost-in-the-Ring & 6-Engine Malware Hunter Audit]
-[PASS] BPF_LSM Kernel Guard    : Unprivileged BPF_PROG_LOAD & IORING_SETUP_SQPOLL blocked
-[PASS] /proc/kcore XArray Walk : 14 active bpf_prog structs in prog_idr (matches bpftool: 14/14, 0 hidden)
-[PASS] Silicon PMU LBR Audit   : 0 anomalous branch deltas / 0 kretprobe trampolines on sys_getdents64
-[PASS] rkhunter & chkrootkit   : 248 rootkit signatures checked, 0 suspect LKM or hidden /proc PIDs
-[PASS] ClamAV + AIDE + YARA    : clamonacc active; SHA-512 /boot & /usr/sbin verified; 0 YARA memory hits
-[PASS] Lynis Hardening Index   : 92 / 100 (CIS / NIST 800-53 Appliance Profile)`;
-        } else if (parts[1] === 'ha-status') {
-          out = `[Axonwall 2-Host High Availability Cluster Status]
-Local Node         : axonwall-fw01 (PRIMARY / MASTER)
-Peer Node          : axonwall-fw02 (172.16.254.2 - HEALTHY, 0.28ms RTT)
-mTLS PKI Link      : Verified (Serial #04A9F1, TLS 1.3 ECDHE-ECDSA-AES256-GCM)
+        if (parts[1] === 'status' || parts[1] === 'ha-status') {
+          out = `[Axonwall 2-Host High Availability & Control Plane Status — v0.11.64]
+Local Node         : axonwall-fw01 (PRIMARY / MASTER • Boot Mode: ZFSBootMenu v3.1.0)
+Commit-Confirm     : Confirmed (Bundle SHA-256: 9f8a4d2c • 0 pending rollback timers)
+Peer Node          : axonwall-fw02 (10.0.99.2 - HEALTHY, 0.28ms RTT)
+mTLS PKI Link      : Verified (ECDSA P-256, TLS 1.3, Signed Payloads: REQUIRED)
 VRRP VIPs          : WAN 203.0.113.10/24 (MASTER) | LAN 192.168.100.1/24 (MASTER)
-conntrackd FTFW    : Synchronized (2,419 active flows mirrored over eth2)
-Chrony Stratum-1   : Peer offset +0.000012s (interleaved symmetric mode)
-State Replication  : OpenLDAP syncrepl OK | SQLite WAL OK | ZFS tank/config @ha-sync-0942 OK`;
+conntrackd FTFW    : Synchronized (2,419 active flows mirrored)
+State Replication  : OpenLDAP syncrepl OK | SQLite OK | ZFS tank @ha-sync OK | K3s HA Ready (2/2)`;
+        } else if (parts[1] === 'ebpf') {
+          out = `[Axonwall Ring-0 eBPF, Dual-Stack XDP & Linux 6.9+ BPF_TOKEN Status — v0.11.64]
+XDP Engine         : Dual-Stack IPv4/IPv6 + 802.1Q/802.1ad QinQ (flow_map: 131K LRU | flow6_map: 65K LRU)
+XDP Blocklists     : 4 active monotonic TTL XDP_DROP bans (0 internal/management lockouts)
+CO-RE BPF-LSM      : 5/5 hooks attached (socket_bind, bpf, uring_sqpoll, bpf_token_create, bpf_token_cmd)
+BPF_TOKEN Mounts   : /run/axonwall/bpffs-tokens/{networking-safe, cgroup-observability, firewall-xdp-tc}
+Ring-0 Isolation   : kprobe, tracepoint, perf_event, tracing, struct_ops, lsm -> BLOCKED (-EPERM)`;
+        } else if (parts[1] === 'kubeconfig') {
+          out = `[axonwall-kubeconfig] Read /etc/rancher/k3s/k3s.yaml (group: axonwall-api 0640)
+[axonwall-kubeconfig] Bound API server endpoint -> https://192.168.100.1:6443 (Floating LAN VIP)
+[axonwall-kubeconfig] Merged context 'axonwall-ha' into ~/.kube/config (mode 0600)`;
+        } else if (parts[1] === 'mcp') {
+          out = `[Axonwall MCP Security AI Control — 16 Scopes • 14 Resources • 22 Tools]
+Master Switch      : DISABLED (Default Safe-Off • /var/lib/axonwall/mcp-settings.json)
+Subsystem Coverage : Firewall + Ring-0 eBPF/BPF_TOKEN + KVM/LXC + K3s + OpenZFS NAS
+Active Leases      : 0 / 250 (table inet axonwall_mcp & XDP blocklists clean)
+Audit Hash Chain   : VERIFIED (/var/lib/axonwall/mcp-audit.jsonl)`;
         } else {
-          out = `Usage: axonwallctl <rootkit-scan | ha-status | tui | status>`;
+          out = `Usage: axonwallctl <status | validate | diff | apply | confirm | rollback | ebpf | zbm | update | plugin | kubeconfig | mcp | cloudinit | config>`;
         }
         break;
 
@@ -136,13 +165,13 @@ State Replication  : OpenLDAP syncrepl OK | SQLite WAL OK | ZFS tank/config @ha-
 
       case 'axonwall':
         if (parts[1] === 'status') {
-          out = `[Axonwall System Report]
+          out = `[Axonwall System Report — v0.11.64]
 Appliance Hostname : axonwall-core
-OS Release         : Debian 13 (Trixie) Linux 6.12.10-amd64
+OS Release         : Axonwall v0.11.64 • Debian 13 (Trixie) Linux 6.12.10-amd64
 Web Management     : Listening on https://0.0.0.0:2966 [TLS 1.3]
-Data Plane Engine  : nftables 1.1.2 (Flowtable HW Offload Active)
+Data Plane Engine  : nftables 1.1.2 + XDP Fastpath + CO-RE BPF-LSM Guard
 Active Conntrack   : 2,419 / 2,000,000 states (0.12%)
-WireGuard Peers    : 3 connected (wg0)
+WireGuard Peers    : 3 connected (wg0 • Rosenpass McEliece + ML-KEM-512)
 Satellite Fleet    : 4 micro-edge nodes synchronized (v24)`;
         } else {
           out = `axonwall: unknown command '${parts.slice(1).join(' ')}'. Try 'axonwall status'.`;
@@ -173,7 +202,7 @@ Satellite Fleet    : 4 micro-edge nodes synchronized (v24)`;
       case 'cat':
         if (parts[1] === '/etc/issue') {
           out = `================================================================================
-Axonwall Appliance (Debian 13)
+Axonwall v0.11.64 Appliance (Debian 13 Trixie)
 Web Console: https://192.168.100.1:2966
 Appliance Console: Login with administrator credentials
 ================================================================================`;
@@ -236,12 +265,13 @@ rtt min/avg/max/mdev = 3.980/4.040/4.120/0.052 ms`;
         <span className="text-slate-500 font-sans text-[11px]">Quick Commands:</span>
         {[
           'nft list ruleset',
-          'axonwall status',
+          'axonwallctl status',
+          'axonwallctl ebpf overview',
           'axonwall-config',
-          'axonwallctl rootkit-scan',
-          'axonwallctl ha-status',
-          'ip addr',
-          'uptime',
+          'axonwall-tui',
+          'axonwall-hunt-rootkits',
+          'axonwallctl kubeconfig --vip',
+          'axonwallctl mcp status',
         ].map((c) => (
           <button
             key={c}

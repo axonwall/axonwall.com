@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
 import {
   Shield,
@@ -20,27 +19,83 @@ import {
   KeyRound,
   Download,
   ExternalLink,
-  ChevronRight,
   HelpCircle,
   EyeOff,
-  TrendingDown,
   Sparkles,
   Bug,
   Database,
   GitBranch,
   ArrowRightLeft,
   BookOpen,
+  Bot,
+  ShieldAlert,
+  Users,
+  Cloud,
+  HardDrive,
+  FileCode,
 } from 'lucide-react';
 import { Logo } from '../components/Logo';
 import { HeroSecurityHUD } from '../components/HeroSecurityHUD';
 import { PersonalPerimeterVisual } from '../components/PersonalPerimeterVisual';
 import { CostSavingsCalculator } from '../components/CostSavingsCalculator';
-import { ThemeSwitcher } from '../components/ThemeSwitcher';
 import { Navbar } from '../components/Navbar';
 
-export default function HomePage() {
-  const [activeTab, setActiveTab] = useState<'firewall' | 'vpn' | 'ha' | 'observability'>('firewall');
+const FIVE_CORE_ROLES = [
+  {
+    id: 'core-firewall',
+    name: 'NGFW & SD-WAN Fabric',
+    desc: 'Multi-core nftables (1:1 BINAT, Hairpin, NPTv6), LPM CIDR + SYN-Flood XDP, FRR BGP/OSPF, PQ-VPN & Suricata 7+.',
+    href: '/docs/architecture',
+    badge: 'core-firewall',
+    accent: 'text-emerald-400 border-emerald-500/30 bg-emerald-500/10',
+  },
+  {
+    id: 'core-nas',
+    name: 'OpenZFS NAS & S3 Vault',
+    desc: 'Special NVMe VDEVs, Native AES-256-GCM encryption, Checkpoints/TRIM, SMB3 Time Machine/VSS, iSCSI, Cloud Sync & S3.',
+    href: '/docs/zfs-nas-storage',
+    badge: 'core-nas',
+    accent: 'text-sky-400 border-sky-500/30 bg-sky-500/10',
+  },
+  {
+    id: 'core-k3s',
+    name: 'K3s, Cilium eBPF & VOW',
+    desc: 'Cilium eBPF CNI (kube-proxy-less + Hubble) or WireGuard Flannel, Etcd S3 snapshots, UserNS BPF_TOKEN & OpenEBS.',
+    href: '/docs/k3s-kubernetes',
+    badge: 'core-k3s',
+    accent: 'text-cyan-400 border-cyan-500/30 bg-cyan-500/10',
+  },
+  {
+    id: 'core-virt',
+    name: 'KVM & LXC Hypervisor',
+    desc: 'OVMF Secure Boot + TPM2, VirtioFS ZFS shares, Zero-Copy Linked Clones, Live Migration, Libvirt XML, LXC & VFIO.',
+    href: '/docs/kvm-lxc-hypervisor',
+    badge: 'core-virt',
+    accent: 'text-amber-400 border-amber-500/30 bg-amber-500/10',
+  },
+  {
+    id: 'core-vigilante',
+    name: 'Vigilante Autonomous SOC',
+    desc: 'Autonomous SOAR containment, honeynet deception mesh, PCAP forensics, security data lake & 12 SOC packages.',
+    href: '/docs/vigilante-cyber-ops',
+    badge: 'core-vigilante',
+    accent: 'text-purple-400 border-purple-500/30 bg-purple-500/10',
+  },
+];
 
+const MIGRATION_IMPORTERS = [
+  'pfSense (config.xml)',
+  'OPNsense (config.xml)',
+  'Proxmox VE 8.x',
+  'TrueNAS SCALE',
+  'Cisco ASA / FTD',
+  'VyOS',
+  'MikroTik RouterOS',
+  'Linux iptables',
+  'RHEL / Fedora firewalld',
+];
+
+export default function HomePage() {
   return (
     <div className="min-h-screen bg-[#080c14] text-slate-100 selection:bg-emerald-500 selection:text-black">
       {/* Background glow header */}
@@ -53,27 +108,28 @@ export default function HomePage() {
       <section className="relative pt-20 pb-24 overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 text-center space-y-8">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 text-xs font-semibold animate-pulse">
-            <span className="w-2 h-2 rounded-full bg-emerald-400" />
-            Axonwall v0.11.32 • Linux 6.12 LTS, Zero-Surface Edge UKI, ZFSBootMenu &amp; Sovereign AI
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            Axonwall v0.11.64 • Linux 6.12 LTS, 5-Hook BPF-LSM + BPF_TOKEN, LPM CIDR/SYN XDP, ZBM v3.1.0 &amp; 24-Tool MCP
           </div>
 
           {/* Heading */}
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white tracking-tight max-w-4xl mx-auto leading-[1.1]">
-            The Next-Generation Open Source Firewall{' '}
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white tracking-tight max-w-5xl mx-auto leading-[1.08]">
+            The Sovereign Linux NGFW &amp;{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-sky-400">
-              Built on Linux
+              Converged Security OS
             </span>
           </h1>
 
           {/* Subtitle */}
           <p className="text-base sm:text-lg text-slate-400 max-w-3xl mx-auto leading-relaxed">
-            Replace legacy BSD packet filters and accidental admin lockouts. Axonwall unites line-rate multi-core{' '}
-            <code className="text-slate-200 font-mono">nftables</code>, a stateless 7 MB{' '}
-            <strong className="text-slate-200">Single-File UEFI Edge UKI</strong> (pure-Go PID 1), native{' '}
-            <strong className="text-slate-200">ZFSBootMenu Root-on-ZFS</strong>, 2-Host Full-Stack High Availability,
-            Post-Quantum Rosenpass Dual-KEM VPNs, Ring-0 <code className="text-slate-200 font-mono">io_uring</code>/<code className="text-slate-200 font-mono">eBPF</code>{' '}
-            rootkit hunting, and the <strong className="text-slate-200">Eluvix Sovereign AI Router</strong> in one platform.
+            Eliminate separate OPNsense, TrueNAS SCALE, Proxmox VE, and standalone Kubernetes nodes. Axonwall unites
+            line-rate multi-core <code className="text-slate-200 font-mono">nftables</code> + Ring-0 eBPF XDP, a 7.1 MB{' '}
+            <strong className="text-slate-200">Zero-Shell UEFI Edge UKI</strong>, pure UEFI{' '}
+            <strong className="text-slate-200">ZFSBootMenu v3.1.0</strong>,{' '}
+            <code className="text-slate-200 font-mono">CO-RE BPF-LSM</code> exploit defense, Post-Quantum Rosenpass
+            Dual-KEM VPNs, <strong className="text-slate-200">OpenZFS NAS, Cilium K3s, KVM/Libvirt/LXC</strong>, and{' '}
+            <strong className="text-slate-200">Vigilante Autonomous SOC + 24-Tool MCP AI</strong> in one platform.
           </p>
 
           {/* CTAs */}
@@ -88,21 +144,21 @@ export default function HomePage() {
               href="/releases"
               className="w-full sm:w-auto px-6 py-3.5 rounded-xl text-sm font-semibold bg-slate-900/90 hover:bg-slate-800 text-emerald-300 border border-emerald-500/40 transition flex items-center justify-center gap-2"
             >
-              <Download className="w-4 h-4 text-emerald-400" /> Releases &amp; Download ISO (v0.11.32)
+              <Download className="w-4 h-4 text-emerald-400" /> Releases &amp; Download ISO (v0.11.64)
             </Link>
             <Link
               href="/docs"
               className="w-full sm:w-auto px-6 py-3.5 rounded-xl text-sm font-semibold bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-slate-800 transition flex items-center justify-center gap-2"
             >
-              <BookOpen className="w-4 h-4 text-sky-400" /> Explore Documentation &amp; Guides
+              <BookOpen className="w-4 h-4 text-sky-400" /> Explore 24 Documentation Guides
             </Link>
           </div>
 
           {/* Trust stats */}
-          <div className="pt-8 grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-3xl mx-auto border-t border-slate-800/80 text-center">
+          <div className="pt-8 grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-4xl mx-auto border-t border-slate-800/80 text-center">
             <div>
               <div className="text-2xl sm:text-3xl font-bold text-white font-mono">100 Gbps</div>
-              <div className="text-xs text-slate-400 mt-1">Wire-Speed nftables</div>
+              <div className="text-xs text-slate-400 mt-1">Wire-Speed nftables + XDP</div>
             </div>
             <div>
               <div className="text-2xl sm:text-3xl font-bold text-emerald-400 font-mono">60s</div>
@@ -110,11 +166,11 @@ export default function HomePage() {
             </div>
             <div>
               <div className="text-2xl sm:text-3xl font-bold text-white font-mono">Dual-KEM</div>
-              <div className="text-xs text-slate-400 mt-1">McEliece + Kyber PQ-VPN</div>
+              <div className="text-xs text-slate-400 mt-1">McEliece + ML-KEM-512 PQ-VPN</div>
             </div>
             <div>
               <div className="text-2xl sm:text-3xl font-bold text-sky-400 font-mono">Ring-0</div>
-              <div className="text-xs text-slate-400 mt-1">BPF_LSM &amp; PMU Rootkit Hunter</div>
+              <div className="text-xs text-slate-400 mt-1">CO-RE BPF-LSM &amp; Coroot eBPF</div>
             </div>
           </div>
 
@@ -132,7 +188,8 @@ export default function HomePage() {
               Why We Left FreeBSD Behind
             </h2>
             <p className="text-sm sm:text-base text-slate-400">
-              For 20 years, open-source firewalls relied on FreeBSD. But today, the modern internet runs on Linux. Here is why Axonwall is the definitive architectural upgrade.
+              For 20 years, open-source firewalls relied on FreeBSD. Today, modern silicon, eBPF Ring-0 telemetry, and
+              hyper-converged workloads run natively on Linux 6.12 LTS.
             </p>
           </div>
 
@@ -141,9 +198,11 @@ export default function HomePage() {
               <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
                 <Zap className="w-5 h-5" />
               </div>
-              <h3 className="text-lg font-bold text-white">nftables Line-Rate</h3>
+              <h3 className="text-lg font-bold text-white">nftables &amp; XDP Line-Rate</h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                FreeBSD <code className="text-slate-300">pf</code> locks on single cores under heavy NAT loads. Linux <code className="text-slate-300">nftables</code> scales across all CPU cores with lockless flow tables and multi-queue RSS.
+                FreeBSD <code className="text-slate-300">pf</code> contends on locks under heavy NAT loads. Linux{' '}
+                <code className="text-slate-300">nftables</code> scales across all CPU cores with lockless flowtables,
+                multi-queue RSS, and pre-conntrack XDP DDoS drops.
               </p>
             </div>
 
@@ -151,9 +210,10 @@ export default function HomePage() {
               <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400">
                 <RefreshCw className="w-5 h-5" />
               </div>
-              <h3 className="text-lg font-bold text-white">Commit-Confirm Rollback</h3>
+              <h3 className="text-lg font-bold text-white">Commit-Confirm &amp; ZFSBootMenu</h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                No more fear of applying rules remotely. If a mistake cuts your connection, the Go daemon automatically reverts to the last-known-good atomic bundle within 60 seconds.
+                Zero remote lockouts: unconfirmed rule commits auto-revert in 60 seconds, while pure UEFI ZFSBootMenu
+                v3.1.0 Boot Environments and A/B Dual-Root slots make OS upgrades unbrickable.
               </p>
             </div>
 
@@ -163,7 +223,8 @@ export default function HomePage() {
               </div>
               <h3 className="text-lg font-bold text-white">Post-Quantum &amp; Kernel DCO</h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                WireGuard runs natively in the Linux kernel paired with Rosenpass Dual-KEM (Classic McEliece + Kyber-768) post-quantum PSK rotation and OpenVPN 2.6 kernel Data Channel Offload (<code className="text-slate-300">ovpn-dco</code>).
+                In-kernel WireGuard paired with Rosenpass Dual-KEM (Classic McEliece 460896 + ML-KEM-512 / Kyber-512)
+                120-second PSK rotation and OpenVPN kernel Data Channel Offload (<code className="text-slate-300">ovpn-dco</code>).
               </p>
             </div>
 
@@ -171,15 +232,89 @@ export default function HomePage() {
               <div className="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400">
                 <Boxes className="w-5 h-5" />
               </div>
-              <h3 className="text-lg font-bold text-white">Modular &amp; Hyper-Converged</h3>
+              <h3 className="text-lg font-bold text-white">5 Modular Core Roles</h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                Axonwall isolates <code className="text-slate-300">table inet axonwall</code> without touching Docker or K3s CNI chains. Run as a dedicated NGFW, a Host-Mode OpenZFS NAS, or a 2-node K3s + OpenEBS cluster.
+                Axonwall isolates <code className="text-slate-300">table inet axonwall</code> cleanly from CNI bridges.
+                Run a pure NGFW or toggle OpenZFS NAS, 2-node HA K3s, KVM/LXC hypervisor, and Vigilante Autonomous SOC.
               </p>
+            </div>
+          </div>
+
+          {/* Unified Competitor Replacement Matrix */}
+          <div className="pt-8 space-y-6">
+            <div className="text-center max-w-3xl mx-auto space-y-2">
+              <span className="text-xs font-semibold text-emerald-400 uppercase tracking-wider">
+                4 Appliances Replaced • Full Parity &amp; Beyond
+              </span>
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                One Converged Linux 6.12 Platform vs. 4 Siloed Systems
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-400">
+                Consolidate OPNsense/pfSense, TrueNAS SCALE, Proxmox VE, and standalone K3s/Harvester clusters with
+                direct 9-vendor configuration importers and zero feature compromises.
+              </p>
+            </div>
+
+            <div className="overflow-x-auto rounded-2xl border border-slate-800 bg-slate-900/70">
+              <table className="w-full text-left border-collapse text-xs">
+                <thead>
+                  <tr className="bg-slate-950/90 border-b border-slate-800 text-slate-300">
+                    <th className="py-3.5 px-4 font-bold">Capability Domain</th>
+                    <th className="py-3.5 px-4 font-bold text-emerald-400">Axonwall v0.11.64</th>
+                    <th className="py-3.5 px-4 font-bold text-slate-400">OPNsense / pfSense</th>
+                    <th className="py-3.5 px-4 font-bold text-slate-400">TrueNAS SCALE</th>
+                    <th className="py-3.5 px-4 font-bold text-slate-400">Proxmox VE 8.x</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-800/70 text-slate-300">
+                  <tr>
+                    <td className="py-3 px-4 font-semibold text-white">Packet &amp; NAT Dataplane</td>
+                    <td className="py-3 px-4 text-emerald-300">Linux 6.12 nftables (BINAT, Hairpin, NPTv6) + LPM CIDR &amp; SYN-Flood XDP</td>
+                    <td className="py-3 px-4 text-slate-400">FreeBSD pf (lock contention, no eBPF XDP)</td>
+                    <td className="py-3 px-4 text-slate-500">Host firewall only</td>
+                    <td className="py-3 px-4 text-slate-400">Bridge firewall only (no NGFW/Multi-WAN)</td>
+                  </tr>
+                  <tr>
+                    <td className="py-3 px-4 font-semibold text-white">Ring-0 Exploit &amp; PQ-VPN</td>
+                    <td className="py-3 px-4 text-emerald-300">5-Hook CO-RE BPF-LSM + BPF_TOKEN + Rosenpass Dual-KEM + ovpn-dco</td>
+                    <td className="py-3 px-4 text-slate-400">WireGuard / OpenVPN DCO (no BPF-LSM)</td>
+                    <td className="py-3 px-4 text-slate-500">None</td>
+                    <td className="py-3 px-4 text-slate-500">AppArmor only (no PQ-VPN or BPF-LSM)</td>
+                  </tr>
+                  <tr>
+                    <td className="py-3 px-4 font-semibold text-white">OpenZFS NAS &amp; Vault</td>
+                    <td className="py-3 px-4 text-emerald-300">Special NVMe VDEVs, AES-256-GCM, TRIM/Checkpoints, SMB3 Time Machine, Cloud Sync &amp; WORM S3</td>
+                    <td className="py-3 px-4 text-slate-500">Boot ZFS only (no NAS shares/S3)</td>
+                    <td className="py-3 px-4 text-slate-300">Full OpenZFS NAS (no NGFW or Edge UKI)</td>
+                    <td className="py-3 px-4 text-slate-400">VM storage ZFS only (no native SMB/Time Machine/S3)</td>
+                  </tr>
+                  <tr>
+                    <td className="py-3 px-4 font-semibold text-white">KVM, Libvirt &amp; LXC</td>
+                    <td className="py-3 px-4 text-emerald-300">OVMF Secure Boot + TPM2, VirtioFS, Linked Clones, Live Migrate, Libvirt XML, LXC BPF_TOKEN &amp; VFIO</td>
+                    <td className="py-3 px-4 text-slate-500">None</td>
+                    <td className="py-3 px-4 text-slate-400">Basic KVM / Incus (no VXLAN SDN or Edge UKI)</td>
+                    <td className="py-3 px-4 text-slate-300">Full KVM &amp; LXC (no NGFW, K3s, or SOC)</td>
+                  </tr>
+                  <tr>
+                    <td className="py-3 px-4 font-semibold text-white">Kubernetes &amp; Cloud-Native</td>
+                    <td className="py-3 px-4 text-emerald-300">Embedded HA K3s, Cilium eBPF CNI + Hubble, Etcd S3 Snapshots, UserNS &amp; OpenEBS Mayastor</td>
+                    <td className="py-3 px-4 text-slate-500">None (FreeBSD kernel)</td>
+                    <td className="py-3 px-4 text-slate-500">Removed k3s in Electric Eel (Docker Compose only)</td>
+                    <td className="py-3 px-4 text-slate-500">Requires separate guest VMs</td>
+                  </tr>
+                  <tr>
+                    <td className="py-3 px-4 font-semibold text-white">Rollback &amp; AI Governance</td>
+                    <td className="py-3 px-4 text-emerald-300">60s Commit-Confirm + ZBM v3.1.0 + 12 YAML GitOps + 24-Tool Guardrailed MCP &amp; Vigilante SOC</td>
+                    <td className="py-3 px-4 text-slate-400">Monolithic config.xml (no auto-revert or MCP)</td>
+                    <td className="py-3 px-4 text-slate-400">SQLite DB + ZFS BEs (no GitOps YAML or MCP)</td>
+                    <td className="py-3 px-4 text-slate-400">pmxcfs /etc/pve (no Commit-Confirm or SOC)</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
       </section>
-
       {/* Personal Sovereignty & Individual Defense */}
       <section id="personal-sovereignty" className="py-24 border-t border-slate-800/80 bg-slate-950/70 relative overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-6xl h-[500px] radial-subtle pointer-events-none -z-10" />
@@ -192,7 +327,9 @@ export default function HomePage() {
               Reclaim Your Digital Bastion
             </h2>
             <p className="text-sm sm:text-base text-slate-400 leading-relaxed">
-              Your home network shouldn&apos;t be an open book for commercial data harvesters, ISP profiling, or vulnerable smart appliances. Axonwall establishes uncompromising digital sovereignty for the individual user.
+              Your home network shouldn&apos;t be an open book for commercial data harvesters, ISP profiling, or
+              vulnerable smart appliances. Axonwall establishes uncompromising digital sovereignty for the individual
+              user.
             </p>
           </div>
 
@@ -200,31 +337,149 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Feature Deep Dive (12 Full-Spectrum Cards) */}
+      {/* Feature Deep Dive (5 Modular Core Roles + Full-Spectrum Feature Grid) */}
       <section id="features" className="py-24 border-t border-slate-800/80">
         <div className="max-w-7xl mx-auto px-6 space-y-16">
           <div className="text-center max-w-3xl mx-auto space-y-4">
-            <span className="text-xs font-semibold text-emerald-400 uppercase tracking-wider">Full-Spectrum Feature Set</span>
+            <span className="text-xs font-semibold text-emerald-400 uppercase tracking-wider">
+              Converged Platform Architecture • v0.11.64
+            </span>
             <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-              Beyond OPNsense &amp; TrueNAS, Built for 2026
+              5 Modular Core Roles, One Unified Control Plane
             </h2>
             <p className="text-sm sm:text-base text-slate-400">
-              Every critical network, storage, container, and Ring-0 security service—engineered natively on Linux 6.12 LTS.
+              Enable only the subsystems your deployment needs in <code className="text-slate-200 font-mono">/etc/axonwall/system.yaml</code>—from
+              a minimal 7.1 MB zero-shell perimeter UKI to a full hyper-converged ZFS, K3s, KVM, and Autonomous SOC cluster.
             </p>
           </div>
 
+          {/* 5 Core Roles Strip */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            {FIVE_CORE_ROLES.map((role) => (
+              <Link
+                key={role.id}
+                href={role.href}
+                className="p-4 rounded-2xl bg-slate-950/90 border border-slate-800 hover:border-emerald-500/50 transition space-y-2.5 flex flex-col justify-between group"
+              >
+                <div className="space-y-2">
+                  <span className={`inline-block text-[10px] font-mono font-bold px-2 py-0.5 rounded border ${role.accent}`}>
+                    {role.badge}
+                  </span>
+                  <h3 className="text-sm font-bold text-white group-hover:text-emerald-300 transition">{role.name}</h3>
+                  <p className="text-[11px] text-slate-400 leading-relaxed">{role.desc}</p>
+                </div>
+                <span className="text-[11px] text-emerald-400 font-semibold inline-flex items-center gap-1 pt-1">
+                  Explore role <ArrowRight className="w-3 h-3" />
+                </span>
+              </Link>
+            ))}
+          </div>
+
+          {/* 15 Full-Spectrum Feature Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* 1. Super-Slim Edge NGFW (Single-File UEFI UKI) */}
+            {/* 1. CO-RE BPF-LSM Ring-0 Exploit Guard & Ghost-in-the-Ring */}
+            <Link
+              href="/docs/ghost-in-the-ring-rootkits"
+              className="p-6 rounded-2xl bg-slate-900 border border-emerald-500/40 hover:border-emerald-500/80 transition space-y-3 group block"
+            >
+              <div className="flex items-center justify-between">
+                <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+                  <Bug className="w-4 h-4" />
+                </div>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+                  RING-0 • CVE-2026-31431
+                </span>
+              </div>
+              <h3 className="text-base font-bold text-white group-hover:text-emerald-300 transition">
+                5-Hook CO-RE BPF-LSM Guard &amp; BPF_TOKEN Mediator
+              </h3>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                Blocks Copy Fail (CVE-2026-31431) <code className="text-slate-300">AF_ALG</code> overflows,{' '}
+                <code className="text-slate-300">io_uring</code> implants, and cross-tenant{' '}
+                <code className="text-slate-300">bpf_probe_read_kernel()</code> tracing while mediating Linux 6.9+{' '}
+                <code className="text-slate-300">BPF_TOKEN_CREATE</code> delegation for rootless LXC &amp; K3s pods.
+              </p>
+            </Link>
+
+            {/* 2. MCP Security AI Server & Tactical Leases */}
+            <Link
+              href="/docs/mcp-ai-control"
+              className="p-6 rounded-2xl bg-slate-900 border border-purple-500/40 hover:border-purple-500/80 transition space-y-3 group block"
+            >
+              <div className="flex items-center justify-between">
+                <div className="w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400">
+                  <Bot className="w-4 h-4" />
+                </div>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-purple-500/15 text-purple-300 border border-purple-500/30">
+                  16 RESOURCES • 24 TOOLS
+                </span>
+              </div>
+              <h3 className="text-base font-bold text-white group-hover:text-purple-300 transition">
+                MCP Security AI Server (5 Full-Stack Duties)
+              </h3>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                16-scope Model Context Protocol server (<code className="text-slate-300">axonwall-mcp</code>) with
+                anti-lockout guardrails, TTL leases in <code className="text-slate-300">table inet axonwall_mcp</code>,
+                LPM CIDR &amp; SYN-Flood <code className="text-slate-300">XDP_DROP</code>, KVM/Libvirt, K3s Etcd, ZFS NAS &amp; 9-vendor import.
+              </p>
+            </Link>
+
+            {/* 3. Coroot Zero-Instrumentation eBPF APM */}
+            <Link
+              href="/docs/observability"
+              className="p-6 rounded-2xl bg-slate-900 border border-sky-500/40 hover:border-sky-500/80 transition space-y-3 group block"
+            >
+              <div className="flex items-center justify-between">
+                <div className="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400">
+                  <Activity className="w-4 h-4" />
+                </div>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-sky-500/15 text-sky-300 border border-sky-500/30">
+                  DUAL-STACK XDP + APM
+                </span>
+              </div>
+              <h3 className="text-base font-bold text-white group-hover:text-sky-300 transition">
+                Dual-Stack VLAN XDP &amp; Coroot eBPF APM
+              </h3>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                Turnkey <code className="text-slate-300">coroot-ebpf-apm</code> captures L7 HTTP, gRPC, Postgres, MySQL,
+                and Redis latency, TCP retransmits, and K3s service dependency graphs via kernel eBPF without code
+                changes, backed by VictoriaMetrics &amp; VictoriaLogs.
+              </p>
+            </Link>
+
+            {/* 4. Vigilante Autonomous SOC & SOAR */}
+            <Link
+              href="/docs/vigilante-cyber-ops"
+              className="p-6 rounded-2xl bg-slate-900 border border-rose-500/35 hover:border-rose-500/75 transition space-y-3 group block"
+            >
+              <div className="flex items-center justify-between">
+                <div className="w-8 h-8 rounded-lg bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-400">
+                  <ShieldAlert className="w-4 h-4" />
+                </div>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-rose-500/15 text-rose-300 border border-rose-500/30">
+                  AUTONOMOUS SOC &amp; SOAR
+                </span>
+              </div>
+              <h3 className="text-base font-bold text-white group-hover:text-rose-300 transition">
+                Vigilante Cyber Defense &amp; Deception Mesh
+              </h3>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                Autonomous SOAR active containment playbooks, low-interaction honeynet deception listeners, ring-buffer
+                PCAP forensics, embedded security data lake, and 12 modular purple-team &amp; threat-hunting packages.
+              </p>
+            </Link>
+
+            {/* 5. Super-Slim Edge NGFW (Single-File UEFI UKI) */}
             <Link
               href="/docs/edge-uki-ngfw"
-              className="p-6 rounded-2xl bg-slate-900 border border-emerald-500/40 hover:border-emerald-500/80 transition space-y-3 group block"
+              className="p-6 rounded-2xl bg-slate-900 border border-emerald-500/30 hover:border-emerald-500/70 transition space-y-3 group block"
             >
               <div className="flex items-center justify-between">
                 <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
                   <Cpu className="w-4 h-4" />
                 </div>
                 <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
-                  NEW • ZERO-SURFACE UKI
+                  7.1 MB ZERO-SHELL UKI
                 </span>
               </div>
               <h3 className="text-base font-bold text-white group-hover:text-emerald-300 transition">
@@ -237,79 +492,53 @@ export default function HomePage() {
               </p>
             </Link>
 
-            {/* 2. Eluvix Sovereign AI Router & DLP Guard */}
+            {/* 6. Eluvix Sovereign AI Router & DLP Guard */}
             <Link
               href="/docs/eluvix-ai-router"
-              className="p-6 rounded-2xl bg-slate-900 border border-purple-500/40 hover:border-purple-500/80 transition space-y-3 group block"
+              className="p-6 rounded-2xl bg-slate-900 border border-purple-500/30 hover:border-purple-500/70 transition space-y-3 group block"
             >
               <div className="flex items-center justify-between">
                 <div className="w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400">
                   <Sparkles className="w-4 h-4" />
                 </div>
                 <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-purple-500/15 text-purple-300 border border-purple-500/30">
-                  NEW • SOVEREIGN AI
+                  SOVEREIGN AI &amp; DLP
                 </span>
               </div>
               <h3 className="text-base font-bold text-white group-hover:text-purple-300 transition">
                 Eluvix Sovereign AI Router &amp; DLP Guard
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                Switchyard 4-tier routing (local Ollama/vLLM/Lemonade SLMs vs. cloud frontier models), PrivacyGuard
-                reversible PII/secret tokenization (<code className="text-slate-300">sk-*</code>, <code className="text-slate-300">AKIA*</code>),
-                PromptGuard filter, and 8 agent harnesses.
+                Switchyard 4-tier routing (local Ollama/vLLM/Lemonade SLMs vs. frontier models), PrivacyGuard reversible
+                PII/secret tokenization (<code className="text-slate-300">sk-*</code>, <code className="text-slate-300">AKIA*</code>),
+                PromptGuard filter, and 8 coding agent harnesses.
               </p>
             </Link>
 
-            {/* 3. ZFSBootMenu Root-on-ZFS Boot Environments */}
+            {/* 7. ZFSBootMenu v3.1.0 Root-on-ZFS & TPM 2.0 */}
             <Link
               href="/docs/installer-raid-zfs"
-              className="p-6 rounded-2xl bg-slate-900 border border-sky-500/40 hover:border-sky-500/80 transition space-y-3 group block"
+              className="p-6 rounded-2xl bg-slate-900 border border-sky-500/30 hover:border-sky-500/70 transition space-y-3 group block"
             >
               <div className="flex items-center justify-between">
                 <div className="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400">
                   <RefreshCw className="w-4 h-4" />
                 </div>
                 <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-sky-500/15 text-sky-300 border border-sky-500/30">
-                  NEW • ZBM ROOT-ON-ZFS
+                  ZBM v3.1.0 • TPM 2.0
                 </span>
               </div>
               <h3 className="text-base font-bold text-white group-hover:text-sky-300 transition">
-                ZFSBootMenu v3.1.x Root-on-ZFS &amp; A/B Slots
+                Pure UEFI ZFSBootMenu, TPM 2.0 &amp; A/B Slots
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                Boot directly from OpenZFS pools (<code className="text-slate-300">zroot/ROOT/*</code> across Stripe,
-                Mirror, RAID-Z, or dRAID) with zero-copy snapshot Boot Environments (BEs) and pre-boot watchdog
-                auto-revert alongside ext4 A/B slots.
+                Direct UEFI ZFSBootMenu v3.1.0 Boot Environments (<code className="text-slate-300">axonwallctl zbm</code>),
+                smart NVMe/SSD/HDD SLOG/L2ARC tiering, LUKS2 + TPM 2.0 PCR <code className="text-slate-300">0+2+7</code>{' '}
+                auto-unlock, and Cloud QCOW2 Slot-B sync.
               </p>
             </Link>
 
-            {/* 4. Ghost-in-the-Ring & rkhunter */}
-            <Link
-              href="/docs/ghost-in-the-ring-rootkits"
-              className="p-6 rounded-2xl bg-slate-900 border border-emerald-500/30 hover:border-emerald-500/70 transition space-y-3 group block"
-            >
-              <div className="flex items-center justify-between">
-                <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
-                  <Bug className="w-4 h-4" />
-                </div>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
-                  RING-0 DEFENSE
-                </span>
-              </div>
-              <h3 className="text-base font-bold text-white group-hover:text-emerald-300 transition">
-                Ghost-in-the-Ring &amp; 6-Engine Malware Hunter
-              </h3>
-              <p className="text-xs text-slate-400 leading-relaxed">
-                Pairs <code className="text-slate-300">rkhunter</code>, <code className="text-slate-300">chkrootkit</code>,{' '}
-                <code className="text-slate-300">ClamAV</code>, <code className="text-slate-300">AIDE</code>,{' '}
-                <code className="text-slate-300">YARA</code>, and <code className="text-slate-300">Lynis</code> with
-                Ring-0 <code className="text-slate-300">BPF_LSM</code> lockdown, <code className="text-slate-300">/proc/kcore</code>{' '}
-                <code className="text-slate-300">prog_idr</code> inspection, and Silicon PMU LBR telemetry to catch
-                syscall-less <code className="text-slate-300">io_uring</code> and eBPF rootkits.
-              </p>
-            </Link>
-
-            {/* 2. Post-Quantum Rosenpass Dual-KEM VPN */}
+            {/* 8. Post-Quantum Rosenpass Dual-KEM VPN */}
             <Link
               href="/docs/post-quantum-rosenpass"
               className="p-6 rounded-2xl bg-slate-900 border border-sky-500/30 hover:border-sky-500/70 transition space-y-3 group block"
@@ -326,170 +555,163 @@ export default function HomePage() {
                 Rosenpass Dual-KEM WireGuard Mesh
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                Hybrid Post-Quantum key exchange combining Classic McEliece 460896 (code-based KEM) + Kyber-768 / ML-KEM
-                (lattice-based KEM) with in-kernel WireGuard, rotating 256-bit Pre-Shared Keys every 120 seconds.
+                Hybrid Post-Quantum key exchange (<code className="text-slate-300">rosenpass</code>) combining Classic
+                McEliece 460896 (code-based KEM) + ML-KEM-512 (Kyber-512) with kernel WireGuard, rotating 256-bit PSKs
+                every 120 seconds.
               </p>
             </Link>
 
-            {/* 3. 2-Host High Availability */}
+            {/* 9. Unified OpenLDAP + OIDC SSO Federation */}
             <Link
-              href="/docs/high-availability#two-host-setup"
+              href="/docs/identity-openldap-sso"
               className="p-6 rounded-2xl bg-slate-900 border border-amber-500/30 hover:border-amber-500/70 transition space-y-3 group block"
             >
               <div className="flex items-center justify-between">
                 <div className="w-8 h-8 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400">
-                  <ArrowRightLeft className="w-4 h-4" />
+                  <Users className="w-4 h-4" />
                 </div>
                 <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-500/15 text-amber-300 border border-amber-500/30">
-                  2-HOST GUIDE
+                  IDENTITY FEDERATION
                 </span>
               </div>
               <h3 className="text-base font-bold text-white group-hover:text-amber-300 transition">
-                Full-Stack High Availability (VRRP + mTLS Sync)
+                Unified OpenLDAP &amp; OIDC/SAML SSO
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                Keepalived VRRP + conntrackd FTFW state sync + automatic ECDSA P-256 HA PKI mTLS enrollment + Chrony
-                symmetric NTP + OpenLDAP <code className="text-slate-300">syncrepl</code> + SQLite WAL streaming + ZFS
-                Send/Recv.
+                Embedded OpenLDAP multi-provider <code className="text-slate-300">syncrepl</code> and OIDC/SAML SSO with
+                zero-touch RBAC &amp; service-account federation across Web UI, K3s, VOW, Vigilante SOC, Eluvix, and
+                FreeRADIUS.
               </p>
             </Link>
 
-            {/* 4. Neovim Super Configurator & ZSH Shell */}
+            {/* 10. KVM/QEMU & LXC Hypervisor */}
             <Link
-              href="/docs/cli-super-configurator"
-              className="p-6 rounded-2xl bg-slate-900 border border-purple-500/30 hover:border-purple-500/70 transition space-y-3 group block"
+              href="/docs/kvm-lxc-hypervisor"
+              className="p-6 rounded-2xl bg-slate-900 border border-amber-500/30 hover:border-amber-500/70 transition space-y-3 group block"
             >
               <div className="flex items-center justify-between">
-                <div className="w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400">
-                  <Terminal className="w-4 h-4" />
+                <div className="w-8 h-8 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400">
+                  <Boxes className="w-4 h-4" />
                 </div>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-purple-500/15 text-purple-300 border border-purple-500/30">
-                  SUPER TUI
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-500/15 text-amber-300 border border-amber-500/30">
+                  KVM • LXC • VFIO
                 </span>
               </div>
-              <h3 className="text-base font-bold text-white group-hover:text-purple-300 transition">
-                Neovim Super Configurator, NastyMap &amp; ZSH
+              <h3 className="text-base font-bold text-white group-hover:text-amber-300 transition">
+                KVM/QEMU, LXC &amp; VFIO Passthrough
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                Configure all 11 domains via <code className="text-slate-300">axonwall-config</code>—a hyperfocused Lua
-                form TUI with full Vim motions—paired with the NastyMap topology simulator and an Oh My Zsh + Starship
-                workstation shell.
+                Full hypervisor orchestration (<code className="text-slate-300">virt.yaml</code>) for KVM VMs,
+                unprivileged LXC containers with Linux 6.9+ <code className="text-slate-300">BPF_TOKEN</code> mounts,
+                VFIO PCIe/GPU &amp; SR-IOV passthrough, VXLAN SDN, and browser noVNC consoles.
               </p>
             </Link>
 
-            {/* 5. Vigilant Octo Waffle & K3s */}
+            {/* 11. 2-Host High Availability + K3s + OpenEBS */}
             <Link
-              href="/docs/vigilant-octo-waffle"
+              href="/docs/high-availability#two-host-setup"
               className="p-6 rounded-2xl bg-slate-900 border border-emerald-500/30 hover:border-emerald-500/70 transition space-y-3 group block"
             >
               <div className="flex items-center justify-between">
                 <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
-                  <GitBranch className="w-4 h-4" />
+                  <ArrowRightLeft className="w-4 h-4" />
                 </div>
                 <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
-                  K3S SECOPS
+                  2-NODE HA + K3S
                 </span>
               </div>
               <h3 className="text-base font-bold text-white group-hover:text-emerald-300 transition">
-                K3s, OpenEBS &amp; Vigilant Octo Waffle SOC
+                Full-Stack 2-Host HA, K3s &amp; OpenEBS
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                Embedded K3s with OpenEBS Mayastor NVMe-oF storage, plus the turnkey <code className="text-slate-300">vigilant-octo-waffle</code>{' '}
-                GitOps stack (Gitea, Tekton, Vault, Wazuh, Cilium, Tetragon) and Vigilante Purple-Team BattleStation.
+                Keepalived VRRP + conntrackd FTFW + CSR mTLS PKI + OpenLDAP <code className="text-slate-300">syncrepl</code>{' '}
+                + 2-node HA K3s (<code className="text-slate-300">axonwallctl kubeconfig --vip</code> &amp;{' '}
+                <code className="text-slate-300">UserNamespacesSupport</code>), OpenEBS CSI, and ZFS Send/Recv.
               </p>
             </Link>
 
-            {/* 6. OpenZFS NAS Storage & Vault */}
+            {/* 12. Etckeeper /etc Git Versioning & Terraform Provider */}
             <Link
-              href="/docs/zfs-nas-storage"
-              className="p-6 rounded-2xl bg-slate-900 border border-sky-500/30 hover:border-sky-500/70 transition space-y-3 group block"
+              href="/docs/gitops-audit"
+              className="p-6 rounded-2xl bg-slate-900 border border-purple-500/30 hover:border-purple-500/70 transition space-y-3 group block"
+            >
+              <div className="flex items-center justify-between">
+                <div className="w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400">
+                  <GitBranch className="w-4 h-4" />
+                </div>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-purple-500/15 text-purple-300 border border-purple-500/30">
+                  GITOPS • TERRAFORM
+                </span>
+              </div>
+              <h3 className="text-base font-bold text-white group-hover:text-purple-300 transition">
+                Etckeeper /etc Git UI &amp; Terraform Provider
+              </h3>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                12 bidirectional <code className="text-slate-300">/etc/axonwall/*.yaml</code> files, Etckeeper{' '}
+                <code className="text-slate-300">/etc</code> Git history &amp; unified diff UI, and the native
+                Terraform / OpenTofu provider for declarative fleet IaC.
+              </p>
+            </Link>
+
+            {/* 13. Neovim Super Configurator & Restricted Operator Shell */}
+            <Link
+              href="/docs/cli-super-configurator"
+              className="p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-emerald-500/50 transition space-y-3 group block"
+            >
+              <div className="flex items-center justify-between">
+                <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+                  <Terminal className="w-4 h-4" />
+                </div>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
+                  TUI • OPSHELL
+                </span>
+              </div>
+              <h3 className="text-base font-bold text-white group-hover:text-emerald-300 transition">
+                Neovim Super Configurator &amp; axonwall-opshell
+              </h3>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                Edit all 12 YAML domains via <code className="text-slate-300">axonwall-config</code> with native Vim
+                motions, simulate paths in NastyMap, and confine non-root operators with{' '}
+                <code className="text-slate-300">axonwall-opshell</code>.
+              </p>
+            </Link>
+
+            {/* 14. Suricata 7+, CrowdSec & Unbound DNS RPZ */}
+            <Link
+              href="/docs/threat-defense"
+              className="p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-emerald-500/50 transition space-y-3 group block"
             >
               <div className="flex items-center justify-between">
                 <div className="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400">
-                  <Database className="w-4 h-4" />
+                  <Shield className="w-4 h-4" />
                 </div>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-sky-500/15 text-sky-300 border border-sky-500/30">
-                  ZFS + VAULT
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
+                  FAIL-OPEN IPS
                 </span>
               </div>
               <h3 className="text-base font-bold text-white group-hover:text-sky-300 transition">
-                TrueNAS-Grade OpenZFS NAS &amp; S3 Vault
+                Suricata 7+ IPS, CrowdSec &amp; DNS RPZ
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                Native OpenZFS Stripe/Mirror/RAID-Z pools, Samba SMB3 with Windows VSS Shadow Copies, NFSv4, iSCSI
-                targets, and the dedicated Axonwall Vault S3 backup appliance with SeaweedFS &amp; B-14 Internal PKI CA.
+                Fail-open NFQUEUE &amp; eBPF Suricata 7+ inspection, CrowdSec LAPI interval-set bouncers, GeoIP/ASN
+                prerouting drops, and Unbound DNSSEC Response Policy Zone (RPZ) sinkholing.
               </p>
             </Link>
 
-            {/* 7. Suricata 7+ IDS/IPS */}
+            {/* 15. N-Port Multi-WAN, CAKE QoS & FRRouting */}
             <div className="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
-              <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
-                <Shield className="w-4 h-4" />
+              <div className="flex items-center justify-between">
+                <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+                  <Globe className="w-4 h-4" />
+                </div>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
+                  SD-WAN • CAKE QOS
+                </span>
               </div>
-              <h3 className="text-base font-bold text-white">Suricata 7+ IDS/IPS (Fail-Open)</h3>
+              <h3 className="text-base font-bold text-white">N-Port Multi-WAN, FRRouting &amp; CAKE QoS</h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                Integrated NFQUEUE fail-open bypass &amp; AF_PACKET/eBPF zero-copy inspection. If Suricata restarts
-                under load, packet flow bypasses the queue rather than severing network connectivity.
-              </p>
-            </div>
-
-            {/* 8. Smart QoS (CAKE + IFB) */}
-            <div className="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
-              <div className="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400">
-                <Activity className="w-4 h-4" />
-              </div>
-              <h3 className="text-base font-bold text-white">Smart QoS (CAKE + IFB Shaping)</h3>
-              <p className="text-xs text-slate-400 leading-relaxed">
-                Linux CAKE queue discipline with automatic DiffServ DSCP prioritization, TCP ACK filtering, and IFB
-                virtual ingress shaping. Eliminates bufferbloat latency during saturated transfers.
-              </p>
-            </div>
-
-            {/* 9. CrowdSec & Unbound DNS RPZ */}
-            <div className="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
-              <div className="w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400">
-                <Radio className="w-4 h-4" />
-              </div>
-              <h3 className="text-base font-bold text-white">CrowdSec LAPI &amp; Unbound DNS RPZ</h3>
-              <p className="text-xs text-slate-400 leading-relaxed">
-                CrowdSec LAPI bouncer binds attacker IPs to native nftables interval sets with CIDR minimization, paired
-                with Unbound DNS Response Policy Zone (RPZ) sinkholing and GeoIP/ASN filtering.
-              </p>
-            </div>
-
-            {/* 10. Multi-WAN, Multi-LAN & FRRouting */}
-            <div className="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
-              <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
-                <Globe className="w-4 h-4" />
-              </div>
-              <h3 className="text-base font-bold text-white">N-Port Multi-WAN &amp; FRRouting (BGP/OSPF)</h3>
-              <p className="text-xs text-slate-400 leading-relaxed">
-                Arbitrary N-port WAN/LAN/OPT topologies, 802.1Q VLANs, and LACP bonds paired with FRRouting BGP, OSPF,
-                ECMP load balancing, and BFD sub-second link failure detection.
-              </p>
-            </div>
-
-            {/* 11. KVM/QEMU & LXC Hypervisor */}
-            <div className="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
-              <div className="w-8 h-8 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400">
-                <Cpu className="w-4 h-4" />
-              </div>
-              <h3 className="text-base font-bold text-white">KVM/QEMU &amp; LXC Hypervisor Compute</h3>
-              <p className="text-xs text-slate-400 leading-relaxed">
-                Built-in virtualization manager for KVM Virtual Machines, lightweight LXC containers, VFIO PCI/GPU
-                passthrough, ISO storage, and browser-based noVNC/SPICE consoles.
-              </p>
-            </div>
-
-            {/* 12. AI Security Copilot & VictoriaMetrics */}
-            <div className="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
-              <div className="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400">
-                <Sparkles className="w-4 h-4" />
-              </div>
-              <h3 className="text-base font-bold text-white">AI Security Copilot &amp; VictoriaMetrics</h3>
-              <p className="text-xs text-slate-400 leading-relaxed">
-                Multi-provider AI engine (Google Antigravity, Ollama, Claude, Codex, vLLM) paired with embedded
-                VictoriaMetrics, VictoriaLogs, and live eBPF/NFLOG SSE packet tracing.
+                Arbitrary WAN/LAN/OPT topologies, 802.1Q VLANs, and LACP bonds with FRRouting BGP/OSPF/BFD ECMP routing
+                and Linux CAKE + IFB ingress shaping to eliminate bufferbloat.
               </p>
             </div>
           </div>
@@ -505,71 +727,97 @@ export default function HomePage() {
                 Engineering Documentation &amp; Guides
               </span>
               <h2 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
-                Deep-Dive Technical Guides
+                24 Comprehensive Technical Guides
               </h2>
             </div>
-              <Link
-                href="/docs"
-                className="inline-flex items-center gap-2 text-xs font-semibold text-emerald-400 hover:text-emerald-300"
-              >
-                Browse All 17 Documentation Sections <ArrowRight className="w-4 h-4" />
-              </Link>
+            <Link
+              href="/docs"
+              className="inline-flex items-center gap-2 text-xs font-semibold text-emerald-400 hover:text-emerald-300"
+            >
+              Browse All 24 Comprehensive Guides <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-xs">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
+            <Link
+              href="/docs/mcp-ai-control"
+              className="p-5 rounded-xl bg-slate-900 border border-purple-500/40 hover:border-purple-500 transition space-y-2 group"
+            >
+              <div className="font-mono text-[10px] text-purple-400 uppercase">Guardrailed AI Ops</div>
+              <div className="font-bold text-white text-sm group-hover:text-purple-300">
+                25-Tool MCP Server &amp; Tactical Leases
+              </div>
+              <p className="text-slate-400 leading-relaxed">
+                16 scopes, 16 resources &amp; 25 tools across Firewall (<code className="font-mono">table inet axonwall_mcp</code>),
+                Ring-0 eBPF/<code className="font-mono">BPF_TOKEN</code>, KVM/Libvirt, K3s, ZFS NAS &amp; 9-vendor import.
+              </p>
+            </Link>
+
+            <Link
+              href="/docs/vigilante-cyber-ops"
+              className="p-5 rounded-xl bg-slate-900 border border-rose-500/40 hover:border-rose-500 transition space-y-2 group"
+            >
+              <div className="font-mono text-[10px] text-rose-400 uppercase">Autonomous SOC &amp; SOAR</div>
+              <div className="font-bold text-white text-sm group-hover:text-rose-300">
+                Vigilante Cyber Defense Operations
+              </div>
+              <p className="text-slate-400 leading-relaxed">
+                Active SOAR containment, honeynet deception mesh, PCAP forensics, and 12 modular SOC packages.
+              </p>
+            </Link>
+
+            <Link
+              href="/docs/kvm-lxc-hypervisor"
+              className="p-5 rounded-xl bg-slate-900 border border-amber-500/40 hover:border-amber-500 transition space-y-2 group"
+            >
+              <div className="font-mono text-[10px] text-amber-400 uppercase">Hypervisor Compute</div>
+              <div className="font-bold text-white text-sm group-hover:text-amber-300">
+                KVM/QEMU, LXC &amp; VFIO Passthrough
+              </div>
+              <p className="text-slate-400 leading-relaxed">
+                Virtual machines, unprivileged LXC <code className="font-mono">BPF_TOKEN</code> containers, PCIe/GPU
+                passthrough, VXLAN SDN, and Hosted Edge UKI micro-VMs.
+              </p>
+            </Link>
+
+            <Link
+              href="/docs/identity-openldap-sso"
+              className="p-5 rounded-xl bg-slate-900 border border-sky-500/40 hover:border-sky-500 transition space-y-2 group"
+            >
+              <div className="font-mono text-[10px] text-sky-400 uppercase">Zero-Touch Identity</div>
+              <div className="font-bold text-white text-sm group-hover:text-sky-300">
+                Unified OpenLDAP &amp; OIDC SSO
+              </div>
+              <p className="text-slate-400 leading-relaxed">
+                Multi-provider <code className="font-mono">syncrepl</code> and automatic RBAC federation across K3s, VOW,
+                Vigilante, Eluvix, and RADIUS.
+              </p>
+            </Link>
+
             <Link
               href="/docs/edge-uki-ngfw"
               className="p-5 rounded-xl bg-slate-900 border border-emerald-500/40 hover:border-emerald-500 transition space-y-2 group"
             >
-              <div className="font-mono text-[10px] text-emerald-400 uppercase">Zero-Surface Perimeter</div>
+              <div className="font-mono text-[10px] text-emerald-400 uppercase">Zero-Shell Perimeter</div>
               <div className="font-bold text-white text-sm group-hover:text-emerald-300">
-                Super-Slim Edge NGFW (Single-File UEFI UKI)
+                Super-Slim Edge NGFW (UEFI UKI)
               </div>
               <p className="text-slate-400 leading-relaxed">
-                How <code className="font-mono">CONFIG_MODULES=n</code>, pure-Go PID 1 (<code className="font-mono">/init</code>),
-                and pure-Go Netlink/Cloud-Init deliver a 7 MB zero-shell firewall that boots in &lt;1.2s.
+                How <code className="font-mono">CONFIG_MODULES=n</code> and pure-Go PID 1 deliver a 7.1 MB stateless
+                firewall booting in &lt;1.2s.
               </p>
             </Link>
 
             <Link
               href="/docs/eluvix-ai-router"
-              className="p-5 rounded-xl bg-slate-900 border border-purple-500/40 hover:border-purple-500 transition space-y-2 group"
+              className="p-5 rounded-xl bg-slate-900 border border-slate-800 hover:border-purple-500/50 transition space-y-2 group"
             >
               <div className="font-mono text-[10px] text-purple-400 uppercase">Sovereign AI &amp; DLP</div>
               <div className="font-bold text-white text-sm group-hover:text-purple-300">
-                Eluvix AI Router, Tokenomics &amp; DLP Guard
+                Eluvix AI Router &amp; PrivacyGuard
               </div>
               <p className="text-slate-400 leading-relaxed">
-                Switchyard 4-tier local/frontier routing, reversible PrivacyGuard PII/secret tokenization, and 8
-                autonomous coding agent harnesses.
-              </p>
-            </Link>
-
-            <Link
-              href="/docs/installer-raid-zfs"
-              className="p-5 rounded-xl bg-slate-900 border border-sky-500/40 hover:border-sky-500 transition space-y-2 group"
-            >
-              <div className="font-mono text-[10px] text-sky-400 uppercase">Root-on-ZFS &amp; A/B Slots</div>
-              <div className="font-bold text-white text-sm group-hover:text-sky-300">
-                ZFSBootMenu v3.1.x &amp; Multi-Disk RAID-1
-              </div>
-              <p className="text-slate-400 leading-relaxed">
-                Zero-copy OpenZFS Boot Environments (<code className="font-mono">zroot/ROOT/*</code>), pre-boot watchdog
-                rollback, and mdadm RAID-1 A/B slots.
-              </p>
-            </Link>
-
-            <Link
-              href="/docs/high-availability#two-host-setup"
-              className="p-5 rounded-xl bg-slate-900 border border-slate-800 hover:border-emerald-500/50 transition space-y-2 group"
-            >
-              <div className="font-mono text-[10px] text-emerald-400 uppercase">Step-by-Step Guide</div>
-              <div className="font-bold text-white text-sm group-hover:text-emerald-300">
-                Setting Up a 2-Host HA Cluster
-              </div>
-              <p className="text-slate-400 leading-relaxed">
-                Complete cabling, <code className="font-mono">interfaces.yaml</code>, <code className="font-mono">ha.yaml</code>,
-                Host CSR mTLS PKI, Keepalived VRRP, and conntrackd failover walkthrough.
+                Switchyard 4-tier local/frontier routing, reversible PII/secret tokenization, and 8 agent harnesses.
               </p>
             </Link>
 
@@ -577,50 +825,50 @@ export default function HomePage() {
               href="/docs/ghost-in-the-ring-rootkits"
               className="p-5 rounded-xl bg-slate-900 border border-slate-800 hover:border-emerald-500/50 transition space-y-2 group"
             >
-              <div className="font-mono text-[10px] text-amber-400 uppercase">Ring-0 Research</div>
-              <div className="font-bold text-white text-sm group-hover:text-amber-300">
-                Detecting eBPF &amp; io_uring Rootkits
+              <div className="font-mono text-[10px] text-emerald-400 uppercase">Ring-0 Security</div>
+              <div className="font-bold text-white text-sm group-hover:text-emerald-300">
+                5-Hook BPF-LSM &amp; BPF_TOKEN Mediator
               </div>
               <p className="text-slate-400 leading-relaxed">
-                How <code className="font-mono">BPF_LSM</code>, <code className="font-mono">/proc/kcore</code>{' '}
-                <code className="font-mono">prog_idr</code> walks, Silicon PMU LBR, and <code className="font-mono">rkhunter</code>{' '}
-                defend Ring-0.
+                CVE-2026-31431 Copy Fail <code className="font-mono">AF_ALG</code> block, Linux 6.9+{' '}
+                <code className="font-mono">BPF_TOKEN</code> Ring-0 gate, and PMU LBR auditing.
               </p>
             </Link>
 
             <Link
-              href="/docs/post-quantum-rosenpass"
-              className="p-5 rounded-xl bg-slate-900 border border-slate-800 hover:border-emerald-500/50 transition space-y-2 group"
+              href="/docs/high-availability#two-host-setup"
+              className="p-5 rounded-xl bg-slate-900 border border-slate-800 hover:border-sky-500/50 transition space-y-2 group"
             >
-              <div className="font-mono text-[10px] text-sky-400 uppercase">Post-Quantum VPN</div>
+              <div className="font-mono text-[10px] text-sky-400 uppercase">Step-by-Step Cluster</div>
               <div className="font-bold text-white text-sm group-hover:text-sky-300">
-                Rosenpass Dual-KEM WireGuard
+                2-Host HA, ZFS &amp; K3s Failover
               </div>
               <p className="text-slate-400 leading-relaxed">
-                Deploy Classic McEliece 460896 + Kyber-768 hybrid PSK rotation across site-to-site WireGuard links.
+                Cabling, CSR mTLS PKI, Keepalived VRRP, conntrackd, OpenEBS replication, and ZFS Send/Recv walkthrough.
               </p>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Official Release v0.11.32 & Signed Installation Media Section */}
+      {/* Official Release v0.11.64 & Signed Installation Media Section */}
       <section id="releases" className="py-24 border-t border-slate-800/80 bg-slate-950/50">
         <div className="max-w-7xl mx-auto px-6 space-y-12">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
             <div className="space-y-3 max-w-2xl">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold">
-                <Download className="w-3.5 h-3.5" /> Official Release • v0.11.32 (Signed with Ed25519 &amp; SHA-256)
+                <Download className="w-3.5 h-3.5" /> Official Release • v0.11.64 (2026-11-10 • Signed with Ed25519 &amp; SHA-256)
               </div>
               <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-                Download Verified Appliance Media
+                Download Verified v0.11.64 Media
               </h2>
               <p className="text-sm text-slate-400 leading-relaxed">
                 Every release artifact is built deterministically from{' '}
                 <a href="https://github.com/axonwall/axonwall" className="text-emerald-400 underline">
                   github.com/axonwall/axonwall
                 </a>{' '}
-                and accompanied by SHA-256 digests and detached Ed25519 signatures (<code className="text-slate-300 font-mono">.sha256.sig</code>).
+                with SHA-256 digests and detached Ed25519 signatures (<code className="text-slate-300 font-mono">.sha256.sig</code>).
+                Standard NGFW and Vault S3 editions ship together inside the unified ISO.
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-3">
@@ -632,47 +880,53 @@ export default function HomePage() {
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <a
-                href="https://github.com/axonwall/axonwall/releases/tag/v0.11.32"
+                href="https://github.com/axonwall/axonwall/releases/tag/v0.11.64"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-4 py-3 rounded-xl text-xs font-semibold bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-800 transition flex items-center gap-2"
               >
-                <ExternalLink className="w-3.5 h-3.5 text-emerald-400" /> GitHub v0.11.32
+                <ExternalLink className="w-3.5 h-3.5 text-emerald-400" /> GitHub v0.11.64
               </a>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* 1. Standard Debian 13 ISO */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* 1. Unified Bare-Metal Debian 13 ISO */}
             <div className="p-6 rounded-2xl bg-slate-900 border border-emerald-500/40 flex flex-col justify-between space-y-5">
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="px-2.5 py-0.5 rounded text-[10px] font-mono bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 font-semibold">
-                    BARE METAL • VM • ZFSBOOTMENU
+                  <span className="px-2.5 py-0.5 rounded text-[10px] font-mono bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 font-semibold flex items-center gap-1.5">
+                    <HardDrive className="w-3 h-3" /> UNIFIED NGFW + VAULT ISO
                   </span>
-                  <span className="text-xs font-mono text-slate-400">1,002.0 MB</span>
+                  <span className="text-xs font-mono text-slate-400">1.21 GiB (1,238.2 MB)</span>
                 </div>
-                <h3 className="text-lg font-bold text-white">Turnkey Appliance ISO</h3>
+                <h3 className="text-lg font-bold text-white">Unified Bare-Metal Live/Installer ISO</h3>
                 <p className="text-xs text-slate-400 leading-relaxed">
-                  Bootable UEFI &amp; BIOS installer supporting A/B Dual-Root, ZFSBootMenu v3.1.x Root-on-ZFS, and
-                  mdadm RAID-1 mirroring.
+                  Debian 13 Trixie UEFI installer for NGFW &amp; Vault S3 editions. Supports pure ZFSBootMenu v3.1.0,
+                  mdadm RAID-1 A/B Dual-Root, smart NVMe/SSD/HDD tiering, and LUKS2 + TPM 2.0 auto-unlock.
                 </p>
-                <div className="p-2.5 rounded-lg bg-slate-950 border border-slate-800 font-mono text-[10px] text-slate-400 truncate">
-                  SHA256: <span className="text-emerald-400">13c0c71d6dcc1968d42e64d36eeff061...</span>
+                <div className="p-2.5 rounded-lg bg-slate-950 border border-slate-800 font-mono text-[10px] text-slate-400 break-all">
+                  SHA256: <span className="text-emerald-400">8c4bb98fda1f304d02e7c91dd629e88c7253578dccaec3c22b62b7320cdaf44d</span>
                 </div>
               </div>
               <div className="flex items-center gap-2">
                 <a
-                  href="https://github.com/axonwall/axonwall/releases/download/v0.11.32/axonwall-debian13-amd64.iso"
+                  href="https://github.com/axonwall/axonwall/releases/download/v0.11.64/axonwall-debian13-amd64.iso"
                   className="flex-1 py-2.5 px-3 rounded-lg text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white transition text-center flex items-center justify-center gap-1.5"
                 >
                   <Download className="w-3.5 h-3.5" /> axonwall-debian13-amd64.iso
                 </a>
                 <a
-                  href="https://github.com/axonwall/axonwall/releases/download/v0.11.32/axonwall-debian13-amd64.iso.sha256"
+                  href="https://github.com/axonwall/axonwall/releases/download/v0.11.64/axonwall-debian13-amd64.iso.sha256"
                   className="py-2.5 px-2.5 rounded-lg text-[11px] font-mono bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-800"
                 >
                   .sha256
+                </a>
+                <a
+                  href="https://github.com/axonwall/axonwall/releases/download/v0.11.64/axonwall-debian13-amd64.iso.sha256.sig"
+                  className="py-2.5 px-2.5 rounded-lg text-[11px] font-mono bg-slate-950 hover:bg-slate-800 text-emerald-300 border border-emerald-500/30"
+                >
+                  .sig
                 </a>
               </div>
             </div>
@@ -681,72 +935,120 @@ export default function HomePage() {
             <div className="p-6 rounded-2xl bg-slate-900 border border-sky-500/40 flex flex-col justify-between space-y-5">
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="px-2.5 py-0.5 rounded text-[10px] font-mono bg-sky-500/15 text-sky-300 border border-sky-500/30 font-semibold">
-                    ZERO-SURFACE UKI • PID 1 GO
+                  <span className="px-2.5 py-0.5 rounded text-[10px] font-mono bg-sky-500/15 text-sky-300 border border-sky-500/30 font-semibold flex items-center gap-1.5">
+                    <Cpu className="w-3 h-3" /> ZERO-SHELL UKI • PID 1 GO
                   </span>
-                  <span className="text-xs font-mono text-slate-400">7.0 MB</span>
+                  <span className="text-xs font-mono text-slate-400">7.1 MB</span>
                 </div>
                 <h3 className="text-lg font-bold text-white">Super-Slim Edge NGFW (.efi)</h3>
                 <p className="text-xs text-slate-400 leading-relaxed">
-                  Single-file UEFI Unified Kernel Image (<code className="text-slate-300">CONFIG_MODULES=n</code>) with
-                  pure-Go PID 1, zero shell, Cloud-Init, Dual-Stack IPv6, and &lt;1.2s RAM boot.
+                  Single-file UEFI Unified Kernel Image (<code className="text-slate-300">CONFIG_MODULES=n</code>) with{' '}
+                  <code className="text-slate-300">axonwall-satellite</code> as PID 1, zero shell, Cloud-Init, Dual-Stack
+                  IPv6, and &lt;1.2s RAM boot.
                 </p>
-                <div className="p-2.5 rounded-lg bg-slate-950 border border-slate-800 font-mono text-[10px] text-slate-400 truncate">
-                  SHA256: <span className="text-sky-400">66342158a0fb97b90d84249b40bdb11e...</span>
+                <div className="p-2.5 rounded-lg bg-slate-950 border border-slate-800 font-mono text-[10px] text-slate-400 break-all">
+                  SHA256: <span className="text-sky-400">6c621e90754fc7879f4cf5a040aea811a0ba9cb0e57bb80e26bd02e5d8aaecab</span>
                 </div>
               </div>
               <div className="flex items-center gap-2">
                 <a
-                  href="https://github.com/axonwall/axonwall/releases/download/v0.11.32/axonwall-edge-sku-vm-virtio.efi"
+                  href="https://github.com/axonwall/axonwall/releases/download/v0.11.64/axonwall-edge-sku-vm-virtio.efi"
                   className="flex-1 py-2.5 px-3 rounded-lg text-xs font-semibold bg-sky-600 hover:bg-sky-500 text-white transition text-center flex items-center justify-center gap-1.5"
                 >
                   <Download className="w-3.5 h-3.5" /> axonwall-edge-sku-vm-virtio.efi
                 </a>
                 <a
-                  href="https://github.com/axonwall/axonwall/releases/download/v0.11.32/axonwall-edge-sku-vm-virtio.efi.sha256"
+                  href="https://github.com/axonwall/axonwall/releases/download/v0.11.64/axonwall-edge-sku-vm-virtio.efi.sha256"
                   className="py-2.5 px-2.5 rounded-lg text-[11px] font-mono bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-800"
                 >
                   .sha256
                 </a>
+                <a
+                  href="https://github.com/axonwall/axonwall/releases/download/v0.11.64/axonwall-edge-sku-vm-virtio.efi.sha256.sig"
+                  className="py-2.5 px-2.5 rounded-lg text-[11px] font-mono bg-slate-950 hover:bg-slate-800 text-sky-300 border border-sky-500/30"
+                >
+                  .sig
+                </a>
               </div>
             </div>
 
-            {/* 3. Cloud QCOW2 / Vault ISO / Debian .deb */}
-            <div className="p-6 rounded-2xl bg-slate-900 border border-slate-800 flex flex-col justify-between space-y-4">
+            {/* 3. Cloud QCOW2 Appliance Image */}
+            <div className="p-6 rounded-2xl bg-slate-900 border border-purple-500/40 flex flex-col justify-between space-y-5">
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="px-2.5 py-0.5 rounded text-[10px] font-mono bg-purple-500/15 text-purple-300 border border-purple-500/30 font-semibold">
-                    CLOUD QCOW2 • VAULT • .DEB
+                  <span className="px-2.5 py-0.5 rounded text-[10px] font-mono bg-purple-500/15 text-purple-300 border border-purple-500/30 font-semibold flex items-center gap-1.5">
+                    <Cloud className="w-3 h-3" /> KVM • PROXMOX • CLOUD-INIT
                   </span>
-                  <span className="text-xs font-mono text-slate-400">v0.11.32</span>
+                  <span className="text-xs font-mono text-slate-400">1.11 GiB (1,132.6 MB)</span>
                 </div>
-                <h3 className="text-lg font-bold text-white">Cloud, S3 Vault &amp; Debian Packages</h3>
+                <h3 className="text-lg font-bold text-white">Cloud-Init QCOW2 Appliance Image</h3>
                 <p className="text-xs text-slate-400 leading-relaxed">
-                  Deploy directly on Proxmox/KVM, build an immutable SeaweedFS S3 backup vault, or install on Debian 13:
+                  Pre-built KVM, Proxmox VE, and OpenStack disk image with VirtIO acceleration, zero-touch Cloud-Init
+                  reconciler, and background first-boot Slot-B synchronization.
                 </p>
-                <div className="space-y-2 pt-1 text-xs">
-                  <a
-                    href="https://github.com/axonwall/axonwall/releases/download/v0.11.32/axonwall-debian13-amd64-cloud.qcow2"
-                    className="flex items-center justify-between p-2.5 rounded-lg bg-slate-950 hover:bg-slate-800 border border-slate-800 transition"
-                  >
-                    <span className="font-mono text-slate-200 text-[11px]">axonwall-debian13-amd64-cloud.qcow2</span>
-                    <span className="text-purple-400 font-mono text-[10px]">827 MB ↓</span>
-                  </a>
-                  <a
-                    href="https://github.com/axonwall/axonwall/releases/download/v0.11.32/axonwall-vault-debian13-amd64.iso"
-                    className="flex items-center justify-between p-2.5 rounded-lg bg-slate-950 hover:bg-slate-800 border border-slate-800 transition"
-                  >
-                    <span className="font-mono text-slate-200 text-[11px]">axonwall-vault-debian13-amd64.iso</span>
-                    <span className="text-amber-400 font-mono text-[10px]">878 MB ↓</span>
-                  </a>
-                  <a
-                    href="https://github.com/axonwall/axonwall/releases/download/v0.11.32/axonwall_0.11.32_amd64.deb"
-                    className="flex items-center justify-between p-2.5 rounded-lg bg-slate-950 hover:bg-slate-800 border border-slate-800 transition"
-                  >
-                    <span className="font-mono text-slate-200 text-[11px]">axonwall_0.11.32_amd64.deb</span>
-                    <span className="text-emerald-400 font-mono text-[10px]">60.1 MB ↓</span>
-                  </a>
+                <div className="p-2.5 rounded-lg bg-slate-950 border border-slate-800 font-mono text-[10px] text-slate-400 break-all">
+                  SHA256: <span className="text-purple-400">aa27acbcd73e055e61c25c07ea16468dd5aa84acd10853388f38971f3fb0f703</span>
                 </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <a
+                  href="https://github.com/axonwall/axonwall/releases/download/v0.11.64/axonwall-debian13-amd64-cloud.qcow2"
+                  className="flex-1 py-2.5 px-3 rounded-lg text-xs font-semibold bg-purple-600 hover:bg-purple-500 text-white transition text-center flex items-center justify-center gap-1.5"
+                >
+                  <Download className="w-3.5 h-3.5" /> axonwall-debian13-amd64-cloud.qcow2
+                </a>
+                <a
+                  href="https://github.com/axonwall/axonwall/releases/download/v0.11.64/axonwall-debian13-amd64-cloud.qcow2.sha256"
+                  className="py-2.5 px-2.5 rounded-lg text-[11px] font-mono bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-800"
+                >
+                  .sha256
+                </a>
+                <a
+                  href="https://github.com/axonwall/axonwall/releases/download/v0.11.64/axonwall-debian13-amd64-cloud.qcow2.sha256.sig"
+                  className="py-2.5 px-2.5 rounded-lg text-[11px] font-mono bg-slate-950 hover:bg-slate-800 text-purple-300 border border-purple-500/30"
+                >
+                  .sig
+                </a>
+              </div>
+            </div>
+
+            {/* 4. Standalone Debian / Ubuntu AMD64 .deb */}
+            <div className="p-6 rounded-2xl bg-slate-900 border border-slate-800 flex flex-col justify-between space-y-5">
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="px-2.5 py-0.5 rounded text-[10px] font-mono bg-slate-800 text-slate-300 border border-slate-700 font-semibold flex items-center gap-1.5">
+                    <Server className="w-3 h-3" /> DEBIAN 12/13 • UBUNTU 24.04
+                  </span>
+                  <span className="text-xs font-mono text-slate-400">82.2 MB</span>
+                </div>
+                <h3 className="text-lg font-bold text-white">Standalone AMD64 Package (.deb)</h3>
+                <p className="text-xs text-slate-400 leading-relaxed">
+                  Install the complete Axonwall daemon, controller, MCP AI server, Web UI, Neovim TUI, and{' '}
+                  <code className="text-slate-300">axonwall-opshell</code> onto existing Debian/Ubuntu hosts or OTA slots.
+                </p>
+                <div className="p-2.5 rounded-lg bg-slate-950 border border-slate-800 font-mono text-[10px] text-slate-400 break-all">
+                  SHA256: <span className="text-emerald-400">6864c004ba550c1822b61303a04aeaaf3bc7d0a0717ad6532c3244af6ce176bc</span>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <a
+                  href="https://github.com/axonwall/axonwall/releases/download/v0.11.64/axonwall_0.11.64_amd64.deb"
+                  className="flex-1 py-2.5 px-3 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 transition text-center flex items-center justify-center gap-1.5"
+                >
+                  <Download className="w-3.5 h-3.5 text-emerald-400" /> axonwall_0.11.64_amd64.deb
+                </a>
+                <a
+                  href="https://github.com/axonwall/axonwall/releases/download/v0.11.64/axonwall_0.11.64_amd64.deb.sha256"
+                  className="py-2.5 px-2.5 rounded-lg text-[11px] font-mono bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-800"
+                >
+                  .sha256
+                </a>
+                <a
+                  href="https://github.com/axonwall/axonwall/releases/download/v0.11.64/axonwall_0.11.64_amd64.deb.sha256.sig"
+                  className="py-2.5 px-2.5 rounded-lg text-[11px] font-mono bg-slate-950 hover:bg-slate-800 text-emerald-300 border border-emerald-500/30"
+                >
+                  .sig
+                </a>
               </div>
             </div>
           </div>
@@ -770,7 +1072,8 @@ export default function HomePage() {
               Pre-Configured Hardware Appliances
             </h2>
             <p className="text-sm sm:text-base text-slate-400">
-              Factory burned-in, pre-loaded with Axonwall OS, and tested for maximum thermal reliability. Ships globally with next-day advance hardware replacement.
+              Factory burned-in, pre-loaded with Axonwall v0.11.64 (ZFSBootMenu + TPM 2.0), and tested for maximum
+              thermal reliability. Ships globally with next-day advance hardware replacement.
             </p>
           </div>
 
@@ -783,20 +1086,25 @@ export default function HomePage() {
                 </span>
                 <h3 className="text-xl font-bold text-white">Axonwall Edge 10</h3>
                 <div className="text-3xl font-extrabold text-white font-mono">$499</div>
-                <p className="text-xs text-slate-400">Silent, fanless aluminum chassis for home labs, branch offices, and edge deployments.</p>
+                <p className="text-xs text-slate-400">
+                  Silent, fanless aluminum chassis for home labs, branch offices, and edge deployments.
+                </p>
 
                 <ul className="text-xs text-slate-300 space-y-2 pt-2 border-t border-slate-800">
                   <li className="flex items-center gap-2">✓ Quad-Core Intel x86 (Fanless)</li>
                   <li className="flex items-center gap-2">✓ 4x 2.5GbE RJ-45 (Intel i226)</li>
                   <li className="flex items-center gap-2">✓ 2x 10GbE SFP+ Ports</li>
                   <li className="flex items-center gap-2">✓ 16GB DDR5 RAM + 128GB NVMe</li>
-                  <li className="flex items-center gap-2">✓ 2.5 Gbps WireGuard Throughput</li>
+                  <li className="flex items-center gap-2">✓ Discrete TPM 2.0 + 2.5 Gbps WG</li>
                 </ul>
               </div>
 
-              <button className="w-full py-2.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition border border-slate-700">
+              <a
+                href="mailto:sales@axonwall.com?subject=Axonwall%20Edge%2010%20Appliance%20Inquiry"
+                className="w-full py-2.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition border border-slate-700 block text-center"
+              >
                 Order Edge 10
-              </button>
+              </a>
             </div>
 
             {/* Edge 20-5G */}
@@ -807,10 +1115,12 @@ export default function HomePage() {
                 </span>
                 <h3 className="text-xl font-bold text-white">Axonwall Edge 20-5G</h3>
                 <div className="text-3xl font-extrabold text-white font-mono">$899</div>
-                <p className="text-xs text-slate-400">Integrated 5G Sub-6 modem with dual SIM redundancy for retail and mobile edge.</p>
+                <p className="text-xs text-slate-400">
+                  Integrated 5G Sub-6 modem with dual SIM redundancy for retail and mobile edge.
+                </p>
 
                 <ul className="text-xs text-slate-300 space-y-2 pt-2 border-t border-slate-800">
-                  <li className="flex items-center gap-2">✓ Octa-Core ARM64 / x86</li>
+                  <li className="flex items-center gap-2">✓ Octa-Core x86_64 Processor</li>
                   <li className="flex items-center gap-2">✓ Dual SIM 5G Sub-6 + GNSS</li>
                   <li className="flex items-center gap-2">✓ 4x 2.5GbE + 2x 10GbE SFP+</li>
                   <li className="flex items-center gap-2">✓ 802.3at PoE Power Input</li>
@@ -818,9 +1128,12 @@ export default function HomePage() {
                 </ul>
               </div>
 
-              <button className="w-full py-2.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition border border-slate-700">
+              <a
+                href="mailto:sales@axonwall.com?subject=Axonwall%20Edge%2020-5G%20Appliance%20Inquiry"
+                className="w-full py-2.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition border border-slate-700 block text-center"
+              >
                 Order Edge 20-5G
-              </button>
+              </a>
             </div>
 
             {/* Rack 100 */}
@@ -831,20 +1144,25 @@ export default function HomePage() {
                 </span>
                 <h3 className="text-xl font-bold text-white">Axonwall Rack 100</h3>
                 <div className="text-3xl font-extrabold text-white font-mono">$1,699</div>
-                <p className="text-xs text-slate-400">1U rackmount appliance for medium enterprises, schools, and central headquarters.</p>
+                <p className="text-xs text-slate-400">
+                  1U rackmount appliance for medium enterprises, schools, and central headquarters.
+                </p>
 
                 <ul className="text-xs text-slate-300 space-y-2 pt-2 border-t border-slate-800">
                   <li className="flex items-center gap-2">✓ Intel Xeon D 8-Core / 16-Thread</li>
                   <li className="flex items-center gap-2">✓ 8x 2.5GbE + 4x 10GbE SFP+</li>
-                  <li className="flex items-center gap-2">✓ 32GB ECC RAM (expandable to 128GB)</li>
+                  <li className="flex items-center gap-2">✓ 32GB ECC RAM + Dual NVMe ZBM Mirror</li>
                   <li className="flex items-center gap-2">✓ Dual Redundant 300W PSUs</li>
                   <li className="flex items-center gap-2">✓ 10 Gbps WireGuard &amp; IMIX NAT</li>
                 </ul>
               </div>
 
-              <button className="w-full py-2.5 rounded-lg text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white transition shadow-lg shadow-emerald-950/60">
+              <a
+                href="mailto:sales@axonwall.com?subject=Axonwall%20Rack%20100%20Appliance%20Inquiry"
+                className="w-full py-2.5 rounded-lg text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white transition shadow-lg shadow-emerald-950/60 block text-center"
+              >
                 Order Rack 100
-              </button>
+              </a>
             </div>
 
             {/* Core HA Cluster */}
@@ -855,20 +1173,25 @@ export default function HomePage() {
                 </span>
                 <h3 className="text-xl font-bold text-white">Axonwall Core HA</h3>
                 <div className="text-3xl font-extrabold text-white font-mono">$7,999</div>
-                <p className="text-xs text-slate-400">Turnkey active/standby dual 1U HA pair with 100GbE QSFP28 and sub-second failover.</p>
+                <p className="text-xs text-slate-400">
+                  Turnkey active/standby dual 1U HA pair with 100GbE QSFP28 and sub-second failover.
+                </p>
 
                 <ul className="text-xs text-slate-300 space-y-2 pt-2 border-t border-slate-800">
                   <li className="flex items-center gap-2">✓ 2x 1U Clustered Appliances</li>
                   <li className="flex items-center gap-2">✓ AMD EPYC 16-Core / 32-Thread</li>
                   <li className="flex items-center gap-2">✓ 4x 25GbE SFP28 + 2x 100GbE QSFP28</li>
-                  <li className="flex items-center gap-2">✓ Conntrackd 100GbE DAC Link</li>
+                  <li className="flex items-center gap-2">✓ Conntrackd &amp; ZFS 100GbE DAC Link</li>
                   <li className="flex items-center gap-2">✓ Dedicated IPMI / BMC management</li>
                 </ul>
               </div>
 
-              <button className="w-full py-2.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition border border-slate-700">
+              <a
+                href="mailto:sales@axonwall.com?subject=Axonwall%20Core%20HA%20Cluster%20Inquiry"
+                className="w-full py-2.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition border border-slate-700 block text-center"
+              >
                 Contact Enterprise Sales
-              </button>
+              </a>
             </div>
           </div>
         </div>
@@ -883,106 +1206,144 @@ export default function HomePage() {
               Software Editions &amp; Enterprise Support
             </h2>
             <p className="text-sm sm:text-base text-slate-400">
-              100% open source community edition for everyone, with certified long-term support and commercial threat feeds for mission-critical enterprise deployments.
+              100% open source GPLv2 Community Edition for everyone, with certified long-term support and commercial
+              threat feeds for mission-critical enterprise deployments.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Community Edition */}
-            <div className="p-8 rounded-2xl bg-slate-900 border border-slate-800 space-y-6">
-              <div>
-                <h3 className="text-xl font-bold text-white">Community Edition</h3>
-                <p className="text-xs text-slate-400 mt-1">For homelabs, developers, and self-supported small deployments.</p>
-                <div className="text-4xl font-extrabold text-white font-mono mt-4">$0 <span className="text-sm font-normal text-slate-500">/ forever</span></div>
+            <div className="p-8 rounded-2xl bg-slate-900 border border-slate-800 flex flex-col justify-between space-y-6">
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-xl font-bold text-white">Community Edition</h3>
+                  <p className="text-xs text-slate-400 mt-1">
+                    For homelabs, developers, and self-supported deployments.
+                  </p>
+                  <div className="text-4xl font-extrabold text-white font-mono mt-4">
+                    $0 <span className="text-sm font-normal text-slate-500">/ forever</span>
+                  </div>
+                </div>
+
+                <ul className="text-xs text-slate-300 space-y-3 pt-4 border-t border-slate-800">
+                  <li className="flex items-center gap-2 text-emerald-400">✓ 100% Free &amp; Open Source (GNU GPLv2)</li>
+                  <li className="flex items-center gap-2">✓ All 5 Core Roles (NGFW, ZFS, K3s, KVM, Vigilante)</li>
+                  <li className="flex items-center gap-2">✓ Rosenpass PQ-KEM, CO-RE BPF-LSM &amp; Coroot eBPF</li>
+                  <li className="flex items-center gap-2">✓ MCP Security AI, Eluvix DLP &amp; Terraform Provider</li>
+                  <li className="flex items-center gap-2">✓ Community GitHub Discussions &amp; Docs</li>
+                </ul>
               </div>
 
-              <ul className="text-xs text-slate-300 space-y-3 pt-4 border-t border-slate-800">
-                <li className="flex items-center gap-2 text-emerald-400">✓ 100% Free &amp; Open Source Core</li>
-                <li className="flex items-center gap-2">✓ Bi-weekly rolling release cycle</li>
-                <li className="flex items-center gap-2">✓ Full nftables, WireGuard, Rosenpass PQ-KEM</li>
-                <li className="flex items-center gap-2">✓ OpenZFS NAS, K3s, Neovim TUI &amp; Rootkit Hunter</li>
-                <li className="flex items-center gap-2">✓ Community Forum Support</li>
-              </ul>
-
-              <a
-                href="https://github.com/axonwall/axonwall"
+              <Link
+                href="/releases"
                 className="w-full py-3 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition border border-slate-700 block text-center"
               >
-                Download Community ISO
-              </a>
+                Download Community ISO (v0.11.64)
+              </Link>
             </div>
 
             {/* Business Edition */}
-            <div className="p-8 rounded-2xl bg-slate-900 border-2 border-emerald-500 shadow-xl shadow-emerald-950/30 space-y-6 relative">
+            <div className="p-8 rounded-2xl bg-slate-900 border-2 border-emerald-500 shadow-xl shadow-emerald-950/30 flex flex-col justify-between space-y-6 relative">
               <div className="absolute top-0 right-8 -translate-y-1/2 bg-emerald-500 text-black px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider">
                 Recommended for Production
               </div>
 
-              <div>
-                <h3 className="text-xl font-bold text-white">Business Edition</h3>
-                <p className="text-xs text-slate-400 mt-1">Hardened, validated release channel for commercial environments.</p>
-                <div className="text-4xl font-extrabold text-white font-mono mt-4">$249 <span className="text-sm font-normal text-slate-500">/ appliance / year</span></div>
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-xl font-bold text-white">Business Edition</h3>
+                  <p className="text-xs text-slate-400 mt-1">
+                    Hardened, validated release channel for commercial environments.
+                  </p>
+                  <div className="text-4xl font-extrabold text-white font-mono mt-4">
+                    $249 <span className="text-sm font-normal text-slate-500">/ appliance / year</span>
+                  </div>
+                </div>
+
+                <ul className="text-xs text-slate-300 space-y-3 pt-4 border-t border-slate-800">
+                  <li className="flex items-center gap-2 text-emerald-400">✓ Everything in Community, plus:</li>
+                  <li className="flex items-center gap-2">✓ Hardened Quarterly LTS update stream</li>
+                  <li className="flex items-center gap-2">✓ Automated hardware regression QA</li>
+                  <li className="flex items-center gap-2">✓ Commercial Threat Intelligence &amp; YARA Feeds</li>
+                  <li className="flex items-center gap-2">✓ MaxMind GeoIP2 + CrowdSec CTI</li>
+                  <li className="flex items-center gap-2">✓ Encrypted Cloud Config Vault</li>
+                </ul>
               </div>
 
-              <ul className="text-xs text-slate-300 space-y-3 pt-4 border-t border-slate-800">
-                <li className="flex items-center gap-2 text-emerald-400">✓ Everything in Community, plus:</li>
-                <li className="flex items-center gap-2">✓ Hardened Quarterly LTS update stream</li>
-                <li className="flex items-center gap-2">✓ Automated hardware regression QA</li>
-                <li className="flex items-center gap-2">✓ Commercial Threat Intelligence &amp; YARA Feeds</li>
-                <li className="flex items-center gap-2">✓ MaxMind GeoIP2 + CrowdSec CTI</li>
-                <li className="flex items-center gap-2">✓ Encrypted Cloud Config Vault</li>
-              </ul>
-
-              <button className="w-full py-3 rounded-lg text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white transition shadow-lg shadow-emerald-950/60">
+              <a
+                href="mailto:sales@axonwall.com?subject=Axonwall%20Business%20Edition%20Inquiry"
+                className="w-full py-3 rounded-lg text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white transition shadow-lg shadow-emerald-950/60 block text-center"
+              >
                 Subscribe to Business Edition
-              </button>
+              </a>
             </div>
 
             {/* Enterprise Support */}
-            <div className="p-8 rounded-2xl bg-slate-900 border border-slate-800 space-y-6">
-              <div>
-                <h3 className="text-xl font-bold text-white">Enterprise SLA Support</h3>
-                <p className="text-xs text-slate-400 mt-1">24/7 mission-critical response for enterprise and government clusters.</p>
-                <div className="text-4xl font-extrabold text-white font-mono mt-4">$1,499 <span className="text-sm font-normal text-slate-500">/ node / year</span></div>
+            <div className="p-8 rounded-2xl bg-slate-900 border border-slate-800 flex flex-col justify-between space-y-6">
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-xl font-bold text-white">Enterprise SLA Support</h3>
+                  <p className="text-xs text-slate-400 mt-1">
+                    24/7 mission-critical response for enterprise and government clusters.
+                  </p>
+                  <div className="text-4xl font-extrabold text-white font-mono mt-4">
+                    $1,499 <span className="text-sm font-normal text-slate-500">/ node / year</span>
+                  </div>
+                </div>
+
+                <ul className="text-xs text-slate-300 space-y-3 pt-4 border-t border-slate-800">
+                  <li className="flex items-center gap-2 text-emerald-400">✓ Everything in Business Edition, plus:</li>
+                  <li className="flex items-center gap-2">✓ 24x7x365 Emergency Phone &amp; Ticket SLA</li>
+                  <li className="flex items-center gap-2">✓ 2-hour response time guarantee</li>
+                  <li className="flex items-center gap-2">✓ Named Technical Account Manager (TAM)</li>
+                  <li className="flex items-center gap-2">✓ Architecture review &amp; 2-Host HA onboarding</li>
+                  <li className="flex items-center gap-2">✓ Next-business-day hardware advance swap</li>
+                </ul>
               </div>
 
-              <ul className="text-xs text-slate-300 space-y-3 pt-4 border-t border-slate-800">
-                <li className="flex items-center gap-2 text-emerald-400">✓ Everything in Business Edition, plus:</li>
-                <li className="flex items-center gap-2">✓ 24x7x365 Emergency Phone &amp; Ticket SLA</li>
-                <li className="flex items-center gap-2">✓ 2-hour response time guarantee</li>
-                <li className="flex items-center gap-2">✓ Named Technical Account Manager (TAM)</li>
-                <li className="flex items-center gap-2">✓ Architecture review &amp; 2-Host HA onboarding</li>
-                <li className="flex items-center gap-2">✓ Next-business-day hardware advance swap</li>
-              </ul>
-
-              <button className="w-full py-3 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition border border-slate-700">
+              <a
+                href="mailto:sales@axonwall.com?subject=Axonwall%20Enterprise%20SLA%20Support%20Inquiry"
+                className="w-full py-3 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition border border-slate-700 block text-center"
+              >
                 Contact Enterprise Support
-              </button>
+              </a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Migration Section */}
+      {/* Migration Section (All 9 Importers) */}
       <section id="migration" className="py-20 border-t border-slate-800/80 bg-slate-950/60">
         <div className="max-w-5xl mx-auto px-6 text-center space-y-6">
           <div className="inline-flex p-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
-            <RefreshCw className="w-6 h-6" />
+            <FileCode className="w-6 h-6" />
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white">
-            Migrate from OPNsense, pfSense, or Cisco ASA in 30 Seconds
+            Migrate from 9 Firewalls, Hypervisors &amp; NAS Appliances in 30 Seconds
           </h2>
-          <p className="text-sm text-slate-400 max-w-xl mx-auto leading-relaxed">
-            Our built-in Migration Studio parses your existing <code className="text-slate-300">config.xml</code> or Cisco
-            ASA configuration, performs mathematical rule-shadowing and subnet-collision analysis, and translates rules,
-            aliases, NAT port forwards, and DHCP subnets directly to Linux nftables.
+          <p className="text-sm text-slate-400 max-w-2xl mx-auto leading-relaxed">
+            Unified Appliance Migration Studio parses configurations across 9 platforms—including{' '}
+            <strong className="text-slate-200">OPNsense, pfSense, Proxmox VE 8.x, and TrueNAS SCALE</strong>—performing
+            mathematical rule-shadowing &amp; subnet-collision audits while non-destructively merging aliases, NAT, KVM
+            VMs, LXC containers, and OpenZFS pools/shares into <code className="text-slate-300">/etc/axonwall/*.yaml</code>.
           </p>
+
+          <div className="flex flex-wrap items-center justify-center gap-2 pt-1">
+            {MIGRATION_IMPORTERS.map((imp) => (
+              <span
+                key={imp}
+                className="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-xs font-mono text-emerald-300"
+              >
+                ✓ {imp}
+              </span>
+            ))}
+          </div>
+
           <div className="pt-2">
             <Link
               href="/docs/migration"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition"
             >
-              Explore Migration Studio Documentation <ArrowRight className="w-3.5 h-3.5 text-emerald-400" />
+              Explore All 9 Migration Importers <ArrowRight className="w-3.5 h-3.5 text-emerald-400" />
             </Link>
           </div>
         </div>
@@ -999,16 +1360,23 @@ export default function HomePage() {
                 <HelpCircle className="w-4 h-4 text-emerald-400" /> Why did you build Axonwall on Linux instead of FreeBSD?
               </h3>
               <p className="text-slate-400 text-xs leading-relaxed">
-                Linux provides modern hardware drivers on day one (including 5G cellular, Wi-Fi 7, and 100GbE NICs), multi-core scalability via <code className="text-slate-300">nftables</code> and eBPF, native Ring-0 <code className="text-slate-300">BPF_LSM</code> security hooks, and native support for OpenZFS, KVM, and K3s Kubernetes. FreeBSD packet filtering (<code className="text-slate-300">pf</code>) suffers from lock contention under heavy symmetrical traffic.
+                Linux 6.12 LTS delivers day-one hardware drivers (5G cellular, Wi-Fi 7, 100GbE NICs), lockless multi-core
+                scalability via <code className="text-slate-300">nftables</code> and Dual-Stack QinQ VLAN XDP, 5-hook
+                Ring-0 <code className="text-slate-300">CO-RE BPF-LSM</code> security + Linux 6.9+{' '}
+                <code className="text-slate-300">BPF_TOKEN_CREATE</code> delegation, Coroot eBPF APM, and native support
+                for OpenZFS, KVM/QEMU, LXC, and K3s Kubernetes.
               </p>
             </div>
 
             <div className="p-6 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
               <h3 className="font-bold text-white flex items-center gap-2">
-                <HelpCircle className="w-4 h-4 text-emerald-400" /> Can I install Axonwall on my own PC or server?
+                <HelpCircle className="w-4 h-4 text-emerald-400" /> Can I install Axonwall on my own PC, server, or Proxmox VM?
               </h3>
               <p className="text-slate-400 text-xs leading-relaxed">
-                Yes. Axonwall Community Edition runs on any standard 64-bit x86 or ARM64 computer. We provide bootable UEFI ISO images (supporting both A/B Dual-Root and Standard Single-Root partition modes), Debian 13 packages (<code className="text-slate-300">.deb</code>), Docker Compose templates, and Proxmox/KVM virtual machine images.
+                Yes. Axonwall Community Edition is 100% open source (GNU GPLv2) and ships as a unified bare-metal UEFI
+                ISO (supporting pure ZFSBootMenu v3.1.0 Root-on-ZFS, mdadm RAID-1 A/B Dual-Root, and Rolling modes), a
+                7.1 MB Zero-Shell Edge UKI (<code className="text-slate-300">.efi</code>), a Cloud-Init QCOW2 image for
+                Proxmox/KVM, and a standalone <code className="text-slate-300">.deb</code> package.
               </p>
             </div>
 
@@ -1017,7 +1385,11 @@ export default function HomePage() {
                 <HelpCircle className="w-4 h-4 text-emerald-400" /> How does two-host High Availability work in Axonwall?
               </h3>
               <p className="text-slate-400 text-xs leading-relaxed">
-                Two Axonwall nodes connect via a dedicated sync interface (<code className="text-slate-300">eth3</code>) running Keepalived VRRP for sub-second virtual IP failover, <code className="text-slate-300">conntrackd</code> FTFW for zero-drop TCP/UDP/WireGuard connection state transfer, automatic ECDSA P-256 HA PKI mTLS enrollment for signed configuration and SQLite WAL replication, Chrony symmetric NTP peering, OpenLDAP <code className="text-slate-300">syncrepl</code>, and incremental OpenZFS snapshot streaming. See the{' '}
+                Two Axonwall nodes peer via Keepalived VRRP for sub-second VIP failover,{' '}
+                <code className="text-slate-300">conntrackd</code> FTFW for zero-drop state sync, CSR-based ECDSA P-256
+                mTLS PKI for configuration &amp; SQLite WAL replication, Chrony symmetric NTP, OpenLDAP{' '}
+                <code className="text-slate-300">syncrepl</code>, 2-node K3s + OpenEBS volume replication, and
+                incremental OpenZFS Send/Recv. See the{' '}
                 <Link href="/docs/high-availability#two-host-setup" className="text-emerald-400 underline">
                   Step-by-Step 2-Host Setup Guide
                 </Link>
@@ -1027,10 +1399,16 @@ export default function HomePage() {
 
             <div className="p-6 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
               <h3 className="font-bold text-white flex items-center gap-2">
-                <HelpCircle className="w-4 h-4 text-emerald-400" /> How does Commit-Confirm prevent lockouts?
+                <HelpCircle className="w-4 h-4 text-emerald-400" /> How are AI and MCP actions kept safe on a production firewall?
               </h3>
               <p className="text-slate-400 text-xs leading-relaxed">
-                When you apply a new ruleset from the Web Console, CLI, or Neovim Super Configurator (<code className="text-slate-300">axonwall-config</code>), Axonwall loads it into the Linux kernel and arms a 60-second confirmation timer. If your session remains connected and you confirm, the configuration is permanently stored. If your rule severed connectivity, the timer expires and the daemon automatically rolls back to the previous working bundle.
+                The Model Context Protocol server (<code className="text-slate-300">axonwall-mcp</code>) ships disabled
+                by default behind a hard kill switch. When enabled by an administrator, its 16 capability scopes, 16
+                resources, and 25 tools spanning Firewall, Ring-0 eBPF/<code className="text-slate-300">BPF_TOKEN</code>,
+                KVM/Libvirt, K3s Etcd, OpenZFS NAS, and 9-vendor Migration enforce dual TypeScript + Go blast-radius validators, isolated
+                auto-expiring TTL blocks (<code className="text-slate-300">table inet axonwall_mcp</code> &amp; LPM CIDR{' '}
+                <code className="text-slate-300">XDP_DROP</code>), and mandatory 60-second Commit-Confirm rollback
+                protection on any DesiredState proposal.
               </p>
             </div>
           </div>
@@ -1044,25 +1422,29 @@ export default function HomePage() {
             <Logo size="sm" variant="icon" />
             <div className="flex items-center gap-2">
               <span className="font-bold text-white text-sm">Axonwall</span>
-              <span className="hidden sm:inline">— The Modern Linux Router &amp; Next-Gen Firewall.</span>
+              <span className="hidden sm:inline">
+                — Sovereign Linux NGFW, OpenZFS NAS, K3s, KVM &amp; Autonomous AI SOC.
+              </span>
             </div>
           </div>
 
           <div className="flex flex-wrap items-center gap-6">
-            <Link href="/docs" className="hover:text-slate-300 transition">Docs</Link>
-            <Link href="/docs/high-availability#two-host-setup" className="hover:text-slate-300 transition">2-Host HA Guide</Link>
-            <Link href="/docs/ghost-in-the-ring-rootkits" className="hover:text-slate-300 transition">Ring-0 Hunter</Link>
-            <Link href="/docs/post-quantum-rosenpass" className="hover:text-slate-300 transition">Post-Quantum VPN</Link>
+            <Link href="/docs" className="hover:text-slate-300 transition">Docs (24 Guides)</Link>
+            <Link href="/releases" className="hover:text-slate-300 transition">Releases (v0.11.64)</Link>
+            <Link href="/docs/mcp-ai-control" className="hover:text-slate-300 transition">MCP AI</Link>
+            <Link href="/docs/vigilante-cyber-ops" className="hover:text-slate-300 transition">Vigilante SOC</Link>
+            <Link href="/docs/ghost-in-the-ring-rootkits" className="hover:text-slate-300 transition">BPF-LSM Guard</Link>
             <Link href="/architecture" className="hover:text-slate-300 transition">Architecture</Link>
             <a href="https://github.com/axonwall/axonwall" className="hover:text-slate-300 transition">GitHub</a>
-            <a href="#appliances" className="hover:text-slate-300 transition">Appliances</a>
-            <a href="#pricing" className="hover:text-slate-300 transition">Pricing</a>
           </div>
         </div>
 
         <div className="max-w-7xl mx-auto px-6 mt-8 pt-6 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-600">
-          <p>© {new Date().getFullYear()} Axonwall Project. All rights reserved.</p>
-          <p>OPNsense is a trademark of Deciso B.V. pfSense is a trademark of Netgate. Axonwall is an independent open-source project.</p>
+          <p>© {new Date().getFullYear()} Axonwall Project. Licensed under GNU GPLv2.</p>
+          <p>
+            OPNsense is a trademark of Deciso B.V. pfSense is a trademark of Netgate. Axonwall is an independent
+            open-source project.
+          </p>
         </div>
       </footer>
     </div>

@@ -1,6 +1,6 @@
 {
   "name": "axonwall-com",
-  "version": "1.0.0",
+  "version": "0.11.64",
   "private": true,
   "type": "module",
   "scripts": {

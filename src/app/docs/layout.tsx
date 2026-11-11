@@ -48,6 +48,12 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
           >
             Architecture
           </Link>
+          <Link
+            href="/releases"
+            className="hidden sm:inline-block text-slate-400 hover:text-white transition px-2.5 py-1.5 rounded-lg hover:bg-slate-800/50"
+          >
+            Releases
+          </Link>
           <a
             href="https://github.com/axonwall/axonwall"
             target="_blank"

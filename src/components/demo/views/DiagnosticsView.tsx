@@ -74,7 +74,7 @@ export function DiagnosticsView() {
       <div>
         <h1 className="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
           <Layers className="w-6 h-6 text-emerald-400" />
-          <span>nftables Packet Tracer Simulation (E5)</span>
+          <span>nftables Packet Tracer Simulation</span>
         </h1>
         <p className="text-xs sm:text-sm text-slate-400 mt-1">
           Trace hypothetical network packets through the kernel data plane to diagnose rule matching, NAT, and filtering.
@@ -98,7 +98,8 @@ export function DiagnosticsView() {
             >
               <option value="lan">lan (eth1 - 192.168.100.1)</option>
               <option value="wan">wan (eth0 - 198.51.100.22)</option>
-              <option value="dmz">dmz (eth2 - 10.0.50.1)</option>
+              <option value="opt1">opt1 (eth2 - 10.0.50.45)</option>
+              <option value="dmz">dmz (eth3 - 10.0.50.1)</option>
               <option value="wg0">wg0 (10.10.0.1)</option>
             </select>
           </div>

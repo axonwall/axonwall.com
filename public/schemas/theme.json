@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axonwall.com/schemas/theme.json",
+  "title": "AxonwallTheme",
+  "description": "Schema for a single Axonwall & Winnegans Universal Theme Engine palette definition.",
+  "type": "object",
+  "required": ["name", "colors"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "JSON Schema URI reference."
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-zA-Z0-9_-]+$",
+      "description": "Unique machine-readable theme slug (auto-derived from name if omitted)."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Human-readable display name shown in the Theme Switcher."
+    },
+    "description": {
+      "type": "string",
+      "description": "Short summary of the palette inspiration and contrast profile."
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "axonwall",
+        "solarized",
+        "gruvbox",
+        "catppuccin",
+        "dark-ambient",
+        "dark-red",
+        "oled",
+        "light",
+        "cyber",
+        "custom"
+      ],
+      "default": "custom",
+      "description": "Palette family grouping inside the Theme Switcher."
+    },
+    "isDark": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether the theme uses a dark background surface."
+    },
+    "author": {
+      "type": "string",
+      "description": "Theme creator name or handle."
+    },
+    "homepage": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL for documentation or upstream repository."
+    },
+    "version": {
+      "type": "string",
+      "default": "1.0.0",
+      "description": "Semantic version of the theme definition."
+    },
+    "colors": {
+      "type": "object",
+      "description": "CSS color tokens injected into the Axonwall Web Console and documentation site.",
+      "required": ["bg", "text", "cardBg", "border", "accent"],
+      "additionalProperties": false,
+      "properties": {
+        "bg": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Primary page background color (e.g. #080c14)."
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Primary foreground text color (e.g. #f1f5f9)."
+        },
+        "textMuted": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Secondary / muted metadata text color."
+        },
+        "cardBg": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Elevated card, modal, and panel surface color."
+        },
+        "border": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Subtle divider and container border color."
+        },
+        "accent": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Primary brand accent and interactive highlight color."
+        },
+        "accentHover": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Hover / active state accent color."
+        },
+        "ring": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Keyboard focus ring and glow accent color."
+        },
+        "readerBg": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Documentation reader and code block viewport background."
+        },
+        "readerText": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Documentation reader primary text color."
+        },
+        "readerCoord": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Line numbers, coordinates, and gutter accent color."
+        },
+        "selectionBg": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Text selection highlight background color."
+        },
+        "selectionText": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Text selection highlight foreground color."
+        }
+      }
+    }
+  }
+}

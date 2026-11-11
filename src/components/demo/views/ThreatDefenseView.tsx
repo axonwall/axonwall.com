@@ -344,19 +344,19 @@ export function ThreatDefenseView() {
         </div>
       )}
 
-      {/* TAB 4: GHOST-IN-THE-RING & 6-ENGINE ROOTKIT HUNTER */}
+      {/* TAB 4: GHOST-IN-THE-RING & 8-ENGINE ROOTKIT HUNTER */}
       {activeTab === 'rootkit' && (
         <div className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="p-4 rounded-xl bg-slate-900 border border-emerald-500/30">
-              <span className="text-xs text-slate-400 font-medium">Ring-0 BPF_LSM Lockdown</span>
+              <span className="text-xs text-slate-400 font-medium">5-Hook BPF-LSM + BPF_TOKEN</span>
               <div className="text-xl font-bold font-mono text-emerald-400 mt-1">ENFORCED</div>
-              <span className="text-[11px] text-slate-500 font-mono mt-1 block">SYS_BPF &amp; io_uring SQPOLL gated</span>
+              <span className="text-[11px] text-slate-500 font-mono mt-1 block">CVE-2026-31431 + UserNS 6.9+</span>
             </div>
             <div className="p-4 rounded-xl bg-slate-900 border border-slate-800">
               <span className="text-xs text-slate-400 font-medium">/proc/kcore XArray Walk</span>
               <div className="text-xl font-bold font-mono text-emerald-400 mt-1">0 Hidden BPF</div>
-              <span className="text-[11px] text-slate-500 font-mono mt-1 block">prog_idr matches bpftool (14/14)</span>
+              <span className="text-[11px] text-slate-500 font-mono mt-1 block">prog_idr matches bpftool (16/16)</span>
             </div>
             <div className="p-4 rounded-xl bg-slate-900 border border-slate-800">
               <span className="text-xs text-slate-400 font-medium">Silicon PMU LBR Telemetry</span>
@@ -364,10 +364,25 @@ export function ThreatDefenseView() {
               <span className="text-[11px] text-slate-500 font-mono mt-1 block">0 NOP-sled / kretprobe trampolines</span>
             </div>
             <div className="p-4 rounded-xl bg-slate-900 border border-slate-800">
-              <span className="text-xs text-slate-400 font-medium">6-Engine Malware Suite</span>
-              <div className="text-xl font-bold font-mono text-emerald-400 mt-1">6 / 6 PASS</div>
-              <span className="text-[11px] text-slate-500 font-mono mt-1 block">Lynis Hardening Index: 92/100</span>
+              <span className="text-xs text-slate-400 font-medium">8-Engine Malware Suite</span>
+              <div className="text-xl font-bold font-mono text-emerald-400 mt-1">8 / 8 PASS</div>
+              <span className="text-[11px] text-slate-500 font-mono mt-1 block">Lynis Hardening Index: 94/100</span>
             </div>
+          </div>
+
+          <div className="bg-slate-900 border border-emerald-500/30 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+            <div className="space-y-1">
+              <div className="font-semibold text-emerald-300 flex items-center gap-2">
+                <Lock className="w-4 h-4 text-emerald-400" />
+                <span>5-Hook CO-RE BPF-LSM &amp; Linux 6.9+ `BPF_TOKEN_CREATE` Mediator Active</span>
+              </div>
+              <p className="text-slate-400">
+                CO-RE BPF-LSM program pinned at <code className="font-mono text-slate-200">/sys/fs/bpf/axonwall_lsm</code> denies Copy Fail (<code className="font-mono text-slate-200">CVE-2026-31431</code>) <code className="font-mono text-slate-200">AF_ALG</code> socket binds, gates <code className="font-mono text-slate-200">lsm/bpf</code> &amp; <code className="font-mono text-slate-200">lsm/uring_sqpoll</code> by <code className="font-mono text-slate-200">(s_dev, i_ino)</code>, and mediates <code className="font-mono text-slate-200">lsm/bpf_token_create</code> / <code className="font-mono text-slate-200">lsm/bpf_token_cmd</code> to block Ring-0 <code className="font-mono text-slate-200">bpf_probe_read_kernel()</code> tracing in UserNS containers.
+              </p>
+            </div>
+            <span className="font-mono text-[10px] px-2.5 py-1 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 whitespace-nowrap self-start sm:self-center">
+              0 Exploits Permitted
+            </span>
           </div>
 
           <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
@@ -375,34 +390,34 @@ export function ThreatDefenseView() {
               <div>
                 <h3 className="font-semibold text-sm text-white">Host Malware &amp; Ring-0 Rootkit Engines</h3>
                 <p className="text-xs text-slate-400">
-                  Combined userland forensic scanners and hardware-assisted kernel telemetry (`security-rootkit-hunter`)
+                  Combined userland forensic scanners and hardware-assisted kernel telemetry (`host-malware-rootkit`)
                 </p>
               </div>
               <span className="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-md border border-emerald-500/20">
-                All Engines Clean
+                All 8 Engines Clean
               </span>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 text-xs">
               {[
                 {
-                  name: 'Ghost-in-the-Ring Telemetry (Ring-0)',
+                  name: '5-Hook CO-RE BPF-LSM & BPF_TOKEN Mediator (Ring-0)',
                   status: 'VERIFIED',
-                  detail: 'Blocks syscall-less io_uring SQPOLL worker implants (iou-sqp-*), audits /proc/kcore prog_idr XArray for DKOM-hidden eBPF programs, and inspects CPU PMU Last Branch Records (LBR).',
+                  detail: 'Blocks CVE-2026-31431 AF_ALG (lsm/socket_bind), gates io_uring SQPOLL & SYS_BPF by (s_dev, i_ino), mediates UserNS BPF_TOKEN_CREATE against kprobe/lsm escapes, and walks /proc/kcore prog_idr.',
                 },
                 {
-                  name: 'rkhunter + chkrootkit',
+                  name: 'rkhunter + chkrootkit + unhide',
                   status: 'CLEAN',
-                  detail: '248 known Linux kernel rootkit signatures, hidden /proc PID cross-checks, LKM table inspection, and promiscuous packet-sniffer hooks.',
+                  detail: '248 known Linux kernel rootkit signatures, brute-forced hidden PID/TID namespace cross-checks (unhide), LKM table inspection, and promiscuous packet-sniffer hooks.',
                 },
                 {
                   name: 'ClamAV Real-Time Guard (clamonacc)',
                   status: 'ACTIVE',
-                  detail: 'fanotify kernel mount guard scanning newly written ELF binaries on /tmp, /var/tmp, /dev/shm, and /root before execution.',
+                  detail: 'fanotify kernel mount guard scanning newly written ELF binaries on /tmp, /var/tmp, /dev/shm, and ZFS NAS share mountpoints before execution.',
                 },
                 {
-                  name: 'AIDE + YARA + Lynis CIS Audit',
+                  name: 'AIDE + debsums + YARA + Lynis CIS Audit',
                   status: 'HARDENED',
-                  detail: 'SHA-512 + xattr integrity verification on /boot and /usr/sbin, YARA live process memory sweeps for C2 beacons, and automated Lynis sysctl scoring.',
+                  detail: 'SHA-512 + xattr integrity verification and Debian package checksums across /boot and /usr/sbin, YARA live process memory sweeps, and automated Lynis sysctl scoring.',
                 },
               ].map((engine) => (
                 <div key={engine.name} className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-1.5">

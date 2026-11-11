@@ -2,36 +2,41 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Axonwall | Next-Generation Open Source Linux Router & Firewall',
+  title: 'Axonwall | Sovereign Linux NGFW, OpenZFS NAS, K3s, KVM & Autonomous AI SOC',
   description:
-    'Modernize your edge security. Wire-speed Linux nftables packet filtering, Junos-style commit-confirm with automatic rollback, reactive Next.js 16 UI, and cloud-native Kubernetes deployment.',
+    'Axonwall v0.11.64: Sovereign Linux 6.12 LTS Next-Gen Firewall with multi-core nftables, CO-RE BPF-LSM Ring-0 exploit guard, ZFSBootMenu Root-on-ZFS, 2-Host HA, OpenZFS NAS, K3s, KVM/LXC, Vigilante Autonomous SOC, and Guardrailed MCP AI.',
   keywords: [
-    'firewall',
-    'router',
+    'Axonwall',
+    'Linux firewall',
     'nftables',
     'OPNsense alternative',
     'pfSense alternative',
-    'Linux firewall',
-    'open source firewall',
+    'open source NGFW',
+    'ZFSBootMenu',
+    'OpenZFS NAS',
     'WireGuard',
-    'Suricata',
-    'HAProxy',
-    'SD-WAN',
+    'Rosenpass post-quantum VPN',
+    'BPF-LSM',
+    'Coroot eBPF',
+    'K3s',
+    'KVM hypervisor',
+    'MCP security AI',
+    'Vigilante SOC',
   ],
   authors: [{ name: 'Axonwall Core Team' }],
   metadataBase: new URL('https://axonwall.com'),
   openGraph: {
-    title: 'Axonwall | Next-Generation Open Source Linux Router & Firewall',
+    title: 'Axonwall v0.11.64 | Sovereign Linux NGFW, ZFS NAS, K3s, KVM & AI SOC',
     description:
-      'The modern replacement for legacy BSD firewalls. Linux nftables, zero-lockout commit-confirm, Next.js UI, and line-rate multi-core performance.',
+      'Replace legacy BSD firewalls. Line-rate Linux nftables, 60s commit-confirm rollback, ZFSBootMenu & A/B Dual-Root, CO-RE BPF-LSM Ring-0 defense, Post-Quantum Rosenpass VPN, and 5 modular converged roles.',
     url: 'https://axonwall.com',
     siteName: 'Axonwall',
     images: [
       {
-        url: 'https://axonwall.com/og-image.png',
+        url: '/og-image.svg',
         width: 1200,
         height: 630,
-        alt: 'Axonwall Open Source Firewall',
+        alt: 'Axonwall v0.11.64 — Sovereign Linux NGFW, OpenZFS NAS, K3s, KVM & Autonomous AI SOC',
       },
     ],
     locale: 'en_US',
@@ -39,8 +44,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Axonwall | Next-Gen Linux Router & Firewall',
-    description: 'Wire-speed Linux nftables, commit-confirm rollback, and reactive Next.js console.',
+    title: 'Axonwall v0.11.64 | Sovereign Linux NGFW & Converged Security OS',
+    description:
+      'Wire-speed Linux nftables, CO-RE BPF-LSM Ring-0 defense, ZFSBootMenu Root-on-ZFS, 2-Host HA, KVM/LXC, K3s, and Guardrailed MCP AI.',
+    images: ['/og-image.svg'],
   },
   icons: {
     icon: '/favicon.svg',

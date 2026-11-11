@@ -1,10 +1,10 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Settings, RefreshCw, Building2, HardDrive, ShieldCheck, CheckCircle2, Download, Upload } from 'lucide-react';
+import { Settings, RefreshCw, Building2, HardDrive, ShieldCheck, CheckCircle2, Download, GitBranch } from 'lucide-react';
 
 export function SystemView() {
-  const [activeTab, setActiveTab] = useState<'ab' | 'sso' | 'backup'>('ab');
+  const [activeTab, setActiveTab] = useState<'ab' | 'git' | 'sso' | 'backup'>('ab');
   const [downloadSuccess, setDownloadSuccess] = useState(false);
 
   const handleDownloadBackup = () => {
@@ -17,49 +17,61 @@ export function SystemView() {
       <div>
         <h1 className="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
           <Settings className="w-6 h-6 text-emerald-400" />
-          <span>System, A/B Partitions & Enterprise SSO</span>
+          <span>System, A/B Boot, Etckeeper Git &amp; Enterprise SSO</span>
         </h1>
         <p className="text-xs sm:text-sm text-slate-400 mt-1">
-          Zero-downtime A/B firmware upgrades, identity provider integration, and configuration snapshots.
+          ZFSBootMenu v3.1.0 &amp; A/B dual-root upgrades, Etckeeper `/etc` Git revision tracking, OpenLDAP + OIDC SSO, and snapshots.
         </p>
       </div>
 
       {/* Tabs */}
-      <div className="flex border-b border-slate-800 space-x-6 text-xs font-semibold">
+      <div className="flex border-b border-slate-800 space-x-6 text-xs font-semibold overflow-x-auto">
         <button
           onClick={() => setActiveTab('ab')}
-          className={`pb-3 flex items-center gap-2 transition-colors border-b-2 ${
+          className={`pb-3 flex items-center gap-2 transition-colors border-b-2 whitespace-nowrap ${
             activeTab === 'ab'
               ? 'border-emerald-400 text-emerald-400'
               : 'border-transparent text-slate-400 hover:text-slate-200'
           }`}
         >
           <RefreshCw className="w-4 h-4" />
-          <span>A/B Dual-Root Partition Scheme</span>
+          <span>A/B Dual-Root &amp; ZFSBootMenu</span>
+        </button>
+
+        <button
+          onClick={() => setActiveTab('git')}
+          className={`pb-3 flex items-center gap-2 transition-colors border-b-2 whitespace-nowrap ${
+            activeTab === 'git'
+              ? 'border-emerald-400 text-emerald-400'
+              : 'border-transparent text-slate-400 hover:text-slate-200'
+          }`}
+        >
+          <GitBranch className="w-4 h-4" />
+          <span>Etckeeper `/etc` Git History</span>
         </button>
 
         <button
           onClick={() => setActiveTab('sso')}
-          className={`pb-3 flex items-center gap-2 transition-colors border-b-2 ${
+          className={`pb-3 flex items-center gap-2 transition-colors border-b-2 whitespace-nowrap ${
             activeTab === 'sso'
               ? 'border-emerald-400 text-emerald-400'
               : 'border-transparent text-slate-400 hover:text-slate-200'
           }`}
         >
           <Building2 className="w-4 h-4" />
-          <span>Enterprise SSO (OIDC / SAML)</span>
+          <span>Unified OpenLDAP + OIDC SSO</span>
         </button>
 
         <button
           onClick={() => setActiveTab('backup')}
-          className={`pb-3 flex items-center gap-2 transition-colors border-b-2 ${
+          className={`pb-3 flex items-center gap-2 transition-colors border-b-2 whitespace-nowrap ${
             activeTab === 'backup'
               ? 'border-emerald-400 text-emerald-400'
               : 'border-transparent text-slate-400 hover:text-slate-200'
           }`}
         >
           <HardDrive className="w-4 h-4" />
-          <span>Backup & Snapshots</span>
+          <span>Backup &amp; Snapshots</span>
         </button>
       </div>
 
@@ -90,11 +102,11 @@ export function SystemView() {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-slate-500">OS Version:</span>
-                  <span className="text-emerald-400">Axonwall OS 2026.4.1 (Stable)</span>
+                  <span className="text-emerald-400">Axonwall v0.11.64 (Stable)</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-500">Kernel:</span>
-                  <span>Linux 6.12.10-amd64</span>
+                  <span className="text-slate-500">Kernel / Boot:</span>
+                  <span>Linux 6.12.10-amd64 • ZFSBootMenu v3.1.0</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-slate-500">Watchdog Status:</span>
@@ -127,7 +139,7 @@ export function SystemView() {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-slate-500">Last Rollback Image:</span>
-                  <span>Axonwall OS 2026.3.8</span>
+                  <span>Axonwall v0.11.62</span>
                 </div>
               </div>
             </div>
@@ -136,6 +148,70 @@ export function SystemView() {
           <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs font-mono text-slate-400 flex items-center justify-between">
             <span>Persistent Data Volume: <strong>/dev/nvme0n1p4 (/var/lib/axonwall)</strong></span>
             <span className="text-emerald-400">48.2 GB free / 64 GB</span>
+          </div>
+        </div>
+      )}
+
+      {/* TAB 2: ETCKEEPER GIT HISTORY */}
+      {activeTab === 'git' && (
+        <div className="space-y-6">
+          <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div>
+              <h3 className="font-semibold text-sm text-white">Etckeeper `/etc` Git Revision Audit (`system-etckeeper`)</h3>
+              <p className="text-xs text-slate-400 mt-0.5">
+                Every committed `/etc/axonwall/*.yaml` reconciliation, APT transaction, and RBAC update is versioned automatically in local Git.
+              </p>
+            </div>
+            <span className="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-md border border-emerald-500/20">
+              HEAD: 9f41c8e (Clean)
+            </span>
+          </div>
+
+          <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden text-xs font-mono">
+            <div className="divide-y divide-slate-800">
+              {[
+                {
+                  sha: '9f41c8e',
+                  msg: 'axonwalld: confirm firewall.yaml rule-07 OPT1 outbound policy',
+                  author: 'admin@axonwall-core',
+                  when: '12 mins ago',
+                },
+                {
+                  sha: '4b18a02',
+                  msg: 'bpf-lsm: pin axonwall_lsm CVE-2026-31431 AF_ALG socket_bind guard',
+                  author: 'systemd-boot',
+                  when: '2 hours ago',
+                },
+                {
+                  sha: 'e720d19',
+                  msg: 'rosenpass: rotate Classic McEliece + ML-KEM-512 peer manifest',
+                  author: 'axonwalld',
+                  when: '1 day ago',
+                },
+              ].map((c) => (
+                <div key={c.sha} className="p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 hover:bg-slate-800/40">
+                  <div className="flex items-center gap-3">
+                    <span className="px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 font-bold">
+                      {c.sha}
+                    </span>
+                    <span className="text-slate-200">{c.msg}</span>
+                  </div>
+                  <div className="text-slate-500 text-[11px]">
+                    {c.author} • {c.when}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <pre className="p-4 bg-slate-950 border-t border-slate-800 text-[11px] leading-relaxed text-slate-300 overflow-x-auto">{`diff --git a/axonwall/firewall.yaml b/axonwall/firewall.yaml
+index 3a118c0..9f41c8e 100644
+--- a/axonwall/firewall.yaml
++++ b/axonwall/firewall.yaml
+@@ -42,4 +42,9 @@ rules:
++  - id: rule-07
++    action: pass
++    interface: opt1
++    destination: any
++    description: Allow OPT1 Attached Subnet Outbound to Internet`}</pre>
           </div>
         </div>
       )}
@@ -212,7 +288,7 @@ export function SystemView() {
             {downloadSuccess && (
               <div className="p-3 bg-emerald-500/10 border border-emerald-500/30 rounded-lg text-xs font-mono text-emerald-300 flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                <span>Configuration bundle generated: <strong>axonwall-backup-2026-10-13.json</strong></span>
+                <span>Configuration bundle generated: <strong>axonwall-backup-2026-11-10.json</strong></span>
               </div>
             )}
           </div>

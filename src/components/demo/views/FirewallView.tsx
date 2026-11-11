@@ -41,7 +41,7 @@ export function FirewallView({
   // New rule form state
   const [desc, setDesc] = useState('');
   const [action, setAction] = useState<'pass' | 'block' | 'reject'>('pass');
-  const [iface, setIface] = useState<'wan' | 'lan' | 'dmz' | 'wg0'>('lan');
+  const [iface, setIface] = useState<'wan' | 'lan' | 'opt1' | 'dmz' | 'wg0'>('lan');
   const [proto, setProto] = useState<'tcp' | 'udp' | 'icmp' | 'any'>('tcp');
   const [src, setSrc] = useState('any');
   const [dst, setDst] = useState('any');
@@ -116,7 +116,7 @@ export function FirewallView({
       {/* Interface Filter Pills & Search */}
       <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 bg-slate-900 border border-slate-800 p-2.5 rounded-xl">
         <div className="flex items-center gap-1 overflow-x-auto text-xs font-medium">
-          {['all', 'wan', 'lan', 'dmz', 'wg0'].map((i) => (
+          {['all', 'wan', 'lan', 'opt1', 'dmz', 'wg0'].map((i) => (
             <button
               key={i}
               onClick={() => setSelectedIface(i)}
@@ -298,7 +298,8 @@ export function FirewallView({
                   >
                     <option value="lan">LAN (eth1)</option>
                     <option value="wan">WAN (eth0)</option>
-                    <option value="dmz">DMZ (eth2)</option>
+                    <option value="opt1">OPT1 (eth2)</option>
+                    <option value="dmz">DMZ (eth3)</option>
                     <option value="wg0">WireGuard (wg0)</option>
                   </select>
                 </div>

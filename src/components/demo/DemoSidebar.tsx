@@ -61,7 +61,7 @@ const NAV_GROUPS: NavGroup[] = [
     id: 'firewall-sec',
     name: 'Firewall & Protection',
     items: [
-      { id: 'firewall', name: 'Firewall Rules & NAT', icon: Flame, badge: '6' },
+      { id: 'firewall', name: 'Firewall Rules & NAT', icon: Flame, badge: '8' },
       { id: 'threats', name: 'Threat Defense & Blocklists', icon: ShieldAlert, badge: 'Active' },
     ],
   },
@@ -70,9 +70,18 @@ const NAV_GROUPS: NavGroup[] = [
     name: 'Networking & Fabric',
     items: [
       { id: 'interfaces', name: 'Interfaces & Multi-WAN', icon: Network },
-      { id: 'routing', name: 'Gateways & Dynamic Routes', icon: Route },
-      { id: 'vpn', name: 'WireGuard & Mesh VPN', icon: KeyRound, badge: 'Mesh' },
+      { id: 'routing', name: 'Routing, SD-WAN & FRR', icon: Route, badge: 'BGP' },
+      { id: 'vpn', name: 'WireGuard & PQ-Mesh VPN', icon: KeyRound, badge: 'PQ' },
       { id: 'fleet', name: 'Edge Satellites (Fleet)', icon: Wifi, badge: '4' },
+    ],
+  },
+  {
+    id: 'converged-infra',
+    name: 'Storage, Virt & K3s',
+    items: [
+      { id: 'storage', name: 'OpenZFS 2.3 NAS & SAN', icon: HardDrive, badge: 'ZFS' },
+      { id: 'compute', name: 'KVM, LXC & Cilium K3s', icon: Server, badge: 'KVM' },
+      { id: 'migration', name: '9-Vendor Migration Studio', icon: RefreshCw, badge: '9x' },
     ],
   },
   {
@@ -81,7 +90,7 @@ const NAV_GROUPS: NavGroup[] = [
     items: [
       { id: 'diagnostics', name: 'Packet Tracer (nftables)', icon: Layers, badge: 'Trace' },
       { id: 'terminal', name: 'Web Shell & Terminal', icon: Terminal, badge: 'CLI' },
-      { id: 'system', name: 'System, A/B & Enterprise SSO', icon: Settings },
+      { id: 'system', name: 'System, A/B, Git & SSO', icon: Settings },
     ],
   },
 ];
@@ -90,9 +99,15 @@ interface DemoSidebarProps {
   activeView: DemoViewKey;
   onSelectView: (view: DemoViewKey) => void;
   stagedChangesCount?: number;
+  rulesCount?: number;
 }
 
-export function DemoSidebar({ activeView, onSelectView, stagedChangesCount = 0 }: DemoSidebarProps) {
+export function DemoSidebar({
+  activeView,
+  onSelectView,
+  stagedChangesCount = 0,
+  rulesCount = 8,
+}: DemoSidebarProps) {
   const [search, setSearch] = useState('');
   const [collapsedGroups, setCollapsedGroups] = useState<Record<string, boolean>>({});
 
@@ -198,7 +213,7 @@ export function DemoSidebar({ activeView, onSelectView, stagedChangesCount = 0 }
                                 : 'bg-slate-800 text-slate-400 border border-slate-700/60'
                             }`}
                           >
-                            {item.badge}
+                            {item.id === 'firewall' ? String(rulesCount) : item.badge}
                           </span>
                         ) : null}
                       </button>
@@ -214,10 +229,10 @@ export function DemoSidebar({ activeView, onSelectView, stagedChangesCount = 0 }
       {/* Footer Info */}
       <div className="p-3 border-t border-slate-800 bg-slate-950/40 text-[11px] text-slate-400 space-y-1">
         <div className="flex items-center justify-between">
-          <span className="text-slate-500">Kernel Fastpath:</span>
+          <span className="text-slate-500">Appliance Release:</span>
           <span className="text-emerald-400 font-mono flex items-center gap-1">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            nftables 1.1.2
+            v0.11.64 (6.12 LTS)
           </span>
         </div>
         <div className="flex items-center justify-between">

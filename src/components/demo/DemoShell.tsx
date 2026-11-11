@@ -17,12 +17,14 @@ import { LobbyView } from './views/LobbyView';
 import { FirewallView } from './views/FirewallView';
 import { ThreatDefenseView } from './views/ThreatDefenseView';
 import { InterfacesView } from './views/InterfacesView';
+import { RoutingView } from './views/RoutingView';
 import { VpnView } from './views/VpnView';
 import { FleetView } from './views/FleetView';
 import { DiagnosticsView } from './views/DiagnosticsView';
 import { TerminalView } from './views/TerminalView';
 import { SystemView } from './views/SystemView';
 import { AiCopilotView } from './views/AiCopilotView';
+import { ConvergedPlatformView } from './views/ConvergedPlatformView';
 
 export function DemoShell() {
   const searchParams = useSearchParams();
@@ -129,7 +131,7 @@ export function DemoShell() {
           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
           <span className="font-semibold text-emerald-300">LIVE INTERACTIVE SANDBOX</span>
           <span className="text-slate-500">•</span>
-          <span className="hidden sm:inline">Simulated Axonwall Appliance</span>
+          <span className="hidden sm:inline">Simulated Axonwall v0.11.64 Appliance</span>
           <span className="text-slate-500 hidden sm:inline">•</span>
           <span className="font-mono text-slate-400">Web Console Port 2966</span>
         </div>
@@ -145,6 +147,7 @@ export function DemoShell() {
           activeView={activeView}
           onSelectView={handleSelectView}
           stagedChangesCount={stagedCount}
+          rulesCount={rules.length}
         />
 
         {/* Content Area */}
@@ -175,9 +178,12 @@ export function DemoShell() {
             )}
             {activeView === 'threats' && <ThreatDefenseView />}
             {activeView === 'interfaces' && <InterfacesView />}
-            {activeView === 'routing' && <InterfacesView />}
+            {activeView === 'routing' && <RoutingView />}
             {activeView === 'vpn' && <VpnView />}
             {activeView === 'fleet' && <FleetView />}
+            {activeView === 'storage' && <ConvergedPlatformView key="storage" initialSection="storage" />}
+            {activeView === 'compute' && <ConvergedPlatformView key="compute" initialSection="compute" />}
+            {activeView === 'migration' && <ConvergedPlatformView key="migration" initialSection="migration" />}
             {activeView === 'diagnostics' && <DiagnosticsView />}
             {activeView === 'terminal' && <TerminalView />}
             {activeView === 'system' && <SystemView />}

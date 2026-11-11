@@ -3,7 +3,17 @@
 import React from 'react';
 import { Network, Layers, Compass, CheckCircle2, ArrowRight, ShieldCheck, Activity } from 'lucide-react';
 
+const ASSIGNED_INTERFACES = [
+  { name: 'WAN', dev: 'eth0', ip: '198.51.100.22/24 (DHCP Gateway)', role: 'Internet Uplink', mac: '52:54:00:1a:2b:01', speed: '10,000 Mbps Full', mtu: 1500, status: 'UP' },
+  { name: 'LAN', dev: 'eth1', ip: '192.168.100.1/24 (Static)', role: 'Authoritative DHCP', mac: '52:54:00:1a:2b:02', speed: '1,000 Mbps Full', mtu: 1500, status: 'UP' },
+  { name: 'OPT1', dev: 'eth2', ip: '10.0.50.45/24 (DHCP Client)', role: 'Non-Authoritative Attached', mac: '52:54:00:1a:2b:03', speed: '1,000 Mbps Full', mtu: 1500, status: 'UP' },
+  { name: 'OPT2', dev: 'eth3', ip: '172.16.20.10/24 (Static)', role: 'Non-Authoritative Attached', mac: '52:54:00:1a:2b:04', speed: '1,000 Mbps Full', mtu: 1500, status: 'UP' },
+  { name: 'WG0', dev: 'wg0', ip: '10.10.0.1/24 (WireGuard)', role: 'Crypto Tunnel', mac: 'Virtual Mesh', speed: 'Line-Rate', mtu: 1420, status: 'UP' },
+];
+
 export function InterfacesView() {
+  const upCount = ASSIGNED_INTERFACES.filter((nic) => nic.status === 'UP').length;
+
   return (
     <div className="space-y-6 max-w-7xl mx-auto">
       <div>
@@ -24,7 +34,7 @@ export function InterfacesView() {
             <span>Assigned Network Interfaces</span>
           </h3>
           <span className="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-md border border-emerald-500/20">
-            4 / 4 Link Up
+            {upCount} / {ASSIGNED_INTERFACES.length} Link Up
           </span>
         </div>
 
@@ -42,13 +52,7 @@ export function InterfacesView() {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-800 font-mono text-slate-200">
-              {[
-                { name: 'WAN', dev: 'eth0', ip: '198.51.100.22/24 (DHCP Gateway)', role: 'Internet Uplink', mac: '52:54:00:1a:2b:01', speed: '10,000 Mbps Full', mtu: 1500, status: 'UP' },
-                { name: 'LAN', dev: 'eth1', ip: '192.168.100.1/24 (Static)', role: 'Authoritative DHCP', mac: '52:54:00:1a:2b:02', speed: '1,000 Mbps Full', mtu: 1500, status: 'UP' },
-                { name: 'OPT1', dev: 'eth2', ip: '10.0.50.45/24 (DHCP Client)', role: 'Non-Authoritative Attached', mac: '52:54:00:1a:2b:03', speed: '1,000 Mbps Full', mtu: 1500, status: 'UP' },
-                { name: 'OPT2', dev: 'eth3', ip: '172.16.20.10/24 (Static)', role: 'Non-Authoritative Attached', mac: '52:54:00:1a:2b:04', speed: '1,000 Mbps Full', mtu: 1500, status: 'UP' },
-                { name: 'WG0', dev: 'wg0', ip: '10.10.0.1/24 (WireGuard)', role: 'Crypto Tunnel', mac: 'Virtual Mesh', speed: 'Line-Rate', mtu: 1420, status: 'UP' },
-              ].map((nic) => (
+              {ASSIGNED_INTERFACES.map((nic) => (
                 <tr key={nic.name} className="hover:bg-slate-800/40">
                   <td className="p-3 pl-4 font-bold text-white font-sans flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-emerald-400" />

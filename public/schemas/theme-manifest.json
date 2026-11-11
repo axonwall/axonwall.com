@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axonwall.com/schemas/theme-manifest.json",
+  "title": "AxonwallThemeManifest",
+  "description": "Schema for a multi-theme Axonwall & Winnegans theme repository manifest (themes.json).",
+  "type": "object",
+  "required": ["name", "themes"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "JSON Schema URI reference."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Display title of the theme collection or pack."
+    },
+    "version": {
+      "type": "string",
+      "default": "1.0.0",
+      "description": "Semantic version of the theme manifest."
+    },
+    "description": {
+      "type": "string",
+      "description": "Summary of the palettes bundled in this manifest."
+    },
+    "homepage": {
+      "type": "string",
+      "format": "uri",
+      "description": "Repository or project URL."
+    },
+    "author": {
+      "type": "string",
+      "description": "Maintainer or organization name."
+    },
+    "themes": {
+      "type": "array",
+      "minItems": 1,
+      "description": "List of AxonwallTheme definitions included in this pack.",
+      "items": {
+        "$ref": "https://axonwall.com/schemas/theme.json"
+      }
+    }
+  }
+}

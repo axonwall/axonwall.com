@@ -20,10 +20,10 @@ export function VpnView() {
       <div>
         <h1 className="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
           <KeyRound className="w-6 h-6 text-emerald-400" />
-          <span>VPN & Post-Quantum Zero-Trust Mesh (WireGuard + Rosenpass + Headscale)</span>
+          <span>VPN &amp; Post-Quantum Zero-Trust Mesh (WireGuard + Rosenpass + Headscale)</span>
         </h1>
         <p className="text-xs sm:text-sm text-slate-400 mt-1">
-          High-performance ChaCha20-Poly1305 kernel encryption hardened with Post-Quantum Rosenpass Dual-KEM (Classic McEliece 460896 + Kyber-768) and Headscale mesh coordination.
+          High-performance ChaCha20-Poly1305 kernel encryption hardened with Post-Quantum Rosenpass Dual-KEM (Classic McEliece 460896 + ML-KEM-512 / Kyber-512) and Headscale mesh coordination.
         </p>
       </div>
 
@@ -33,10 +33,10 @@ export function VpnView() {
           <div>
             <h3 className="font-semibold text-sm text-white flex items-center gap-2">
               <Shield className="w-4 h-4 text-emerald-400" />
-              <span>Post-Quantum Rosenpass Dual-KEM Sidecar (vpn-rosenpass)</span>
+              <span>Post-Quantum Rosenpass Dual-KEM Sidecar (rosenpass)</span>
             </h3>
             <p className="text-xs text-slate-400">
-              Hybrid Classic McEliece 460896 + Kyber-768 (ML-KEM) key exchange rotating kernel WireGuard PSKs every 120 seconds on UDP :9999.
+              Hybrid Classic McEliece 460896 + ML-KEM-512 (Kyber-512) key exchange rotating kernel WireGuard PSKs every 120 seconds on UDP :9999.
             </p>
           </div>
           <span className="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-md border border-emerald-500/20 self-start sm:self-auto">
@@ -52,7 +52,7 @@ export function VpnView() {
           </div>
           <div className="p-3 rounded-lg bg-slate-950 border border-slate-800">
             <div className="text-slate-400 text-[10px] font-sans uppercase tracking-wider">Ephemeral KEM (Forward Secrecy)</div>
-            <div className="text-cyan-400 font-bold mt-1">Kyber-768 (NIST FIPS 203 ML-KEM)</div>
+            <div className="text-cyan-400 font-bold mt-1">ML-KEM-512 (Kyber-512 / FIPS 203)</div>
             <div className="text-[11px] text-slate-500 mt-0.5">Module-Lattice Ephemeral Keying</div>
           </div>
           <div className="p-3 rounded-lg bg-slate-950 border border-slate-800">

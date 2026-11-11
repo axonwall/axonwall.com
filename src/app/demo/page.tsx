@@ -2,9 +2,9 @@ import React, { Suspense } from 'react';
 import { DemoShell } from '../../components/demo/DemoShell';
 
 export const metadata = {
-  title: 'Live Interactive Web Console Demo | Axonwall',
+  title: 'Live Interactive Web Console Demo (v0.11.64) | Axonwall',
   description:
-    'Experience the Axonwall Next-Gen Linux Firewall Web Console directly in your browser. Test rule staging, commit-confirm timers, WireGuard mesh, and threat defense.',
+    'Experience the Axonwall v0.11.64 Next-Gen Linux Firewall Web Console directly in your browser. Test nftables rule staging, 60s commit-confirm, Multi-WAN & BGP routing, Rosenpass PQ-KEM, CO-RE BPF-LSM guard, and Etckeeper Git.',
 };
 
 export default function DemoPage() {

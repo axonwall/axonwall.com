@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" fill="none">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#050911" />
+      <stop offset="55%" stop-color="#0a1222" />
+      <stop offset="100%" stop-color="#041e19" />
+    </linearGradient>
+    <radialGradient id="emeraldOrb" cx="980" cy="140" r="420" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#10b981" stop-opacity="0.22" />
+      <stop offset="100%" stop-color="#10b981" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="cyanOrb" cx="180" cy="540" r="380" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.18" />
+      <stop offset="100%" stop-color="#06b6d4" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="shieldFill" x1="8" y1="4" x2="40" y2="44" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="50%" stop-color="#061c18" />
+      <stop offset="100%" stop-color="#022c22" />
+    </linearGradient>
+    <linearGradient id="brandAccent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#34d399" />
+      <stop offset="50%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#38bdf8" />
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="1" stroke-opacity="0.45" />
+    </pattern>
+  </defs>
+
+  <!-- Canvas Background -->
+  <rect width="1200" height="630" fill="url(#bgGrad)" />
+  <rect width="1200" height="630" fill="url(#grid)" />
+  <circle cx="980" cy="140" r="420" fill="url(#emeraldOrb)" />
+  <circle cx="180" cy="540" r="380" fill="url(#cyanOrb)" />
+
+  <!-- Outer Frame -->
+  <rect x="36" y="36" width="1128" height="558" rx="28" fill="#09101d" fill-opacity="0.72" stroke="#1e293b" stroke-width="2" />
+  <rect x="36" y="36" width="1128" height="4" rx="2" fill="url(#brandAccent)" />
+
+  <!-- Brand Header & Neural Shield Icon -->
+  <g transform="translate(84, 82)">
+    <g transform="scale(1.9)">
+      <path
+        d="M24 4.5 L39.5 9.5 C39.5 9.5 40 24 24 43.5 C8 24 8.5 9.5 8.5 9.5 L24 4.5 Z"
+        fill="url(#shieldFill)"
+        stroke="url(#brandAccent)"
+        stroke-width="1.8"
+        stroke-linejoin="round"
+      />
+      <path d="M24 13 L24 23" stroke="url(#brandAccent)" stroke-width="1.5" stroke-linecap="round" />
+      <path d="M24 23 L16 18" stroke="url(#brandAccent)" stroke-width="1.5" stroke-linecap="round" />
+      <path d="M24 23 L32 18" stroke="url(#brandAccent)" stroke-width="1.5" stroke-linecap="round" />
+      <path d="M24 23 L17 31" stroke="url(#brandAccent)" stroke-width="1.5" stroke-linecap="round" />
+      <path d="M24 23 L31 31" stroke="url(#brandAccent)" stroke-width="1.5" stroke-linecap="round" />
+      <circle cx="24" cy="13" r="2.2" fill="#34d399" />
+      <circle cx="16" cy="18" r="2" fill="#38bdf8" />
+      <circle cx="32" cy="18" r="2" fill="#38bdf8" />
+      <circle cx="17" cy="31" r="2" fill="#10b981" />
+      <circle cx="31" cy="31" r="2" fill="#10b981" />
+      <circle cx="24" cy="23" r="3.2" fill="#042f2e" stroke="#34d399" stroke-width="1.8" />
+      <circle cx="24" cy="23" r="1.3" fill="#ffffff" />
+    </g>
+
+    <text x="108" y="46" font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-size="38" font-weight="800" fill="#ffffff" letter-spacing="-0.5">
+      AXONWALL
+    </text>
+    <rect x="336" y="18" width="132" height="34" rx="17" fill="#064e3b" fill-opacity="0.7" stroke="#10b981" stroke-width="1.5" />
+    <text x="402" y="40" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" font-weight="700" fill="#34d399">
+      v0.11.64
+    </text>
+
+    <text x="108" y="76" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" fill="#94a3b8">
+      DEBIAN 13 TRIXIE • LINUX 6.12 LTS • PORT 2966 CONSOLE • 100% GPLv2
+    </text>
+  </g>
+
+  <!-- Main Headline -->
+  <g transform="translate(84, 238)">
+    <text x="0" y="0" font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-size="54" font-weight="900" fill="#ffffff" letter-spacing="-1.2">
+      Sovereign Linux NGFW, ZFS NAS,
+    </text>
+    <text x="0" y="66" font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-size="54" font-weight="900" fill="url(#brandAccent)" letter-spacing="-1.2">
+      K3s, KVM &amp; Autonomous AI SOC.
+    </text>
+    <text x="0" y="122" font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-size="23" font-weight="400" fill="#cbd5e1">
+      Line-rate nftables + XDP fastpath, CO-RE BPF-LSM Ring-0 zero-day defense,
+    </text>
+    <text x="0" y="156" font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-size="23" font-weight="400" fill="#cbd5e1">
+      ZFSBootMenu v3.1.0 A/B recovery, Rosenpass PQ-KEM, and MCP AI guardrails.
+    </text>
+  </g>
+
+  <!-- Bottom Capability Pills -->
+  <g transform="translate(84, 468)" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" font-weight="600">
+    <g transform="translate(0, 0)">
+      <rect width="248" height="44" rx="10" fill="#0f172a" stroke="#10b981" stroke-opacity="0.45" stroke-width="1.5" />
+      <text x="124" y="27" text-anchor="middle" fill="#34d399">nftables + XDP Fastpath</text>
+    </g>
+    <g transform="translate(264, 0)">
+      <rect width="256" height="44" rx="10" fill="#0f172a" stroke="#38bdf8" stroke-opacity="0.45" stroke-width="1.5" />
+      <text x="128" y="27" text-anchor="middle" fill="#38bdf8">CO-RE BPF-LSM Ring-0</text>
+    </g>
+    <g transform="translate(536, 0)">
+      <rect width="268" height="44" rx="10" fill="#0f172a" stroke="#10b981" stroke-opacity="0.45" stroke-width="1.5" />
+      <text x="134" y="27" text-anchor="middle" fill="#34d399">McEliece + ML-KEM-512</text>
+    </g>
+    <g transform="translate(820, 0)">
+      <rect width="212" height="44" rx="10" fill="#0f172a" stroke="#38bdf8" stroke-opacity="0.45" stroke-width="1.5" />
+      <text x="106" y="27" text-anchor="middle" fill="#38bdf8">axonwall.com</text>
+    </g>
+  </g>
+</svg>
