@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import { KeyRound, Shield, Lock, RefreshCw, Network, Terminal, Zap } from 'lucide-react';
 import { Callout } from '../components/Callout';
 import { CodeBlock } from '../components/CodeBlock';
@@ -16,7 +17,7 @@ export default function PostQuantumRosenpassDocPage() {
       <div className="space-y-4 border-b border-slate-800/80 pb-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-          Post-Quantum Cryptography (PQC) • Hybrid Dual-KEM • v0.11.64
+          Post-Quantum Cryptography (PQC) • Hybrid Dual-KEM • v0.11.68
         </div>
         <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
           Post-Quantum Rosenpass Dual-KEM WireGuard Mesh
@@ -77,7 +78,7 @@ export default function PostQuantumRosenpassDocPage() {
         <p className="text-sm text-slate-300 leading-relaxed">
           Enable the <code className="text-emerald-400 font-mono">rosenpass</code> plugin via{' '}
           <code className="text-emerald-400 font-mono">sudo axonwallctl plugin enable rosenpass</code> (or in{' '}
-          <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-slate-800/80 border border-slate-700/70 text-emerald-400 font-mono text-xs">/system/plugins</span>), then declare your Rosenpass
+          <Link href="/system/plugins" className="text-emerald-400 underline">/system/plugins</Link>), then declare your Rosenpass
           listener and peers under <code className="text-emerald-400 font-mono">rosenpass:</code> inside{' '}
           <code className="text-emerald-400 font-mono">/etc/axonwall/vpn.yaml</code>:
         </p>
@@ -108,7 +109,7 @@ export default function PostQuantumRosenpassDocPage() {
           <ul className="list-disc list-inside space-y-1">
             <li>
               <strong>Web Console:</strong> Navigate to{' '}
-              <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-slate-800/80 border border-slate-700/70 text-emerald-400 font-mono text-xs">/vpn/rosenpass</span> to
+              <Link href="/vpn/rosenpass" className="font-mono text-emerald-300 underline">/vpn/rosenpass</Link> to
               generate Classic McEliece 460896 + ML-KEM-512 keypairs, export peer public keys, and monitor live PSK rotation epochs.
             </li>
             <li>

@@ -14,16 +14,16 @@ export function TerminalView() {
     {
       command: 'cat /etc/issue',
       output: `================================================================================
-Axonwall v0.11.64 Appliance (Debian 13 Trixie)
+Axonwall v0.11.68 Appliance (Debian 13 Trixie)
 Web Console: https://192.168.100.1:2966
 Appliance Console: Login with administrator credentials
 ================================================================================`,
     },
     {
       command: 'axonwall status',
-      output: `[Axonwall System Report — v0.11.64]
+      output: `[Axonwall System Report — v0.11.68]
 Appliance Hostname : axonwall-core
-OS Release         : Axonwall v0.11.64 • Debian 13 (Trixie) Linux 6.12.10-amd64
+OS Release         : Axonwall v0.11.68 • Debian 13 (Trixie) Linux 6.12.10-amd64
 Web Management     : Listening on https://0.0.0.0:2966 [TLS 1.3]
 Data Plane Engine  : nftables 1.1.2 + XDP Fastpath + CO-RE BPF-LSM Guard
 Active Conntrack   : 2,419 / 2,000,000 states (0.12%)
@@ -67,7 +67,7 @@ Satellite Fleet    : 4 micro-edge nodes synchronized (v24)`,
         break;
 
       case 'axonwall-config':
-        out = `[Axonwall Neovim Super Configurator v0.11.64]
+        out = `[Axonwall Neovim Super Configurator v0.11.68]
 Loaded 12 Declarative YAML Domains (/etc/axonwall/*.yaml):
   [1] system.yaml          [5] services.yaml        [9]  storage.yaml
   [2] interfaces.yaml      [6] vpn.yaml             [10] k3s.yaml
@@ -77,14 +77,14 @@ Keymaps: <Tab> Switch Pane | <C-d> Live Diff | <C-s> Validate & Save | :AxonAppl
         break;
 
       case 'axonwall-tui':
-        out = `[Axonwall Interactive TUI Dashboard — v0.11.64]
+        out = `[Axonwall Interactive TUI Dashboard — v0.11.68]
 Tabs: [1] Dashboard [2] Interfaces [3] Firewall [4] Routing [5] Services & PQ
       [6] Storage [7] Compute & SOC [8] Plugins [9] NastyMap [u] ZBM/Boot [0] System & Ops
 Tip: Run 'axonwall-tui --nastymap' over SSH for full interactive 6-view topology & Nmap simulator.`;
         break;
 
       case 'axonwall-hunt-rootkits':
-        out = `[Ghost-in-the-Ring & 8-Engine Malware Hunter Audit — v0.11.64]
+        out = `[Ghost-in-the-Ring & 8-Engine Malware Hunter Audit — v0.11.68]
 [PASS] 5-Hook CO-RE BPF-LSM    : socket_bind (CVE-2026-31431), bpf, uring_sqpoll, bpf_token_create & bpf_token_cmd ENFORCED
 [PASS] Linux 6.9+ BPF_TOKEN    : 3 bpffs token superblocks active; FORBIDDEN_RING0_TOKEN_PROG_MASK (kprobe/lsm) VETOED
 [PASS] /proc/kcore XArray Walk : 16 active bpf_prog structs in prog_idr (matches bpftool: 16/16, 0 hidden)
@@ -95,7 +95,7 @@ Tip: Run 'axonwall-tui --nastymap' over SSH for full interactive 6-view topology
 
       case 'axonwallctl':
         if (parts[1] === 'status' || parts[1] === 'ha-status') {
-          out = `[Axonwall 2-Host High Availability & Control Plane Status — v0.11.64]
+          out = `[Axonwall 2-Host High Availability & Control Plane Status — v0.11.68]
 Local Node         : axonwall-fw01 (PRIMARY / MASTER • Boot Mode: ZFSBootMenu v3.1.0)
 Commit-Confirm     : Confirmed (Bundle SHA-256: 9f8a4d2c • 0 pending rollback timers)
 Peer Node          : axonwall-fw02 (10.0.99.2 - HEALTHY, 0.28ms RTT)
@@ -104,7 +104,7 @@ VRRP VIPs          : WAN 203.0.113.10/24 (MASTER) | LAN 192.168.100.1/24 (MASTER
 conntrackd FTFW    : Synchronized (2,419 active flows mirrored)
 State Replication  : OpenLDAP syncrepl OK | SQLite OK | ZFS tank @ha-sync OK | K3s HA Ready (2/2)`;
         } else if (parts[1] === 'ebpf') {
-          out = `[Axonwall Ring-0 eBPF, Dual-Stack XDP & Linux 6.9+ BPF_TOKEN Status — v0.11.64]
+          out = `[Axonwall Ring-0 eBPF, Dual-Stack XDP & Linux 6.9+ BPF_TOKEN Status — v0.11.68]
 XDP Engine         : Dual-Stack IPv4/IPv6 + 802.1Q/802.1ad QinQ (flow_map: 131K LRU | flow6_map: 65K LRU)
 XDP Blocklists     : 4 active monotonic TTL XDP_DROP bans (0 internal/management lockouts)
 CO-RE BPF-LSM      : 5/5 hooks attached (socket_bind, bpf, uring_sqpoll, bpf_token_create, bpf_token_cmd)
@@ -165,9 +165,9 @@ Audit Hash Chain   : VERIFIED (/var/lib/axonwall/mcp-audit.jsonl)`;
 
       case 'axonwall':
         if (parts[1] === 'status') {
-          out = `[Axonwall System Report — v0.11.64]
+          out = `[Axonwall System Report — v0.11.68]
 Appliance Hostname : axonwall-core
-OS Release         : Axonwall v0.11.64 • Debian 13 (Trixie) Linux 6.12.10-amd64
+OS Release         : Axonwall v0.11.68 • Debian 13 (Trixie) Linux 6.12.10-amd64
 Web Management     : Listening on https://0.0.0.0:2966 [TLS 1.3]
 Data Plane Engine  : nftables 1.1.2 + XDP Fastpath + CO-RE BPF-LSM Guard
 Active Conntrack   : 2,419 / 2,000,000 states (0.12%)
@@ -202,7 +202,7 @@ Satellite Fleet    : 4 micro-edge nodes synchronized (v24)`;
       case 'cat':
         if (parts[1] === '/etc/issue') {
           out = `================================================================================
-Axonwall v0.11.64 Appliance (Debian 13 Trixie)
+Axonwall v0.11.68 Appliance (Debian 13 Trixie)
 Web Console: https://192.168.100.1:2966
 Appliance Console: Login with administrator credentials
 ================================================================================`;

@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import { GitBranch, History, ShieldCheck, CheckCircle2, RotateCcw, FileDiff } from 'lucide-react';
 import { Callout } from '../components/Callout';
 import { CodeBlock } from '../components/CodeBlock';
@@ -6,7 +7,7 @@ import { CodeBlock } from '../components/CodeBlock';
 export const metadata = {
   title: 'GitOps Configuration Versioning & Etckeeper /etc Audit | Axonwall Documentation',
   description:
-    'Git-backed declarative YAML configuration versioning (/var/lib/axonwall/gitops), unified diff inspection, 1-click rollback, and Etckeeper /etc host configuration auditing in Axonwall v0.11.64.',
+    'Git-backed declarative YAML configuration versioning (/var/lib/axonwall/gitops), unified diff inspection, 1-click rollback, and Etckeeper /etc host configuration auditing in Axonwall v0.11.68.',
 };
 
 export default function GitOpsAuditDocPage() {
@@ -16,7 +17,7 @@ export default function GitOpsAuditDocPage() {
       <div className="space-y-4 border-b border-slate-800/80 pb-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-          Version Control &amp; Compliance Audit • v0.11.64
+          Version Control &amp; Compliance Audit • v0.11.68
         </div>
         <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
           GitOps Configuration &amp; Etckeeper /etc Audit Trail
@@ -100,7 +101,7 @@ export default function GitOpsAuditDocPage() {
           <History className="w-6 h-6 text-emerald-400" /> Etckeeper Host <code className="font-mono text-emerald-400">/etc</code> Configuration Versioning
         </h2>
         <p className="text-sm text-slate-300 leading-relaxed">
-          While <code className="text-emerald-400 font-mono">/var/lib/axonwall/gitops</code> versions Axonwall&apos;s declarative YAML intent, enterprise compliance audits also require tracking every low-level daemon file rendered across <code className="text-white font-mono">/etc</code> (such as <code className="text-slate-200 font-mono">/etc/keepalived/</code>, <code className="text-slate-200 font-mono">/etc/unbound/</code>, <code className="text-slate-200 font-mono">/etc/ssh/sshd_config</code>, <code className="text-slate-200 font-mono">/etc/pam.d/</code>, and APT package postinst changes). Axonwall natively integrates <strong>Etckeeper</strong> with first-class daemon APIs and a dedicated Web Console workspace at <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-slate-800/80 border border-slate-700/70 text-emerald-400 font-mono text-xs">/system/etckeeper</span>:
+          While <code className="text-emerald-400 font-mono">/var/lib/axonwall/gitops</code> versions Axonwall&apos;s declarative YAML intent, enterprise compliance audits also require tracking every low-level daemon file rendered across <code className="text-white font-mono">/etc</code> (such as <code className="text-slate-200 font-mono">/etc/keepalived/</code>, <code className="text-slate-200 font-mono">/etc/unbound/</code>, <code className="text-slate-200 font-mono">/etc/ssh/sshd_config</code>, <code className="text-slate-200 font-mono">/etc/pam.d/</code>, and APT package postinst changes). Axonwall natively integrates <strong>Etckeeper</strong> with first-class daemon APIs and a dedicated Web Console workspace at <Link href="/system/etckeeper" className="text-emerald-400 underline font-mono">/system/etckeeper</Link>:
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
@@ -137,7 +138,7 @@ sudo curl -s --unix-socket /run/axonwall/agent-api.sock \\
         />
 
         <Callout type="tip" title="Web Console Revisions & Etckeeper">
-          View Axonwall GitOps revisions at <code className="text-emerald-300 font-mono">System &gt; Configuration &amp; Revisions (/system)</code>, and manage host-wide <code className="text-emerald-300 font-mono">/etc</code> commits, <code className="text-emerald-300 font-mono">.gitignore</code> rules, and diffs at <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-slate-800/80 border border-slate-700/70 text-emerald-400 font-mono text-xs">/system/etckeeper</span>.
+          View Axonwall GitOps revisions at <code className="text-emerald-300 font-mono">System &gt; Configuration &amp; Revisions (/system)</code>, and manage host-wide <code className="text-emerald-300 font-mono">/etc</code> commits, <code className="text-emerald-300 font-mono">.gitignore</code> rules, and diffs at <Link href="/system/etckeeper" className="text-emerald-300 underline font-mono">/system/etckeeper</Link>.
         </Callout>
       </section>
     </div>

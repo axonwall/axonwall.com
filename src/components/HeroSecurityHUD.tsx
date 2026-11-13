@@ -56,7 +56,7 @@ export const HeroSecurityHUD: React.FC = () => {
               LIVE TELEMETRY
             </span>
             <span className="text-xs font-mono text-slate-400 hidden sm:inline">
-              Axonwall v0.11.64 • Linux 6.12 LTS • Dual-Stack XDP + 5-Hook BPF-LSM + BPF_TOKEN
+              Axonwall v0.11.68 • Linux 6.12 LTS • Dual-Stack XDP + 5-Hook BPF-LSM + BPF_TOKEN
             </span>
           </div>
         </div>

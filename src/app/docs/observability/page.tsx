@@ -32,7 +32,7 @@ export default function ObservabilityDocPage() {
       <div className="space-y-4 border-b border-slate-800/80 pb-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-          Zero-Instrumentation Kernel Telemetry • eBPF &amp; K3s • v0.11.64
+          Zero-Instrumentation Kernel Telemetry • eBPF &amp; K3s • v0.11.68
         </div>
         <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
           eBPF Infrastructure &amp; Kubernetes Observability
@@ -45,8 +45,19 @@ export default function ObservabilityDocPage() {
           tracking container network calls and filesystem operations with sub-microsecond overhead.
         </p>
         <div className="pt-2 flex flex-wrap gap-3">
-          <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-slate-800/80 border border-slate-700/70 text-emerald-400 font-mono text-xs">Open eBPF Observability Console (/reporting/ebpf)</span>
-          <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-slate-800/80 border border-slate-700/70 text-emerald-400 font-mono text-xs">Live Packet &amp; Flow Stream (/reporting/flows)</span>
+          <Link
+            href="/reporting/ebpf"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-xs font-semibold text-white transition"
+          >
+            Open eBPF Observability Console (/reporting/ebpf)
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
+          <Link
+            href="/reporting/flows"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-700 text-xs font-semibold text-slate-200 transition"
+          >
+            Live Packet &amp; Flow Stream (/reporting/flows)
+          </Link>
         </div>
       </div>
 
@@ -281,7 +292,7 @@ kubectl logs -n kube-system -l app.kubernetes.io/name=tetragon -c export-stdout 
         </h2>
         <p className="text-sm text-slate-300 leading-relaxed">
           Axonwall integrates <strong className="text-white">Coroot-inspired eBPF Application Performance Monitoring (APM)</strong>{' '}
-          both natively inside <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-slate-800/80 border border-slate-700/70 text-emerald-400 font-mono text-xs">/reporting/ebpf</span>{' '}
+          both natively inside <Link href="/reporting/ebpf" className="text-emerald-400 hover:underline">/reporting/ebpf</Link>{' '}
           and as a toggleable plugin (<code className="text-slate-200 font-mono">coroot-ebpf-apm</code> / VOW catalog{' '}
           <code className="text-slate-200 font-mono">coroot</code>). Using guardrailed{' '}
           <code className="text-emerald-400 font-mono">observability.ebpfApm</code> toggles, operators can enable or disable

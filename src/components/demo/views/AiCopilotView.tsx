@@ -78,7 +78,7 @@ This blocks IoT cameras and smart bulbs from probing your workstations or NAS, w
 - Once a bidirectional connection is established (e.g. TCP handshake complete), Axonwall offloads that connection's tuple into the kernel **flowtable fastpath**.
 - Subsequent packets bypass layer 3/4 filtering routines and are directly forwarded by the network driver, slashing latency to microseconds!`;
       } else if (lower.includes('bpf_token') || lower.includes('token') || lower.includes('lsm')) {
-        reply = `Axonwall v0.11.64 implements **Linux 6.9+ \`BPF_TOKEN_CREATE\` Delegation** mediated by **5 CO-RE BPF-LSM hooks**:
+        reply = `Axonwall v0.11.68 implements **Linux 6.9+ \`BPF_TOKEN_CREATE\` Delegation** mediated by **5 CO-RE BPF-LSM hooks**:
 - Isolated \`bpffs\` instances mounted at \`/run/axonwall/bpffs-tokens/<profile>\` delegate verified networking eBPF (\`XDP\`, \`SCHED_CLS\`, \`CGROUP_SKB\`) into rootless K3s (\`hostUsers: false\`) pods and unprivileged LXC (\`CLONE_NEWUSER\`) containers without host \`CAP_BPF\`.
 - Simultaneously, \`SEC("lsm/bpf_token_create")\` and \`SEC("lsm/bpf_token_cmd")\` enforce \`FORBIDDEN_RING0_TOKEN_PROG_MASK\`, returning \`-EPERM\` if any UserNS tenant attempts to load \`kprobe\`, \`tracepoint\`, \`perf_event\`, or \`lsm\` programs capable of calling \`bpf_probe_read_kernel()\` on host RAM.`;
       } else if (lower.includes('mcp') || lower.includes('25') || lower.includes('22')) {
@@ -94,7 +94,7 @@ tcp dport 22 ct state new counter accept comment "Accept SSH within rate limit"
 \`\`\`
 This defeats automated brute-force scripts before they can stress system authentication services.`;
       } else {
-        reply = `I have analyzed your request regarding **"${q}"** against the Axonwall v0.11.64 security policy engine and MCP tactical lease guard (\`table inet axonwall_mcp\`). All configuration rules compile to native \`nftables\` data plane tables on port **2966**, maintaining 60s commit-confirm safety and A/B dual-root integrity.`;
+        reply = `I have analyzed your request regarding **"${q}"** against the Axonwall v0.11.68 security policy engine and MCP tactical lease guard (\`table inet axonwall_mcp\`). All configuration rules compile to native \`nftables\` data plane tables on port **2966**, maintaining 60s commit-confirm safety and A/B dual-root integrity.`;
       }
 
       setMessages((prev) => [

@@ -45,21 +45,21 @@ interface ReleaseArtifact {
 const RELEASE_ARTIFACTS: ReleaseArtifact[] = [
   {
     id: 'iso-unified',
-    title: 'Unified Bare-Metal NGFW + Vault Edition ISO (Debian 13)',
+    title: 'Unified Bare-Metal NGFW + Vault + K3s Storage ISO (Debian 13)',
     subtitle:
-      'Bootable UEFI Live/Installer ISO for bare-metal x86_64 routers, servers, and mini-PCs — select Standard NGFW or Immutable S3 Vault Edition during install',
+      'Bootable UEFI/BIOS Live/Installer ISO for bare-metal x86_64 servers, routers, and mini-PCs — select Standard NGFW, Immutable Vault S3, or Barebones K3s + Storage Edition at boot or in the TUI installer',
     filename: 'axonwall-debian13-amd64.iso',
-    size: '1.21 GiB (1,238.2 MB)',
-    badge: 'RECOMMENDED • UNIFIED NGFW + VAULT',
+    size: '1.27 GiB (1,299.2 MB)',
+    badge: 'RECOMMENDED • NGFW + VAULT + K3S',
     badgeColor: 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30',
     icon: HardDrive,
-    sha256: '8c4bb98fda1f304d02e7c91dd629e88c7253578dccaec3c22b62b7320cdaf44d',
-    downloadUrl: 'https://github.com/axonwall/axonwall/releases/download/v0.11.64/axonwall-debian13-amd64.iso',
-    sha256Url: 'https://github.com/axonwall/axonwall/releases/download/v0.11.64/axonwall-debian13-amd64.iso.sha256',
-    sigUrl: 'https://github.com/axonwall/axonwall/releases/download/v0.11.64/axonwall-debian13-amd64.iso.sha256.sig',
+    sha256: 'dda4648fc20ba148b530cc87f55ecfff16329681a1ffb8265304ccfcfb8aa83b',
+    downloadUrl: 'https://github.com/axonwall/axonwall/releases/download/v0.11.68/axonwall-debian13-amd64.iso',
+    sha256Url: 'https://github.com/axonwall/axonwall/releases/download/v0.11.68/axonwall-debian13-amd64.iso.sha256',
+    sigUrl: 'https://github.com/axonwall/axonwall/releases/download/v0.11.68/axonwall-debian13-amd64.iso.sha256.sig',
     highlights: [
-      'Pure ZFSBootMenu v3.1.0 direct UEFI Root-on-ZFS, A/B Dual-Root (mdadm RAID-1), or Single-Root Rolling modes',
-      'Unified 5-step TUI & unattended YAML installer (axonwall-console --install) with NGFW + SeaweedFS S3 Vault editions',
+      'Triple-edition UEFI GRUB & BIOS ISOLINUX menus + 5-step TUI (axonwall-console --install) supporting axonwall (NGFW), vault (S3), and k3s-storage (Barebones K3s + OpenZFS/OpenEBS)',
+      'Pure ZFSBootMenu v3.1.0 direct UEFI Root-on-ZFS, A/B Dual-Root (mdadm RAID-1), or Single-Root Rolling modes with unattended YAML profiles',
       'Smart NVMe/SSD/HDD disk tiering (SLOG/L2ARC/spares), LUKS2 + TPM 2.0 PCR 0+2+7 auto-unlock, 5-hook CO-RE BPF-LSM & Linux 6.9+ BPF_TOKEN mediator',
     ],
   },
@@ -73,10 +73,10 @@ const RELEASE_ARTIFACTS: ReleaseArtifact[] = [
     badge: 'ZERO-SHELL UKI • PID 1 GO',
     badgeColor: 'bg-sky-500/15 text-sky-300 border-sky-500/30',
     icon: Cpu,
-    sha256: '6c621e90754fc7879f4cf5a040aea811a0ba9cb0e57bb80e26bd02e5d8aaecab',
-    downloadUrl: 'https://github.com/axonwall/axonwall/releases/download/v0.11.64/axonwall-edge-sku-vm-virtio.efi',
-    sha256Url: 'https://github.com/axonwall/axonwall/releases/download/v0.11.64/axonwall-edge-sku-vm-virtio.efi.sha256',
-    sigUrl: 'https://github.com/axonwall/axonwall/releases/download/v0.11.64/axonwall-edge-sku-vm-virtio.efi.sha256.sig',
+    sha256: '81795473dfafad59db093b5c8d2a20bc1bf8e327e7edb3c6b1bf3ef7205298c9',
+    downloadUrl: 'https://github.com/axonwall/axonwall/releases/download/v0.11.68/axonwall-edge-sku-vm-virtio.efi',
+    sha256Url: 'https://github.com/axonwall/axonwall/releases/download/v0.11.68/axonwall-edge-sku-vm-virtio.efi.sha256',
+    sigUrl: 'https://github.com/axonwall/axonwall/releases/download/v0.11.68/axonwall-edge-sku-vm-virtio.efi.sha256.sig',
     highlights: [
       'Zero userland, zero shell (/bin/sh, bash, busybox, sshd stripped), and complete loadable-kernel-module immunity',
       'Pure-Go Netlink nftables/WireGuard data plane + RFC 8415 DHCPv6 IA_NA/IA_PD & RFC 4861 Router Advertisements',
@@ -85,9 +85,9 @@ const RELEASE_ARTIFACTS: ReleaseArtifact[] = [
     extraAsset: {
       filename: 'axonwall-edge-sku-vm-virtio-initramfs.cpio.gz',
       size: '3.6 MB',
-      sha256: '9204c9f9ac77889c6e201320cf6f2919003026c78809d1f83315d03cb115b40b',
+      sha256: 'cfe81c1cd175a41ecf2dbb4c156c702aa95508cf8d9121c39d69ce780c35d7ba',
       downloadUrl:
-        'https://github.com/axonwall/axonwall/releases/download/v0.11.64/axonwall-edge-sku-vm-virtio-initramfs.cpio.gz',
+        'https://github.com/axonwall/axonwall/releases/download/v0.11.68/axonwall-edge-sku-vm-virtio-initramfs.cpio.gz',
     },
   },
   {
@@ -96,16 +96,16 @@ const RELEASE_ARTIFACTS: ReleaseArtifact[] = [
     subtitle:
       'Cloud-Init ready disk image for KVM/QEMU, Proxmox VE, OpenStack, Hetzner, AWS, and GCP with background Slot-B first-boot sync',
     filename: 'axonwall-debian13-amd64-cloud.qcow2',
-    size: '1.11 GiB (1,132.6 MB)',
+    size: '1.17 GiB (1,194.9 MB)',
     badge: 'KVM • PROXMOX VE • OPENSTACK',
     badgeColor: 'bg-purple-500/15 text-purple-300 border-purple-500/30',
     icon: Cloud,
-    sha256: 'aa27acbcd73e055e61c25c07ea16468dd5aa84acd10853388f38971f3fb0f703',
-    downloadUrl: 'https://github.com/axonwall/axonwall/releases/download/v0.11.64/axonwall-debian13-amd64-cloud.qcow2',
+    sha256: '10c4ec26051bfe130afe13be4a4a2c644f364c3167e5e2643f14bf596b359415',
+    downloadUrl: 'https://github.com/axonwall/axonwall/releases/download/v0.11.68/axonwall-debian13-amd64-cloud.qcow2',
     sha256Url:
-      'https://github.com/axonwall/axonwall/releases/download/v0.11.64/axonwall-debian13-amd64-cloud.qcow2.sha256',
+      'https://github.com/axonwall/axonwall/releases/download/v0.11.68/axonwall-debian13-amd64-cloud.qcow2.sha256',
     sigUrl:
-      'https://github.com/axonwall/axonwall/releases/download/v0.11.64/axonwall-debian13-amd64-cloud.qcow2.sha256.sig',
+      'https://github.com/axonwall/axonwall/releases/download/v0.11.68/axonwall-debian13-amd64-cloud.qcow2.sha256.sig',
     highlights: [
       'Instant import into Proxmox VE (qm importdisk) and libvirt/QEMU with VirtIO-SCSI, VirtIO-Net, and QEMU guest agent',
       'Background first-boot Slot-B synchronization establishes full A/B Dual-Root rollback parity without delaying first login',
@@ -117,18 +117,18 @@ const RELEASE_ARTIFACTS: ReleaseArtifact[] = [
     title: 'Standalone Debian / Ubuntu AMD64 Package (.deb)',
     subtitle:
       'Install Axonwall on existing Debian 12/13 or Ubuntu 24.04 x86_64 hosts, or apply verified OTA A/B & ZFSBootMenu upgrades',
-    filename: 'axonwall_0.11.64_amd64.deb',
-    size: '82.2 MB',
+    filename: 'axonwall_0.11.68_amd64.deb',
+    size: '142.3 MB',
     badge: 'DEBIAN 12/13 • UBUNTU 24.04',
     badgeColor: 'bg-slate-800 text-slate-300 border-slate-700',
     icon: Server,
-    sha256: '6864c004ba550c1822b61303a04aeaaf3bc7d0a0717ad6532c3244af6ce176bc',
-    downloadUrl: 'https://github.com/axonwall/axonwall/releases/download/v0.11.64/axonwall_0.11.64_amd64.deb',
-    sha256Url: 'https://github.com/axonwall/axonwall/releases/download/v0.11.64/axonwall_0.11.64_amd64.deb.sha256',
-    sigUrl: 'https://github.com/axonwall/axonwall/releases/download/v0.11.64/axonwall_0.11.64_amd64.deb.sha256.sig',
+    sha256: '17c8040dabf10dd716447c09a0ecbc61b5d2b6b0a0339a8a73bd940a0e19cfe9',
+    downloadUrl: 'https://github.com/axonwall/axonwall/releases/download/v0.11.68/axonwall_0.11.68_amd64.deb',
+    sha256Url: 'https://github.com/axonwall/axonwall/releases/download/v0.11.68/axonwall_0.11.68_amd64.deb.sha256',
+    sigUrl: 'https://github.com/axonwall/axonwall/releases/download/v0.11.68/axonwall_0.11.68_amd64.deb.sha256.sig',
     highlights: [
-      'Bundles axonwalld (Go daemon + 5-hook CO-RE BPF-LSM & Dual-Stack VLAN/LPM CIDR/SYN-Flood XDP objects), axonwall-controller, 24-tool axonwall-mcp, axonwall-ui, and axonwall-console',
-      'Includes Neovim Super Configurator (axonwall-config), axonwallctl <ebpf|nas|virt|k3s|import> CLI, restricted operator shell (axonwall-opshell), and Etckeeper /etc Git sync',
+      'Bundles axonwalld (Go daemon + 5-hook CO-RE BPF-LSM & Dual-Stack VLAN/LPM CIDR/SYN-Flood XDP objects), axonwall-controller, 25-tool axonwall-mcp, axonwall-ui, and axonwall-console',
+      'Includes Neovim Super Configurator (axonwall-config), axonwallctl <kernel|ebpf|nas|virt|k3s|import> CLI, restricted operator shell (axonwall-opshell), and Etckeeper /etc Git sync',
       'Used automatically by axonwall-update and axonwallctl update for Ed25519-verified OTA upgrades across ZBM & A/B slots',
     ],
   },
@@ -136,9 +136,36 @@ const RELEASE_ARTIFACTS: ReleaseArtifact[] = [
 
 const RELEASE_CHANGELOG = [
   {
-    version: 'v0.11.64',
-    date: 'November 10, 2026',
+    version: 'Upcoming (main)',
+    date: 'November 13, 2026',
+    tag: 'Custom Kernel Studio & KSPP',
+    highlights: [
+      'Universal & Hardware-Stripped Hardened Linux 6.12 LTS Kernel Pipeline (packaging/kernel/): Seven layered Kconfig fragments delivering Debian-equivalent server/cloud hardware support with KSPP memory/slab/stack hardening, integrity-mode Lockdown LSM, BPF_LSM, rootless USER_NS + cgroups v2, OpenZFS DKMS symbol preservation (# CONFIG_TRIM_UNUSED_KSYMS is not set), nftables flowtable fastpath, and eBPF CO-RE BTF.',
+      'Interactive Custom Kernel Studio (/system/kernel & axonwallctl kernel): Detects host CPU flags/ISA (-march x86-64-v2/v3/v4/native), IOMMU, UEFI Secure Boot, TPM 2.0, watchdogs, PCIe/NIC/NVMe devices, and active lsmod modules; runs a 24-check kernel posture audit; synthesizes minimal localmodconfig fragments; compiles asynchronously via axonwalld; and stages installs safely via ZFSBootMenu Boot Environment clones or side-by-side dpkg + update-grub.',
+    ],
+  },
+  {
+    version: 'v0.11.68',
+    date: 'November 13, 2026',
     tag: 'Latest Stable',
+    highlights: [
+      'Triple-Edition Unified Bootloader Menus: Debian 13 UEFI GRUB & BIOS ISOLINUX and Alpine UEFI GRUB & BIOS Syslinux menus expose all three appliance editions directly at boot—Standard NGFW (axonwall), Immutable Vault S3 (vault), and Barebones K3s + Storage (k3s-storage).',
+      'CI Preseed & Branding Parity Checks: Enforced automated package and systemd-enable consistency verification across Vault and K3s-Storage Debian installer preseeds in release builds.',
+    ],
+  },
+  {
+    version: 'v0.11.66 – v0.11.67',
+    date: 'November 11–12, 2026',
+    tag: 'Barebones K3s + Storage Profile',
+    highlights: [
+      'Barebones K3s + OpenZFS/OpenEBS Storage Host Profile (k3s-storage): Headless compute + storage edition enabling core-k3s and core-nas cleanly in host mode (core-firewall=false) with pre-staged OpenEBS ZFS-LocalPV CSI manifests, minimal host nftables, and server/agent cluster join.',
+      'Cross-Distro Firstboot & Cloud-Init Parity: Integrated k3s-storage across the 5-step axonwall-console --install wizard, Debian preseeds, Alpine OpenRC firstboot, and @axonwall/lib Cloud-Init & K3s compilers.',
+    ],
+  },
+  {
+    version: 'v0.11.64 – v0.11.65',
+    date: 'November 10–11, 2026',
+    tag: 'BPF_TOKEN, Dual XDP & 9x Import',
     highlights: [
       'Linux 6.9+ BPF_TOKEN_CREATE Unprivileged UserNS Delegation & 5-Hook CO-RE BPF-LSM Mediator: Added lsm/bpf_token_create and lsm/bpf_token_cmd Ring-0 hooks plus isolated /run/axonwall/bpffs-tokens/<profile> superblocks—empowering rootless K3s (hostUsers: false) pods and unprivileged LXC containers to load safe XDP/TC/Socket networking eBPF while vetoing kprobe/tracepoint/lsm bpf_probe_read_kernel() host memory reads.',
       'Dual-Stack IPv4/IPv6 + 802.1Q/802.1ad QinQ VLAN, LPM CIDR & TCP SYN-Flood XDP Engine: Upgraded Ring-0 XDP with 2-layer VLAN peeling, BPF_MAP_TYPE_LRU_HASH dual-stack flow accounting, BPF_MAP_TYPE_LPM_TRIE CIDR subnet & exact-host TTL XDP_DROP blocklists, per-source Ring-0 TCP SYN-flood PPS rate limiting, and complete axonwallctl ebpf <overview|tokens|xdp-blocks|xdp-drop|xdp-unblock|syn-limit|render-k3s> commands.',
@@ -247,7 +274,7 @@ export default function ReleasesPage() {
         <section className="text-center max-w-4xl mx-auto space-y-6">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950/70 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            Latest Official Release: v0.11.64 (Published 2026-11-10) • Signed with Ed25519 &amp; SHA-256
+            Latest Official Release: v0.11.68 (Published 2026-11-13) • Signed with Ed25519 &amp; SHA-256
           </div>
 
           <h1 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight">
@@ -258,18 +285,18 @@ export default function ReleasesPage() {
             Every Axonwall release is built deterministically via GitHub Actions and published with 64-character SHA-256
             checksums and detached Ed25519 cryptographic signatures (
             <code className="text-slate-200 font-mono">.sha256.sig</code>) verified against{' '}
-            <code className="text-emerald-400 font-mono">/etc/axonwall/release-signing.pub</code>. Both Standard NGFW
-            and Immutable Vault S3 editions ship inside the unified bare-metal ISO.
+            <code className="text-emerald-400 font-mono">/etc/axonwall/release-signing.pub</code>. Standard NGFW,
+            Immutable Vault S3, and Barebones K3s + Storage editions all ship inside the unified bare-metal ISO.
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
             <a
-              href="https://github.com/axonwall/axonwall/releases/tag/v0.11.64"
+              href="https://github.com/axonwall/axonwall/releases/tag/v0.11.68"
               target="_blank"
               rel="noopener noreferrer"
               className="px-5 py-2.5 rounded-xl text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white transition flex items-center gap-2 shadow-lg shadow-emerald-950/60"
             >
-              <ExternalLink className="w-4 h-4" /> View v0.11.64 on GitHub Releases
+              <ExternalLink className="w-4 h-4" /> View v0.11.68 on GitHub Releases
             </a>
             <a
               href="https://github.com/axonwall/axonwall/releases/tag/rolling-latest"
@@ -293,7 +320,7 @@ export default function ReleasesPage() {
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-800 pb-4">
             <div>
               <span className="text-xs font-semibold text-emerald-400 uppercase tracking-wider">
-                Official v0.11.64 Build Matrix • 2026-11-10
+                Official v0.11.68 Build Matrix • 2026-11-13
               </span>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-white mt-1">
                 Download Verified Appliance Images
@@ -416,19 +443,19 @@ export default function ReleasesPage() {
           <div className="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-4">
             <div className="flex items-center gap-2 text-white font-bold text-base">
               <Lock className="w-5 h-5 text-emerald-400" />
-              <span>1. Verify v0.11.64 SHA-256 &amp; Ed25519 Signature</span>
+              <span>1. Verify v0.11.68 SHA-256 &amp; Ed25519 Signature</span>
             </div>
             <p className="text-xs text-slate-400 leading-relaxed">
-              Every v0.11.64 release artifact is signed with the Axonwall Release Signing Key. Verify both the SHA-256
+              Every v0.11.68 release artifact is signed with the Axonwall Release Signing Key. Verify both the SHA-256
               digest and the detached Ed25519 signature before flashing or booting:
             </p>
             <pre className="p-4 rounded-xl bg-slate-950 border border-slate-800 text-[11px] font-mono text-slate-300 overflow-x-auto leading-relaxed">
-{`# Download v0.11.64 ISO + checksum + Ed25519 signature
-curl -LO https://github.com/axonwall/axonwall/releases/download/v0.11.64/axonwall-debian13-amd64.iso
-curl -LO https://github.com/axonwall/axonwall/releases/download/v0.11.64/axonwall-debian13-amd64.iso.sha256
-curl -LO https://github.com/axonwall/axonwall/releases/download/v0.11.64/axonwall-debian13-amd64.iso.sha256.sig
+{`# Download v0.11.68 ISO + checksum + Ed25519 signature
+curl -LO https://github.com/axonwall/axonwall/releases/download/v0.11.68/axonwall-debian13-amd64.iso
+curl -LO https://github.com/axonwall/axonwall/releases/download/v0.11.68/axonwall-debian13-amd64.iso.sha256
+curl -LO https://github.com/axonwall/axonwall/releases/download/v0.11.68/axonwall-debian13-amd64.iso.sha256.sig
 
-# Verify SHA-256 checksum (8c4bb98fda1f304d...0cdaf44d)
+# Verify SHA-256 checksum (dda4648fc20ba148...fb8aa83b)
 sha256sum -c axonwall-debian13-amd64.iso.sha256
 
 # Verify detached Ed25519 signature (.sha256.sig)
@@ -457,8 +484,8 @@ qemu-system-x86_64 -enable-kvm -m 512M -smp 2 \\
 # Import Cloud QCOW2 into Proxmox VE (Slot-B syncs on first boot)
 qm importdisk 9000 axonwall-debian13-amd64-cloud.qcow2 local-zfs
 
-# Install standalone v0.11.64 package on Debian 12/13 or Ubuntu 24.04
-sudo apt install ./axonwall_0.11.64_amd64.deb`}
+# Install standalone v0.11.68 package on Debian 12/13 or Ubuntu 24.04
+sudo apt install ./axonwall_0.11.68_amd64.deb`}
             </pre>
           </div>
         </section>

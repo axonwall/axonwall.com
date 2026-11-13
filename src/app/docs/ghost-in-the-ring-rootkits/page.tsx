@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import { ShieldAlert, Cpu, Lock, Eye, Terminal, Activity, FileCheck2, Bug } from 'lucide-react';
 import { Callout } from '../components/Callout';
 import { CodeBlock } from '../components/CodeBlock';
@@ -16,7 +17,7 @@ export default function GhostInTheRingDocsPage() {
       <div className="space-y-4 border-b border-slate-800/80 pb-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-          Ring-0 Kernel Telemetry &amp; Host Malware Defense Suite • v0.11.64
+          Ring-0 Kernel Telemetry &amp; Host Malware Defense Suite • v0.11.68
         </div>
         <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
           Host Malware &amp; Ghost-in-the-Ring Kernel Rootkit Hunter
@@ -305,7 +306,9 @@ sudo python3 /usr/local/bin/audit_hidden_bpf_prog_idr.py`}
           Configure <code className="font-mono text-emerald-300">hostDefense:</code> in{' '}
           <code className="font-mono text-emerald-300">/etc/axonwall/security.yaml</code> via{' '}
           <code className="font-mono text-emerald-300">axonwall-config security</code>, inspect live Ring-0 telemetry in the Web Console at{' '}
-          <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-slate-800/80 border border-slate-700/70 text-emerald-400 font-mono text-xs">/security/rootkit-hunter</span>
+          <Link href="/security/rootkit-hunter" className="font-mono text-emerald-300 underline">
+            /security/rootkit-hunter
+          </Link>
           , or run <code className="font-mono text-emerald-300">sudo axonwall-hunt-rootkits</code> from SSH.
         </Callout>
       </section>

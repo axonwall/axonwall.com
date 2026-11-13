@@ -1,10 +1,11 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Settings, RefreshCw, Building2, HardDrive, ShieldCheck, CheckCircle2, Download, GitBranch } from 'lucide-react';
+import { Settings, RefreshCw, Building2, HardDrive, ShieldCheck, CheckCircle2, Download, GitBranch, Cpu } from 'lucide-react';
 
 export function SystemView() {
-  const [activeTab, setActiveTab] = useState<'ab' | 'git' | 'sso' | 'backup'>('ab');
+  const [activeTab, setActiveTab] = useState<'ab' | 'git' | 'sso' | 'backup' | 'kernel'>('ab');
+  const [kernelTrack, setKernelTrack] = useState<'universal' | 'stripped'>('stripped');
   const [downloadSuccess, setDownloadSuccess] = useState(false);
 
   const handleDownloadBackup = () => {
@@ -73,6 +74,18 @@ export function SystemView() {
           <HardDrive className="w-4 h-4" />
           <span>Backup &amp; Snapshots</span>
         </button>
+
+        <button
+          onClick={() => setActiveTab('kernel')}
+          className={`pb-3 flex items-center gap-2 transition-colors border-b-2 whitespace-nowrap ${
+            activeTab === 'kernel'
+              ? 'border-emerald-400 text-emerald-400'
+              : 'border-transparent text-slate-400 hover:text-slate-200'
+          }`}
+        >
+          <Cpu className="w-4 h-4" />
+          <span>Custom Kernel Studio</span>
+        </button>
       </div>
 
       {/* TAB 1: A/B DUAL-ROOT */}
@@ -102,7 +115,7 @@ export function SystemView() {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-slate-500">OS Version:</span>
-                  <span className="text-emerald-400">Axonwall v0.11.64 (Stable)</span>
+                  <span className="text-emerald-400">Axonwall v0.11.68 (Stable)</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-slate-500">Kernel / Boot:</span>
@@ -291,6 +304,100 @@ index 3a118c0..9f41c8e 100644
                 <span>Configuration bundle generated: <strong>axonwall-backup-2026-11-10.json</strong></span>
               </div>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* TAB 4: CUSTOM KERNEL STUDIO */}
+      {activeTab === 'kernel' && (
+        <div className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <button
+              onClick={() => setKernelTrack('universal')}
+              className={`p-5 rounded-xl border text-left transition ${
+                kernelTrack === 'universal'
+                  ? 'bg-emerald-950/30 border-emerald-500/50'
+                  : 'bg-slate-900 border-slate-800 hover:border-slate-700'
+              }`}
+            >
+              <div className="flex items-center justify-between">
+                <span className="font-bold text-white text-sm">Track 1: Universal Hardened Kernel</span>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">
+                  Debian + KSPP
+                </span>
+              </div>
+              <p className="text-xs text-slate-400 mt-2">
+                Ships broad hardware module compatibility (NVMe, HBA, VirtIO, NICs) layered with KSPP hardening,
+                5-Hook BPF-LSM, K3s cgroups v2, OpenZFS SPL, and nftables LPM XDP.
+              </p>
+            </button>
+
+            <button
+              onClick={() => setKernelTrack('stripped')}
+              className={`p-5 rounded-xl border text-left transition ${
+                kernelTrack === 'stripped'
+                  ? 'bg-sky-950/30 border-sky-500/50'
+                  : 'bg-slate-900 border-slate-800 hover:border-slate-700'
+              }`}
+            >
+              <div className="flex items-center justify-between">
+                <span className="font-bold text-white text-sm">Track 2: Hardware-Stripped localmodconfig</span>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-sky-500/20 text-sky-300">
+                  ~78% Fewer Modules
+                </span>
+              </div>
+              <p className="text-xs text-slate-400 mt-2">
+                Detects host CPU microarchitecture, PCIe NICs/NVMe, IOMMU, and TPM 2.0 via sysfs, building a tailored
+                <code className="text-slate-200 mx-1">.deb</code> that strips unused drivers while locking mandatory runtime bits.
+              </p>
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="p-5 rounded-xl bg-slate-900 border border-slate-800 space-y-3">
+              <div className="flex items-center justify-between">
+                <h4 className="font-semibold text-sm text-white">Detected Hardware Inventory (Demo Node)</h4>
+                <span className="text-[11px] font-mono text-emerald-400">x86_64 • znver4</span>
+              </div>
+              <div className="space-y-2 text-xs font-mono text-slate-300">
+                <div className="flex justify-between p-2 rounded bg-slate-950 border border-slate-800/80">
+                  <span className="text-slate-500">CPU / IOMMU / TPM:</span>
+                  <span>AMD EPYC 4564P • AMD-Vi + TPM 2.0</span>
+                </div>
+                <div className="flex justify-between p-2 rounded bg-slate-950 border border-slate-800/80">
+                  <span className="text-slate-500">NIC Drivers:</span>
+                  <span>ixgbe (2x 10GbE SFP+), igc (2x 2.5GbE)</span>
+                </div>
+                <div className="flex justify-between p-2 rounded bg-slate-950 border border-slate-800/80">
+                  <span className="text-slate-500">Storage / FS:</span>
+                  <span>nvme, zfs, overlay, wireguard, cls_bpf</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="p-5 rounded-xl bg-slate-900 border border-slate-800 space-y-3">
+              <div className="flex items-center justify-between">
+                <h4 className="font-semibold text-sm text-white">24-Check Kernel Security &amp; Feature Audit</h4>
+                <span className="text-xs font-mono font-bold text-emerald-400">Score: 96 / 100</span>
+              </div>
+              <div className="grid grid-cols-2 gap-2 text-xs font-mono">
+                <div className="p-2 rounded bg-slate-950 border border-emerald-500/30 text-emerald-300">
+                  ✓ CONFIG_SECURITY_LOCKDOWN_LSM
+                </div>
+                <div className="p-2 rounded bg-slate-950 border border-emerald-500/30 text-emerald-300">
+                  ✓ CONFIG_BPF_LSM + BPF_JIT
+                </div>
+                <div className="p-2 rounded bg-slate-950 border border-emerald-500/30 text-emerald-300">
+                  ✓ CONFIG_CGROUPS + USER_NS
+                </div>
+                <div className="p-2 rounded bg-slate-950 border border-emerald-500/30 text-emerald-300">
+                  ✓ CONFIG_NF_TABLES + VETH
+                </div>
+              </div>
+              <div className="text-[11px] font-mono text-slate-400 pt-1">
+                Active Profile: <span className="text-white">{kernelTrack === 'universal' ? 'universal-kspp (make bindeb-pkg)' : 'stripped-host-localmod (znver4 + KSPP)'}</span>
+              </div>
+            </div>
           </div>
         </div>
       )}

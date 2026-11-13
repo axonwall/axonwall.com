@@ -4,7 +4,7 @@ import './globals.css';
 export const metadata: Metadata = {
   title: 'Axonwall | Sovereign Linux NGFW, OpenZFS NAS, K3s, KVM & Autonomous AI SOC',
   description:
-    'Axonwall v0.11.64: Sovereign Linux 6.12 LTS Next-Gen Firewall with multi-core nftables, CO-RE BPF-LSM Ring-0 exploit guard, ZFSBootMenu Root-on-ZFS, 2-Host HA, OpenZFS NAS, K3s, KVM/LXC, Vigilante Autonomous SOC, and Guardrailed MCP AI.',
+    'Axonwall v0.11.68: Sovereign Linux 6.12 LTS Next-Gen Firewall with multi-core nftables, Custom Hardened Kernels, CO-RE BPF-LSM Ring-0 exploit guard, ZFSBootMenu Root-on-ZFS, 2-Host HA, OpenZFS NAS, K3s, KVM/LXC, Vigilante Autonomous SOC, and Guardrailed MCP AI.',
   keywords: [
     'Axonwall',
     'Linux firewall',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   authors: [{ name: 'Axonwall Core Team' }],
   metadataBase: new URL('https://axonwall.com'),
   openGraph: {
-    title: 'Axonwall v0.11.64 | Sovereign Linux NGFW, ZFS NAS, K3s, KVM & AI SOC',
+    title: 'Axonwall v0.11.68 | Sovereign Linux NGFW, ZFS NAS, K3s, KVM & AI SOC',
     description:
       'Replace legacy BSD firewalls. Line-rate Linux nftables, 60s commit-confirm rollback, ZFSBootMenu & A/B Dual-Root, CO-RE BPF-LSM Ring-0 defense, Post-Quantum Rosenpass VPN, and 5 modular converged roles.',
     url: 'https://axonwall.com',
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
         url: '/og-image.svg',
         width: 1200,
         height: 630,
-        alt: 'Axonwall v0.11.64 — Sovereign Linux NGFW, OpenZFS NAS, K3s, KVM & Autonomous AI SOC',
+        alt: 'Axonwall v0.11.68 — Sovereign Linux NGFW, OpenZFS NAS, K3s, KVM & Autonomous AI SOC',
       },
     ],
     locale: 'en_US',
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Axonwall v0.11.64 | Sovereign Linux NGFW & Converged Security OS',
+    title: 'Axonwall v0.11.68 | Sovereign Linux NGFW & Converged Security OS',
     description:
       'Wire-speed Linux nftables, CO-RE BPF-LSM Ring-0 defense, ZFSBootMenu Root-on-ZFS, 2-Host HA, KVM/LXC, K3s, and Guardrailed MCP AI.',
     images: ['/og-image.svg'],

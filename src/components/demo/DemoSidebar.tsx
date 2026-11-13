@@ -232,7 +232,7 @@ export function DemoSidebar({
           <span className="text-slate-500">Appliance Release:</span>
           <span className="text-emerald-400 font-mono flex items-center gap-1">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            v0.11.64 (6.12 LTS)
+            v0.11.68 (6.12 LTS)
           </span>
         </div>
         <div className="flex items-center justify-between">

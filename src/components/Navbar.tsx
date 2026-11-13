@@ -81,6 +81,13 @@ const PRODUCT_ITEMS: DropdownItem[] = [
     badge: 'UKI',
   },
   {
+    title: 'Custom Hardened Kernels & Studio',
+    desc: 'Universal KSPP + k3s + ZFS + eBPF Linux 6.12 LTS kernels & localmodconfig studio',
+    href: '/docs/custom-kernel',
+    icon: Lock,
+    badge: 'KSPP',
+  },
+  {
     title: 'Eluvix Sovereign AI Router & DLP',
     desc: 'Switchyard 4-tier routing, PrivacyGuard PII/secret DLP & 8 agent harnesses',
     href: '/docs/eluvix-ai-router',
@@ -111,11 +118,18 @@ const PRODUCT_ITEMS: DropdownItem[] = [
 
 const DOCS_ITEMS: DropdownItem[] = [
   {
-    title: 'Documentation Hub (v0.11.64)',
-    desc: 'All 24 technical guides: OS setup, 12 YAML domains, HA, Ring-0 & API reference',
+    title: 'Documentation Hub (v0.11.68)',
+    desc: 'All 25 technical guides: OS setup, KSPP kernels, 12 YAML domains, HA, Ring-0 & API',
     href: '/docs',
     icon: FileText,
-    badge: '24 Guides',
+    badge: '25 Guides',
+  },
+  {
+    title: 'Custom Hardened Kernels & Studio',
+    desc: 'Hardware-locked localmodconfig builds, 24-check audit & ZBM safe staging',
+    href: '/docs/custom-kernel',
+    icon: Lock,
+    badge: 'KSPP',
   },
   {
     title: 'MCP Security AI & Guardrails',
@@ -184,11 +198,11 @@ const DOCS_ITEMS: DropdownItem[] = [
 
 const EXPLORE_ITEMS: DropdownItem[] = [
   {
-    title: 'Releases & Downloads (v0.11.64)',
-    desc: 'Unified NGFW + Vault ISO, Super-Slim Edge UKI (.efi), Cloud QCOW2 & Debian .deb',
+    title: 'Releases & Downloads (v0.11.68)',
+    desc: 'Unified NGFW + Vault + K3s-Storage ISO, Edge UKI (.efi), Cloud QCOW2 & .deb',
     href: '/releases',
     icon: Download,
-    badge: 'v0.11.64',
+    badge: 'v0.11.68',
   },
   {
     title: 'Live Web Console Demo',
@@ -440,7 +454,7 @@ export function Navbar() {
             <Download className="w-3.5 h-3.5 text-emerald-400" />
             <span>Releases</span>
             <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
-              v0.11.64
+              v0.11.68
             </span>
           </Link>
         </nav>

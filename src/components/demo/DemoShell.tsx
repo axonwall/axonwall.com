@@ -131,7 +131,7 @@ export function DemoShell() {
           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
           <span className="font-semibold text-emerald-300">LIVE INTERACTIVE SANDBOX</span>
           <span className="text-slate-500">•</span>
-          <span className="hidden sm:inline">Simulated Axonwall v0.11.64 Appliance</span>
+          <span className="hidden sm:inline">Simulated Axonwall v0.11.68 Appliance</span>
           <span className="text-slate-500 hidden sm:inline">•</span>
           <span className="font-mono text-slate-400">Web Console Port 2966</span>
         </div>

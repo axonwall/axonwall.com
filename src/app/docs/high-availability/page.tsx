@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import {
   ArrowRightLeft,
   Shield,
@@ -30,7 +31,7 @@ export default function HighAvailabilityDocPage() {
       <div className="space-y-4 border-b border-slate-800/80 pb-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-          Clustering, 6-Plane State Replication &amp; Two-Host Walkthrough • v0.11.64
+          Clustering, 6-Plane State Replication &amp; Two-Host Walkthrough • v0.11.68
         </div>
         <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
           High Availability &amp; Two-Host Cluster Setup
@@ -553,7 +554,7 @@ export default function HighAvailabilityDocPage() {
                 <Layers className="w-4 h-4 text-emerald-400" /> 1. Web Console (/ha)
               </div>
               <p className="text-slate-400 leading-relaxed">
-                Navigate to <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-slate-800/80 border border-slate-700/70 text-emerald-400 font-mono text-xs">/ha</span> on
+                Navigate to <Link href="/ha" className="text-emerald-400 underline hover:text-emerald-300">/ha</Link> on
                 Host 1 and Host 2, toggle <strong>Failover Configuration</strong>, enter the Node Role, VRID, Sync
                 Interface (<code className="font-mono">eth3</code>), Peer Sync IP, Sync Password, Virtual IP (CIDR), and
                 VRRP Interface (<code className="font-mono">eth1</code>), enable <strong>Distributed SQLite &amp; Mesh State Sync</strong>,
@@ -667,7 +668,7 @@ sudo curl -sk --cacert /var/lib/axonwall/secrets/ha-pki/ca.crt \\
           />
 
           <p className="text-xs text-slate-400">
-            In the Web Console under <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-slate-800/80 border border-slate-700/70 text-emerald-400 font-mono text-xs">/ha</span>, check the{' '}
+            In the Web Console under <Link href="/ha" className="text-emerald-400 underline">/ha</Link>, check the{' '}
             <strong>Sync Trust (live from this node&apos;s daemon)</strong> panel inside the SQLite sync card: once PKI
             enrollment completes, <code className="text-emerald-400 font-mono">PKI enrollment: enrolled</code> and{' '}
             <code className="text-indigo-300 font-mono">Transport in effect: mtls</code> will appear, and both nodes will
