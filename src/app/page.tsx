@@ -106,12 +106,30 @@ export default function HomePage() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative pt-20 pb-24 overflow-hidden">
+      <section className="relative pt-12 sm:pt-16 pb-24 overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 text-center space-y-8">
+          {/* Brand Rebrand Hero Banner Showcase */}
+          <div className="relative max-w-5xl mx-auto rounded-2xl sm:rounded-3xl overflow-hidden border border-emerald-500/30 bg-slate-950/90 shadow-[0_0_70px_-15px_rgba(16,185,129,0.4)]">
+            <picture>
+              <source srcSet="/hero-axonwall.webp" type="image/webp" />
+              <img
+                src="/hero-axonwall.png"
+                alt="Axonwall Crest — Neural Cyber-Shield Mounted on a Fortified Brick Wall with Twin Crossed Battle Axes"
+                width={1376}
+                height={768}
+                fetchPriority="high"
+                loading="eager"
+                decoding="async"
+                className="w-full h-auto max-h-[440px] sm:max-h-[500px] object-cover object-center"
+              />
+            </picture>
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#080c14] via-[#080c14]/25 to-transparent" />
+          </div>
+
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
+          <div className="relative -mt-4 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-emerald-400 text-xs font-semibold backdrop-blur-md">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            Axonwall v0.11.71 • Blackbox eBPF Threat-LLM Harvester, 25-Check Kernels, 5-Hook BPF-LSM, ZBM v3.1.0 &amp; 25-Tool MCP
+            Axonwall v0.11.73 • Plymouth Branded Boot, Blackbox eBPF Threat-LLM Harvester, 25-Check Kernels, 5-Hook BPF-LSM &amp; 25-Tool MCP
           </div>
 
           {/* Heading */}
@@ -261,7 +279,7 @@ export default function HomePage() {
                 <thead>
                   <tr className="bg-slate-950/90 border-b border-slate-800 text-slate-300">
                     <th className="py-3.5 px-4 font-bold">Capability Domain</th>
-                    <th className="py-3.5 px-4 font-bold text-emerald-400">Axonwall v0.11.68</th>
+                    <th className="py-3.5 px-4 font-bold text-emerald-400">Axonwall v0.11.73</th>
                     <th className="py-3.5 px-4 font-bold text-slate-400">OPNsense / pfSense</th>
                     <th className="py-3.5 px-4 font-bold text-slate-400">TrueNAS SCALE</th>
                     <th className="py-3.5 px-4 font-bold text-slate-400">Proxmox VE 8.x</th>
@@ -343,7 +361,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-6 space-y-16">
           <div className="text-center max-w-3xl mx-auto space-y-4">
             <span className="text-xs font-semibold text-emerald-400 uppercase tracking-wider">
-              Converged Platform Architecture • v0.11.68
+              Converged Platform Architecture • v0.11.73
             </span>
             <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
               5 Modular Core Roles, One Unified Control Plane
