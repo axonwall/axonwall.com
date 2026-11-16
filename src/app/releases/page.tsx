@@ -137,11 +137,22 @@ const RELEASE_ARTIFACTS: ReleaseArtifact[] = [
 const RELEASE_CHANGELOG = [
   {
     version: 'Upcoming (main)',
-    date: 'November 13, 2026',
-    tag: 'Custom Kernel Studio & KSPP',
+    date: 'November 15, 2026',
+    tag: 'Blackbox Harvester & KSPP Kernels',
     highlights: [
-      'Universal & Hardware-Stripped Hardened Linux 6.12 LTS Kernel Pipeline (packaging/kernel/): Seven layered Kconfig fragments delivering Debian-equivalent server/cloud hardware support with KSPP memory/slab/stack hardening, integrity-mode Lockdown LSM, BPF_LSM, rootless USER_NS + cgroups v2, OpenZFS DKMS symbol preservation (# CONFIG_TRIM_UNUSED_KSYMS is not set), nftables flowtable fastpath, and eBPF CO-RE BTF.',
-      'Interactive Custom Kernel Studio (/system/kernel & axonwallctl kernel): Detects host CPU flags/ISA (-march x86-64-v2/v3/v4/native), IOMMU, UEFI Secure Boot, TPM 2.0, watchdogs, PCIe/NIC/NVMe devices, and active lsmod modules; runs a 24-check kernel posture audit; synthesizes minimal localmodconfig fragments; compiles asynchronously via axonwalld; and stages installs safely via ZFSBootMenu Boot Environment clones or side-by-side dpkg + update-grub.',
+      'Axonwall Blackbox: Extreme eBPF Threat-LLM Harvester (ebpf-threat-harvester): Strictly opt-in Ring-0 flight recorder correlating TCX ingress/egress flow sketches, JA4T, DNS entropy, and Tier-1 L7 slices with sched_process_exec, sys_enter_memfd_create, and guarded uprobe/SSL_write. Enforces mandatory pre-disk DLP secret/token masking, prefix-preserving AES-128 Crypto-PAn IPv4/IPv6 + HMAC hostname anonymization, hardcoded control-plane TLS uprobe exclusions (axonwalld, sshd, eluvix, vault, k3s, etc.), 45s Gold/Silver oracle correlation, Teacher-LLM distillation, OpenZFS zstd spooling, Dual-Track .tar.zst (ChatML SFT/RLVR train.jsonl/val.jsonl + Apache Parquet 1.0 features.parquet), and AWS SigV4 S3 shipping.',
+      'Universal & Hardware-Stripped Hardened Linux 6.12 LTS Kernel Pipeline (packaging/kernel/): Seven layered Kconfig fragments (now including CONFIG_NET_CLS_ACT, CONFIG_NET_SCH_INGRESS, CONFIG_UPROBE_EVENTS & CONFIG_FTRACE_SYSCALLS) delivering Debian-equivalent server/cloud hardware support with KSPP hardening, integrity-mode Lockdown LSM, BPF_LSM, rootless USER_NS + cgroups v2, OpenZFS DKMS symbol preservation, nftables flowtables, and eBPF CO-RE BTF.',
+      'Interactive 25-Check Custom Kernel Studio (/system/kernel & axonwallctl kernel): Inventories CPU flags/ISA (-march x86-64-v2/v3/v4/native), IOMMU, UEFI Secure Boot, TPM 2.0, watchdogs, PCIe/NIC/NVMe devices, and active lsmod modules; audits /boot/config-* or /proc/config.gz against 25 checks (including ebpf-tcx-uprobe-harvester); compiles minimal localmodconfig fragments asynchronously; and stages installs via ZFSBootMenu clones or side-by-side GRUB.',
+    ],
+  },
+  {
+    version: 'v0.11.69 – v0.11.71',
+    date: 'November 13–15, 2026',
+    tag: 'Arch Parity, Rootless Dev & Installer Safety',
+    highlights: [
+      'Arch / Omarchy Linux Parity & Zero-Config Rootless Dev Sandbox (.axonwall-dev/): Run axonwalld, Web Console, and axonwallctl inside a workspace-local rootless sandbox, with Arch Linux distro detection, pacman upgrades, /proc/config.gz kernel audit fallback, Cloud-Init symlink guards, and dev CSRF/auth hardening.',
+      'Installer OS/Disk Detection & Reinstall Safety Guards: Hides installer menus on already-installed booted systems, detects existing OS and ZFS partitions on candidate disks, and requires explicit confirmation before destructive writes.',
+      'First-Boot Password Recovery & Cross-Edition Credential Guarantees: Fixes unprovisioned console password-setter glitch loops and ensures consistent default credentials across axonwall, vault, and k3s-storage editions.',
     ],
   },
   {

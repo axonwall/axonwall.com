@@ -56,6 +56,7 @@ Satellite Fleet    : 4 micro-edge nodes synchronized (v24)`,
   axonwall-tui              - Launch 11-tab interactive terminal dashboard & NastyMap
   axonwall-hunt-rootkits    - Run 8-engine Malware Suite + 5-hook CO-RE BPF-LSM audit
   axonwallctl ebpf overview - Inspect Dual-Stack VLAN XDP, BPF-LSM & BPF_TOKEN mounts
+  axonwallctl harvester     - Inspect Blackbox Threat-LLM Harvester (status, episodes, export, ship)
   axonwallctl kubeconfig    - Export non-root HA K3s credentials to ~/.kube/config
   axonwallctl mcp status    - Inspect 16-scope / 25-tool MCP AI kill-switch & leases
   ip addr                   - List network interfaces and assigned IP subnets
@@ -110,6 +111,13 @@ XDP Blocklists     : 4 active monotonic TTL XDP_DROP bans (0 internal/management
 CO-RE BPF-LSM      : 5/5 hooks attached (socket_bind, bpf, uring_sqpoll, bpf_token_create, bpf_token_cmd)
 BPF_TOKEN Mounts   : /run/axonwall/bpffs-tokens/{networking-safe, cgroup-observability, firewall-xdp-tc}
 Ring-0 Isolation   : kprobe, tracepoint, perf_event, tracing, struct_ops, lsm -> BLOCKED (-EPERM)`;
+        } else if (parts[1] === 'harvester' || parts[1] === 'blackbox') {
+          out = `[Axonwall Blackbox: Extreme eBPF Threat-LLM Harvester — v0.11.71]
+Opt-In Mode        : adaptive (Tier-0 sketches + Canary Dark-Port / memfd escalation)
+Ring-0 eBPF Hooks  : ATTACHED (tc_harvester_ingress, tc_harvester_egress, tp_harvester_exec, tp_harvester_memfd)
+TLS Uprobe Guard   : uprobe/SSL_write DISABLED (axonwalld, sshd, eluvix, vault, k3s, containerd hardcoded excluded)
+Oracle Corpus      : 142 Gold | 38 Silver | 1,240 Benign Sampled | 48 Pinned Gold
+Pre-Disk DLP Scrub : 19 secrets redacted prior to write | OpenZFS dataset tank/threat-corpus (zstd, 1.4 GiB / 10 GiB)`;
         } else if (parts[1] === 'kubeconfig') {
           out = `[axonwall-kubeconfig] Read /etc/rancher/k3s/k3s.yaml (group: axonwall-api 0640)
 [axonwall-kubeconfig] Bound API server endpoint -> https://192.168.100.1:6443 (Floating LAN VIP)
@@ -121,7 +129,7 @@ Subsystem Coverage : Firewall + Ring-0 eBPF/BPF_TOKEN + KVM/LXC + K3s + OpenZFS 
 Active Leases      : 0 / 250 (table inet axonwall_mcp & XDP blocklists clean)
 Audit Hash Chain   : VERIFIED (/var/lib/axonwall/mcp-audit.jsonl)`;
         } else {
-          out = `Usage: axonwallctl <status | validate | diff | apply | confirm | rollback | ebpf | zbm | update | plugin | kubeconfig | mcp | cloudinit | config>`;
+          out = `Usage: axonwallctl <status | validate | diff | apply | confirm | rollback | kernel | ebpf | harvester | zbm | update | plugin | kubeconfig | mcp | cloudinit | config>`;
         }
         break;
 
@@ -267,6 +275,7 @@ rtt min/avg/max/mdev = 3.980/4.040/4.120/0.052 ms`;
           'nft list ruleset',
           'axonwallctl status',
           'axonwallctl ebpf overview',
+          'axonwallctl harvester status',
           'axonwall-config',
           'axonwall-tui',
           'axonwall-hunt-rootkits',

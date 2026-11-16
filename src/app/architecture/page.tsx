@@ -17,13 +17,14 @@ import {
   Boxes,
   ShieldAlert,
   HardDrive,
+  Binary,
 } from 'lucide-react';
 import { Navbar } from '../../components/Navbar';
 
 export const metadata = {
-  title: 'Axonwall Architecture | v0.11.68 System Design & Ring-0 Blueprint',
+  title: 'Axonwall Architecture | v0.11.71 System Design & Ring-0 Blueprint',
   description:
-    'Detailed architectural blueprint of Axonwall v0.11.68: 5 modular core roles, 12 bidirectional /etc/axonwall/*.yaml files, Linux 6.12 LTS nftables & XDP data plane, CO-RE BPF-LSM Ring-0 exploit guard, Custom Hardened Kernels, ZFSBootMenu v3.1.0 & A/B Dual-Root boot, Coroot eBPF APM, and isolated MCP tactical leases.',
+    'Detailed architectural blueprint of Axonwall v0.11.71: 5 modular core roles, 12 bidirectional /etc/axonwall/*.yaml files, Linux 6.12 LTS nftables & XDP data plane, CO-RE BPF-LSM Ring-0 exploit guard, Blackbox eBPF Threat-LLM Harvester, 25-check Custom Hardened Kernels, ZFSBootMenu v3.1.0 & A/B Dual-Root boot, Coroot eBPF APM, and isolated MCP tactical leases.',
 };
 
 const YAML_DOMAINS = [
@@ -33,7 +34,7 @@ const YAML_DOMAINS = [
   { file: 'routing.yaml', scope: 'Gateways, Multi-WAN failover/ECMP groups, static routes & FRR (BGP/OSPF/BFD)' },
   { file: 'services.yaml', scope: 'Kea DHCPv4/v6 IA_PD + radvd SLAAC, Unbound RPZ, mDNS, UPnP/NAT-PMP, HAProxy & RADIUS' },
   { file: 'vpn.yaml', scope: 'WireGuard, Rosenpass Dual-KEM (McEliece + ML-KEM-512), strongSwan IPsec, OpenVPN DCO & Headscale' },
-  { file: 'security.yaml', scope: 'Suricata 7+, CrowdSec, GeoIP, Zero-Trust IAP, OIDC/LDAP SSO, 5-Hook BPF-LSM & BPF_TOKEN' },
+  { file: 'security.yaml', scope: 'Suricata 7+, CrowdSec, GeoIP, Zero-Trust IAP, OIDC/LDAP SSO, 5-Hook BPF-LSM, BPF_TOKEN & Blackbox Threat Harvester (threatHarvester)' },
   { file: 'ha.yaml', scope: '2-Host VRRP + conntrackd + CSR mTLS PKI state sync & Satellite Fleet manager' },
   { file: 'storage.yaml', scope: 'OpenZFS pools + Special NVMe VDEVs, AES-256-GCM, Checkpoints/TRIM, Time Machine, Cloud Sync & S3' },
   { file: 'k3s.yaml', scope: 'Embedded HA K3s, Cilium eBPF CNI + Hubble, Etcd S3 snapshots, UserNS + BPF_TOKEN & OpenEBS CSI' },
@@ -56,7 +57,7 @@ export default function StandaloneArchitecturePage() {
         <div className="text-center space-y-5">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            System Blueprint &amp; Technical Specification • v0.11.68
+            System Blueprint &amp; Technical Specification • v0.11.71
           </div>
           <h1 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight max-w-4xl mx-auto leading-tight">
             The Linux-Native{' '}
@@ -99,6 +100,7 @@ export default function StandaloneArchitecturePage() {
  │   axonwall_mcp (TTL) │  │    io_uring / UserNS)  │  │ • core-virt (KVM/LXC/VFIO)  │
  │ • Rosenpass ML-KEM   │  │ • Coroot eBPF L7 APM   │  │ • core-vigilante (SOAR/SOC) │
  │ • Keepalived + FTFW  │  │ • Suricata 7+ & 8 AVs  │  │ • ZFSBootMenu v3.1.0 & A/B  │
+ │                      │  │ • Blackbox Threat-LLM  │  │   (.axonwall-dev rootless)  │
  └──────────────────────┘  └────────────────────────┘  └─────────────────────────────┘`}
           </pre>
         </section>
@@ -293,14 +295,36 @@ export default function StandaloneArchitecturePage() {
                 Modular Core Roles guide <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
+
+            <div className="p-6 rounded-xl bg-slate-900/40 border border-cyan-500/30 space-y-3 md:col-span-2">
+              <div className="flex items-center gap-2.5 font-bold text-white text-base">
+                <Binary className="w-5 h-5 text-cyan-400" />
+                <span>Axonwall Blackbox: Opt-In eBPF Threat-LLM Harvester (<code className="text-cyan-300">ebpf-threat-harvester</code>)</span>
+              </div>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                Correlates TCX wire sketches &amp; L7 slices with <code className="text-slate-200">sched_process_exec</code>,{' '}
+                <code className="text-slate-200">sys_enter_memfd_create</code>, and guarded{' '}
+                <code className="text-slate-200">uprobe/SSL_write</code> (with hardcoded control-plane daemon exclusions).
+                Applies pre-disk DLP secret masking, prefix-preserving AES-128 Crypto-PAn IPv4/IPv6 anonymization, 45s
+                Gold/Silver oracle labeling, OpenZFS <code className="text-slate-200">zstd</code> spooling, and Dual-Track
+                SFT/RLVR ChatML JSONL + Apache Parquet 1.0 <code className="text-slate-200">.tar.zst</code> export &amp;
+                AWS SigV4 Vault/S3 shipping.
+              </p>
+              <Link
+                href="/docs/threat-harvester"
+                className="text-xs text-cyan-400 hover:text-cyan-300 font-semibold inline-flex items-center gap-1"
+              >
+                Read Blackbox Threat-LLM Harvester architecture <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
           </div>
         </section>
 
         {/* CTA Section */}
         <section className="p-8 rounded-2xl bg-gradient-to-r from-emerald-950/40 via-slate-900 to-sky-950/40 border border-emerald-500/30 text-center space-y-6">
-          <h2 className="text-3xl font-extrabold text-white">Ready to deploy Axonwall v0.11.68?</h2>
+          <h2 className="text-3xl font-extrabold text-white">Ready to deploy Axonwall v0.11.71?</h2>
           <p className="text-sm text-slate-300 max-w-xl mx-auto">
-            Explore all 25 engineering guides, test the interactive Web Console sandbox, or download the Ed25519-signed
+            Explore all 26 engineering guides, test the interactive Web Console sandbox, or download the Ed25519-signed
             unified triple-edition ISO (NGFW, Vault S3 &amp; K3s-Storage) with Custom Hardened Kernel support.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
@@ -308,7 +332,7 @@ export default function StandaloneArchitecturePage() {
               href="/docs"
               className="px-6 py-2.5 rounded-xl font-semibold text-xs bg-emerald-600 hover:bg-emerald-500 text-white transition shadow-lg shadow-emerald-950/60"
             >
-              Explore All 25 Guides
+              Explore All 26 Guides
             </Link>
             <Link
               href="/demo/"

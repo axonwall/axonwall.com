@@ -33,6 +33,7 @@ import {
   Cloud,
   HardDrive,
   FileCode,
+  Binary,
 } from 'lucide-react';
 import { Logo } from '../components/Logo';
 import { HeroSecurityHUD } from '../components/HeroSecurityHUD';
@@ -110,7 +111,7 @@ export default function HomePage() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            Axonwall v0.11.68 • Linux 6.12 LTS, Custom Hardened Kernels, 5-Hook BPF-LSM, LPM CIDR/SYN XDP, ZBM v3.1.0 &amp; 25-Tool MCP
+            Axonwall v0.11.71 • Blackbox eBPF Threat-LLM Harvester, 25-Check Kernels, 5-Hook BPF-LSM, ZBM v3.1.0 &amp; 25-Tool MCP
           </div>
 
           {/* Heading */}
@@ -150,7 +151,7 @@ export default function HomePage() {
               href="/docs"
               className="w-full sm:w-auto px-6 py-3.5 rounded-xl text-sm font-semibold bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-slate-800 transition flex items-center justify-center gap-2"
             >
-              <BookOpen className="w-4 h-4 text-sky-400" /> Explore 25 Documentation Guides
+              <BookOpen className="w-4 h-4 text-sky-400" /> Explore 26 Documentation Guides
             </Link>
           </div>
 
@@ -714,6 +715,29 @@ export default function HomePage() {
                 and Linux CAKE + IFB ingress shaping to eliminate bufferbloat.
               </p>
             </div>
+
+            {/* 16. Axonwall Blackbox: eBPF Threat-LLM Harvester */}
+            <Link
+              href="/docs/threat-harvester"
+              className="p-6 rounded-2xl bg-slate-900 border border-cyan-500/40 hover:border-cyan-500/80 transition space-y-3 group block"
+            >
+              <div className="flex items-center justify-between">
+                <div className="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400">
+                  <Binary className="w-4 h-4" />
+                </div>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">
+                  OPT-IN • SFT + PARQUET
+                </span>
+              </div>
+              <h3 className="text-base font-bold text-white group-hover:text-cyan-300 transition">
+                Axonwall Blackbox: eBPF Threat-LLM Harvester
+              </h3>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                Opt-in Ring-0 TCX flow sketches + <code className="text-slate-300">execve</code>/
+                <code className="text-slate-300">memfd</code> lineage + guarded TLS uprobes with mandatory pre-disk DLP
+                redaction, Crypto-PAn anonymization, and <code className="text-slate-300">.tar.zst</code> SFT + Parquet export.
+              </p>
+            </Link>
           </div>
         </div>
       </section>
@@ -727,14 +751,14 @@ export default function HomePage() {
                 Engineering Documentation &amp; Guides
               </span>
               <h2 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
-                24 Comprehensive Technical Guides
+                26 Comprehensive Technical Guides
               </h2>
             </div>
             <Link
               href="/docs"
               className="inline-flex items-center gap-2 text-xs font-semibold text-emerald-400 hover:text-emerald-300"
             >
-              Browse All 24 Comprehensive Guides <ArrowRight className="w-4 h-4" />
+              Browse All 26 Comprehensive Guides <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
 

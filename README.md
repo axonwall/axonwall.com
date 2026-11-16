@@ -1,8 +1,8 @@
-# axonwall.com — Official Public Website & Interactive Console Sandbox (`v0.11.68`)
+# axonwall.com — Official Public Website & Interactive Console Sandbox (`v0.11.71`)
 
-This directory contains the statically exported Next.js 14 website, interactive browser console sandbox, theme schema registry, and public technical documentation for **[Axonwall](https://axonwall.com)** — the Sovereign Linux Next-Generation Firewall (`core-firewall`), OpenZFS + Garage S3 Vault NAS (`core-nas`), K3s Edge Cloud (`core-k3s`), KVM/LXC Hypervisor (`core-virt`), and Vigilante Autonomous AI SOC (`core-vigilante`).
+This directory contains the statically exported Next.js 15 website, interactive browser console sandbox, theme schema registry, and public technical documentation for **[Axonwall](https://axonwall.com)** — the Sovereign Linux Next-Generation Firewall (`core-firewall`), OpenZFS + Garage S3 Vault NAS (`core-nas`), K3s Edge Cloud (`core-k3s`), KVM/LXC Hypervisor (`core-virt`), and Vigilante Autonomous AI SOC (`core-vigilante`).
 
-Includes the interactive Custom Kernel Studio demo, the Custom Hardened Kernels guide (`docs/custom-kernel`), Barebones K3s + Storage (`k3s-storage`) edition documentation, and `v0.11.68` SHA-256 release artifacts.
+Includes the interactive Custom Kernel Studio demo (`25-check` audit + `/proc/config.gz` fallback), Axonwall Blackbox eBPF Threat-LLM Harvester guide (`docs/threat-harvester`), Custom Hardened Kernels guide (`docs/custom-kernel`), Barebones K3s + Storage (`k3s-storage`) edition documentation, Arch Linux parity + `.axonwall-dev/` sandbox notes, and `v0.11.68`–`v0.11.71` release history.
 
 ## Tech Stack
 
@@ -41,8 +41,8 @@ axonwall.com/
 │   │   ├── page.tsx                 # Landing page, 5 core roles, TCO calculator & downloads
 │   │   ├── architecture/page.tsx    # 4-layer architecture, 12 YAML domains, BPF-LSM & MCP leases
 │   │   ├── demo/page.tsx            # Client-only interactive Port 2966 Web Console sandbox
-│   │   ├── releases/page.tsx        # v0.11.68 SHA-256 checksums, artifacts & release changelog
-│   │   └── docs/                    # 25 technical documentation guides + DocsSidebar
+│   │   ├── releases/page.tsx        # v0.11.68 SHA-256 checksums, artifacts & v0.11.69-v0.11.71 release changelog
+│   │   └── docs/                    # 26 technical documentation guides + DocsSidebar
 │   ├── components/
 │   │   ├── Navbar.tsx               # Global navigation with dropdown badges & theme switcher
 │   │   ├── HeroSecurityHUD.tsx      # Live telemetry & atomic nftables hero preview

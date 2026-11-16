@@ -25,6 +25,7 @@ import {
   Boxes,
   Bot,
   Users,
+  Binary,
 } from 'lucide-react';
 import { Logo } from './Logo';
 import { ThemeSwitcher } from './ThemeSwitcher';
@@ -118,15 +119,22 @@ const PRODUCT_ITEMS: DropdownItem[] = [
 
 const DOCS_ITEMS: DropdownItem[] = [
   {
-    title: 'Documentation Hub (v0.11.68)',
-    desc: 'All 25 technical guides: OS setup, KSPP kernels, 12 YAML domains, HA, Ring-0 & API',
+    title: 'Documentation Hub (v0.11.71)',
+    desc: 'All 26 technical guides: Blackbox Threat-LLM Harvester, KSPP kernels, 12 YAML domains, HA, Ring-0 & API',
     href: '/docs',
     icon: FileText,
-    badge: '25 Guides',
+    badge: '26 Guides',
+  },
+  {
+    title: 'Blackbox Threat-LLM Harvester',
+    desc: 'Opt-in Ring-0 TCX/tracepoint flight recorder, DLP scrubber & SFT/Parquet exporter',
+    href: '/docs/threat-harvester',
+    icon: Binary,
+    badge: 'eBPF+LLM',
   },
   {
     title: 'Custom Hardened Kernels & Studio',
-    desc: 'Hardware-locked localmodconfig builds, 24-check audit & ZBM safe staging',
+    desc: 'Hardware-locked localmodconfig builds, 25-check audit & ZBM safe staging',
     href: '/docs/custom-kernel',
     icon: Lock,
     badge: 'KSPP',

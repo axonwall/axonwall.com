@@ -12,11 +12,16 @@ import {
   AlertTriangle,
   Play,
   Lock,
+  Binary,
+  Database,
+  ShieldCheck,
 } from 'lucide-react';
 import { DemoCrowdSecAlert, INITIAL_CROWDSEC_ALERTS } from '../demoState';
 
 export function ThreatDefenseView() {
-  const [activeTab, setActiveTab] = useState<'sinkhole' | 'geoip' | 'crowdsec' | 'rootkit'>('sinkhole');
+  const [activeTab, setActiveTab] = useState<'sinkhole' | 'geoip' | 'crowdsec' | 'rootkit' | 'harvester'>('sinkhole');
+  const [harvesterEnabled, setHarvesterEnabled] = useState(true);
+  const [simulatedBlackboxCount, setSimulatedBlackboxCount] = useState(142);
 
   // DNS Sinkhole Test State
   const [testDomain, setTestDomain] = useState('');
@@ -136,6 +141,18 @@ export function ThreatDefenseView() {
         >
           <Lock className="w-4 h-4" />
           <span>Ghost-in-the-Ring & Rootkit Hunter</span>
+        </button>
+
+        <button
+          onClick={() => setActiveTab('harvester')}
+          className={`pb-3 flex items-center gap-2 transition-colors border-b-2 ${
+            activeTab === 'harvester'
+              ? 'border-cyan-400 text-cyan-400'
+              : 'border-transparent text-slate-400 hover:text-slate-200'
+          }`}
+        >
+          <Binary className="w-4 h-4" />
+          <span>Blackbox Threat Harvester</span>
         </button>
       </div>
 
@@ -430,6 +447,93 @@ export function ThreatDefenseView() {
                   <p className="text-slate-400 leading-relaxed">{engine.detail}</p>
                 </div>
               ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* TAB 5: BLACKBOX THREAT-LLM HARVESTER (OPT-IN SANDBOX PREVIEW) */}
+      {activeTab === 'harvester' && (
+        <div className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div className="p-4 rounded-xl bg-slate-900 border border-cyan-500/30">
+              <span className="text-xs text-slate-400 font-medium">Plugin State (Opt-In)</span>
+              <div className="text-xl font-bold font-mono text-cyan-300 mt-1">
+                {harvesterEnabled ? 'ACTIVE (ADAPTIVE)' : 'STANDBY (OFF)'}
+              </div>
+              <span className="text-[11px] text-slate-500 font-mono mt-1 block">TCX + execve/memfd + DLP</span>
+            </div>
+            <div className="p-4 rounded-xl bg-slate-900 border border-slate-800">
+              <span className="text-xs text-slate-400 font-medium">Oracle Gold Episodes</span>
+              <div className="text-xl font-bold font-mono text-red-300 mt-1">{simulatedBlackboxCount}</div>
+              <span className="text-[11px] text-slate-500 font-mono mt-1 block">Pinned in OpenZFS zstd spool</span>
+            </div>
+            <div className="p-4 rounded-xl bg-slate-900 border border-slate-800">
+              <span className="text-xs text-slate-400 font-medium">Pre-Disk DLP Redactions</span>
+              <div className="text-xl font-bold font-mono text-emerald-400 mt-1">100% Masked</div>
+              <span className="text-[11px] text-slate-500 font-mono mt-1 block">JWT / Bearer / AKIA / PEM scrubbed</span>
+            </div>
+            <div className="p-4 rounded-xl bg-slate-900 border border-slate-800">
+              <span className="text-xs text-slate-400 font-medium">Dual-Track Bundle</span>
+              <div className="text-xl font-bold font-mono text-purple-300 mt-1">.tar.zst Ready</div>
+              <span className="text-[11px] text-slate-500 font-mono mt-1 block">ChatML JSONL + features.parquet</span>
+            </div>
+          </div>
+
+          <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 flex flex-wrap items-center justify-between gap-4">
+            <div className="space-y-1 text-xs">
+              <div className="font-semibold text-white flex items-center gap-2">
+                <Database className="w-4 h-4 text-cyan-400" />
+                <span>Interactive Blackbox Episode Simulator (`ebpf-threat-harvester`)</span>
+              </div>
+              <p className="text-slate-400">
+                Toggle the strictly opt-in Ring-0 harvester or synthesize a dark-port RCE + <code className="font-mono text-red-300">memfd_create</code> episode with Crypto-PAn IP anonymization.
+              </p>
+            </div>
+            <div className="flex flex-wrap items-center gap-2.5">
+              <button
+                type="button"
+                onClick={() => setHarvesterEnabled((v) => !v)}
+                className="px-3.5 py-2 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition"
+              >
+                {harvesterEnabled ? 'Disable Opt-In' : 'Enable Opt-In'}
+              </button>
+              <button
+                type="button"
+                onClick={() => setSimulatedBlackboxCount((c) => c + 1)}
+                className="px-3.5 py-2 rounded-lg text-xs font-semibold bg-cyan-600 hover:bg-cyan-500 text-white transition flex items-center gap-1.5"
+              >
+                <Play className="w-3.5 h-3.5" />
+                Simulate Honeypot RCE + memfd
+              </button>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 text-xs">
+            <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
+              <div className="font-semibold text-cyan-300 flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4" />
+                <span>Causal Episode DSL (SFT Input • Crypto-PAn + DLP Scrubbed)</span>
+              </div>
+              <pre className="text-[11px] font-mono text-slate-300 whitespace-pre-wrap leading-relaxed">
+{`[EPISODE ep-gold-${simulatedBlackboxCount}] TIER=gold_malicious ORACLES=dark_port:4444,memfd_create
+FLOW 198.51.196.42:54112 -> 192.0.140.10:4444 (TCP) ja4t=t13_1460_2_4_8_7
+SKETCH pktSizes=[74, -66, 60, 412, -128] iatUs=[0, 180, 92, 1450, 310]
+EXEC pid=4812 comm="curl" cgroup=9412802 -> SYSCALL memfd_create(MFD_CLOEXEC)
+L7_SLICE POST /stage HTTP/1.1 | Authorization: Bearer [REDACTED_JWT]`}
+              </pre>
+            </div>
+            <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
+              <div className="font-semibold text-emerald-300 flex items-center gap-2">
+                <Lock className="w-4 h-4" />
+                <span>SFT Assistant Trace &amp; Control-Plane Uprobe Guardrails</span>
+              </div>
+              <pre className="text-[11px] font-mono text-emerald-200 whitespace-pre-wrap leading-relaxed">
+{`VERDICT: MALICIOUS (0.98) | MITRE: T1105, T1620 (Fileless memfd ELF Staging)
+ACTION: mcp.xdp_block_ip(ip="198.51.196.42", ttlSeconds=3600)
+EXPORT: axonwall-threat-corpus.tar.zst -> train.jsonl + val.jsonl + features.parquet
+EXCLUDED UPROBES: axonwalld, sshd, eluvix, slapd, vault, minio, k3s, containerd, systemd, postgres`}
+              </pre>
             </div>
           </div>
         </div>
