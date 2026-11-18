@@ -54,9 +54,9 @@ const RELEASE_ARTIFACTS: ReleaseArtifact[] = [
     badgeColor: 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30',
     icon: HardDrive,
     sha256: 'dda4648fc20ba148b530cc87f55ecfff16329681a1ffb8265304ccfcfb8aa83b',
-    downloadUrl: 'https://github.com/axonwall/axonwall/releases/download/v0.12.0/axonwall-debian13-amd64.iso',
-    sha256Url: 'https://github.com/axonwall/axonwall/releases/download/v0.12.0/axonwall-debian13-amd64.iso.sha256',
-    sigUrl: 'https://github.com/axonwall/axonwall/releases/download/v0.12.0/axonwall-debian13-amd64.iso.sha256.sig',
+    downloadUrl: 'https://github.com/axonwall/axonwall/releases/download/v0.12.1/axonwall-debian13-amd64.iso',
+    sha256Url: 'https://github.com/axonwall/axonwall/releases/download/v0.12.1/axonwall-debian13-amd64.iso.sha256',
+    sigUrl: 'https://github.com/axonwall/axonwall/releases/download/v0.12.1/axonwall-debian13-amd64.iso.sha256.sig',
     highlights: [
       'Triple-edition UEFI GRUB & BIOS ISOLINUX menus + 5-step TUI (axonwall-console --install) supporting axonwall (NGFW), vault (S3), and k3s-storage (Barebones K3s + OpenZFS/OpenEBS)',
       'Pure ZFSBootMenu v3.1.0 direct UEFI Root-on-ZFS, A/B Dual-Root (mdadm RAID-1), or Single-Root Rolling modes with unattended YAML profiles',
@@ -74,9 +74,9 @@ const RELEASE_ARTIFACTS: ReleaseArtifact[] = [
     badgeColor: 'bg-sky-500/15 text-sky-300 border-sky-500/30',
     icon: Cpu,
     sha256: '81795473dfafad59db093b5c8d2a20bc1bf8e327e7edb3c6b1bf3ef7205298c9',
-    downloadUrl: 'https://github.com/axonwall/axonwall/releases/download/v0.12.0/axonwall-edge-sku-vm-virtio.efi',
-    sha256Url: 'https://github.com/axonwall/axonwall/releases/download/v0.12.0/axonwall-edge-sku-vm-virtio.efi.sha256',
-    sigUrl: 'https://github.com/axonwall/axonwall/releases/download/v0.12.0/axonwall-edge-sku-vm-virtio.efi.sha256.sig',
+    downloadUrl: 'https://github.com/axonwall/axonwall/releases/download/v0.12.1/axonwall-edge-sku-vm-virtio.efi',
+    sha256Url: 'https://github.com/axonwall/axonwall/releases/download/v0.12.1/axonwall-edge-sku-vm-virtio.efi.sha256',
+    sigUrl: 'https://github.com/axonwall/axonwall/releases/download/v0.12.1/axonwall-edge-sku-vm-virtio.efi.sha256.sig',
     highlights: [
       'Zero userland, zero shell (/bin/sh, bash, busybox, sshd stripped), and complete loadable-kernel-module immunity',
       'Pure-Go Netlink nftables/WireGuard data plane + RFC 8415 DHCPv6 IA_NA/IA_PD & RFC 4861 Router Advertisements',
@@ -87,7 +87,7 @@ const RELEASE_ARTIFACTS: ReleaseArtifact[] = [
       size: '3.6 MB',
       sha256: 'cfe81c1cd175a41ecf2dbb4c156c702aa95508cf8d9121c39d69ce780c35d7ba',
       downloadUrl:
-        'https://github.com/axonwall/axonwall/releases/download/v0.12.0/axonwall-edge-sku-vm-virtio-initramfs.cpio.gz',
+        'https://github.com/axonwall/axonwall/releases/download/v0.12.1/axonwall-edge-sku-vm-virtio-initramfs.cpio.gz',
     },
   },
   {
@@ -101,11 +101,11 @@ const RELEASE_ARTIFACTS: ReleaseArtifact[] = [
     badgeColor: 'bg-purple-500/15 text-purple-300 border-purple-500/30',
     icon: Cloud,
     sha256: '10c4ec26051bfe130afe13be4a4a2c644f364c3167e5e2643f14bf596b359415',
-    downloadUrl: 'https://github.com/axonwall/axonwall/releases/download/v0.12.0/axonwall-debian13-amd64-cloud.qcow2',
+    downloadUrl: 'https://github.com/axonwall/axonwall/releases/download/v0.12.1/axonwall-debian13-amd64-cloud.qcow2',
     sha256Url:
-      'https://github.com/axonwall/axonwall/releases/download/v0.12.0/axonwall-debian13-amd64-cloud.qcow2.sha256',
+      'https://github.com/axonwall/axonwall/releases/download/v0.12.1/axonwall-debian13-amd64-cloud.qcow2.sha256',
     sigUrl:
-      'https://github.com/axonwall/axonwall/releases/download/v0.12.0/axonwall-debian13-amd64-cloud.qcow2.sha256.sig',
+      'https://github.com/axonwall/axonwall/releases/download/v0.12.1/axonwall-debian13-amd64-cloud.qcow2.sha256.sig',
     highlights: [
       'Instant import into Proxmox VE (qm importdisk) and libvirt/QEMU with VirtIO-SCSI, VirtIO-Net, and QEMU guest agent',
       'Background first-boot Slot-B synchronization establishes full A/B Dual-Root rollback parity without delaying first login',
@@ -117,15 +117,15 @@ const RELEASE_ARTIFACTS: ReleaseArtifact[] = [
     title: 'Standalone Debian / Ubuntu AMD64 Package (.deb)',
     subtitle:
       'Install Axonwall on existing Debian 12/13 or Ubuntu 24.04 x86_64 hosts, or apply verified OTA A/B & ZFSBootMenu upgrades',
-    filename: 'axonwall_0.12.0_amd64.deb',
+    filename: 'axonwall_0.12.1_amd64.deb',
     size: '343 MB',
     badge: 'DEBIAN 12/13 • UBUNTU 24.04',
     badgeColor: 'bg-slate-800 text-slate-300 border-slate-700',
     icon: Server,
     sha256: '17c8040dabf10dd716447c09a0ecbc61b5d2b6b0a0339a8a73bd940a0e19cfe9',
-    downloadUrl: 'https://github.com/axonwall/axonwall/releases/download/v0.12.0/axonwall_0.12.0_amd64.deb',
-    sha256Url: 'https://github.com/axonwall/axonwall/releases/download/v0.12.0/axonwall_0.12.0_amd64.deb.sha256',
-    sigUrl: 'https://github.com/axonwall/axonwall/releases/download/v0.12.0/axonwall_0.12.0_amd64.deb.sha256.sig',
+    downloadUrl: 'https://github.com/axonwall/axonwall/releases/download/v0.12.1/axonwall_0.12.1_amd64.deb',
+    sha256Url: 'https://github.com/axonwall/axonwall/releases/download/v0.12.1/axonwall_0.12.1_amd64.deb.sha256',
+    sigUrl: 'https://github.com/axonwall/axonwall/releases/download/v0.12.1/axonwall_0.12.1_amd64.deb.sha256.sig',
     highlights: [
       'Bundles axonwalld (Go daemon + 5-hook CO-RE BPF-LSM & Dual-Stack VLAN/LPM CIDR/SYN-Flood XDP objects), axonwall-controller, 25-tool axonwall-mcp, axonwall-ui, and axonwall-console',
       'Includes Neovim Super Configurator (axonwall-config), axonwallctl <kernel|ebpf|nas|virt|k3s|import> CLI, restricted operator shell (axonwall-opshell), and Etckeeper /etc Git sync',
@@ -136,9 +136,19 @@ const RELEASE_ARTIFACTS: ReleaseArtifact[] = [
 
 const RELEASE_CHANGELOG = [
   {
+    version: 'v0.12.1',
+    date: 'November 18, 2026',
+    tag: 'Latest Release',
+    highlights: [
+      'Full-Stack Hardening & Security Audit: Comprehensive v0.12.1 bug hunt across @axonwall/lib, axonwalld, axonwall-satellite, axonwall-controller, axonwall-console, Web Console, and packaging/CI.',
+      'Daemons, eBPF & Satellite: Hardened netdev/ZFS/K3s/Virt engines, bundle validation, and Threat-LLM Harvester eBPF; added standby interface fencing, fixed nftables netlink opcodes, and improved cloud-init parsing.',
+      'Web Console, TUI & Packaging: Fixed IPC timeouts, split-brain prevention, RBAC/MFA guards, ZFSBootMenu partition layout, QCOW2 build traps/growpart, edition isolation, and preseed parity; removed hardcoded workstation paths.',
+    ],
+  },
+  {
     version: 'v0.12.0',
     date: 'November 17, 2026',
-    tag: 'Latest Release',
+    tag: 'Feature Release',
     highlights: [
       'Vigilante Base Domain & Module Endpoint URLs: Configure the Vigilante base domain directly in /vigilante/modules and view/launch per-module HTTPS endpoints (soc.<domain>, wazuh.<domain>, opensearch.<domain>, etc.). Updated axonwalld bundle validation to permit in-house Vigilante modular SOC HelmCharts alongside Cilium.',
       'Axonwall Blackbox: Extreme eBPF Threat-LLM Harvester (ebpf-threat-harvester): Strictly opt-in Ring-0 flight recorder correlating TCX ingress/egress flow sketches, JA4T, DNS entropy, and Tier-1 L7 slices with sched_process_exec, sys_enter_memfd_create, and guarded uprobe/SSL_write. Enforces mandatory pre-disk DLP secret/token masking, prefix-preserving AES-128 Crypto-PAn IPv4/IPv6 + HMAC hostname anonymization, hardcoded control-plane TLS uprobe exclusions (axonwalld, sshd, eluvix, vault, k3s, etc.), 45s Gold/Silver oracle correlation, Teacher-LLM distillation, OpenZFS zstd spooling, Dual-Track .tar.zst (ChatML SFT/RLVR train.jsonl/val.jsonl + Apache Parquet 1.0 features.parquet), and AWS SigV4 S3 shipping.',
