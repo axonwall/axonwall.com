@@ -115,7 +115,7 @@ export function SystemView() {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-slate-500">OS Version:</span>
-                  <span className="text-emerald-400">Axonwall v0.11.68 (Stable)</span>
+                  <span className="text-emerald-400">Axonwall v0.13.0 (Stable)</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-slate-500">Kernel / Boot:</span>
@@ -152,7 +152,7 @@ export function SystemView() {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-slate-500">Last Rollback Image:</span>
-                  <span>Axonwall v0.11.62</span>
+                  <span>Axonwall v0.12.4</span>
                 </div>
               </div>
             </div>
