@@ -115,7 +115,7 @@ export function SystemView() {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-slate-500">OS Version:</span>
-                  <span className="text-emerald-400">Axonwall v0.14.0 (Stable)</span>
+                  <span className="text-emerald-400">Axonwall v0.14.1 (Stable)</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-slate-500">Kernel / Boot:</span>

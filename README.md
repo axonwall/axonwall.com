@@ -1,8 +1,8 @@
-# axonwall.com — Official Public Website & Interactive Console Sandbox (`v0.13.0`)
+# axonwall.com — Official Public Website & Interactive Console Sandbox (`v0.14.1`)
 
 This directory contains the statically exported Next.js 15 website, interactive browser console sandbox, theme schema registry, and public technical documentation for **[Axonwall](https://axonwall.com)** — the Sovereign Linux Next-Generation Firewall (`core-firewall`), OpenZFS + Garage/SeaweedFS S3 Vault NAS (`core-nas`), K3s Edge Cloud (`core-k3s`), KVM/LXC Hypervisor (`core-virt`), and Vigilante Autonomous AI SOC (`core-vigilante`).
 
-Includes the interactive Custom Kernel Studio demo (`25-check` audit + `/proc/config.gz` fallback), **Btrfs + Snapper Root** (`installMode: "btrfs"`) & Quad-Edition Unified ISO (`axonwall`, `minimal`, `vault`, `k3s-storage`) documentation, **5 Core Roles + 18 Extension Plugins** (with SHA-256 bundled binary provisioning), **Expanded Live eBPF Visualizations & Kernel BPF Inventory**, **Browser K9s Live Explorer**, Axonwall Blackbox eBPF Threat-LLM Harvester guide (`docs/threat-harvester`), Custom Hardened Kernels guide (`docs/custom-kernel`), and `v0.13.0` release portal & changelog.
+Includes the interactive Custom Kernel Studio demo (`25-check` audit + `/proc/config.gz` fallback), **Btrfs + Snapper Root** (`installMode: "btrfs"`) & Quad-Edition Unified ISO (`axonwall`, `minimal`, `vault`, `k3s-storage`) documentation, **5 Core Roles + 18 Extension Plugins** (with SHA-256 bundled binary provisioning), **Expanded Live eBPF Visualizations & Kernel BPF Inventory**, **Browser K9s Live Explorer & Full-Suite K3s Telemetry Visualizations**, Axonwall Blackbox eBPF Threat-LLM Harvester guide (`docs/threat-harvester`), Custom Hardened Kernels guide (`docs/custom-kernel`), and `v0.14.1` release portal & changelog.
 
 ## Tech Stack
 
@@ -41,7 +41,7 @@ axonwall.com/
 │   │   ├── page.tsx                 # Landing page, 5 core roles, TCO calculator & downloads
 │   │   ├── architecture/page.tsx    # 4-layer architecture, 12 YAML domains, BPF-LSM & MCP leases
 │   │   ├── demo/page.tsx            # Client-only interactive Port 2966 Web Console sandbox
-│   │   ├── releases/page.tsx        # v0.13.0 artifacts, verification portal & full changelog
+│   │   ├── releases/page.tsx        # v0.14.1 artifacts, verification portal & full changelog
 │   │   └── docs/                    # 26 technical documentation guides + DocsSidebar
 │   ├── components/
 │   │   ├── Navbar.tsx               # Global navigation with dropdown badges & theme switcher
