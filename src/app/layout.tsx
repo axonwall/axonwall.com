@@ -34,9 +34,10 @@ export const metadata: Metadata = {
     siteName: 'Axonwall',
     images: [
       {
-        url: '/og-image.svg',
+        url: '/og-image.png',
         width: 1200,
         height: 630,
+        type: 'image/png',
         alt: 'Axonwall v0.16.0 — Sovereign Linux NGFW, OpenZFS NAS, K3s, KVM & Autonomous AI SOC',
       },
     ],
@@ -48,12 +49,22 @@ export const metadata: Metadata = {
     title: 'Axonwall v0.16.0 | Sovereign Linux NGFW & Converged Security OS',
     description:
       'Wire-speed Linux nftables, CO-RE BPF-LSM Ring-0 defense, ZFSBootMenu & Btrfs + Snapper Root, Minimal Edition, Browser K9s, 2-Host HA, KVM/LXC, K3s, and Guardrailed MCP AI.',
-    images: ['/og-image.svg'],
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Axonwall v0.16.0 — Sovereign Linux NGFW, OpenZFS NAS, K3s, KVM & Autonomous AI SOC',
+      },
+    ],
   },
   icons: {
-    icon: '/favicon.svg',
-    shortcut: '/favicon.svg',
-    apple: '/logo-icon.svg',
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.png', type: 'image/png', sizes: '64x64' },
+    ],
+    shortcut: '/favicon.png',
+    apple: '/apple-touch-icon.png',
   },
 };
 

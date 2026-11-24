@@ -30,8 +30,11 @@ pnpm build
 axonwall.com/
 ├── public/
 │   ├── CNAME                        # Custom domain binding (axonwall.com)
+│   ├── apple-touch-icon.png         # 180x180 PNG Apple touch icon
+│   ├── favicon.png                  # 64x64 raster PNG favicon fallback
 │   ├── logo-icon.svg                # Brand neural shield SVG icon
-│   ├── og-image.svg                 # 1200x630 OpenGraph / Twitter social card
+│   ├── og-image.png                 # 1200x630 raster OpenGraph / Twitter social card
+│   ├── og-image.svg                 # 1200x630 vector OpenGraph / Twitter card source
 │   ├── robots.txt                   # Search engine crawler policy
 │   └── schemas/
 │       ├── theme.json               # JSON Schema for single AxonwallTheme files
