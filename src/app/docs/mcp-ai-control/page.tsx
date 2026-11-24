@@ -31,7 +31,7 @@ export default function McpAiControlDocPage() {
           MCP Security AI Server &amp; Guardrailed Tactical Response
         </h1>
         <p className="text-base text-slate-400 leading-relaxed max-w-3xl">
-          Axonwall embeds a native <strong className="text-white">Model Context Protocol (MCP)</strong> server—available
+          Axonwall embeds an opt-in <strong className="text-white">Model Context Protocol (MCP)</strong> server (<code className="text-emerald-400 font-mono">mcp-ai-control</code>, <code className="font-mono text-slate-200">defaultEnabled: false</code>; also included in the <code className="font-mono text-purple-300">ai-observability</code> Starter Pack)—available
           both over JSON-RPC 2.0 <code className="text-emerald-400 font-mono">axonwall-mcp</code> stdio and HTTPS/SSE at{' '}
           <code className="text-emerald-400 font-mono">/api/v1/mcp</code>—so autonomous SOC agents, Antigravity, Claude
           Code, and the{' '}

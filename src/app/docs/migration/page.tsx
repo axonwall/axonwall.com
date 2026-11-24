@@ -6,7 +6,7 @@ import { CodeBlock } from '../components/CodeBlock';
 export const metadata = {
   title: 'Unified Appliance Migration Studio & 9-Vendor Importer | Axonwall Documentation',
   description:
-    'Complete guide to migrating from pfSense, OPNsense, Proxmox VE 8.x, TrueNAS SCALE, Cisco IOS/ASA/FTD, VyOS, MikroTik RouterOS, iptables-save, and firewalld XML to Axonwall v0.15.1: KVM/LXC workload conversion, ZFS pool & dataset import, rule shadowing detection, and non-destructive merge.',
+    'Complete guide to migrating from pfSense, OPNsense, Proxmox VE 8.x, TrueNAS SCALE, Cisco IOS/ASA/FTD, VyOS, MikroTik RouterOS, iptables-save, and firewalld XML to Axonwall v0.16.0: KVM/LXC workload conversion, ZFS pool & dataset import, rule shadowing detection, and non-destructive merge.',
 };
 
 export default function MigrationDocPage() {
@@ -16,13 +16,13 @@ export default function MigrationDocPage() {
       <div className="space-y-4 border-b border-slate-800/80 pb-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-          Enterprise Tooling • 9-Vendor Unified Appliance Importer • v0.15.1
+          Enterprise Tooling • 9-Vendor Unified Appliance Importer • v0.16.0
         </div>
         <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
           Migration Studio &amp; 9-Vendor Importer
         </h1>
         <p className="text-base sm:text-lg text-slate-400 leading-relaxed max-w-3xl">
-          Consolidate legacy firewalls, hypervisors, and NAS appliances onto a single Linux 6.12 LTS Axonwall host.
+          Consolidate legacy firewalls, hypervisors, and NAS appliances onto a single Linux 6.12 LTS Axonwall host (enable via the opt-in <code className="font-mono text-slate-200">firewall-importer</code> plugin in <code className="font-mono text-slate-200">/system/plugins</code>).
           Powered by <code className="text-emerald-400 font-mono">@axonwall/lib/import</code>,{' '}
           <code className="text-emerald-400 font-mono">axonwallctl import</code>, and the{' '}
           <code className="text-purple-300 font-mono">mcp_import_competitor_config</code> MCP tool, Migration Studio

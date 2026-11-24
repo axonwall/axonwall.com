@@ -34,22 +34,28 @@ export default function IdentityOpenLdapSsoDocPage() {
         </h1>
         <p className="text-base text-slate-400 leading-relaxed max-w-3xl">
           Axonwall eliminates fragmented credential silos across the Web Console, SSH/serial CLI, ZFS SMB/NFS shares,
-          FreeRADIUS 802.1X, VPN tunnels, and Kubernetes SecOps apps. Every appliance bootstraps a zero-touch embedded{' '}
-          <strong className="text-white">OpenLDAP (<code className="font-mono">slapd</code>) + SSSD</strong> directory
-          paired with external OIDC/SAML federation, an Identity-Aware Reverse Proxy, and a hardened restricted operator
-          shell (<code className="text-emerald-400 font-mono">axonwall-opshell</code>).
+          FreeRADIUS 802.1X, VPN tunnels, and Kubernetes SecOps apps. Lean Core installations authenticate administrators
+          locally via RBAC + <code className="text-slate-200 font-mono">/bin/bash</code> (or{' '}
+          <code className="text-emerald-400 font-mono">/usr/bin/zsh</code> when <code className="font-mono">cli-workstation</code> is installed); enabling the opt-in{' '}
+          <strong className="text-white"><code className="font-mono">directory-ldap</code> OpenLDAP (<code className="font-mono">slapd</code>) + SSSD</strong>{' '}
+          plugin (or <code className="font-mono">enterprise-ngfw</code> Starter Pack) paired with{' '}
+          <code className="font-mono">enterprise-sso</code> and{' '}
+          <code className="font-mono">identity-aware-proxy</code> unlocks federated OIDC/SAML, Zero-Trust IAP, and{' '}
+          <code className="text-emerald-400 font-mono">axonwall-opshell</code>.
         </p>
       </div>
 
-      {/* 1. Zero-Touch Embedded OpenLDAP & SSSD Directory */}
+      {/* 1. On-Demand Embedded OpenLDAP & SSSD Directory */}
       <section id="openldap-sssd" className="space-y-6">
         <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-          <Database className="w-6 h-6 text-emerald-400" /> 1. Zero-Touch Embedded OpenLDAP (<code className="font-mono text-emerald-400">cn=config</code>) &amp; SSSD
+          <Database className="w-6 h-6 text-emerald-400" /> 1. Embedded OpenLDAP (<code className="font-mono text-emerald-400">cn=config</code>) &amp; SSSD (<code className="font-mono text-sky-400">directory-ldap</code>)
         </h2>
         <p className="text-sm text-slate-300 leading-relaxed">
-          On first boot, <code className="text-emerald-400 font-mono">DirectoryManager</code> (<code className="text-slate-200 font-mono">apps/axonwalld/engine/directory.go</code>,{' '}
+          When the <code className="text-emerald-400 font-mono">directory-ldap</code> plugin is enabled,{' '}
+          <code className="text-emerald-400 font-mono">DirectoryManager</code> (<code className="text-slate-200 font-mono">apps/axonwalld/engine/directory.go</code>,{' '}
           <code className="text-slate-200 font-mono">slapd_bootstrap.go</code>, and{' '}
-          <code className="text-slate-200 font-mono">sssd.go</code>) automatically initializes an LMDB-backed{' '}
+          <code className="text-slate-200 font-mono">sssd.go</code>) reads runtime <code className="font-mono">system.domain</code> and{' '}
+          <code className="font-mono">ha.nodeId</code> from <code className="font-mono">state.json</code> and automatically initializes an LMDB-backed{' '}
           <code className="text-slate-200 font-mono">slapd</code> instance under{' '}
           <code className="text-slate-200 font-mono">/var/lib/axonwall/ldap/</code> with{' '}
           <code className="text-slate-200 font-mono">back_mdb</code>, <code className="text-slate-200 font-mono">syncprov</code>,{' '}
@@ -116,10 +122,11 @@ export default function IdentityOpenLdapSsoDocPage() {
             <tbody className="divide-y divide-slate-800/60 text-slate-300">
               <tr>
                 <td className="py-3 px-4 font-mono text-emerald-400 font-semibold">admin</td>
-                <td className="py-3 px-4 font-mono">/usr/bin/zsh (/bin/zsh)</td>
+                <td className="py-3 px-4 font-mono">/bin/bash (<code className="text-slate-400">/usr/bin/zsh</code> w/ <code className="text-slate-400">cli-workstation</code>)</td>
                 <td className="py-3 px-4">
-                  Full superuser across Web Console, API (<code className="font-mono">axonwall-api</code>), Oh My Zsh +
-                  Starship interactive shell, Neovim Super Configurator (<code className="font-mono">axonwall-config</code>),
+                  Full superuser across Web Console, API (<code className="font-mono">axonwall-api</code>), interactive shell
+                  (falling back safely to <code className="font-mono">/bin/bash</code> on Lean Core / Minimal or upgrading to
+                  Oh My Zsh + Starship + <code className="font-mono">axonwall-config</code> with <code className="font-mono">cli-workstation</code>),
                   and <code className="font-mono">%axonwall-admin NOPASSWD: ALL</code> sudo.
                 </td>
               </tr>
@@ -142,7 +149,7 @@ export default function IdentityOpenLdapSsoDocPage() {
               </tr>
               <tr>
                 <td className="py-3 px-4 font-mono text-purple-400 font-semibold">os_only</td>
-                <td className="py-3 px-4 font-mono">/usr/bin/zsh or custom</td>
+                <td className="py-3 px-4 font-mono">/bin/bash or custom</td>
                 <td className="py-3 px-4">
                   Standard POSIX / ZFS SMB share / NFSv4 / FreeRADIUS 802.1X / WireGuard &amp; OpenVPN user account with
                   zero Web Console administrative privileges.

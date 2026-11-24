@@ -7,7 +7,7 @@ import { CodeBlock } from '../components/CodeBlock';
 export const metadata = {
   title: 'REST API, Fleet/MCP, Agent Sockets & Terraform Reference | Axonwall Documentation',
   description:
-    'Complete REST/OpenAPI endpoints, Server-Sent Events (SSE) packet streams, Fleet & MCP security APIs, Go agent Unix socket IPC, and official Terraform / OpenTofu provider for Axonwall v0.15.1.',
+    'Complete REST/OpenAPI endpoints, Server-Sent Events (SSE) packet streams, Fleet & MCP security APIs, Go agent Unix socket IPC, fail-closed plugin guards, and official Terraform / OpenTofu provider for Axonwall v0.16.0.',
 };
 
 export default function ApiReferenceDocPage() {
@@ -17,7 +17,7 @@ export default function ApiReferenceDocPage() {
       <div className="space-y-4 border-b border-slate-800/80 pb-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-          Developer, IaC &amp; Automation • v0.15.1
+          Developer, IaC &amp; Automation • v0.16.0
         </div>
         <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
           REST, Fleet/MCP, Agent Socket &amp; Terraform Reference
@@ -50,7 +50,7 @@ export default function ApiReferenceDocPage() {
           <Code2 className="w-6 h-6 text-emerald-400" /> 1. Console REST &amp; OpenAPI Endpoints
         </h2>
         <p className="text-sm text-slate-300 leading-relaxed">
-          The Next.js Console exposes a versioned OpenAPI 3.1 specification at <code className="text-emerald-400 font-mono">/api/v1/openapi.json</code> alongside transactional DesiredState and Commit-Confirm endpoints:
+          The Next.js Console exposes a versioned OpenAPI 3.1 specification at <code className="text-emerald-400 font-mono">/api/v1/openapi.json</code> alongside transactional DesiredState and Commit-Confirm endpoints. Optional extension subsystem endpoints fail closed with <code className="text-amber-300 font-mono">HTTP 403</code> when their backing plugin is disabled in DesiredState:
         </p>
 
         <div className="overflow-x-auto rounded-xl border border-slate-800">
@@ -71,7 +71,7 @@ export default function ApiReferenceDocPage() {
               <tr>
                 <td className="p-3 font-mono text-sky-400 font-bold">GET</td>
                 <td className="p-3 font-mono text-emerald-400">/api/v1/status</td>
-                <td className="p-3">Appliance health, version (<code className="font-mono">0.15.1</code>), active boot slot/BE/snapshot, and Commit-Confirm timer state.</td>
+                <td className="p-3">Appliance health, version (<code className="font-mono">0.16.0</code>), active boot slot/BE/snapshot, and Commit-Confirm timer state.</td>
               </tr>
               <tr>
                 <td className="p-3 font-mono text-sky-400 font-bold">GET / PUT</td>
@@ -157,6 +157,16 @@ export default function ApiReferenceDocPage() {
                 <td className="p-3 font-mono text-sky-400 font-bold">GET / POST</td>
                 <td className="p-3 font-mono text-emerald-400">/api/v1/services/&#123;netbox,librenms&#125;/*</td>
                 <td className="p-3">K3s NetBox v4 DCIM/IPAM (<code className="font-mono">status</code>, <code className="font-mono">sync</code>) and LibreNMS discovery hub (<code className="font-mono">status</code>, <code className="font-mono">sync</code>, <code className="font-mono">topology</code>, <code className="font-mono">netbox-sync</code>, <code className="font-mono">webhook</code>).</td>
+              </tr>
+              <tr>
+                <td className="p-3 font-mono text-sky-400 font-bold">GET / POST</td>
+                <td className="p-3 font-mono text-emerald-400">/api/system/users &amp; /api/system/directory</td>
+                <td className="p-3">Local POSIX user/group administration (<code className="font-mono">/api/system/users</code> remains active even when OpenLDAP <code className="font-mono">directory-ldap</code> is disabled; <code className="font-mono">/api/system/directory</code> fails closed with 403 when disabled).</td>
+              </tr>
+              <tr>
+                <td className="p-3 font-mono text-sky-400 font-bold">GET</td>
+                <td className="p-3 font-mono text-emerald-400">/api/docs-bundle/[[...path]]</td>
+                <td className="p-3">Authenticated, CSP-hardened static file server for the opt-in offline <code className="font-mono">docs-portal</code> tarball bundle.</td>
               </tr>
             </tbody>
           </table>
@@ -314,7 +324,7 @@ sudo curl -s --unix-socket /run/axonwall/agent-api.sock \\
   required_providers {
     axonwall = {
       source  = "axonwall/axonwall"
-      version = "~> 0.15.1"
+      version = "~> 0.16.0"
     }
   }
 }

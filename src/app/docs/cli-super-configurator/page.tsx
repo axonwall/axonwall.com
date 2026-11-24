@@ -5,7 +5,7 @@ import { CodeBlock } from '../components/CodeBlock';
 export const metadata = {
   title: 'Neovim Super Configurator, axonwall-tui, axonwallctl & ZSH Workstation | Axonwall Documentation',
   description:
-    'Configure every Axonwall v0.15.1 subsystem from SSH or serial console using the 14-domain Neovim Super Configurator (axonwall-config), standalone axonwall-tui + Btrfs Snapper + NastyMap simulator, axonwallctl CLI (including netflow queries & reports), and ZSH workstation.',
+    'Configure every Axonwall v0.16.0 subsystem from SSH or serial console using the 14-domain Neovim Super Configurator (axonwall-config), standalone axonwall-tui + Btrfs Snapper + NastyMap simulator, axonwallctl CLI (including plugins, starter packs, cache-status & netflow), and opt-in ZSH workstation.',
 };
 
 export default function CliSuperConfiguratorDocPage() {
@@ -15,7 +15,7 @@ export default function CliSuperConfiguratorDocPage() {
       <div className="space-y-4 border-b border-slate-800/80 pb-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-          Terminal UX • 14-Domain Neovim TUI, axonwall-tui &amp; ZSH Workstation • v0.15.1
+          Terminal UX • 14-Domain Neovim TUI, axonwall-tui &amp; ZSH Workstation • v0.16.0
         </div>
         <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
           Neovim Super Configurator, axonwall-tui &amp; CLI Reference
@@ -179,6 +179,7 @@ axonwallctl netflow report [--range 7d] [--group interface|exporter|asn|applicat
 axonwallctl nas <status|snapshot|rollback|scrub|trim|checkpoint|unlock|lock> ...
 axonwallctl virt <list|start|stop|reboot|snapshot|rollback|clone|migrate|xml> ...
 axonwallctl k3s <status|etcd-snapshots|etcd-save|etcd-restore> ...
+axonwallctl plugin <list|enable|disable|install|remove|pack list|pack install|cache-status> ...
 axonwallctl import <file> [--type auto|pfsense|opnsense|proxmox|truenas|...] [--merge] [--stage] [--apply]
 axonwallctl mcp                            # Start stdio Model Context Protocol (MCP) 25-tool security server
 axonwallctl cloudinit export --iso -o cidata.iso
@@ -195,7 +196,7 @@ axonwallctl completion <zsh|bash|fish>     # Generate shell tab-completion scrip
           <Command className="w-6 h-6 text-emerald-400" /> 4. ZSH Power-User Shell (<code className="font-mono text-emerald-400">cli-workstation</code>)
         </h2>
         <p className="text-sm text-slate-300 leading-relaxed">
-          Enabled by default on standard Axonwall editions, <code className="text-emerald-400 font-mono">cli-workstation</code>{' '}
+          Available as an opt-in extension plugin (<code className="font-mono text-slate-200">defaultEnabled: false</code>; install individually via <code className="font-mono text-slate-200">sudo axonwallctl plugin install cli-workstation</code> or via the <code className="font-mono text-amber-300">operator-diagnostics</code> Starter Pack, while fresh Lean Core installs fall back cleanly to <code className="font-mono text-slate-200">/bin/bash</code>), <code className="text-emerald-400 font-mono">cli-workstation</code>{' '}
           configures <code className="text-white font-mono">zsh</code> with Oh My Zsh, syntax highlighting, autosuggestions, Tmux, bundled{' '}
           <code className="text-emerald-400 font-mono">vim</code>, <code className="text-emerald-400 font-mono">neovim</code>,{' '}
           <code className="text-emerald-400 font-mono">kubectl</code>, <code className="text-emerald-400 font-mono">k9s</code> (v0.51.0, bundled via <code className="font-mono text-slate-200">core-k3s</code>), &amp; <code className="text-emerald-400 font-mono">helm</code> v3 (with automatic per-plugin <code className="font-mono text-slate-200">PATH</code> snippets covering opt-in bundled plugins such as <code className="font-mono text-slate-200">cli-emacs</code> / <code className="font-mono text-slate-200">cli-emacs-doom</code> / <code className="font-mono text-slate-200">cli-emacs-spacemacs</code>), tactical aliases (<code className="text-slate-200 font-mono">ax</code> for <code className="text-slate-200 font-mono">axonwallctl</code>, <code className="text-slate-200 font-mono">axc</code> for <code className="text-slate-200 font-mono">axonwall-config</code>, <code className="text-slate-200 font-mono">axt</code> for <code className="text-slate-200 font-mono">axonwall-tui</code>, <code className="text-slate-200 font-mono">k</code> for <code className="text-slate-200 font-mono">kubectl</code>, <code className="text-slate-200 font-mono">k9</code> for <code className="text-slate-200 font-mono">k9s</code>), a custom <strong>Starship</strong> prompt that displays a flashing red{' '}

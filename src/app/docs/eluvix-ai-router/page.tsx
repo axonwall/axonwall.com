@@ -24,13 +24,13 @@ export default function EluvixAiRouterDocPage() {
       {/* Header */}
       <div className="space-y-4 border-b border-slate-800 pb-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-950/60 border border-purple-500/30 text-purple-300 text-xs font-semibold">
-          <Sparkles className="w-3.5 h-3.5" /> Sovereign AI Gateway • DLP &amp; Tokenomics • v0.15.1
+          <Sparkles className="w-3.5 h-3.5" /> Sovereign AI Gateway • DLP &amp; Tokenomics • v0.16.0
         </div>
         <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
           Eluvix Sovereign AI Router &amp; Prompt/PII DLP Guard
         </h1>
         <p className="text-base text-slate-400 leading-relaxed max-w-3xl">
-          The <code className="text-emerald-400 font-mono">eluvix</code> plugin (<code className="text-slate-200 font-mono">sudo axonwallctl plugin enable eluvix</code>) embeds the{' '}
+          Both the <code className="text-emerald-400 font-mono">eluvix</code> router engine (<code className="text-slate-200 font-mono">sudo axonwallctl plugin enable eluvix</code>) and the interactive <code className="text-emerald-400 font-mono">/ai</code> Eluvix Copilot console workspace (<code className="text-slate-200 font-mono">ai-copilot</code> opt-in plugin, also included in the <code className="text-purple-300 font-mono">ai-observability</code> Starter Pack) embed the{' '}
           <strong className="text-white">Eluvix Sovereign AI Router</strong> directly into your Axonwall perimeter (control plane on port <code className="text-emerald-400 font-mono">3588</code> and Switchyard OpenAI/Anthropic-compatible proxy on port <code className="text-emerald-400 font-mono">8080</code>).
           Instead of allowing developer workstations, autonomous coding agents, and internal services to send raw source
           code, API keys, and PII directly to external cloud LLM APIs, Eluvix intercepts, sanitizes, caches, and routes

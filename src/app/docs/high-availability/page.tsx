@@ -31,13 +31,13 @@ export default function HighAvailabilityDocPage() {
       <div className="space-y-4 border-b border-slate-800/80 pb-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-          Clustering, 6-Plane State Replication &amp; Two-Host Walkthrough • v0.15.1
+          Clustering, 6-Plane State Replication &amp; Two-Host Walkthrough • v0.16.0
         </div>
         <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
           High Availability &amp; Two-Host Cluster Setup
         </h1>
         <p className="text-base sm:text-lg text-slate-400 leading-relaxed max-w-3xl">
-          Achieve 99.999% uptime with zero connection drops. Axonwall pairs industry-standard{' '}
+          Achieve 99.999% uptime with zero connection drops (enable on demand on Lean Core nodes via the <code className="text-emerald-400 font-mono">enterprise-ngfw</code> Starter Pack or <code className="font-mono text-slate-200">axonwallctl plugin install high-availability</code> + <code className="font-mono text-slate-200">directory-ldap</code>). Axonwall pairs industry-standard{' '}
           <code className="text-white font-mono">Keepalived</code> VRRPv2/v3 clustering with{' '}
           <code className="text-emerald-400 font-mono">conntrackd</code> FTFW kernel state replication, mutual-TLS
           signed configuration &amp; SQLite WAL replication, Chrony NTP peering, OpenLDAP multi-provider{' '}

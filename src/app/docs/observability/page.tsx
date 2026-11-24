@@ -32,7 +32,7 @@ export default function ObservabilityDocPage() {
       <div className="space-y-4 border-b border-slate-800/80 pb-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-          Zero-Instrumentation Kernel Telemetry • eBPF &amp; K3s • v0.15.1
+          Zero-Instrumentation Kernel Telemetry • eBPF &amp; K3s • v0.16.0
         </div>
         <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
           eBPF Infrastructure &amp; Kubernetes Observability
@@ -40,7 +40,7 @@ export default function ObservabilityDocPage() {
         <p className="text-base sm:text-lg text-slate-400 leading-relaxed max-w-3xl">
           Achieving deep observability across modern infrastructure is essential—yet traditional approaches require
           invasive application SDK instrumentation and resource-heavy sidecar proxies. Axonwall leverages{' '}
-          <code className="text-emerald-400 font-mono">CO-RE eBPF</code> to gather{' '}
+          <code className="text-emerald-400 font-mono">CO-RE eBPF</code> (enabled on demand via the opt-in <code className="font-mono text-slate-200">coroot-ebpf-apm</code>, <code className="font-mono text-slate-200">netflow-collector</code>, and <code className="font-mono text-slate-200">topology-studio</code> plugins or the <code className="font-mono text-purple-300">ai-observability</code> Starter Pack) to gather{' '}
           <strong className="text-slate-200">metrics, logs, and traces</strong> directly inside the Linux kernel,
           tracking container network calls and filesystem operations with sub-microsecond overhead.
         </p>

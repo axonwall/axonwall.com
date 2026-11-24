@@ -7,7 +7,7 @@ import { CodeBlock } from '../components/CodeBlock';
 export const metadata = {
   title: 'GitOps Configuration Versioning & Etckeeper /etc Audit | Axonwall Documentation',
   description:
-    'Git-backed declarative YAML configuration versioning (/var/lib/axonwall/gitops), unified diff inspection, 1-click rollback, and Etckeeper /etc host configuration auditing in Axonwall v0.15.1.',
+    'Git-backed declarative YAML configuration versioning (/var/lib/axonwall/gitops), unified diff inspection, 1-click rollback, and Etckeeper /etc host configuration auditing (etckeeper-audit plugin) in Axonwall v0.16.0.',
 };
 
 export default function GitOpsAuditDocPage() {
@@ -17,13 +17,13 @@ export default function GitOpsAuditDocPage() {
       <div className="space-y-4 border-b border-slate-800/80 pb-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-          Version Control &amp; Compliance Audit • v0.15.1
+          Version Control &amp; Compliance Audit • v0.16.0
         </div>
         <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
           GitOps Configuration &amp; Etckeeper /etc Audit Trail
         </h1>
         <p className="text-base sm:text-lg text-slate-400 leading-relaxed max-w-3xl">
-          Bring software engineering rigor to network security. Every Axonwall policy transaction across the 14 canonical <code className="text-emerald-400 font-mono">/etc/axonwall/*.yaml</code> domain files is recorded in an immutable Git revision repository (<code className="text-emerald-400 font-mono">/var/lib/axonwall/gitops</code>), paired with full host <code className="text-white font-mono">/etc</code> configuration versioning via integrated <strong>Etckeeper</strong>.
+          Bring software engineering rigor to network security. Every Axonwall policy transaction across the 14 canonical <code className="text-emerald-400 font-mono">/etc/axonwall/*.yaml</code> domain files is recorded in an immutable Git revision repository (<code className="text-emerald-400 font-mono">/var/lib/axonwall/gitops</code>), paired with optional host <code className="text-white font-mono">/etc</code> configuration versioning via the opt-in <strong>Etckeeper</strong> (<code className="font-mono text-slate-200">etckeeper-audit</code>) plugin (<code className="font-mono text-emerald-300">enterprise-ngfw</code> / <code className="font-mono text-amber-300">operator-diagnostics</code> Starter Packs).
         </p>
       </div>
 

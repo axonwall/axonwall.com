@@ -17,13 +17,13 @@ export default function GhostInTheRingDocsPage() {
       <div className="space-y-4 border-b border-slate-800/80 pb-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-          Ring-0 Kernel Telemetry &amp; Host Malware Defense Suite • v0.15.1
+          Ring-0 Kernel Telemetry &amp; Host Malware Defense Suite • v0.16.0
         </div>
         <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
           Host Malware &amp; Ghost-in-the-Ring Kernel Rootkit Hunter
         </h1>
         <p className="text-base sm:text-lg text-slate-400 leading-relaxed max-w-3xl">
-          Enabled by default via the <code className="text-emerald-400 font-mono">host-malware-rootkit</code> plugin, Axonwall pairs eight battle-tested host integrity &amp; malware engines (<code className="text-white font-mono">rkhunter</code>,{' '}
+          Available as an opt-in extension plugin via <code className="text-emerald-400 font-mono">host-malware-rootkit</code> (<code className="font-mono text-slate-200">defaultEnabled: false</code>; enable in <code className="font-mono text-slate-200">/system/plugins</code> or via <code className="font-mono text-slate-200">sudo axonwallctl plugin install host-malware-rootkit</code>), Axonwall pairs eight battle-tested host integrity &amp; malware engines (<code className="text-white font-mono">rkhunter</code>,{' '}
           <code className="text-white font-mono">chkrootkit</code>, <code className="text-white font-mono">ClamAV</code>,{' '}
           <code className="text-white font-mono">AIDE</code>, <code className="text-white font-mono">YARA</code>,{' '}
           <code className="text-white font-mono">Lynis</code>, <code className="text-white font-mono">unhide</code>, and{' '}

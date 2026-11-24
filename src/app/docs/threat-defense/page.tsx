@@ -17,13 +17,13 @@ export default function ThreatDefenseDocPage() {
       <div className="space-y-4 border-b border-slate-800/80 pb-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-          Perimeter Security • v0.15.1
+          Perimeter Security • v0.16.0
         </div>
         <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
           Threat Defense &amp; DNS Intelligence
         </h1>
         <p className="text-base sm:text-lg text-slate-400 leading-relaxed max-w-3xl">
-          Axonwall implements a multi-layered perimeter security engine combining eBPF XDP volumetric flood mitigation, dynamic <code className="text-emerald-400 font-mono">nftables</code> IP blocklist &amp; GeoIP sets, an autonomous <code className="text-white font-mono">Unbound RPZ</code> DNS sinkhole, Suricata 7+ IPS, and CrowdSec intrusion defense.
+          Axonwall implements a multi-layered perimeter security engine combining core XDP volumetric flood mitigation, dynamic <code className="text-emerald-400 font-mono">nftables</code> IP blocklist &amp; GeoIP sets, an autonomous <code className="text-white font-mono">Unbound RPZ</code> DNS sinkhole, plus opt-in Suricata 7+ IPS (<code className="font-mono text-slate-200">suricata-ids</code>) and CrowdSec (<code className="font-mono text-slate-200">crowdsec-bouncer</code>) via the <code className="font-mono text-emerald-300">enterprise-ngfw</code> Starter Pack.
         </p>
       </div>
 

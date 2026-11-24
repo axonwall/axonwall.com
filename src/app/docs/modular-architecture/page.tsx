@@ -5,9 +5,9 @@ import { Callout } from '../components/Callout';
 import { CodeBlock } from '../components/CodeBlock';
 
 export const metadata = {
-  title: 'Modular Appliance Architecture: 5 Core Roles & 22 Plugins | Axonwall Documentation',
+  title: 'Lean Core & Modular Plugin Architecture: 5 Core Roles & 42 Extensions | Axonwall Documentation',
   description:
-    'Comprehensive documentation for Axonwall v0.15.1 modular core roles (core-firewall, core-nas, core-k3s, core-virt, core-vigilante), 22 built-in systemd sandboxed extension plugins (27 total), SHA-256 bundled binary provisioning, and Minimal edition on-demand installation.',
+    'Comprehensive documentation for Axonwall Lean Router/NGFW Core defaults (5 Core Roles + 42 opt-in Extension Plugins = 47 manifests), Zero-Role minimal edition, 4 Curated Starter Packs, on-demand ai-copilot & offline docs-portal, Air-Gapped Plugin Cache, and upgrade preservation.',
 };
 
 export default function ModularArchitectureDocPage() {
@@ -17,14 +17,13 @@ export default function ModularArchitectureDocPage() {
       <div className="space-y-4 border-b border-slate-800/80 pb-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-          Core Appliance System Architecture • v0.15.1
+          Lean Core &amp; Modular Plugin Architecture • 47 Plugins + 4 Starter Packs
         </div>
         <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-          Modular Core Roles: Firewall, ZFS NAS, K3s, Hypervisor &amp; Vigilante SOC
+          Lean Router/NGFW Core &amp; 47 Modular Plugins
         </h1>
         <p className="text-base sm:text-lg text-slate-400 leading-relaxed max-w-3xl">
-          Axonwall is a hyper-converged, role-modular operating system governed by <strong>5 Core Roles</strong> and{' '}
-          <strong>22 built-in sandboxed extension plugins</strong> (27 total plugins with SHA-256-verified bundled binary archives and on-demand installation on <code className="text-amber-300 font-mono">minimal</code> hosts). Disable <code className="text-emerald-400 font-mono">core-firewall</code> to run as a dedicated Host-Mode ZFS NAS or KVM hypervisor, run as a wire-speed Next-Gen Firewall, or converge all five roles on high-availability bare-metal clusters.
+          Axonwall boots with a <strong>Lean Router/NGFW Core</strong> on the standard <code className="text-emerald-300 font-mono">axonwall</code> edition: <code className="text-emerald-400 font-mono">core-firewall</code> (nftables + Flowtable, WireGuard, Kea DHCP, Unbound DNS) is active out of the box, while the remaining <strong>4 Core Roles</strong> and all <strong>42 Extension Plugins</strong> (47 manifests total) stay disabled until opted in individually, via <strong>4 Curated Starter Packs</strong>, or across zero-role <code className="text-amber-300 font-mono">minimal</code> hosts.
         </p>
       </div>
 
@@ -188,22 +187,35 @@ export default function ModularArchitectureDocPage() {
         </div>
       </section>
 
-      {/* 22 Built-in Extension Plugins */}
+      {/* 42 Opt-In Extension Plugins & Starter Packs */}
       <section id="extension-plugins" className="space-y-6 pt-6 border-t border-slate-800/80">
         <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-          <Zap className="w-6 h-6 text-emerald-400" /> 22 Built-In Extension Plugins &amp; Bundled Binaries
+          <Zap className="w-6 h-6 text-emerald-400" /> 42 Opt-In Extension Plugins, Starter Packs &amp; Air-Gapped Cache
         </h2>
         <p className="text-sm text-slate-300 leading-relaxed">
-          Beyond the 5 Core Roles, Axonwall includes <strong>22 first-party extension plugins</strong> managed declaratively in{' '}
-          <code className="text-emerald-400 font-mono">/etc/axonwall/system.yaml</code> or imperatively via{' '}
-          <code className="text-emerald-400 font-mono">axonwallctl plugin</code>. Three workstation &amp; host-security plugins ship enabled out of the box (unless provisioned with the <code className="text-amber-300 font-mono">minimal</code> edition), while nineteen specialized network, NetFlow/topology, DCIM/monitoring, VPN, AI, editor, and SecOps plugins remain opt-in to keep the default attack surface minimal.
+          Beyond the 5 Core Roles, Axonwall includes <strong>42 first-party opt-in extension plugins</strong> governed declaratively in{' '}
+          <code className="text-emerald-400 font-mono">/etc/axonwall/system.yaml</code>, interactively in{' '}
+          <code className="text-emerald-400 font-mono">/system/plugins</code> (with category filters &amp; dependency impact previews), or via{' '}
+          <code className="text-emerald-400 font-mono">axonwallctl plugin</code>. Every non-core subsystem—including Suricata IDS, CrowdSec, FRRouting, OpenVPN, strongSwan IPsec, OpenLDAP/SSSD (<code className="font-mono">directory-ldap</code>), Enterprise SSO, High Availability, <code className="font-mono">ai-copilot</code>, offline <code className="font-mono">docs-portal</code>, Web Terminal, and Zsh/Neovim Workstation (<code className="font-mono">cli-workstation</code>)—remains dormant until enabled so fresh installs boot fast with minimal attack surface. Existing v0.15.x upgrades preserve enabled plugins and <code className="font-mono text-slate-200">/etc/axonwall/</code> markers automatically via <code className="font-mono text-emerald-300">runUpgradePreservation</code>.
         </p>
 
-        <div className="p-4 rounded-xl bg-slate-900/90 border border-emerald-500/25 text-xs text-slate-300 leading-relaxed space-y-1.5">
-          <div className="font-bold text-emerald-300">SHA-256 Bundled Binary Supply Chain &amp; On-Demand Provisioning</div>
-          <p>
-            Plugins such as <code className="font-mono text-slate-200">core-k3s</code> (<code className="font-mono">k3s</code>, <code className="font-mono">k9s</code>), <code className="font-mono text-slate-200">cli-workstation</code> (<code className="font-mono">vim</code>, <code className="font-mono">neovim</code>), and <code className="font-mono text-slate-200">cli-emacs</code> (bundled Debian Emacs shared with <code className="font-mono">cli-emacs-doom</code> / <code className="font-mono">cli-emacs-spacemacs</code>) verify pinned SHA-256 archives before fail-closed extraction into per-plugin <code className="font-mono text-slate-200">bin/</code> directories, wired automatically into interactive shell <code className="font-mono text-slate-200">PATH</code> snippets and installable on demand from <code className="font-mono text-amber-300">/system/plugins</code>.
-          </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+          <div className="p-4 rounded-xl bg-slate-900/90 border border-emerald-500/25 text-slate-300 leading-relaxed space-y-2">
+            <div className="font-bold text-emerald-300">4 Curated Starter Packs (One-Click / Seeded Profiles)</div>
+            <ul className="space-y-1 text-slate-400 list-disc list-inside">
+              <li><code className="text-emerald-300 font-mono">enterprise-ngfw</code> — Suricata IDS/IPS (<code className="font-mono">suricata-ids</code>), CrowdSec (<code className="font-mono">crowdsec-bouncer</code>), FRRouting (<code className="font-mono">frr-routing</code>), High Availability (<code className="font-mono">high-availability</code>), OpenLDAP/SSSD (<code className="font-mono">directory-ldap</code>) &amp; Etckeeper (<code className="font-mono">etckeeper-audit</code>)</li>
+              <li><code className="text-sky-300 font-mono">remote-access-vpn</code> — OpenVPN (<code className="font-mono">openvpn</code>), strongSwan IPsec (<code className="font-mono">ipsec-strongswan</code>), Headscale Mesh (<code className="font-mono">headscale</code>) &amp; Rosenpass PQ-PSK (<code className="font-mono">rosenpass</code>)</li>
+              <li><code className="text-amber-300 font-mono">operator-diagnostics</code> — Zsh/Neovim/Tmux Workstation (<code className="font-mono">cli-workstation</code>), Packet Diagnostics (<code className="font-mono">packet-diagnostics</code>), Web Terminal (<code className="font-mono">web-terminal</code>) &amp; Etckeeper Audit (<code className="font-mono">etckeeper-audit</code>)</li>
+              <li><code className="text-purple-300 font-mono">ai-observability</code> — Opt-in <code className="font-mono">ai-copilot</code>, MCP AI Control (<code className="font-mono">mcp-ai-control</code>), Coroot eBPF APM (<code className="font-mono">coroot-ebpf-apm</code>), NetFlow Collector (<code className="font-mono">netflow-collector</code>) &amp; Topology Studio (<code className="font-mono">topology-studio</code>)</li>
+            </ul>
+          </div>
+
+          <div className="p-4 rounded-xl bg-slate-900/90 border border-sky-500/25 text-slate-300 leading-relaxed space-y-2">
+            <div className="font-bold text-sky-300">On-Demand Provisioning &amp; Air-Gapped Plugin Cache</div>
+            <p className="text-slate-400">
+              Plugins bundle SHA-256-verified archives and isolated per-plugin <code className="font-mono text-slate-200">bin/</code> trees (including RSA-4096 detached SHA-256 signature verified offline <code className="font-mono text-emerald-300">docs-portal</code> bundles with transparent <code className="font-mono">https://axonwall.com/docs</code> fallback when uninstalled). For air-gapped networks, build offline bundles with <code className="font-mono text-slate-200">scripts/build-plugins-bundle.sh</code>, unpack into <code className="font-mono text-slate-200">/var/lib/axonwall/plugin-cache/&lt;os&gt;/</code>, and verify with <code className="font-mono text-emerald-300">axonwallctl plugin cache-status</code>—<code className="font-mono">axonwalld</code> verifies <code className="font-mono">manifest.json</code> SHA-256 checksums fail-closed before local <code className="font-mono">apt-get</code> / <code className="font-mono">apk --no-network</code> install.
+            </p>
+          </div>
         </div>
 
         <div className="overflow-x-auto rounded-xl border border-slate-800">
@@ -218,22 +230,52 @@ export default function ModularArchitectureDocPage() {
             </thead>
             <tbody className="divide-y divide-slate-800/60 text-slate-300">
               <tr>
-                <td className="p-2.5 font-mono text-emerald-400 font-semibold">cli-workstation</td>
-                <td className="p-2.5 text-emerald-400 font-semibold">Enabled</td>
+                <td className="p-2.5 font-mono text-sky-400 font-semibold">cli-workstation</td>
+                <td className="p-2.5 text-slate-400">Opt-In (<code className="font-mono">operator-diagnostics</code>)</td>
                 <td className="p-2.5 font-mono text-slate-400">system.yaml</td>
-                <td className="p-2.5">Bundled <code className="font-mono">vim</code> &amp; <code className="font-mono">neovim</code> Super Configurator (<code className="font-mono">axonwall-config</code>), Oh My Zsh + Starship shell, Tmux, <code className="font-mono">kubectl</code> &amp; <code className="font-mono">helm</code> v3</td>
+                <td className="p-2.5">Bundled <code className="font-mono">vim</code> &amp; <code className="font-mono">neovim</code> Super Configurator (<code className="font-mono">axonwall-config</code>), Oh My Zsh + Starship shell, Tmux, <code className="font-mono">kubectl</code> &amp; <code className="font-mono">helm</code> v3 (core falls back safely to <code className="font-mono">/bin/bash</code> until installed)</td>
               </tr>
               <tr>
-                <td className="p-2.5 font-mono text-emerald-400 font-semibold">host-malware-rootkit</td>
-                <td className="p-2.5 text-emerald-400 font-semibold">Enabled</td>
+                <td className="p-2.5 font-mono text-sky-400 font-semibold">host-malware-rootkit</td>
+                <td className="p-2.5 text-slate-400">Opt-In</td>
                 <td className="p-2.5 font-mono text-slate-400">security.yaml</td>
                 <td className="p-2.5">Ghost-in-the-Ring 8-scanner host defense + 5-hook CO-RE BPF-LSM Ring-0 &amp; <code className="font-mono">BPF_TOKEN</code> mediator (<code className="font-mono">hostDefense:</code>)</td>
               </tr>
               <tr>
-                <td className="p-2.5 font-mono text-emerald-400 font-semibold">coroot-ebpf-apm</td>
-                <td className="p-2.5 text-emerald-400 font-semibold">Enabled</td>
+                <td className="p-2.5 font-mono text-sky-400 font-semibold">coroot-ebpf-apm</td>
+                <td className="p-2.5 text-slate-400">Opt-In (<code className="font-mono">ai-observability</code>)</td>
                 <td className="p-2.5 font-mono text-slate-400">system.yaml</td>
                 <td className="p-2.5">Zero-instrumentation Ring-0 eBPF service map, TLS uprobes, 99 Hz FlameGraphs, automated RCA, and OpenZFS ARC/ZIL correlation (<code className="font-mono">observability.ebpfApm</code>)</td>
+              </tr>
+              <tr>
+                <td className="p-2.5 font-mono text-emerald-400 font-semibold">suricata-ids / crowdsec-bouncer</td>
+                <td className="p-2.5 text-slate-400">Opt-In (<code className="font-mono">enterprise-ngfw</code>)</td>
+                <td className="p-2.5 font-mono text-slate-400">security.yaml</td>
+                <td className="p-2.5">Inline NFQUEUE Suricata IDS/IPS signature engine and CrowdSec collaborative nftables set bouncer</td>
+              </tr>
+              <tr>
+                <td className="p-2.5 font-mono text-emerald-400 font-semibold">frr-routing / openvpn / ipsec-strongswan</td>
+                <td className="p-2.5 text-slate-400">Opt-In (<code className="font-mono">enterprise-ngfw</code> / <code className="font-mono">remote-access-vpn</code>)</td>
+                <td className="p-2.5 font-mono text-slate-400">routing.yaml / vpn.yaml</td>
+                <td className="p-2.5">FRRouting BGP/OSPF/BFD daemon, OpenVPN SSL/TLS server, and strongSwan IKEv2 IPsec tunnels (WireGuard core ships enabled with <code className="font-mono">core-firewall</code>)</td>
+              </tr>
+              <tr>
+                <td className="p-2.5 font-mono text-emerald-400 font-semibold">directory-ldap / enterprise-sso / identity-aware-proxy</td>
+                <td className="p-2.5 text-slate-400">Opt-In (<code className="font-mono">directory-ldap</code> in <code className="font-mono">enterprise-ngfw</code>)</td>
+                <td className="p-2.5 font-mono text-slate-400">security.yaml</td>
+                <td className="p-2.5">Embedded OpenLDAP <code className="font-mono">slapd</code> + SSSD identity store (deriving Base DN &amp; HA server ID at runtime), OIDC/Entra/Okta SSO, and Zero-Trust reverse proxy</td>
+              </tr>
+              <tr>
+                <td className="p-2.5 font-mono text-purple-400 font-semibold">ai-copilot / mcp-ai-control / docs-portal</td>
+                <td className="p-2.5 text-slate-400">Opt-In (<code className="font-mono">ai-observability</code>; <code className="font-mono">docs-portal</code> on-demand)</td>
+                <td className="p-2.5 font-mono text-slate-400">system.yaml</td>
+                <td className="p-2.5">Standalone <code className="font-mono">/ai</code> Eluvix Copilot workspace, disabled-by-default MCP server, and RSA-4096 detached SHA-256 signature verified offline <code className="font-mono">/docs</code> portal (~1.2 MB tarball)</td>
+              </tr>
+              <tr>
+                <td className="p-2.5 font-mono text-sky-400 font-semibold">high-availability / fleet-controller / web-terminal</td>
+                <td className="p-2.5 text-slate-400">Opt-In (<code className="font-mono">enterprise-ngfw</code> / <code className="font-mono">operator-diagnostics</code>)</td>
+                <td className="p-2.5 font-mono text-slate-400">system.yaml</td>
+                <td className="p-2.5">Keepalived + conntrackd VRRP clustering, multi-node fleet controller, browser TTY, packet diagnostics, config importer, and Etckeeper GitOps audit</td>
               </tr>
               <tr>
                 <td className="p-2.5 font-mono text-cyan-400 font-semibold">ebpf-threat-harvester</td>
@@ -390,20 +432,20 @@ plugins:
         />
 
         <CodeBlock
-          title="CLI Plugin Lifecycle Management (axonwallctl plugin)"
+          title="CLI Plugin Lifecycle, Starter Packs & Air-Gapped Cache (axonwallctl plugin)"
           language="bash"
-          code={`# List all 5 Core Roles & 22 extension plugins with live systemd & binary state
+          code={`# List all 5 Core Roles & 42 extension plugins (47 total) with live systemd & binary state
 axonwallctl plugin list
 
-# Enable or disable built-in plugins (updates /etc/axonwall/system.yaml & reconciles)
-sudo axonwallctl plugin enable rosenpass
-sudo axonwallctl plugin enable eluvix
-sudo axonwallctl plugin disable snmp
+# List or apply Curated Starter Packs cleanly
+axonwallctl plugin pack list
+sudo axonwallctl plugin pack install enterprise-ngfw
 
-# Install, remove, or re-sync plugin packages and systemd sandboxes
-sudo axonwallctl plugin install vigilant-octo-waffle
+# Enable, install, remove, or inspect offline plugin cache integrity
+sudo axonwallctl plugin install docs-portal
+sudo axonwallctl plugin enable ai-copilot
 sudo axonwallctl plugin remove ntopng
-sudo axonwallctl plugin re-sync host-malware-rootkit`}
+axonwallctl plugin cache-status`}
         />
       </section>
     </div>
