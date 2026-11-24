@@ -22,9 +22,9 @@ import {
 import { Navbar } from '../../components/Navbar';
 
 export const metadata = {
-  title: 'Axonwall Architecture | v0.15.0 System Design & Ring-0 Blueprint',
+  title: 'Axonwall Architecture | v0.15.1 System Design & Ring-0 Blueprint',
   description:
-    'Detailed architectural blueprint of Axonwall v0.15.0: 5 modular core roles & 18 extension plugins (SHA-256 bundled binaries), 12 bidirectional /etc/axonwall/*.yaml files, Linux 6.12 LTS nftables & XDP data plane, CO-RE BPF-LSM Ring-0 exploit guard, Blackbox eBPF Threat-LLM Harvester, 25-check Custom Hardened Kernels, ZFSBootMenu v3.1.0, Btrfs + Snapper Root & A/B Dual-Root boot, Coroot eBPF APM, Browser K9s, and isolated MCP tactical leases.',
+    'Detailed architectural blueprint of Axonwall v0.15.1: 5 modular core roles & 22 extension plugins (SHA-256 bundled binaries), 14 bidirectional /etc/axonwall/*.yaml files, Linux 6.12 LTS nftables & XDP data plane, NetFlow/IPFIX/sFlow Collector Studio, Topology Studio & NetBox/LibreNMS Triad, CO-RE BPF-LSM Ring-0 exploit guard, Blackbox eBPF Threat-LLM Harvester, 25-check Custom Hardened Kernels, ZFSBootMenu v3.1.0, Btrfs + Snapper Root & A/B Dual-Root boot, Coroot eBPF APM, Browser K9s, and isolated MCP tactical leases.',
 };
 
 const YAML_DOMAINS = [
@@ -32,7 +32,7 @@ const YAML_DOMAINS = [
   { file: 'interfaces.yaml', scope: 'NIC bindings, 802.1Q/802.1ad VLANs, bridges, LACP bonds, CARP/VRRP VIPs & VRFs' },
   { file: 'firewall.yaml', scope: 'Aliases, stateful nftables rules, SNAT/DNAT/Hairpin/1:1 BINAT/NPTv6 & CAKE/FQ-CoDel QoS' },
   { file: 'routing.yaml', scope: 'Gateways, Multi-WAN failover/ECMP groups, static routes & FRR (BGP/OSPF/BFD)' },
-  { file: 'services.yaml', scope: 'Kea DHCPv4/v6 IA_PD + radvd SLAAC, Unbound RPZ, mDNS, UPnP/NAT-PMP, HAProxy & RADIUS' },
+  { file: 'services.yaml', scope: 'Kea DHCPv4/v6 IA_PD + radvd SLAAC, Unbound RPZ, mDNS, UPnP/NAT-PMP, HAProxy, RADIUS, NetBox & LibreNMS' },
   { file: 'vpn.yaml', scope: 'WireGuard, Rosenpass Dual-KEM (McEliece + ML-KEM-512), strongSwan IPsec, OpenVPN DCO & Headscale' },
   { file: 'security.yaml', scope: 'Suricata 7+, CrowdSec, GeoIP, Zero-Trust IAP, OIDC/LDAP SSO, 5-Hook BPF-LSM, BPF_TOKEN & Blackbox Threat Harvester (threatHarvester)' },
   { file: 'ha.yaml', scope: '2-Host VRRP + conntrackd + CSR mTLS PKI state sync & Satellite Fleet manager' },
@@ -40,6 +40,8 @@ const YAML_DOMAINS = [
   { file: 'k3s.yaml', scope: 'Embedded HA K3s, Cilium eBPF CNI + Hubble, Etcd S3 snapshots, UserNS + BPF_TOKEN & OpenEBS CSI' },
   { file: 'virt.yaml', scope: 'KVM/QEMU VMs, VirtioFS, Linked Clones, Live Migrate, Libvirt XML, LXC + BPF_TOKEN, VFIO & Edge UKI' },
   { file: 'vigilante.yaml', scope: 'Autonomous SOAR containment, honeynet deception mesh, PCAP forensics & 12 SOC packages' },
+  { file: 'topology.yaml', scope: 'Topology Studio @xyflow/react multi-host fabric, physical/VLAN links, lldpd, health probes & peers' },
+  { file: 'netflow.yaml', scope: 'NetFlow v5/v9, IPFIX (UDP/TCP/TLS 1.3 mTLS) & sFlow v5 collector, eBPF self-exporter, MMDB GeoIP, ClickHouse & baselines' },
 ];
 
 export default function StandaloneArchitecturePage() {
@@ -57,7 +59,7 @@ export default function StandaloneArchitecturePage() {
         <div className="text-center space-y-5">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            System Blueprint &amp; Technical Specification • v0.15.0
+            System Blueprint &amp; Technical Specification • v0.15.1
           </div>
           <h1 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight max-w-4xl mx-auto leading-tight">
             The Linux-Native{' '}
@@ -66,9 +68,9 @@ export default function StandaloneArchitecturePage() {
             </span>
           </h1>
           <p className="text-base sm:text-lg text-slate-400 max-w-3xl mx-auto leading-relaxed">
-            Axonwall v0.15.0 unifies 5 modular core roles &amp; 18 extension plugins (with SHA-256 bundled binaries), 12 bidirectional{' '}
+            Axonwall v0.15.1 unifies 5 modular core roles &amp; 22 extension plugins (with SHA-256 bundled binaries), 14 bidirectional{' '}
             <code className="text-slate-200 font-mono">/etc/axonwall/*.yaml</code> files, lockless Linux 6.12 LTS
-            nftables + Dual-Stack VLAN/LPM CIDR/SYN-Flood XDP packet processing, Custom Hardened Kernels, 5-hook CO-RE BPF-LSM &amp; Linux 6.9+{' '}
+            nftables + Dual-Stack VLAN/LPM CIDR/SYN-Flood XDP packet processing, NetFlow/IPFIX/sFlow Analytics Studio, Custom Hardened Kernels, 5-hook CO-RE BPF-LSM &amp; Linux 6.9+{' '}
             <code className="text-slate-200 font-mono">BPF_TOKEN_CREATE</code> mediation, pure UEFI ZFSBootMenu v3.1.0 &amp; in-kernel <strong className="text-cyan-300">Btrfs + Snapper Root</strong>,
             and a guardrailed 25-tool MCP AI control plane.
           </p>
@@ -84,7 +86,7 @@ export default function StandaloneArchitecturePage() {
  │  Next.js Console (:2966 TLS) • Neovim TUI (axonwall-config) • Terraform Provider  │
  │  OpenLDAP Multi-Provider syncrepl • OIDC/SAML SSO • 16-Scope / 25-Tool MCP Server │
  └─────────────────────────────────────────┬─────────────────────────────────────────┘
-                                           │ Bidirectional 12x /etc/axonwall/*.yaml
+                                           │ Bidirectional 14x /etc/axonwall/*.yaml
                                            │ + Etckeeper /etc Git + Zod Schema Lock
                                            ▼
  ┌───────────────────────────────────────────────────────────────────────────────────┐
@@ -93,19 +95,19 @@ export default function StandaloneArchitecturePage() {
  └──────┬──────────────────────────┬──────────────────────────┬──────────────────────┘
         ▼                          ▼                          ▼
  ┌──────────────────────┐  ┌────────────────────────┐  ┌─────────────────────────────┐
- │ Linux 6.12 Dataplane │  │ Ring-0 BPF & Threat AI │  │ 5 Modular Converged Roles   │
+ │ Linux 6.12 Dataplane │  │ Ring-0 BPF & Flow AI   │  │ 5 Modular Converged Roles   │
  │ • Dual-Stack VLAN XDP│  │ • 5-Hook CO-RE BPF-LSM │  │ • core-firewall (NGFW/FRR)  │
  │ • table inet axonwall│  │   + BPF_TOKEN (6.9+)   │  │ • core-nas (ZFS+ARC/ZIL+S3) │
  │ • table inet         │  │   (CVE-2026-31431 /    │  │ • core-k3s (UserNS+OpenEBS) │
  │   axonwall_mcp (TTL) │  │    io_uring / UserNS)  │  │ • core-virt (KVM/LXC/VFIO)  │
- │ • Rosenpass ML-KEM   │  │ • Coroot eBPF L7 APM   │  │ • core-vigilante (SOAR/SOC) │
+ │ • Rosenpass ML-KEM   │  │ • Coroot & NetFlow/IPFIX│ │ • core-vigilante (SOAR/SOC) │
  │ • Keepalived + FTFW  │  │ • Suricata 7+ & 8 AVs  │  │ • ZFSBootMenu v3.1.0 & A/B  │
- │                      │  │ • Blackbox Threat-LLM  │  │   (.axonwall-dev rootless)  │
+ │ • Topology Studio    │  │ • Blackbox Threat-LLM  │  │   (.axonwall-dev rootless)  │
  └──────────────────────┘  └────────────────────────┘  └─────────────────────────────┘`}
           </pre>
         </section>
 
-        {/* 12 Declarative /etc/axonwall/*.yaml Files */}
+        {/* 14 Declarative /etc/axonwall/*.yaml Files */}
         <section className="space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
             <div>
@@ -113,7 +115,7 @@ export default function StandaloneArchitecturePage() {
                 Single Source of Truth
               </span>
               <h2 className="text-2xl font-bold text-white mt-1">
-                12 Bidirectional <code className="font-mono text-emerald-300">/etc/axonwall/*.yaml</code> Domains
+                14 Bidirectional <code className="font-mono text-emerald-300">/etc/axonwall/*.yaml</code> Domains
               </h2>
             </div>
             <Link
@@ -259,18 +261,18 @@ export default function StandaloneArchitecturePage() {
             <div className="p-6 rounded-xl bg-slate-900/40 border border-slate-800 space-y-3">
               <div className="flex items-center gap-2.5 font-bold text-white text-base">
                 <Activity className="w-5 h-5 text-emerald-400" />
-                <span>Coroot eBPF APM &amp; OpenZFS ARC/ZIL Telemetry</span>
+                <span>Coroot eBPF APM, NetFlow/IPFIX Studio &amp; OpenZFS Telemetry</span>
               </div>
               <p className="text-xs text-slate-400 leading-relaxed">
                 Kernel tracepoints, optional TLS uprobes, and 99 Hz FlameGraphs inspect L7 HTTP, gRPC, SQL, Redis, and
-                Kafka flows alongside <code className="text-slate-200">/proc/spl/kstat/zfs</code> ARC/L2ARC/ZIL storage
-                metrics and automated RCA checks.
+                Kafka flows alongside NetFlow v5/v9, IPFIX (TLS 1.3 mTLS), sFlow v5 &amp; dual-stack eBPF flow analytics,{' '}
+                <code className="text-slate-200">/proc/spl/kstat/zfs</code> ARC/L2ARC/ZIL storage metrics, and automated RCA checks.
               </p>
               <Link
-                href="/docs/observability"
+                href="/docs/observability#netflow-collector"
                 className="text-xs text-emerald-400 hover:text-emerald-300 font-semibold inline-flex items-center gap-1"
               >
-                eBPF &amp; Observability docs <ArrowRight className="w-3.5 h-3.5" />
+                eBPF, NetFlow Studio &amp; Observability docs <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
 
@@ -320,7 +322,7 @@ export default function StandaloneArchitecturePage() {
 
         {/* CTA Section */}
         <section className="p-8 rounded-2xl bg-gradient-to-r from-emerald-950/40 via-slate-900 to-sky-950/40 border border-emerald-500/30 text-center space-y-6">
-          <h2 className="text-3xl font-extrabold text-white">Ready to deploy Axonwall v0.15.0?</h2>
+          <h2 className="text-3xl font-extrabold text-white">Ready to deploy Axonwall v0.15.1?</h2>
           <p className="text-sm text-slate-300 max-w-xl mx-auto">
             Explore all 26 engineering guides, test the interactive Web Console sandbox, or download the Ed25519-signed
             unified quad-edition ISO (NGFW, Minimal, Vault S3 &amp; K3s-Storage) with Custom Hardened Kernel, ZFSBootMenu &amp; Btrfs + Snapper support.
@@ -342,7 +344,7 @@ export default function StandaloneArchitecturePage() {
               href="/releases"
               className="px-6 py-2.5 rounded-xl font-semibold text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition"
             >
-              Releases &amp; Download ISO (v0.15.0)
+              Releases &amp; Download ISO (v0.15.1)
             </Link>
           </div>
         </section>
@@ -362,7 +364,7 @@ export default function StandaloneArchitecturePage() {
           <div className="flex items-center gap-6">
             <Link href="/" className="hover:text-slate-300 transition">Home</Link>
             <Link href="/docs" className="hover:text-slate-300 transition">Docs</Link>
-            <Link href="/releases" className="hover:text-slate-300 transition">Releases (v0.15.0)</Link>
+            <Link href="/releases" className="hover:text-slate-300 transition">Releases (v0.15.1)</Link>
             <a href="https://github.com/axonwall/axonwall" className="hover:text-slate-300 transition">GitHub</a>
           </div>
         </div>

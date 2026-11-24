@@ -34,6 +34,7 @@ import {
   HardDrive,
   FileCode,
   Binary,
+  Network,
 } from 'lucide-react';
 import { Logo } from '../components/Logo';
 import { HeroSecurityHUD } from '../components/HeroSecurityHUD';
@@ -129,7 +130,7 @@ export default function HomePage() {
           {/* Badge */}
           <div className="relative -mt-4 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-emerald-400 text-xs font-semibold backdrop-blur-md">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            Axonwall v0.15.0 • K3s Live Telemetry Visualizers &amp; Node Bin-Packing, Turnkey Headscale Mesh, Ring-0 eBPF Profiler
+            Axonwall v0.15.1 • NetFlow/IPFIX/sFlow Analytics Studio, Interactive Topology Fabric, NetBox/LibreNMS Triad &amp; K3s Telemetry
           </div>
 
           {/* Heading */}
@@ -164,7 +165,7 @@ export default function HomePage() {
               href="/releases"
               className="w-full sm:w-auto px-6 py-3.5 rounded-xl text-sm font-semibold bg-slate-900/90 hover:bg-slate-800 text-emerald-300 border border-emerald-500/40 transition flex items-center justify-center gap-2"
             >
-              <Download className="w-4 h-4 text-emerald-400" /> Releases &amp; Download ISO (v0.15.0)
+              <Download className="w-4 h-4 text-emerald-400" /> Releases &amp; Download ISO (v0.15.1)
             </Link>
             <Link
               href="/docs"
@@ -280,7 +281,7 @@ export default function HomePage() {
                 <thead>
                   <tr className="bg-slate-950/90 border-b border-slate-800 text-slate-300">
                     <th className="py-3.5 px-4 font-bold">Capability Domain</th>
-                    <th className="py-3.5 px-4 font-bold text-emerald-400">Axonwall v0.15.0</th>
+                    <th className="py-3.5 px-4 font-bold text-emerald-400">Axonwall v0.15.1</th>
                     <th className="py-3.5 px-4 font-bold text-slate-400">OPNsense / pfSense</th>
                     <th className="py-3.5 px-4 font-bold text-slate-400">TrueNAS SCALE</th>
                     <th className="py-3.5 px-4 font-bold text-slate-400">Proxmox VE 8.x</th>
@@ -324,7 +325,7 @@ export default function HomePage() {
                   </tr>
                   <tr>
                     <td className="py-3 px-4 font-semibold text-white">Rollback &amp; AI Governance</td>
-                    <td className="py-3 px-4 text-emerald-300">60s Commit-Confirm + ZBM v3.1.0 + 12 YAML GitOps + 25-Tool Guardrailed MCP &amp; Vigilante SOC</td>
+                    <td className="py-3 px-4 text-emerald-300">60s Commit-Confirm + ZBM v3.1.0 + 14 YAML GitOps + 25-Tool Guardrailed MCP &amp; Vigilante SOC</td>
                     <td className="py-3 px-4 text-slate-400">Monolithic config.xml (no auto-revert or MCP)</td>
                     <td className="py-3 px-4 text-slate-400">SQLite DB + ZFS BEs (no GitOps YAML or MCP)</td>
                     <td className="py-3 px-4 text-slate-400">pmxcfs /etc/pve (no Commit-Confirm or SOC)</td>
@@ -362,10 +363,10 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-6 space-y-16">
           <div className="text-center max-w-3xl mx-auto space-y-4">
             <span className="text-xs font-semibold text-emerald-400 uppercase tracking-wider">
-              Converged Platform Architecture • v0.15.0
+              Converged Platform Architecture • v0.15.1
             </span>
             <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-              5 Modular Core Roles, 18 Extension Plugins
+              5 Modular Core Roles, 22 Extension Plugins
             </h2>
             <p className="text-sm sm:text-base text-slate-400">
               Enable only the subsystems your deployment needs in <code className="text-slate-200 font-mono">/etc/axonwall/system.yaml</code>—from
@@ -667,7 +668,7 @@ export default function HomePage() {
                 Etckeeper /etc Git UI &amp; Terraform Provider
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                12 bidirectional <code className="text-slate-300">/etc/axonwall/*.yaml</code> files, Etckeeper{' '}
+                14 bidirectional <code className="text-slate-300">/etc/axonwall/*.yaml</code> files, Etckeeper{' '}
                 <code className="text-slate-300">/etc</code> Git history &amp; unified diff UI, and the native
                 Terraform / OpenTofu provider for declarative fleet IaC.
               </p>
@@ -690,7 +691,7 @@ export default function HomePage() {
                 Neovim Super Configurator &amp; axonwall-opshell
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                Edit all 12 YAML domains via <code className="text-slate-300">axonwall-config</code> with native Vim
+                Edit all 14 YAML domains via <code className="text-slate-300">axonwall-config</code> with native Vim
                 motions, simulate paths in NastyMap, and confine non-root operators with{' '}
                 <code className="text-slate-300">axonwall-opshell</code>.
               </p>
@@ -755,6 +756,49 @@ export default function HomePage() {
                 Opt-in Ring-0 TCX flow sketches + <code className="text-slate-300">execve</code>/
                 <code className="text-slate-300">memfd</code> lineage + guarded TLS uprobes with mandatory pre-disk DLP
                 redaction, Crypto-PAn anonymization, and <code className="text-slate-300">.tar.zst</code> SFT + Parquet export.
+              </p>
+            </Link>
+
+            {/* 17. NetFlow / IPFIX / sFlow Collector & Analytics Studio */}
+            <Link
+              href="/docs/observability#netflow-collector"
+              className="p-6 rounded-2xl bg-slate-900 border border-sky-500/40 hover:border-sky-500/80 transition space-y-3 group block"
+            >
+              <div className="flex items-center justify-between">
+                <div className="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400">
+                  <Activity className="w-4 h-4" />
+                </div>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-sky-500/15 text-sky-300 border border-sky-500/30">
+                  IPFIX • SFLOW • FQL
+                </span>
+              </div>
+              <h3 className="text-base font-bold text-white group-hover:text-sky-300 transition">
+                NetFlow / IPFIX / sFlow Analytics Studio
+              </h3>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                Multi-protocol UDP/TCP/TLS 1.3 mTLS collector (<code className="text-slate-300">SO_REUSEPORT</code>), dual-stack eBPF
+                self-export, pure-Go MMDB GeoIP/ASN, FRR BGP/K3s/conntrack NAT enrichment, ClickHouse SQL pushdown, 95th-pct reports &amp; 7d×24h EWMA baselines.
+              </p>
+            </Link>
+
+            {/* 18. Interactive Topology Studio, NetBox & LibreNMS */}
+            <Link
+              href="/docs/modular-architecture#extension-plugins"
+              className="p-6 rounded-2xl bg-slate-900 border border-emerald-500/40 hover:border-emerald-500/80 transition space-y-3 group block"
+            >
+              <div className="flex items-center justify-between">
+                <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+                  <Network className="w-4 h-4" />
+                </div>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+                  TOPOLOGY • NETBOX
+                </span>
+              </div>
+              <h3 className="text-base font-bold text-white group-hover:text-emerald-300 transition">
+                Topology Studio, NetBox &amp; LibreNMS Triad
+              </h3>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                Interactive <code className="text-slate-300">@xyflow/react</code> multi-host fabric editor with strict health probes &amp; phased apply, paired with K3s NetBox v4 DCIM/IPAM &amp; LibreNMS SNMP/DOM sync.
               </p>
             </Link>
           </div>
@@ -894,16 +938,16 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Official Release v0.15.0 & Signed Installation Media Section */}
+      {/* Official Release v0.15.1 & Signed Installation Media Section */}
       <section id="releases" className="py-24 border-t border-slate-800/80 bg-slate-950/50">
         <div className="max-w-7xl mx-auto px-6 space-y-12">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
             <div className="space-y-3 max-w-2xl">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold">
-                <Download className="w-3.5 h-3.5" /> Official Release • v0.15.0 (2026-11-23 • Signed with Ed25519 &amp; SHA-256)
+                <Download className="w-3.5 h-3.5" /> Official Release • v0.15.1 (2026-11-23 • Signed with Ed25519 &amp; SHA-256)
               </div>
               <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-                Download Verified v0.15.0 Media
+                Download Verified v0.15.1 Media
               </h2>
               <p className="text-sm text-slate-400 leading-relaxed">
                 Every release artifact is built deterministically from{' '}
@@ -923,12 +967,12 @@ export default function HomePage() {
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <a
-                href="https://github.com/axonwall/axonwall/releases/tag/v0.15.0"
+                href="https://github.com/axonwall/axonwall/releases/tag/v0.15.1"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-4 py-3 rounded-xl text-xs font-semibold bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-800 transition flex items-center gap-2"
               >
-                <ExternalLink className="w-3.5 h-3.5 text-emerald-400" /> GitHub v0.15.0
+                <ExternalLink className="w-3.5 h-3.5 text-emerald-400" /> GitHub v0.15.1
               </a>
             </div>
           </div>
@@ -949,24 +993,24 @@ export default function HomePage() {
                   Supports ZFSBootMenu v3.1.0, in-kernel Btrfs + Snapper Root RAID-1, mdadm A/B Dual-Root, smart NVMe/SSD/HDD tiering, and LUKS2 + TPM 2.0 auto-unlock.
                 </p>
                 <div className="p-2.5 rounded-lg bg-slate-950 border border-slate-800 font-mono text-[10px] text-slate-400 break-all">
-                  Verification: <span className="text-emerald-400">SHA-256 &amp; Ed25519 signature published in official v0.15.0 .sha256 / .sha256.sig assets</span>
+                  Verification: <span className="text-emerald-400">SHA-256 &amp; Ed25519 signature published in official v0.15.1 .sha256 / .sha256.sig assets</span>
                 </div>
               </div>
               <div className="flex items-center gap-2">
                 <a
-                  href="https://github.com/axonwall/axonwall/releases/download/v0.15.0/axonwall-debian13-amd64.iso"
+                  href="https://github.com/axonwall/axonwall/releases/download/v0.15.1/axonwall-debian13-amd64.iso"
                   className="flex-1 py-2.5 px-3 rounded-lg text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white transition text-center flex items-center justify-center gap-1.5"
                 >
                   <Download className="w-3.5 h-3.5" /> axonwall-debian13-amd64.iso
                 </a>
                 <a
-                  href="https://github.com/axonwall/axonwall/releases/download/v0.15.0/axonwall-debian13-amd64.iso.sha256"
+                  href="https://github.com/axonwall/axonwall/releases/download/v0.15.1/axonwall-debian13-amd64.iso.sha256"
                   className="py-2.5 px-2.5 rounded-lg text-[11px] font-mono bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-800"
                 >
                   .sha256
                 </a>
                 <a
-                  href="https://github.com/axonwall/axonwall/releases/download/v0.15.0/axonwall-debian13-amd64.iso.sha256.sig"
+                  href="https://github.com/axonwall/axonwall/releases/download/v0.15.1/axonwall-debian13-amd64.iso.sha256.sig"
                   className="py-2.5 px-2.5 rounded-lg text-[11px] font-mono bg-slate-950 hover:bg-slate-800 text-emerald-300 border border-emerald-500/30"
                 >
                   .sig
@@ -990,24 +1034,24 @@ export default function HomePage() {
                   IPv6, and &lt;1.2s RAM boot.
                 </p>
                 <div className="p-2.5 rounded-lg bg-slate-950 border border-slate-800 font-mono text-[10px] text-slate-400 break-all">
-                  Verification: <span className="text-sky-400">SHA-256 &amp; Ed25519 signature published in official v0.15.0 .sha256 / .sha256.sig assets</span>
+                  Verification: <span className="text-sky-400">SHA-256 &amp; Ed25519 signature published in official v0.15.1 .sha256 / .sha256.sig assets</span>
                 </div>
               </div>
               <div className="flex items-center gap-2">
                 <a
-                  href="https://github.com/axonwall/axonwall/releases/download/v0.15.0/axonwall-edge-sku-vm-virtio.efi"
+                  href="https://github.com/axonwall/axonwall/releases/download/v0.15.1/axonwall-edge-sku-vm-virtio.efi"
                   className="flex-1 py-2.5 px-3 rounded-lg text-xs font-semibold bg-sky-600 hover:bg-sky-500 text-white transition text-center flex items-center justify-center gap-1.5"
                 >
                   <Download className="w-3.5 h-3.5" /> axonwall-edge-sku-vm-virtio.efi
                 </a>
                 <a
-                  href="https://github.com/axonwall/axonwall/releases/download/v0.15.0/axonwall-edge-sku-vm-virtio.efi.sha256"
+                  href="https://github.com/axonwall/axonwall/releases/download/v0.15.1/axonwall-edge-sku-vm-virtio.efi.sha256"
                   className="py-2.5 px-2.5 rounded-lg text-[11px] font-mono bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-800"
                 >
                   .sha256
                 </a>
                 <a
-                  href="https://github.com/axonwall/axonwall/releases/download/v0.15.0/axonwall-edge-sku-vm-virtio.efi.sha256.sig"
+                  href="https://github.com/axonwall/axonwall/releases/download/v0.15.1/axonwall-edge-sku-vm-virtio.efi.sha256.sig"
                   className="py-2.5 px-2.5 rounded-lg text-[11px] font-mono bg-slate-950 hover:bg-slate-800 text-sky-300 border border-sky-500/30"
                 >
                   .sig
@@ -1030,24 +1074,24 @@ export default function HomePage() {
                   reconciler, and background first-boot Slot-B synchronization.
                 </p>
                 <div className="p-2.5 rounded-lg bg-slate-950 border border-slate-800 font-mono text-[10px] text-slate-400 break-all">
-                  Verification: <span className="text-purple-400">SHA-256 &amp; Ed25519 signature published in official v0.15.0 .sha256 / .sha256.sig assets</span>
+                  Verification: <span className="text-purple-400">SHA-256 &amp; Ed25519 signature published in official v0.15.1 .sha256 / .sha256.sig assets</span>
                 </div>
               </div>
               <div className="flex items-center gap-2">
                 <a
-                  href="https://github.com/axonwall/axonwall/releases/download/v0.15.0/axonwall-debian13-amd64-cloud.qcow2"
+                  href="https://github.com/axonwall/axonwall/releases/download/v0.15.1/axonwall-debian13-amd64-cloud.qcow2"
                   className="flex-1 py-2.5 px-3 rounded-lg text-xs font-semibold bg-purple-600 hover:bg-purple-500 text-white transition text-center flex items-center justify-center gap-1.5"
                 >
                   <Download className="w-3.5 h-3.5" /> axonwall-debian13-amd64-cloud.qcow2
                 </a>
                 <a
-                  href="https://github.com/axonwall/axonwall/releases/download/v0.15.0/axonwall-debian13-amd64-cloud.qcow2.sha256"
+                  href="https://github.com/axonwall/axonwall/releases/download/v0.15.1/axonwall-debian13-amd64-cloud.qcow2.sha256"
                   className="py-2.5 px-2.5 rounded-lg text-[11px] font-mono bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-800"
                 >
                   .sha256
                 </a>
                 <a
-                  href="https://github.com/axonwall/axonwall/releases/download/v0.15.0/axonwall-debian13-amd64-cloud.qcow2.sha256.sig"
+                  href="https://github.com/axonwall/axonwall/releases/download/v0.15.1/axonwall-debian13-amd64-cloud.qcow2.sha256.sig"
                   className="py-2.5 px-2.5 rounded-lg text-[11px] font-mono bg-slate-950 hover:bg-slate-800 text-purple-300 border border-purple-500/30"
                 >
                   .sig
@@ -1071,24 +1115,24 @@ export default function HomePage() {
                   <code className="text-slate-300">axonwall-vault</code> &amp; <code className="text-slate-300">axonwall-k3s-storage</code> packages also built).
                 </p>
                 <div className="p-2.5 rounded-lg bg-slate-950 border border-slate-800 font-mono text-[10px] text-slate-400 break-all">
-                  Verification: <span className="text-emerald-400">SHA-256 &amp; Ed25519 signature published in official v0.15.0 .sha256 / .sha256.sig assets</span>
+                  Verification: <span className="text-emerald-400">SHA-256 &amp; Ed25519 signature published in official v0.15.1 .sha256 / .sha256.sig assets</span>
                 </div>
               </div>
               <div className="flex items-center gap-2">
                 <a
-                  href="https://github.com/axonwall/axonwall/releases/download/v0.15.0/axonwall_0.15.0_amd64.deb"
+                  href="https://github.com/axonwall/axonwall/releases/download/v0.15.1/axonwall_0.15.1_amd64.deb"
                   className="flex-1 py-2.5 px-3 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 transition text-center flex items-center justify-center gap-1.5"
                 >
-                  <Download className="w-3.5 h-3.5 text-emerald-400" /> axonwall_0.15.0_amd64.deb
+                  <Download className="w-3.5 h-3.5 text-emerald-400" /> axonwall_0.15.1_amd64.deb
                 </a>
                 <a
-                  href="https://github.com/axonwall/axonwall/releases/download/v0.15.0/axonwall_0.15.0_amd64.deb.sha256"
+                  href="https://github.com/axonwall/axonwall/releases/download/v0.15.1/axonwall_0.15.1_amd64.deb.sha256"
                   className="py-2.5 px-2.5 rounded-lg text-[11px] font-mono bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-800"
                 >
                   .sha256
                 </a>
                 <a
-                  href="https://github.com/axonwall/axonwall/releases/download/v0.15.0/axonwall_0.15.0_amd64.deb.sha256.sig"
+                  href="https://github.com/axonwall/axonwall/releases/download/v0.15.1/axonwall_0.15.1_amd64.deb.sha256.sig"
                   className="py-2.5 px-2.5 rounded-lg text-[11px] font-mono bg-slate-950 hover:bg-slate-800 text-emerald-300 border border-emerald-500/30"
                 >
                   .sig
@@ -1116,7 +1160,7 @@ export default function HomePage() {
               Pre-Configured Hardware Appliances
             </h2>
             <p className="text-sm sm:text-base text-slate-400">
-              Factory burned-in, pre-loaded with Axonwall v0.15.0 (ZFSBootMenu / Btrfs + Snapper + TPM 2.0 + Custom Hardened Kernel), and tested for maximum
+              Factory burned-in, pre-loaded with Axonwall v0.15.1 (ZFSBootMenu / Btrfs + Snapper + TPM 2.0 + Custom Hardened Kernel), and tested for maximum
               thermal reliability. Ships globally with next-day advance hardware replacement.
             </p>
           </div>
@@ -1282,7 +1326,7 @@ export default function HomePage() {
                 href="/releases"
                 className="w-full py-3 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition border border-slate-700 block text-center"
               >
-                Download Community ISO (v0.15.0)
+                Download Community ISO (v0.15.1)
               </Link>
             </div>
 
@@ -1474,7 +1518,7 @@ export default function HomePage() {
 
           <div className="flex flex-wrap items-center gap-6">
             <Link href="/docs" className="hover:text-slate-300 transition">Docs (26 Guides)</Link>
-            <Link href="/releases" className="hover:text-slate-300 transition">Releases (v0.15.0)</Link>
+            <Link href="/releases" className="hover:text-slate-300 transition">Releases (v0.15.1)</Link>
             <Link href="/docs/custom-kernel" className="hover:text-slate-300 transition">Custom Kernel</Link>
             <Link href="/docs/mcp-ai-control" className="hover:text-slate-300 transition">MCP AI</Link>
             <Link href="/docs/vigilante-cyber-ops" className="hover:text-slate-300 transition">Vigilante SOC</Link>

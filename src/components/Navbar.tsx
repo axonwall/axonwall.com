@@ -119,7 +119,7 @@ const PRODUCT_ITEMS: DropdownItem[] = [
 
 const DOCS_ITEMS: DropdownItem[] = [
   {
-    title: 'Documentation Hub (v0.15.0)',
+    title: 'Documentation Hub (v0.15.1)',
     desc: 'All 26 technical guides: Btrfs + Snapper, Minimal Edition, Blackbox Harvester, KSPP kernels, Browser K9s & API',
     href: '/docs',
     icon: FileText,
@@ -206,11 +206,11 @@ const DOCS_ITEMS: DropdownItem[] = [
 
 const EXPLORE_ITEMS: DropdownItem[] = [
   {
-    title: 'Releases & Downloads (v0.15.0)',
+    title: 'Releases & Downloads (v0.15.1)',
     desc: 'Unified NGFW + Minimal + Vault + K3s-Storage ISO, Edge UKI (.efi), Cloud QCOW2 & .deb',
     href: '/releases',
     icon: Download,
-    badge: 'v0.15.0',
+    badge: 'v0.15.1',
   },
   {
     title: 'Live Web Console Demo',
@@ -462,7 +462,7 @@ export function Navbar() {
             <Download className="w-3.5 h-3.5 text-emerald-400" />
             <span>Releases</span>
             <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
-              v0.15.0
+              v0.15.1
             </span>
           </Link>
         </nav>
