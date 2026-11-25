@@ -52,9 +52,9 @@ const RELEASE_ARTIFACTS: ReleaseArtifact[] = [
     badge: 'RECOMMENDED • NGFW + MINIMAL + VAULT + K3S',
     badgeColor: 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30',
     icon: HardDrive,
-    downloadUrl: 'https://github.com/axonwall/axonwall/releases/download/v0.16.0/axonwall-debian13-amd64.iso',
-    sha256Url: 'https://github.com/axonwall/axonwall/releases/download/v0.16.0/axonwall-debian13-amd64.iso.sha256',
-    sigUrl: 'https://github.com/axonwall/axonwall/releases/download/v0.16.0/axonwall-debian13-amd64.iso.sha256.sig',
+    downloadUrl: 'https://github.com/axonwall/axonwall/releases/download/v0.16.1/axonwall-debian13-amd64.iso',
+    sha256Url: 'https://github.com/axonwall/axonwall/releases/download/v0.16.1/axonwall-debian13-amd64.iso.sha256',
+    sigUrl: 'https://github.com/axonwall/axonwall/releases/download/v0.16.1/axonwall-debian13-amd64.iso.sha256.sig',
     highlights: [
       'Lean Router/NGFW Core defaults (core-firewall active; 4 Starter Packs via [P] -> starter-packs.seed) + Quad-edition GRUB/ISOLINUX & 5-step TUI (axonwall, minimal, vault, k3s-storage)',
       'Four boot engines: ZFSBootMenu v3.1.0 Root-on-ZFS, in-kernel Btrfs + Snapper Root (single-disk or native RAID-1), A/B Dual-Root (mdadm RAID-1), or Rolling Single-Root',
@@ -70,9 +70,9 @@ const RELEASE_ARTIFACTS: ReleaseArtifact[] = [
     badge: 'ZERO-SHELL UKI • PID 1 GO',
     badgeColor: 'bg-sky-500/15 text-sky-300 border-sky-500/30',
     icon: Cpu,
-    downloadUrl: 'https://github.com/axonwall/axonwall/releases/download/v0.16.0/axonwall-edge-sku-vm-virtio.efi',
-    sha256Url: 'https://github.com/axonwall/axonwall/releases/download/v0.16.0/axonwall-edge-sku-vm-virtio.efi.sha256',
-    sigUrl: 'https://github.com/axonwall/axonwall/releases/download/v0.16.0/axonwall-edge-sku-vm-virtio.efi.sha256.sig',
+    downloadUrl: 'https://github.com/axonwall/axonwall/releases/download/v0.16.1/axonwall-edge-sku-vm-virtio.efi',
+    sha256Url: 'https://github.com/axonwall/axonwall/releases/download/v0.16.1/axonwall-edge-sku-vm-virtio.efi.sha256',
+    sigUrl: 'https://github.com/axonwall/axonwall/releases/download/v0.16.1/axonwall-edge-sku-vm-virtio.efi.sha256.sig',
     highlights: [
       'Zero userland, zero shell (/bin/sh, bash, busybox, sshd stripped), and complete loadable-kernel-module immunity',
       'Pure-Go Netlink nftables/WireGuard data plane (including NFT_LIMIT_F_INV over-rate, wildcard ifname & chunked sets) + RFC 8415 DHCPv6 & RA',
@@ -81,7 +81,7 @@ const RELEASE_ARTIFACTS: ReleaseArtifact[] = [
     extraAsset: {
       filename: 'axonwall-edge-sku-vm-virtio-initramfs.cpio.gz',
       downloadUrl:
-        'https://github.com/axonwall/axonwall/releases/download/v0.16.0/axonwall-edge-sku-vm-virtio-initramfs.cpio.gz',
+        'https://github.com/axonwall/axonwall/releases/download/v0.16.1/axonwall-edge-sku-vm-virtio-initramfs.cpio.gz',
     },
   },
   {
@@ -93,11 +93,11 @@ const RELEASE_ARTIFACTS: ReleaseArtifact[] = [
     badge: 'KVM • PROXMOX VE • OPENSTACK',
     badgeColor: 'bg-purple-500/15 text-purple-300 border-purple-500/30',
     icon: Cloud,
-    downloadUrl: 'https://github.com/axonwall/axonwall/releases/download/v0.16.0/axonwall-debian13-amd64-cloud.qcow2',
+    downloadUrl: 'https://github.com/axonwall/axonwall/releases/download/v0.16.1/axonwall-debian13-amd64-cloud.qcow2',
     sha256Url:
-      'https://github.com/axonwall/axonwall/releases/download/v0.16.0/axonwall-debian13-amd64-cloud.qcow2.sha256',
+      'https://github.com/axonwall/axonwall/releases/download/v0.16.1/axonwall-debian13-amd64-cloud.qcow2.sha256',
     sigUrl:
-      'https://github.com/axonwall/axonwall/releases/download/v0.16.0/axonwall-debian13-amd64-cloud.qcow2.sha256.sig',
+      'https://github.com/axonwall/axonwall/releases/download/v0.16.1/axonwall-debian13-amd64-cloud.qcow2.sha256.sig',
     highlights: [
       'Instant import into Proxmox VE (qm importdisk) and libvirt/QEMU with VirtIO-SCSI, VirtIO-Net, and QEMU guest agent',
       'Background first-boot Slot-B synchronization establishes full A/B Dual-Root rollback parity without delaying first login',
@@ -109,32 +109,42 @@ const RELEASE_ARTIFACTS: ReleaseArtifact[] = [
     title: 'Standalone Debian / Ubuntu AMD64 Packages (.deb)',
     subtitle:
       'Install Lean Core Axonwall on existing Debian 12/13 or Ubuntu 24.04 x86_64 hosts, or apply verified OTA ZBM, Btrfs + Snapper & A/B upgrades (companion axonwall-minimal, axonwall-vault & axonwall-k3s-storage .debs + axonwall-docs tarball also published)',
-    filename: 'axonwall_0.16.0_amd64.deb',
+    filename: 'axonwall_0.16.1_amd64.deb',
     badge: 'DEBIAN 12/13 • UBUNTU 24.04',
     badgeColor: 'bg-slate-800 text-slate-300 border-slate-700',
     icon: Server,
-    downloadUrl: 'https://github.com/axonwall/axonwall/releases/download/v0.16.0/axonwall_0.16.0_amd64.deb',
-    sha256Url: 'https://github.com/axonwall/axonwall/releases/download/v0.16.0/axonwall_0.16.0_amd64.deb.sha256',
-    sigUrl: 'https://github.com/axonwall/axonwall/releases/download/v0.16.0/axonwall_0.16.0_amd64.deb.sha256.sig',
+    downloadUrl: 'https://github.com/axonwall/axonwall/releases/download/v0.16.1/axonwall_0.16.1_amd64.deb',
+    sha256Url: 'https://github.com/axonwall/axonwall/releases/download/v0.16.1/axonwall_0.16.1_amd64.deb.sha256',
+    sigUrl: 'https://github.com/axonwall/axonwall/releases/download/v0.16.1/axonwall_0.16.1_amd64.deb.sha256.sig',
     highlights: [
       'Lean Router/NGFW Core (47 plugin manifests, 4 Curated Starter Packs & Air-Gapped Plugin Cache) + automatic v0.15.x upgrade preservation',
       'Includes axonwalld, axonwall-controller, 25-tool mcp-ai-control, Next.js 16 axonwall-ui, axonwall-console, /bin/bash fallback & local POSIX UserManager',
       'Used automatically by axonwall-update and axonwallctl update for RSA-4096 SHA-256 verified OTA upgrades across ZBM, Btrfs + Snapper & A/B slots',
     ],
     extraAsset: {
-      filename: 'axonwall-docs-0.16.0.tar.gz',
+      filename: 'axonwall-docs-0.16.1.tar.gz',
       size: '~1.1 MB offline docs-portal bundle',
       downloadUrl:
-        'https://github.com/axonwall/axonwall/releases/download/v0.16.0/axonwall-docs-0.16.0.tar.gz',
+        'https://github.com/axonwall/axonwall/releases/download/v0.16.1/axonwall-docs-0.16.1.tar.gz',
     },
   },
 ];
 
 const RELEASE_CHANGELOG = [
   {
+    version: 'v0.16.1',
+    date: 'November 25, 2026',
+    tag: 'Latest Release',
+    highlights: [
+      'Commit-Confirm & Anti-Lockout Hardening: Removed localhost /v1/confirm auto-confirm bypasses and pre-apply /etc/axonwall/* disk writes across Web Console interface assignments, DesiredState apply pipelines, and WireGuard peer registration; added live+static overlapping subnet guards and restricted default gateway emission to WAN.',
+      'Live Kernel Network Rollback (net_rollback.go): Added live IPv4/route/link snapshot and rollback with ECMP multipath nexthop restoration, virtual/overlay NIC exclusion (tailscale*, wg*, veth*, tap*, cni*, flannel*, cilium*, br-*), non-releasing dhcpcd -x / rebind, promote_secondaries=1, and resilient executeRollback even when last-known-good.nft is empty or nft -f fails.',
+      'Boot, SD-WAN, Topology & Systemd Reliability: Fixed --boot-apply startup ordering for expired/live pending-confirm bundles, prober.go cancellation race before evaluateFailover(), topology.go premature peer auto-confirm, getDesiredStateInternal() read-clobber protection, controlSystemService critical-unit stop guards, and RuntimeDirectoryPreserve=yes on axonwalld/headscale/axonwall-ui systemd units.',
+    ],
+  },
+  {
     version: 'v0.16.0',
     date: 'November 24, 2026',
-    tag: 'Latest Release',
+    tag: 'Feature Release',
     highlights: [
       'Lean Router/NGFW Core Default (5 Core Roles + 42 Opt-In Extension Plugins = 47 Manifests): Standard axonwall installs boot cleanly with core-firewall active (nftables, WireGuard, Kea DHCP, Unbound DNS) while keeping IDS/IPS (suricata-ids, crowdsec-bouncer), FRRouting, OpenVPN, strongSwan, OpenLDAP/SSSD (directory-ldap), Enterprise SSO, High Availability, ai-copilot, docs-portal, and Zsh/Neovim Workstation opt-in with validated /bin/bash & local POSIX UserManager fallback. Minimal edition starts with all 5 Core Roles disabled.',
       '4 Curated Starter Packs Across Web UI, CLI, Installer & Cloud-Init: Install and enable enterprise-ngfw, remote-access-vpn, operator-diagnostics, or ai-observability in one click (/system/plugins with category filter pills & impact/dependency confirmation modal), via Ink TUI [p], bare-metal installer [P] (starter-packs.seed with daemon-ready firstboot), Cloud-Init (starter_packs:), or axonwallctl plugin pack install [--offline-config-only] (resolving full transitive dependency closure).',
@@ -409,7 +419,7 @@ export default function ReleasesPage() {
         <section className="text-center max-w-4xl mx-auto space-y-6">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950/70 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            Latest Official Release: v0.16.0 (2026-11-24) • Signed with RSA-4096 &amp; SHA-256
+            Latest Official Release: v0.16.1 (2026-11-25) • Signed with RSA-4096 &amp; SHA-256
           </div>
 
           <h1 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight">
@@ -426,12 +436,12 @@ export default function ReleasesPage() {
 
           <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
             <a
-              href="https://github.com/axonwall/axonwall/releases/tag/v0.16.0"
+              href="https://github.com/axonwall/axonwall/releases/tag/v0.16.1"
               target="_blank"
               rel="noopener noreferrer"
               className="px-5 py-2.5 rounded-xl text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white transition flex items-center gap-2 shadow-lg shadow-emerald-950/60"
             >
-              <ExternalLink className="w-4 h-4" /> View v0.16.0 on GitHub Releases
+              <ExternalLink className="w-4 h-4" /> View v0.16.1 on GitHub Releases
             </a>
             <a
               href="https://github.com/axonwall/axonwall/releases/tag/rolling-latest"
@@ -455,7 +465,7 @@ export default function ReleasesPage() {
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-800 pb-4">
             <div>
               <span className="text-xs font-semibold text-emerald-400 uppercase tracking-wider">
-                Official v0.16.0 Build Matrix • 2026-11-24
+                Official v0.16.1 Build Matrix • 2026-11-25
               </span>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-white mt-1">
                 Download Verified Appliance Images
@@ -530,7 +540,7 @@ export default function ReleasesPage() {
                     <div className="flex items-center gap-2 overflow-x-auto">
                       <span className="text-slate-500 font-semibold uppercase text-[10px] shrink-0">Verify:</span>
                       <code className="font-mono text-emerald-400 text-[11px]">
-                        {item.sha256 || `Download .sha256 & .sha256.sig from GitHub v0.16.0 release assets`}
+                        {item.sha256 || `Download .sha256 & .sha256.sig from GitHub v0.16.1 release assets`}
                       </code>
                     </div>
                     <button
@@ -570,7 +580,7 @@ export default function ReleasesPage() {
                         <div className="text-[11px] text-slate-400 font-mono break-all">
                           {item.extraAsset.sha256
                             ? `SHA-256: ${item.extraAsset.sha256}`
-                            : 'Signed .sha256 and .sha256.sig attached to v0.16.0 GitHub Release'}
+                            : 'Signed .sha256 and .sha256.sig attached to v0.16.1 GitHub Release'}
                         </div>
                       </div>
                       <a
@@ -592,17 +602,17 @@ export default function ReleasesPage() {
           <div className="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-4">
             <div className="flex items-center gap-2 text-white font-bold text-base">
               <Lock className="w-5 h-5 text-emerald-400" />
-              <span>1. Verify v0.16.0 SHA-256 &amp; RSA-4096 Signature</span>
+              <span>1. Verify v0.16.1 SHA-256 &amp; RSA-4096 Signature</span>
             </div>
             <p className="text-xs text-slate-400 leading-relaxed">
-              Every v0.16.0 release artifact is signed with the Axonwall Release Signing Key. Verify both the SHA-256
+              Every v0.16.1 release artifact is signed with the Axonwall Release Signing Key. Verify both the SHA-256
               digest and the detached RSA-4096 signature before flashing or booting:
             </p>
             <pre className="p-4 rounded-xl bg-slate-950 border border-slate-800 text-[11px] font-mono text-slate-300 overflow-x-auto leading-relaxed">
-{`# Download v0.16.0 ISO + checksum + detached signature
-curl -LO https://github.com/axonwall/axonwall/releases/download/v0.16.0/axonwall-debian13-amd64.iso
-curl -LO https://github.com/axonwall/axonwall/releases/download/v0.16.0/axonwall-debian13-amd64.iso.sha256
-curl -LO https://github.com/axonwall/axonwall/releases/download/v0.16.0/axonwall-debian13-amd64.iso.sha256.sig
+{`# Download v0.16.1 ISO + checksum + detached signature
+curl -LO https://github.com/axonwall/axonwall/releases/download/v0.16.1/axonwall-debian13-amd64.iso
+curl -LO https://github.com/axonwall/axonwall/releases/download/v0.16.1/axonwall-debian13-amd64.iso.sha256
+curl -LO https://github.com/axonwall/axonwall/releases/download/v0.16.1/axonwall-debian13-amd64.iso.sha256.sig
 
 # Verify SHA-256 checksum
 sha256sum -c axonwall-debian13-amd64.iso.sha256
@@ -633,8 +643,8 @@ qemu-system-x86_64 -enable-kvm -m 512M -smp 2 \\
 # Import Cloud QCOW2 into Proxmox VE (Slot-B syncs on first boot)
 qm importdisk 9000 axonwall-debian13-amd64-cloud.qcow2 local-zfs
 
-# Install standalone v0.16.0 package (or minimal / vault / k3s-storage edition)
-sudo apt install ./axonwall_0.16.0_amd64.deb`}
+# Install standalone v0.16.1 package (or minimal / vault / k3s-storage edition)
+sudo apt install ./axonwall_0.16.1_amd64.deb`}
             </pre>
           </div>
         </section>
