@@ -5,7 +5,7 @@ import { CodeBlock } from '../components/CodeBlock';
 export const metadata = {
   title: 'Kubernetes (K3s), Cilium eBPF CNI, Etcd Snapshots & OpenEBS | Axonwall Documentation',
   description:
-    'Complete guide to running K3s Kubernetes and OpenEBS distributed storage on Axonwall v0.16.0: Cilium eBPF CNI (kube-proxy replacement + Hubble), Browser K9s Live Explorer, Node Roles & Taints Modal, embedded etcd snapshots & S3 backup/restore, automated HA peer join, WireGuard flannel mesh, axonwall-kubeconfig VIP sync, ZFS-LocalPV, and Mayastor NVMe-oF replication.',
+    'Complete guide to running K3s Kubernetes and OpenEBS distributed storage on Axonwall v0.16.2: Cilium eBPF CNI (kube-proxy replacement + Hubble), Browser K9s Live Explorer, Node Roles & Taints Modal, embedded etcd snapshots & S3 backup/restore, automated HA peer join, WireGuard flannel mesh, axonwall-kubeconfig VIP sync, ZFS-LocalPV, and Mayastor NVMe-oF replication.',
 };
 
 export default function K3sKubernetesDocPage() {
@@ -15,7 +15,7 @@ export default function K3sKubernetesDocPage() {
       <div className="space-y-4 border-b border-slate-800/80 pb-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-          Container Orchestration &amp; Cloud-Native Storage • v0.16.0
+          Container Orchestration &amp; Cloud-Native Storage • v0.16.2
         </div>
         <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
           Kubernetes (K3s) &amp; OpenEBS Distributed Storage
@@ -328,6 +328,23 @@ spec:
             path: /run/axonwall/bpffs-tokens/k3s-net-safe
             type: Directory`}
         />
+      </section>
+
+      {/* Central Analytics Stack Helm Chart */}
+      <section id="axonwall-analytics" className="space-y-4 pt-6 border-t border-slate-800/80">
+        <h2 className="text-2xl font-bold text-white">
+          Central Analytics Stack (<code className="font-mono text-emerald-400">axonwall-analytics</code> Helm Chart)
+        </h2>
+        <p className="text-sm text-slate-300 leading-relaxed">
+          Dedicated <code className="text-emerald-400 font-mono">k3s-storage</code> appliances can deploy the bundled{' '}
+          <code className="text-slate-200 font-mono">deploy/k8s/helm/axonwall-analytics</code> Helm chart backed by{' '}
+          <code className="text-slate-200 font-mono">axonwall-zfs-local</code> StorageClasses (via{' '}
+          <code className="font-mono text-sky-300">values-homelab.yaml</code>, <code className="font-mono text-sky-300">values-standard.yaml</code>,
+          or <code className="font-mono text-sky-300">values-enterprise.yaml</code>, or automatically during firstboot via{' '}
+          <code className="font-mono text-slate-200">packaging/k3s-storage/02-axonwall-analytics-helmchart.yaml.example</code>).
+          It deploys ClickHouse, VictoriaMetrics, VictoriaLogs, unprivileged <code className="font-mono text-emerald-300">axonwalld --mode=collector</code>,
+          and <code className="font-mono text-emerald-300">axonwall-controller</code> so edge gateways stay free to route packets.
+        </p>
       </section>
     </div>
   );

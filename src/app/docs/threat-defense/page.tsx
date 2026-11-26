@@ -17,7 +17,7 @@ export default function ThreatDefenseDocPage() {
       <div className="space-y-4 border-b border-slate-800/80 pb-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-          Perimeter Security • v0.16.0
+          Perimeter Security • v0.16.2
         </div>
         <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
           Threat Defense &amp; DNS Intelligence
@@ -57,7 +57,7 @@ export default function ThreatDefenseDocPage() {
     flags interval
     auto-merge
     elements = {
-      1.10.16.0/20,
+      1.10.16.2/20,
       1.19.0.0/16,
       14.136.0.0/15
     }

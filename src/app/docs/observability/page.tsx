@@ -32,7 +32,7 @@ export default function ObservabilityDocPage() {
       <div className="space-y-4 border-b border-slate-800/80 pb-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-          Zero-Instrumentation Kernel Telemetry • eBPF &amp; K3s • v0.16.0
+          Zero-Instrumentation Kernel Telemetry • eBPF &amp; Central Analytics • v0.16.2
         </div>
         <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
           eBPF Infrastructure &amp; Kubernetes Observability
@@ -800,9 +800,96 @@ curl -N "https://192.168.1.1:2966/api/v1/events/packets?iface=eth0&proto=tcp"`}
           Explore live eBPF and flow observability in your console under{' '}
           <code className="text-emerald-300 font-mono">Reporting &gt; eBPF &amp; K3s Observability (/reporting/ebpf)</code>,{' '}
           <code className="text-emerald-300 font-mono">Reporting &gt; Live Flow Monitor (/reporting/flows)</code>,{' '}
-          <code className="text-sky-300 font-mono">Reporting &gt; NetFlow Collector Studio (/reporting/netflow)</code>, and{' '}
+          <code className="text-sky-300 font-mono">Reporting &gt; NetFlow Collector Studio (/reporting/netflow)</code>,{' '}
+          <code className="text-emerald-300 font-mono">Reporting &gt; Observability &amp; Offload (/reporting/observability)</code>,{' '}
+          <code className="text-purple-300 font-mono">Reporting &gt; Log Explorer (/reporting/logs)</code>, and{' '}
           <code className="text-emerald-300 font-mono">Diagnostics &gt; Packet Tracer (/diagnostics/packet-tracer)</code>.
         </Callout>
+      </section>
+
+      {/* Edge-to-Central-Analytics Telemetry Offload */}
+      <section id="central-analytics" className="space-y-6 pt-6 border-t border-slate-800/80">
+        <h2 className="text-2xl font-bold text-white flex items-center gap-2">
+          <Network className="w-6 h-6 text-emerald-400" /> 10. Edge-to-Central-Analytics Telemetry Offload &amp; K3s Analytics Stack
+        </h2>
+        <p className="text-sm text-slate-300 leading-relaxed">
+          Keep latency-critical routing appliances lean by shipping NetFlow/IPFIX flows, Prometheus metrics, and structured
+          security/firewall logs over WireGuard or LAN to a central Axonwall <code className="font-mono text-emerald-400">k3s-storage</code>{' '}
+          or Docker host running ClickHouse, VictoriaMetrics, VictoriaLogs, and <code className="font-mono text-sky-400">axonwalld --mode=collector</code>.
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+          <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
+            <div className="font-bold text-emerald-400 text-sm">Non-Blocking Shippers &amp; Bounded Disk Spool</div>
+            <ul className="space-y-1.5 text-slate-400 leading-relaxed">
+              <li>
+                • <strong className="text-slate-200">Prometheus Remote-Write:</strong> Snappy-compressed protobuf{' '}
+                <code className="font-mono">WriteRequest</code> push covering CPU/RAM, per-NIC stats, XDP verdicts, conntrack, SD-WAN RTT/jitter/loss, and ZFS kstats.
+              </li>
+              <li>
+                • <strong className="text-slate-200">VictoriaLogs NDJSON/gzip:</strong> Native{' '}
+                <code className="font-mono">NETLINK_NETFILTER</code> NFLOG listener with token-bucket rate-limit guard (default{' '}
+                <code className="font-mono">50/s</code>), <code className="font-mono">journald</code>, Suricata EVE, CrowdSec alerts, Kea DHCP leases, and strictly opt-in Unbound queries.
+              </li>
+              <li>
+                • <strong className="font-mono text-sky-300">RAM Ring + Zstd Spool:</strong> Drops cleanly at rest and survives transient WAN outages when{' '}
+                <code className="font-mono">diskSpool.enabled</code> is true.
+              </li>
+            </ul>
+          </div>
+
+          <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
+            <div className="font-bold text-sky-400 text-sm">IPFIX PEN 62999, Scoped Tokens &amp; Remote Mitigation</div>
+            <ul className="space-y-1.5 text-slate-400 leading-relaxed">
+              <li>
+                • <strong className="text-slate-200">Multi-Node Flow Attribution:</strong> IPFIX Enterprise PEN{' '}
+                <code className="font-mono">62999</code> Options Templates <code className="font-mono">258</code>/<code className="font-mono">259</code> tag every remote flow with{' '}
+                <code className="font-mono">node_id</code>/<code className="font-mono">node_name</code> and resolved interface names for ClickHouse <code className="font-mono">node:</code> FQL queries.
+              </li>
+              <li>
+                • <strong className="text-slate-200">Scoped Service Tokens (<code className="font-mono">axw_svc_*</code>):</strong> Scrypt-hashed tokens minted in{' '}
+                <code className="font-mono">/reporting/observability</code> authenticate edge-to-hub ingest, metadata sync, and opt-in XDP blocks with{' '}
+                <code className="font-mono">protectedCidrs</code>.
+              </li>
+              <li>
+                • <strong className="text-slate-200">Decoupled Collector Mode:</strong> Run central hubs with{' '}
+                <code className="font-mono">netflow.mode: collector</code> or deploy <code className="font-mono">deploy/k8s/helm/axonwall-analytics</code> (<code className="font-mono">homelab</code> / <code className="font-mono">standard</code> / <code className="font-mono">enterprise</code>).
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <CodeBlock
+          title="Edge Node Offload (/etc/axonwall/system.yaml & netflow.yaml) + K3s Analytics Deploy"
+          language="yaml"
+          code={`# /etc/axonwall/system.yaml (Edge Router)
+observability:
+  offload:
+    enabled: true
+    nodeId: edge-fw-denver-01
+    hubUrl: https://10.8.0.10:2966
+    serviceTokenSecretRef: env:AXONWALL_HUB_SVC_TOKEN
+    metrics:
+      prometheusRemoteWrite:
+        enabled: true
+        endpoint: http://10.8.0.10:8428/api/v1/write
+        intervalSec: 15
+    logs:
+      victoriaLogs:
+        enabled: true
+        endpoint: http://10.8.0.10:9428/insert/jsonline
+      nflog:
+        enabled: true
+        group: 0
+        rateLimitPerSec: 50
+    remoteEdgeMitigation:
+      enabled: false
+      protectedCidrs: ["10.8.0.0/24", "192.168.10.0/24"]
+
+# Central K3s Storage Host:
+# helm upgrade --install axonwall-analytics deploy/k8s/helm/axonwall-analytics \\
+#   -f deploy/k8s/helm/axonwall-analytics/values-standard.yaml --namespace axonwall-analytics --create-namespace`}
+        />
       </section>
     </div>
   );

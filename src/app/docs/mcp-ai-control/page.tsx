@@ -16,7 +16,7 @@ import {
 export const metadata = {
   title: 'MCP Security AI Control Plane & Guardrailed Tactical Response | Axonwall Documentation',
   description:
-    'Technical documentation for the Axonwall Model Context Protocol (MCP) Server: disabled-by-default kill switch, 16 cryptographic scopes, 16 read-only MCP resources, 25 guardrailed MCP tools across Firewall, Linux 6.9+ BPF_TOKEN_CREATE eBPF + LPM CIDR/SYN-Flood XDP, KVM/LXC Virtualization, K3s Kubernetes, OpenZFS NAS, and 9-Vendor Migration.',
+    'Technical documentation for the Axonwall Model Context Protocol (MCP) Server: disabled-by-default kill switch, 16 cryptographic scopes, 18 read-only MCP resources, 29 guardrailed MCP tools across Firewall, Observability, Linux 6.9+ BPF_TOKEN_CREATE eBPF + LPM CIDR/SYN-Flood XDP, KVM/LXC Virtualization, K3s Kubernetes, OpenZFS NAS, and 9-Vendor Migration.',
 };
 
 export default function McpAiControlDocPage() {
@@ -235,7 +235,7 @@ axonwallctl mcp disable`}
       {/* 5. Complete Resource & Tool Catalog + Hash-Chained Audit Trail */}
       <section id="catalog-audit" className="space-y-6 pt-6 border-t border-slate-800/80">
         <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-          <Database className="w-6 h-6 text-sky-400" /> 5. Complete Catalog (16 Resources &amp; 25 Tools) &amp; Audit Chain
+          <Database className="w-6 h-6 text-sky-400" /> 5. Complete Catalog (18 Resources &amp; 29 Tools) &amp; Audit Chain
         </h2>
         <p className="text-sm text-slate-300 leading-relaxed">
           Every mutating tool requires structured <code className="text-slate-200 font-mono">audit</code> provenance (
@@ -253,7 +253,7 @@ axonwallctl mcp disable`}
           <table className="w-full text-left border-collapse text-xs">
             <thead>
               <tr className="bg-slate-900/90 border-b border-slate-800 text-slate-300">
-                <th className="py-3 px-4 font-bold">MCP Resource URI (16 Total)</th>
+                <th className="py-3 px-4 font-bold">MCP Resource URI (18 Total)</th>
                 <th className="py-3 px-4 font-bold">Payload Summary &amp; Read Scope</th>
               </tr>
             </thead>
@@ -322,6 +322,14 @@ axonwallctl mcp disable`}
                 <td className="py-2.5 px-4 font-mono text-rose-300">axonwall://security/rootkit-posture</td>
                 <td className="py-2.5 px-4">Ring-0 rootkit posture, <code className="font-mono">io_uring</code> rings, trampoline audit, and BPF-LSM denial ring buffer (<code className="font-mono">mcp:ebpf:read</code>).</td>
               </tr>
+              <tr>
+                <td className="py-2.5 px-4 font-mono text-emerald-300">axonwall://observability/offload-status</td>
+                <td className="py-2.5 px-4">Live Prometheus Remote-Write, VictoriaLogs NFLOG/journald shipper, and RAM/zstd disk spool queue telemetry (<code className="font-mono">mcp:telemetry:read</code>).</td>
+              </tr>
+              <tr>
+                <td className="py-2.5 px-4 font-mono text-emerald-300">axonwall://observability/nodes</td>
+                <td className="py-2.5 px-4">Multi-node central analytics directory listing reporting edge firewalls, IPFIX exporters, and Online/Stale heartbeats (<code className="font-mono">mcp:telemetry:read</code>).</td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -330,7 +338,7 @@ axonwallctl mcp disable`}
           <table className="w-full text-left border-collapse text-xs">
             <thead>
               <tr className="bg-slate-900/90 border-b border-slate-800 text-slate-300">
-                <th className="py-3 px-4 font-bold">MCP Tool Name (25 Total)</th>
+                <th className="py-3 px-4 font-bold">MCP Tool Name (29 Total)</th>
                 <th className="py-3 px-4 font-bold">Required Scope</th>
                 <th className="py-3 px-4 font-bold">Operational Effect</th>
               </tr>
@@ -460,6 +468,26 @@ axonwallctl mcp disable`}
                 <td className="py-2.5 px-4 font-mono text-teal-300">mcp_import_competitor_config</td>
                 <td className="py-2.5 px-4 font-mono">mcp:firewall:write (+ role scopes)</td>
                 <td className="py-2.5 px-4">Dry-run parse or non-destructively stage configs from all 9 vendors (<code className="font-mono">pfSense</code>, <code className="font-mono">OPNsense</code>, <code className="font-mono">Proxmox VE</code>, <code className="font-mono">TrueNAS SCALE</code>, <code className="font-mono">Cisco ASA</code>, <code className="font-mono">VyOS</code>, <code className="font-mono">MikroTik</code>, <code className="font-mono">iptables</code>, <code className="font-mono">firewalld</code>) with cross-role RBAC checks &amp; Commit-Confirm.</td>
+              </tr>
+              <tr>
+                <td className="py-2.5 px-4 font-mono text-emerald-300">mcp_query_metrics</td>
+                <td className="py-2.5 px-4 font-mono">mcp:telemetry:read</td>
+                <td className="py-2.5 px-4">Execute instant or range PromQL queries against VictoriaMetrics across local or offloaded edge nodes.</td>
+              </tr>
+              <tr>
+                <td className="py-2.5 px-4 font-mono text-emerald-300">mcp_query_logs</td>
+                <td className="py-2.5 px-4 font-mono">mcp:telemetry:read</td>
+                <td className="py-2.5 px-4">Query centralized VictoriaLogs streams via LogsQL with bounded result limits.</td>
+              </tr>
+              <tr>
+                <td className="py-2.5 px-4 font-mono text-sky-300">mcp_query_historical_flows</td>
+                <td className="py-2.5 px-4 font-mono">mcp:telemetry:read</td>
+                <td className="py-2.5 px-4">Run FQL queries over historical ClickHouse / Zstd NetFlow records with <code className="font-mono">node:</code> filtering.</td>
+              </tr>
+              <tr>
+                <td className="py-2.5 px-4 font-mono text-rose-400">mcp_trigger_edge_mitigation</td>
+                <td className="py-2.5 px-4 font-mono">mcp:traffic:blackhole</td>
+                <td className="py-2.5 px-4">Push bounded-TTL XDP drop rules to an opt-in edge appliance with <code className="font-mono">protectedCidrs</code> &amp; anti-lockout guards.</td>
               </tr>
             </tbody>
           </table>

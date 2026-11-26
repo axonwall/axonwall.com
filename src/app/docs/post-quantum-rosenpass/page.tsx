@@ -17,7 +17,7 @@ export default function PostQuantumRosenpassDocPage() {
       <div className="space-y-4 border-b border-slate-800/80 pb-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-          Post-Quantum Cryptography (PQC) • Hybrid Dual-KEM • v0.16.0
+          Post-Quantum Cryptography (PQC) • Hybrid Dual-KEM &amp; Mesh VPN • v0.16.2
         </div>
         <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
           Post-Quantum Rosenpass Dual-KEM WireGuard Mesh
@@ -127,6 +127,73 @@ export default function PostQuantumRosenpassDocPage() {
             </li>
           </ul>
         </Callout>
+      </section>
+
+      {/* Headscale WAN Invite Access & Port Knocking */}
+      <section id="headscale-wan-invites" className="space-y-6 pt-6 border-t border-slate-800/80">
+        <h2 className="text-2xl font-bold text-white flex items-center gap-2">
+          <Network className="w-6 h-6 text-emerald-400" /> 3. Headscale Mesh VPN: Hardened WAN Invites &amp; Stateful Port Knocking
+        </h2>
+        <p className="text-sm text-slate-300 leading-relaxed">
+          Onboard remote users to your private Headscale WireGuard mesh directly from the WAN without exposing the
+          Axonwall Admin Console (<code className="font-mono text-rose-300">/login</code>,{' '}
+          <code className="font-mono text-rose-300">/lobby</code>, or <code className="font-mono text-rose-300">/vpn</code>).
+          When <code className="text-emerald-400 font-mono">headscale.wanInvite.enabled</code> is active in{' '}
+          <code className="text-slate-200 font-mono">/etc/axonwall/vpn.yaml</code> (or{' '}
+          <Link href="/vpn/mesh" className="text-emerald-400 underline">/vpn/mesh</Link>), Axonwall layers five defenses automatically:
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+          <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
+            <div className="font-bold text-emerald-400 text-sm">SNI-Pinned HAProxy Allowlist + Auto-Closing Window</div>
+            <p className="text-slate-400 leading-relaxed">
+              Dedicated TLS frontend <code className="font-mono text-slate-200">fe_headscale_wan_invite</code> pins
+              both TLS SNI and HTTP <code className="font-mono text-slate-200">Host</code>, sanitizes forwarding
+              headers, rejects traversal patterns, and issues <code className="font-mono text-rose-300">http-request silent-drop</code>{' '}
+              for everything outside <code className="font-mono text-emerald-300">/invite/*</code>, static assets, and{' '}
+              <code className="font-mono text-emerald-300">/api/v1/vpn/mesh/invites/&#123;preview,redeem&#125;</code>. With{' '}
+              <code className="font-mono text-slate-200">autoWindow: true</code>, <code className="font-mono text-slate-200">HeadscaleWanGateManager</code>{' '}
+              opens <code className="font-mono text-emerald-300">headscale_wan_window_ports</code> in{' '}
+              <code className="font-mono text-slate-200">nftables</code> only while unexpired pending invites exist (zero open WAN ports at rest).
+            </p>
+          </div>
+
+          <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
+            <div className="font-bold text-amber-400 text-sm">Kernel Port Knocking, Out-of-Band PIN &amp; Single-Page Setup</div>
+            <p className="text-slate-400 leading-relaxed">
+              Enable optional kernel-native UDP or TCP SYN port knocking (<code className="font-mono text-slate-200">headscale_knock_s*</code>{' '}
+              → <code className="font-mono text-slate-200">headscale_knock_allow_v4/v6</code>), optional{' '}
+              <code className="font-mono text-slate-200">allowedCidrs</code> restrictions, and scrypt-hashed 6-digit{' '}
+              <code className="font-mono text-amber-300">requirePin</code> codes (auto-revoking the invite after 5 wrong guesses).
+              Redemption renders the <code className="font-mono text-emerald-300">tailscale up --login-server=... --authkey=...</code>{' '}
+              command and scannable QR code directly on <code className="font-mono text-slate-200">/invite/[token]</code>.
+            </p>
+          </div>
+        </div>
+
+        <CodeBlock
+          title="/etc/axonwall/vpn.yaml — Headscale WAN Invite & Stateful Port Knocking"
+          language="yaml"
+          code={`headscale:
+  enabled: true
+  magicDnsDomain: tailnet.example.com
+  serverUrl: https://vpn.example.com
+  wanInvite:
+    enabled: true
+    hostname: join.example.com
+    bindPort: 8443
+    certName: hub
+    autoWindow: true
+    requirePin: true
+    allowedCidrs: []
+    exposeHeadscaleControl: false
+    portKnocking:
+      enabled: true
+      protocol: udp
+      sequence: [41821, 52913, 38477]
+      stepTimeoutSec: 15
+      openDurationSec: 900`}
+        />
       </section>
     </div>
   );

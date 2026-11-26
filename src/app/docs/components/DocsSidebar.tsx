@@ -102,6 +102,7 @@ export const DOCS_NAVIGATION: DocCategory[] = [
       { title: 'Rosenpass Dual-KEM VPN', href: '/docs/post-quantum-rosenpass', badge: 'PQ-KEM' },
       { title: 'McEliece 460896 + ML-KEM-512', href: '/docs/post-quantum-rosenpass#architecture' },
       { title: 'Peer & PSK Rotation (vpn.yaml)', href: '/docs/post-quantum-rosenpass#configuration' },
+      { title: 'Headscale WAN Invites & Knock', href: '/docs/post-quantum-rosenpass#headscale-wan-invites', badge: 'New' },
     ],
   },
   {
@@ -214,7 +215,8 @@ export const DOCS_NAVIGATION: DocCategory[] = [
     icon: Activity,
     items: [
       { title: 'Observability & Tracing', href: '/docs/observability', badge: 'eBPF' },
-      { title: 'NetFlow / IPFIX / sFlow Studio', href: '/docs/observability#netflow-collector', badge: 'New' },
+      { title: 'Central Analytics Offload', href: '/docs/observability#central-analytics', badge: 'New' },
+      { title: 'NetFlow / IPFIX / sFlow Studio', href: '/docs/observability#netflow-collector' },
       { title: 'Metrics, Logs & Traces', href: '/docs/observability#metrics-logs-traces' },
       { title: 'Container Network & FS I/O', href: '/docs/observability#container-tracking' },
       { title: 'K3s Cluster Troubleshooting', href: '/docs/observability#kubernetes-troubleshooting' },
@@ -364,7 +366,7 @@ export function DocsSidebar({ onClose }: DocsSidebarProps) {
 
       {/* Footer Status */}
       <div className="p-3 border-t border-slate-800/80 text-[11px] text-slate-500 flex items-center justify-between">
-        <span className="font-mono">Axonwall v0.16.0</span>
+        <span className="font-mono">Axonwall v0.16.2</span>
         <span className="text-emerald-400 font-medium">26 Guides</span>
       </div>
     </aside>

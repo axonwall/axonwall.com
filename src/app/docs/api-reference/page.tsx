@@ -7,7 +7,7 @@ import { CodeBlock } from '../components/CodeBlock';
 export const metadata = {
   title: 'REST API, Fleet/MCP, Agent Sockets & Terraform Reference | Axonwall Documentation',
   description:
-    'Complete REST/OpenAPI endpoints, Server-Sent Events (SSE) packet streams, Fleet & MCP security APIs, Go agent Unix socket IPC, fail-closed plugin guards, and official Terraform / OpenTofu provider for Axonwall v0.16.0.',
+    'Complete REST/OpenAPI endpoints, Server-Sent Events (SSE) packet streams, Scoped Service Tokens, Central Observability APIs, Fleet & MCP security APIs, Go agent Unix socket IPC, fail-closed plugin guards, and official Terraform / OpenTofu provider for Axonwall v0.16.2.',
 };
 
 export default function ApiReferenceDocPage() {
@@ -17,7 +17,7 @@ export default function ApiReferenceDocPage() {
       <div className="space-y-4 border-b border-slate-800/80 pb-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-          Developer, IaC &amp; Automation • v0.16.0
+          Developer, IaC &amp; Automation • v0.16.2
         </div>
         <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
           REST, Fleet/MCP, Agent Socket &amp; Terraform Reference
@@ -71,7 +71,7 @@ export default function ApiReferenceDocPage() {
               <tr>
                 <td className="p-3 font-mono text-sky-400 font-bold">GET</td>
                 <td className="p-3 font-mono text-emerald-400">/api/v1/status</td>
-                <td className="p-3">Appliance health, version (<code className="font-mono">0.16.0</code>), active boot slot/BE/snapshot, and Commit-Confirm timer state.</td>
+                <td className="p-3">Appliance health, version (<code className="font-mono">0.16.2</code>), active boot slot/BE/snapshot, and Commit-Confirm timer state.</td>
               </tr>
               <tr>
                 <td className="p-3 font-mono text-sky-400 font-bold">GET / PUT</td>
@@ -101,7 +101,7 @@ export default function ApiReferenceDocPage() {
               <tr>
                 <td className="p-3 font-mono text-sky-400 font-bold">GET / POST</td>
                 <td className="p-3 font-mono text-emerald-400">/api/v1/vpn/mesh/*</td>
-                <td className="p-3">Manage sovereign Headscale/Tailscale mesh nodes, pre-auth keys, routes, and Rosenpass PQ peers.</td>
+                <td className="p-3">Manage sovereign Headscale/Tailscale mesh nodes, pre-auth keys, routes, PIN-protected WAN invite preview/redeem (<code className="font-mono">wan-window</code>, <code className="font-mono">invites/&#123;preview,redeem&#125;</code>), and Rosenpass PQ peers.</td>
               </tr>
               <tr>
                 <td className="p-3 font-mono text-sky-400 font-bold">GET</td>
@@ -168,6 +168,21 @@ export default function ApiReferenceDocPage() {
                 <td className="p-3 font-mono text-emerald-400">/api/docs-bundle/[[...path]]</td>
                 <td className="p-3">Authenticated, CSP-hardened static file server for the opt-in offline <code className="font-mono">docs-portal</code> tarball bundle.</td>
               </tr>
+              <tr>
+                <td className="p-3 font-mono text-emerald-400 font-bold">GET / POST</td>
+                <td className="p-3 font-mono text-emerald-400">/api/v1/observability/*</td>
+                <td className="p-3">Edge-to-central offload control &amp; queries: <code className="font-mono">status</code>, <code className="font-mono">metrics</code> (VictoriaMetrics PromQL), <code className="font-mono">logs</code> (VictoriaLogs LogsQL), <code className="font-mono">ingest</code>, and opt-in <code className="font-mono">mitigate</code> (bounded XDP block).</td>
+              </tr>
+              <tr>
+                <td className="p-3 font-mono text-sky-400 font-bold">GET / POST</td>
+                <td className="p-3 font-mono text-sky-400">/api/v1/netflow/&#123;metadata-sync,nodes&#125;</td>
+                <td className="p-3">Edge interface/node metadata synchronization and multi-node collector directory listing with heartbeat freshness.</td>
+              </tr>
+              <tr>
+                <td className="p-3 font-mono text-emerald-400 font-bold">GET / POST / DEL</td>
+                <td className="p-3 font-mono text-amber-300">/api/v1/system/service-tokens</td>
+                <td className="p-3">Mint, list, and revoke scrypt-hashed scoped automation Bearer tokens (<code className="font-mono">axw_svc_*</code>) for headless edge shippers.</td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -233,7 +248,7 @@ export default function ApiReferenceDocPage() {
           <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
             <h3 className="font-bold text-white text-sm font-mono">/api/v1/mcp &amp; /api/v1/mcp/sse</h3>
             <p className="text-slate-400 leading-relaxed">
-              Streamable HTTP JSON-RPC 2.0 and SSE Model Context Protocol endpoints exposing <strong>16 granular capability scopes</strong>, <strong>16 read-only resources</strong>, and <strong>25 guardrailed tools</strong> across Firewall, Ring-0 eBPF &amp; <code className="text-slate-200 font-mono">BPF_TOKEN_CREATE</code>, KVM/LXC Virtualization, K3s Kubernetes, OpenZFS NAS, and 9-Vendor Migration. See <Link href="/docs/mcp-ai-control" className="text-emerald-400 underline">/docs/mcp-ai-control</Link>.
+              Streamable HTTP JSON-RPC 2.0 and SSE Model Context Protocol endpoints exposing <strong>16 granular capability scopes</strong>, <strong>18 read-only resources</strong>, and <strong>29 guardrailed tools</strong> across Firewall, Central Observability (PromQL/LogsQL/ClickHouse &amp; edge mitigation), Ring-0 eBPF &amp; <code className="text-slate-200 font-mono">BPF_TOKEN_CREATE</code>, KVM/LXC Virtualization, K3s Kubernetes, OpenZFS NAS, and 9-Vendor Migration. See <Link href="/docs/mcp-ai-control" className="text-emerald-400 underline">/docs/mcp-ai-control</Link>.
             </p>
           </div>
         </div>
@@ -302,6 +317,8 @@ sudo curl -s --unix-socket /run/axonwall/agent-api.sock \\
 //    GET/POST /v1/netflow/{status,query,stream,exporters,templates,alerts,alerts/ack,reports,reports/generate,baselines,geoip/update,metrics,test-inject}
 //    GET/POST /v1/topology/{fabric,probe,apply,sync/netbox,sync/librenms}
 //    GET/POST /v1/{netbox,librenms}/*    -> NetBox v4 & LibreNMS Triad sync, credentials, topology & alert webhooks
+//    GET/POST /v1/observability/{status,test,flush} -> Prometheus Remote-Write, VictoriaLogs shipper & zstd spool control
+//    GET/POST /v1/vpn/headscale/wan-window/{status,sync,arm} -> Dynamic nftables WAN invite window gate & knocked IPs
 
 // 2. /run/axonwall/agent.sock            -> Internal gRPC control-plane socket
 // 3. /run/axonwall/ha.sock               -> 0600 root:root SO_PEERCRED Keepalived MASTER/BACKUP/FAULT hook`}
@@ -324,7 +341,7 @@ sudo curl -s --unix-socket /run/axonwall/agent-api.sock \\
   required_providers {
     axonwall = {
       source  = "axonwall/axonwall"
-      version = "~> 0.16.0"
+      version = "~> 0.16.2"
     }
   }
 }

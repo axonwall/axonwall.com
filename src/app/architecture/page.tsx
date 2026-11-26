@@ -22,9 +22,9 @@ import {
 import { Navbar } from '../../components/Navbar';
 
 export const metadata = {
-  title: 'Axonwall Architecture | v0.16.0 System Design & Ring-0 Blueprint',
+  title: 'Axonwall Architecture | v0.16.2 System Design & Ring-0 Blueprint',
   description:
-    'Detailed architectural blueprint of Axonwall v0.16.0: Lean Router/NGFW Core with 5 modular Core Roles & 42 opt-in Extension Plugins (47 total, 4 Curated Starter Packs & Air-Gapped Plugin Cache), 14 bidirectional /etc/axonwall/*.yaml files, Linux 6.12 LTS nftables & XDP data plane, NetFlow/IPFIX/sFlow Collector Studio, Topology Studio & NetBox/LibreNMS Triad, CO-RE BPF-LSM Ring-0 exploit guard, Blackbox eBPF Threat-LLM Harvester, 25-check Custom Hardened Kernels, ZFSBootMenu v3.1.0, Btrfs + Snapper Root & A/B Dual-Root boot, Coroot eBPF APM, Browser K9s, on-demand ai-copilot, offline docs-portal, and isolated MCP tactical leases.',
+    'Detailed architectural blueprint of Axonwall v0.16.2: Lean Router/NGFW Core with 5 modular Core Roles & 42 opt-in Extension Plugins (47 total, 4 Curated Starter Packs & Air-Gapped Plugin Cache), 14 bidirectional /etc/axonwall/*.yaml files, Linux 6.12 LTS nftables & XDP data plane, NetFlow/IPFIX/sFlow Collector Studio, Topology Studio & NetBox/LibreNMS Triad, CO-RE BPF-LSM Ring-0 exploit guard, Blackbox eBPF Threat-LLM Harvester, 25-check Custom Hardened Kernels, ZFSBootMenu v3.1.0, Btrfs + Snapper Root & A/B Dual-Root boot, Coroot eBPF APM, Browser K9s, on-demand ai-copilot, offline docs-portal, and isolated MCP tactical leases.',
 };
 
 const YAML_DOMAINS = [
@@ -59,7 +59,7 @@ export default function StandaloneArchitecturePage() {
         <div className="text-center space-y-5">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            System Blueprint &amp; Technical Specification • v0.16.0
+            System Blueprint &amp; Technical Specification • v0.16.2
           </div>
           <h1 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight max-w-4xl mx-auto leading-tight">
             The Linux-Native{' '}
@@ -68,7 +68,7 @@ export default function StandaloneArchitecturePage() {
             </span>
           </h1>
           <p className="text-base sm:text-lg text-slate-400 max-w-3xl mx-auto leading-relaxed">
-            Axonwall v0.16.0 unifies a Lean Router/NGFW Core (5 modular Core Roles &amp; 42 opt-in Extension Plugins = 47 manifests, 4 Curated Starter Packs &amp; Air-Gapped Plugin Cache), 14 bidirectional{' '}
+            Axonwall v0.16.2 unifies a Lean Router/NGFW Core (5 modular Core Roles &amp; 42 opt-in Extension Plugins = 47 manifests, 4 Curated Starter Packs &amp; Air-Gapped Plugin Cache), 14 bidirectional{' '}
             <code className="text-slate-200 font-mono">/etc/axonwall/*.yaml</code> files, lockless Linux 6.12 LTS
             nftables + Dual-Stack VLAN/LPM CIDR/SYN-Flood XDP packet processing, NetFlow/IPFIX/sFlow Analytics Studio, Custom Hardened Kernels, 5-hook CO-RE BPF-LSM &amp; Linux 6.9+{' '}
             <code className="text-slate-200 font-mono">BPF_TOKEN_CREATE</code> mediation, pure UEFI ZFSBootMenu v3.1.0 &amp; in-kernel <strong className="text-cyan-300">Btrfs + Snapper Root</strong>,
@@ -322,7 +322,7 @@ export default function StandaloneArchitecturePage() {
 
         {/* CTA Section */}
         <section className="p-8 rounded-2xl bg-gradient-to-r from-emerald-950/40 via-slate-900 to-sky-950/40 border border-emerald-500/30 text-center space-y-6">
-          <h2 className="text-3xl font-extrabold text-white">Ready to deploy Axonwall v0.16.0?</h2>
+          <h2 className="text-3xl font-extrabold text-white">Ready to deploy Axonwall v0.16.2?</h2>
           <p className="text-sm text-slate-300 max-w-xl mx-auto">
             Explore all 26 engineering guides, test the interactive Web Console sandbox, or download the RSA-4096 SHA-256 signed
             unified quad-edition ISO (NGFW, Minimal, Vault S3 &amp; K3s-Storage) with Custom Hardened Kernel, ZFSBootMenu &amp; Btrfs + Snapper support.
@@ -344,7 +344,7 @@ export default function StandaloneArchitecturePage() {
               href="/releases"
               className="px-6 py-2.5 rounded-xl font-semibold text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition"
             >
-              Releases &amp; Download ISO (v0.16.0)
+              Releases &amp; Download ISO (v0.16.2)
             </Link>
           </div>
         </section>
@@ -364,7 +364,7 @@ export default function StandaloneArchitecturePage() {
           <div className="flex items-center gap-6">
             <Link href="/" className="hover:text-slate-300 transition">Home</Link>
             <Link href="/docs" className="hover:text-slate-300 transition">Docs</Link>
-            <Link href="/releases" className="hover:text-slate-300 transition">Releases (v0.16.0)</Link>
+            <Link href="/releases" className="hover:text-slate-300 transition">Releases (v0.16.2)</Link>
             <a href="https://github.com/axonwall/axonwall" className="hover:text-slate-300 transition">GitHub</a>
           </div>
         </div>
