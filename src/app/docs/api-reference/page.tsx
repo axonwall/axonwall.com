@@ -7,7 +7,7 @@ import { CodeBlock } from '../components/CodeBlock';
 export const metadata = {
   title: 'REST API, Fleet/MCP, Agent Sockets & Terraform Reference | Axonwall Documentation',
   description:
-    'Complete REST/OpenAPI endpoints, Server-Sent Events (SSE) packet streams, Scoped Service Tokens, Central Observability APIs, Fleet & MCP security APIs, Go agent Unix socket IPC, fail-closed plugin guards, and official Terraform / OpenTofu provider for Axonwall v0.16.2.',
+    'Complete REST/OpenAPI endpoints, Server-Sent Events (SSE) packet streams, Scoped Service Tokens, Central Observability APIs, Fleet & MCP security APIs, Go agent Unix socket IPC, fail-closed plugin guards, and official Terraform / OpenTofu provider for Axonwall v0.16.3.',
 };
 
 export default function ApiReferenceDocPage() {
@@ -17,7 +17,7 @@ export default function ApiReferenceDocPage() {
       <div className="space-y-4 border-b border-slate-800/80 pb-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-          Developer, IaC &amp; Automation • v0.16.2
+          Developer, IaC &amp; Automation • v0.16.3
         </div>
         <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
           REST, Fleet/MCP, Agent Socket &amp; Terraform Reference
@@ -71,7 +71,7 @@ export default function ApiReferenceDocPage() {
               <tr>
                 <td className="p-3 font-mono text-sky-400 font-bold">GET</td>
                 <td className="p-3 font-mono text-emerald-400">/api/v1/status</td>
-                <td className="p-3">Appliance health, version (<code className="font-mono">0.16.2</code>), active boot slot/BE/snapshot, and Commit-Confirm timer state.</td>
+                <td className="p-3">Appliance health, version (<code className="font-mono">0.16.3</code>), active boot slot/BE/snapshot, and Commit-Confirm timer state.</td>
               </tr>
               <tr>
                 <td className="p-3 font-mono text-sky-400 font-bold">GET / PUT</td>
@@ -341,7 +341,7 @@ sudo curl -s --unix-socket /run/axonwall/agent-api.sock \\
   required_providers {
     axonwall = {
       source  = "axonwall/axonwall"
-      version = "~> 0.16.2"
+      version = "~> 0.16.3"
     }
   }
 }

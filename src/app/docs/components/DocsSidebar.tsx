@@ -366,7 +366,7 @@ export function DocsSidebar({ onClose }: DocsSidebarProps) {
 
       {/* Footer Status */}
       <div className="p-3 border-t border-slate-800/80 text-[11px] text-slate-500 flex items-center justify-between">
-        <span className="font-mono">Axonwall v0.16.2</span>
+        <span className="font-mono">Axonwall v0.16.3</span>
         <span className="text-emerald-400 font-medium">26 Guides</span>
       </div>
     </aside>
