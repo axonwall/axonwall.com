@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { Terminal as TerminalIcon, CornerDownLeft, Trash2, HelpCircle } from 'lucide-react';
+import { RELEASE_TAG } from '@/lib/release';
 
 interface HistoryItem {
   command: string;
@@ -14,16 +15,16 @@ export function TerminalView() {
     {
       command: 'cat /etc/issue',
       output: `================================================================================
-Axonwall v0.16.3 Appliance (Debian 13 Trixie)
+Axonwall ${RELEASE_TAG} Appliance (Debian 13 Trixie)
 Web Console: https://192.168.100.1:2966
 Appliance Console: Login with administrator credentials
 ================================================================================`,
     },
     {
       command: 'axonwall status',
-      output: `[Axonwall System Report — v0.16.3]
+      output: `[Axonwall System Report — ${RELEASE_TAG}]
 Appliance Hostname : axonwall-core
-OS Release         : Axonwall v0.16.3 • Debian 13 (Trixie) Linux 6.12.10-amd64
+OS Release         : Axonwall ${RELEASE_TAG} • Debian 13 (Trixie) Linux 6.12.10-amd64
 Web Management     : Listening on https://0.0.0.0:2966 [TLS 1.3]
 Data Plane Engine  : nftables 1.1.2 + XDP Fastpath + CO-RE BPF-LSM Guard
 Active Conntrack   : 2,419 / 2,000,000 states (0.12%)
@@ -69,7 +70,7 @@ Satellite Fleet    : 4 micro-edge nodes synchronized (v24)`,
         break;
 
       case 'axonwall-config':
-        out = `[Axonwall Neovim Super Configurator v0.16.3]
+        out = `[Axonwall Neovim Super Configurator ${RELEASE_TAG}]
 Loaded 14 Declarative YAML Domains (/etc/axonwall/*.yaml):
   [1] system.yaml          [6]  vpn.yaml             [11] virt.yaml
   [2] interfaces.yaml      [7]  security.yaml        [12] vigilante.yaml
@@ -80,14 +81,14 @@ Keymaps: <Tab> Switch Pane | <C-d> Live Diff | <C-s> Validate & Save | :AxonAppl
         break;
 
       case 'axonwall-tui':
-        out = `[Axonwall Interactive TUI Dashboard — v0.16.3]
+        out = `[Axonwall Interactive TUI Dashboard — ${RELEASE_TAG}]
 Tabs: [1] Dashboard [2] Interfaces [3] Firewall [4] Routing [5] Services & PQ
       [6] Storage [7] Compute & SOC [8] Plugins [9] NastyMap [u] ZBM/Btrfs/Boot [0] System & Ops
 Tip: Run 'axonwall-tui --nastymap' over SSH for full interactive 6-view topology & Nmap simulator.`;
         break;
 
       case 'axonwall-hunt-rootkits':
-        out = `[Ghost-in-the-Ring & 8-Engine Malware Hunter Audit — v0.16.3]
+        out = `[Ghost-in-the-Ring & 8-Engine Malware Hunter Audit — ${RELEASE_TAG}]
 [PASS] 5-Hook CO-RE BPF-LSM    : socket_bind (CVE-2026-31431), bpf, uring_sqpoll, bpf_token_create & bpf_token_cmd ENFORCED
 [PASS] Linux 6.9+ BPF_TOKEN    : 3 bpffs token superblocks active; FORBIDDEN_RING0_TOKEN_PROG_MASK (kprobe/lsm) VETOED
 [PASS] /proc/kcore XArray Walk : 16 active bpf_prog structs in prog_idr (matches bpftool: 16/16, 0 hidden)
@@ -98,7 +99,7 @@ Tip: Run 'axonwall-tui --nastymap' over SSH for full interactive 6-view topology
 
       case 'axonwallctl':
         if (parts[1] === 'status' || parts[1] === 'ha-status') {
-          out = `[Axonwall 2-Host High Availability & Control Plane Status — v0.16.3]
+          out = `[Axonwall 2-Host High Availability & Control Plane Status — ${RELEASE_TAG}]
 Local Node         : axonwall-fw01 (PRIMARY / MASTER • Boot Mode: ZFSBootMenu / Btrfs + Snapper)
 Commit-Confirm     : Confirmed (Bundle SHA-256: 9f8a4d2c • 0 pending rollback timers)
 Peer Node          : axonwall-fw02 (10.0.99.2 - HEALTHY, 0.28ms RTT)
@@ -107,14 +108,14 @@ VRRP VIPs          : WAN 203.0.113.10/24 (MASTER) | LAN 192.168.100.1/24 (MASTER
 conntrackd FTFW    : Synchronized (2,419 active flows mirrored)
 State Replication  : OpenLDAP syncrepl OK | SQLite OK | ZFS tank @ha-sync OK | K3s HA Ready (2/2)`;
         } else if (parts[1] === 'ebpf') {
-          out = `[Axonwall Ring-0 eBPF, Dual-Stack XDP & Linux 6.9+ BPF_TOKEN Status — v0.16.3]
+          out = `[Axonwall Ring-0 eBPF, Dual-Stack XDP & Linux 6.9+ BPF_TOKEN Status — ${RELEASE_TAG}]
 XDP Engine         : Dual-Stack IPv4/IPv6 + 802.1Q/802.1ad QinQ (flow_map: 131K LRU | flow6_map: 65K LRU)
 XDP Blocklists     : 4 active monotonic TTL XDP_DROP bans (0 internal/management lockouts)
 CO-RE BPF-LSM      : 5/5 hooks attached (socket_bind, bpf, uring_sqpoll, bpf_token_create, bpf_token_cmd)
 BPF_TOKEN Mounts   : /run/axonwall/bpffs-tokens/{networking-safe, cgroup-observability, firewall-xdp-tc}
 Ring-0 Isolation   : kprobe, tracepoint, perf_event, tracing, struct_ops, lsm -> BLOCKED (-EPERM)`;
         } else if (parts[1] === 'harvester' || parts[1] === 'blackbox') {
-          out = `[Axonwall Blackbox: Extreme eBPF Threat-LLM Harvester — v0.16.3]
+          out = `[Axonwall Blackbox: Extreme eBPF Threat-LLM Harvester — ${RELEASE_TAG}]
 Opt-In Mode        : adaptive (Tier-0 sketches + Canary Dark-Port / memfd escalation)
 Ring-0 eBPF Hooks  : ATTACHED (tc_harvester_ingress, tc_harvester_egress, tp_harvester_exec, tp_harvester_memfd)
 TLS Uprobe Guard   : uprobe/SSL_write DISABLED (axonwalld, sshd, eluvix, vault, k3s, containerd hardcoded excluded)
@@ -175,9 +176,9 @@ Audit Hash Chain   : VERIFIED (/var/lib/axonwall/mcp-audit.jsonl)`;
 
       case 'axonwall':
         if (parts[1] === 'status') {
-          out = `[Axonwall System Report — v0.16.3]
+          out = `[Axonwall System Report — ${RELEASE_TAG}]
 Appliance Hostname : axonwall-core
-OS Release         : Axonwall v0.16.3 • Debian 13 (Trixie) Linux 6.12.10-amd64
+OS Release         : Axonwall ${RELEASE_TAG} • Debian 13 (Trixie) Linux 6.12.10-amd64
 Web Management     : Listening on https://0.0.0.0:2966 [TLS 1.3]
 Data Plane Engine  : nftables 1.1.2 + XDP Fastpath + CO-RE BPF-LSM Guard
 Active Conntrack   : 2,419 / 2,000,000 states (0.12%)
@@ -212,7 +213,7 @@ Satellite Fleet    : 4 micro-edge nodes synchronized (v24)`;
       case 'cat':
         if (parts[1] === '/etc/issue') {
           out = `================================================================================
-Axonwall v0.16.3 Appliance (Debian 13 Trixie)
+Axonwall ${RELEASE_TAG} Appliance (Debian 13 Trixie)
 Web Console: https://192.168.100.1:2966
 Appliance Console: Login with administrator credentials
 ================================================================================`;

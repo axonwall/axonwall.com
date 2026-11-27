@@ -3,11 +3,12 @@ import Link from 'next/link';
 import { Terminal, Cpu, Gauge, Zap, CheckCircle2, AlertOctagon } from 'lucide-react';
 import { Callout } from '../components/Callout';
 import { CodeBlock } from '../components/CodeBlock';
+import { RELEASE_TAG } from '@/lib/release';
 
 export const metadata = {
   title: 'Hardware Telemetry, Optical DOM & Console Command Runner | Axonwall Documentation',
   description:
-    'Comprehensive hardware telemetry and shell access documentation for Axonwall v0.16.3: Linux HWMON chassis sensor telemetry, SFP+/QSFP optical DOM transceiver monitoring, RBAC Console Command Runner, KVM noVNC consoles, and SSH/serial TUI.',
+    `Comprehensive hardware telemetry and shell access documentation for Axonwall ${RELEASE_TAG}: Linux HWMON chassis sensor telemetry, SFP+/QSFP optical DOM transceiver monitoring, RBAC Console Command Runner, KVM noVNC consoles, and SSH/serial TUI.`,
 };
 
 export default function HardwareTelemetryDocPage() {
@@ -17,7 +18,7 @@ export default function HardwareTelemetryDocPage() {
       <div className="space-y-4 border-b border-slate-800/80 pb-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-          Hardware &amp; Management • v0.16.3
+          Hardware &amp; Management • {RELEASE_TAG}
         </div>
         <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
           Hardware Telemetry, Optical DOM &amp; Shell Access

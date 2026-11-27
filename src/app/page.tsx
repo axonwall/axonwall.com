@@ -41,6 +41,7 @@ import { HeroSecurityHUD } from '../components/HeroSecurityHUD';
 import { PersonalPerimeterVisual } from '../components/PersonalPerimeterVisual';
 import { CostSavingsCalculator } from '../components/CostSavingsCalculator';
 import { Navbar } from '../components/Navbar';
+import { GITHUB_RELEASE_URL, RELEASE_DATE, RELEASE_TAG, RELEASE_VERSION } from '@/lib/release';
 
 const FIVE_CORE_ROLES = [
   {
@@ -130,7 +131,7 @@ export default function HomePage() {
           {/* Badge */}
           <div className="relative -mt-4 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-emerald-400 text-xs font-semibold backdrop-blur-md">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            Axonwall v0.16.3 • Lean Core (47 Plugins), Edge-to-Central Telemetry Offload &amp; Hardened WAN Mesh Invites
+            Axonwall {RELEASE_TAG} • Lean Core (47 Plugins), Edge-to-Central Telemetry Offload &amp; Hardened WAN Mesh Invites
           </div>
 
           {/* Heading */}
@@ -165,7 +166,7 @@ export default function HomePage() {
               href="/releases"
               className="w-full sm:w-auto px-6 py-3.5 rounded-xl text-sm font-semibold bg-slate-900/90 hover:bg-slate-800 text-emerald-300 border border-emerald-500/40 transition flex items-center justify-center gap-2"
             >
-              <Download className="w-4 h-4 text-emerald-400" /> Releases &amp; Download ISO (v0.16.3)
+              <Download className="w-4 h-4 text-emerald-400" /> Releases &amp; Download ISO ({RELEASE_TAG})
             </Link>
             <Link
               href="/docs"
@@ -281,7 +282,7 @@ export default function HomePage() {
                 <thead>
                   <tr className="bg-slate-950/90 border-b border-slate-800 text-slate-300">
                     <th className="py-3.5 px-4 font-bold">Capability Domain</th>
-                    <th className="py-3.5 px-4 font-bold text-emerald-400">Axonwall v0.16.3</th>
+                    <th className="py-3.5 px-4 font-bold text-emerald-400">Axonwall {RELEASE_TAG}</th>
                     <th className="py-3.5 px-4 font-bold text-slate-400">OPNsense / pfSense</th>
                     <th className="py-3.5 px-4 font-bold text-slate-400">TrueNAS SCALE</th>
                     <th className="py-3.5 px-4 font-bold text-slate-400">Proxmox VE 8.x</th>
@@ -937,16 +938,16 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Official Release v0.16.3 & Signed Installation Media Section */}
+      {/* Official Release & Signed Installation Media Section */}
       <section id="releases" className="py-24 border-t border-slate-800/80 bg-slate-950/50">
         <div className="max-w-7xl mx-auto px-6 space-y-12">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
             <div className="space-y-3 max-w-2xl">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold">
-                <Download className="w-3.5 h-3.5" /> Official Release • v0.16.3 (2026-11-25 • Signed with RSA-4096 &amp; SHA-256)
+                <Download className="w-3.5 h-3.5" /> Official Release • {RELEASE_TAG} ({RELEASE_DATE} • Signed with RSA-4096 &amp; SHA-256)
               </div>
               <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-                Download Verified v0.16.3 Media
+                Download Verified {RELEASE_TAG} Media
               </h2>
               <p className="text-sm text-slate-400 leading-relaxed">
                 Every release artifact is built deterministically from{' '}
@@ -966,12 +967,12 @@ export default function HomePage() {
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <a
-                href="https://github.com/axonwall/axonwall/releases/tag/v0.16.3"
+                href={GITHUB_RELEASE_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-4 py-3 rounded-xl text-xs font-semibold bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-800 transition flex items-center gap-2"
               >
-                <ExternalLink className="w-3.5 h-3.5 text-emerald-400" /> GitHub v0.16.3
+                <ExternalLink className="w-3.5 h-3.5 text-emerald-400" /> GitHub {RELEASE_TAG}
               </a>
             </div>
           </div>
@@ -992,24 +993,24 @@ export default function HomePage() {
                   Supports ZFSBootMenu v3.1.0, in-kernel Btrfs + Snapper Root RAID-1, mdadm A/B Dual-Root, smart NVMe/SSD/HDD tiering, and LUKS2 + TPM 2.0 auto-unlock.
                 </p>
                 <div className="p-2.5 rounded-lg bg-slate-950 border border-slate-800 font-mono text-[10px] text-slate-400 break-all">
-                  Verification: <span className="text-emerald-400">SHA-256 &amp; RSA-4096 signature published in official v0.16.3 .sha256 / .sha256.sig assets</span>
+                  Verification: <span className="text-emerald-400">SHA-256 &amp; RSA-4096 signature published in official {RELEASE_TAG} .sha256 / .sha256.sig assets</span>
                 </div>
               </div>
               <div className="flex items-center gap-2">
                 <a
-                  href="https://github.com/axonwall/axonwall/releases/download/v0.16.3/axonwall-debian13-amd64.iso"
+                  href={`https://github.com/axonwall/axonwall/releases/download/${RELEASE_TAG}/axonwall-debian13-amd64.iso`}
                   className="flex-1 py-2.5 px-3 rounded-lg text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white transition text-center flex items-center justify-center gap-1.5"
                 >
                   <Download className="w-3.5 h-3.5" /> axonwall-debian13-amd64.iso
                 </a>
                 <a
-                  href="https://github.com/axonwall/axonwall/releases/download/v0.16.3/axonwall-debian13-amd64.iso.sha256"
+                  href={`https://github.com/axonwall/axonwall/releases/download/${RELEASE_TAG}/axonwall-debian13-amd64.iso.sha256`}
                   className="py-2.5 px-2.5 rounded-lg text-[11px] font-mono bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-800"
                 >
                   .sha256
                 </a>
                 <a
-                  href="https://github.com/axonwall/axonwall/releases/download/v0.16.3/axonwall-debian13-amd64.iso.sha256.sig"
+                  href={`https://github.com/axonwall/axonwall/releases/download/${RELEASE_TAG}/axonwall-debian13-amd64.iso.sha256.sig`}
                   className="py-2.5 px-2.5 rounded-lg text-[11px] font-mono bg-slate-950 hover:bg-slate-800 text-emerald-300 border border-emerald-500/30"
                 >
                   .sig
@@ -1033,24 +1034,24 @@ export default function HomePage() {
                   IPv6, and &lt;1.2s RAM boot.
                 </p>
                 <div className="p-2.5 rounded-lg bg-slate-950 border border-slate-800 font-mono text-[10px] text-slate-400 break-all">
-                  Verification: <span className="text-sky-400">SHA-256 &amp; RSA-4096 signature published in official v0.16.3 .sha256 / .sha256.sig assets</span>
+                  Verification: <span className="text-sky-400">SHA-256 &amp; RSA-4096 signature published in official {RELEASE_TAG} .sha256 / .sha256.sig assets</span>
                 </div>
               </div>
               <div className="flex items-center gap-2">
                 <a
-                  href="https://github.com/axonwall/axonwall/releases/download/v0.16.3/axonwall-edge-sku-vm-virtio.efi"
+                  href={`https://github.com/axonwall/axonwall/releases/download/${RELEASE_TAG}/axonwall-edge-sku-vm-virtio.efi`}
                   className="flex-1 py-2.5 px-3 rounded-lg text-xs font-semibold bg-sky-600 hover:bg-sky-500 text-white transition text-center flex items-center justify-center gap-1.5"
                 >
                   <Download className="w-3.5 h-3.5" /> axonwall-edge-sku-vm-virtio.efi
                 </a>
                 <a
-                  href="https://github.com/axonwall/axonwall/releases/download/v0.16.3/axonwall-edge-sku-vm-virtio.efi.sha256"
+                  href={`https://github.com/axonwall/axonwall/releases/download/${RELEASE_TAG}/axonwall-edge-sku-vm-virtio.efi.sha256`}
                   className="py-2.5 px-2.5 rounded-lg text-[11px] font-mono bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-800"
                 >
                   .sha256
                 </a>
                 <a
-                  href="https://github.com/axonwall/axonwall/releases/download/v0.16.3/axonwall-edge-sku-vm-virtio.efi.sha256.sig"
+                  href={`https://github.com/axonwall/axonwall/releases/download/${RELEASE_TAG}/axonwall-edge-sku-vm-virtio.efi.sha256.sig`}
                   className="py-2.5 px-2.5 rounded-lg text-[11px] font-mono bg-slate-950 hover:bg-slate-800 text-sky-300 border border-sky-500/30"
                 >
                   .sig
@@ -1073,24 +1074,24 @@ export default function HomePage() {
                   reconciler, and background first-boot Slot-B synchronization.
                 </p>
                 <div className="p-2.5 rounded-lg bg-slate-950 border border-slate-800 font-mono text-[10px] text-slate-400 break-all">
-                  Verification: <span className="text-purple-400">SHA-256 &amp; RSA-4096 signature published in official v0.16.3 .sha256 / .sha256.sig assets</span>
+                  Verification: <span className="text-purple-400">SHA-256 &amp; RSA-4096 signature published in official {RELEASE_TAG} .sha256 / .sha256.sig assets</span>
                 </div>
               </div>
               <div className="flex items-center gap-2">
                 <a
-                  href="https://github.com/axonwall/axonwall/releases/download/v0.16.3/axonwall-debian13-amd64-cloud.qcow2"
+                  href={`https://github.com/axonwall/axonwall/releases/download/${RELEASE_TAG}/axonwall-debian13-amd64-cloud.qcow2`}
                   className="flex-1 py-2.5 px-3 rounded-lg text-xs font-semibold bg-purple-600 hover:bg-purple-500 text-white transition text-center flex items-center justify-center gap-1.5"
                 >
                   <Download className="w-3.5 h-3.5" /> axonwall-debian13-amd64-cloud.qcow2
                 </a>
                 <a
-                  href="https://github.com/axonwall/axonwall/releases/download/v0.16.3/axonwall-debian13-amd64-cloud.qcow2.sha256"
+                  href={`https://github.com/axonwall/axonwall/releases/download/${RELEASE_TAG}/axonwall-debian13-amd64-cloud.qcow2.sha256`}
                   className="py-2.5 px-2.5 rounded-lg text-[11px] font-mono bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-800"
                 >
                   .sha256
                 </a>
                 <a
-                  href="https://github.com/axonwall/axonwall/releases/download/v0.16.3/axonwall-debian13-amd64-cloud.qcow2.sha256.sig"
+                  href={`https://github.com/axonwall/axonwall/releases/download/${RELEASE_TAG}/axonwall-debian13-amd64-cloud.qcow2.sha256.sig`}
                   className="py-2.5 px-2.5 rounded-lg text-[11px] font-mono bg-slate-950 hover:bg-slate-800 text-purple-300 border border-purple-500/30"
                 >
                   .sig
@@ -1114,24 +1115,24 @@ export default function HomePage() {
                   <code className="text-slate-300">axonwall-vault</code>, <code className="text-slate-300">axonwall-k3s-storage</code>, and <code className="text-slate-300">axonwall-docs</code> assets also published).
                 </p>
                 <div className="p-2.5 rounded-lg bg-slate-950 border border-slate-800 font-mono text-[10px] text-slate-400 break-all">
-                  Verification: <span className="text-emerald-400">SHA-256 &amp; RSA-4096 signature published in official v0.16.3 .sha256 / .sha256.sig assets</span>
+                  Verification: <span className="text-emerald-400">SHA-256 &amp; RSA-4096 signature published in official {RELEASE_TAG} .sha256 / .sha256.sig assets</span>
                 </div>
               </div>
               <div className="flex items-center gap-2">
                 <a
-                  href="https://github.com/axonwall/axonwall/releases/download/v0.16.3/axonwall_0.16.3_amd64.deb"
+                  href={`https://github.com/axonwall/axonwall/releases/download/${RELEASE_TAG}/axonwall_${RELEASE_VERSION}_amd64.deb`}
                   className="flex-1 py-2.5 px-3 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 transition text-center flex items-center justify-center gap-1.5"
                 >
-                  <Download className="w-3.5 h-3.5 text-emerald-400" /> axonwall_0.16.3_amd64.deb
+                  <Download className="w-3.5 h-3.5 text-emerald-400" /> axonwall_{RELEASE_VERSION}_amd64.deb
                 </a>
                 <a
-                  href="https://github.com/axonwall/axonwall/releases/download/v0.16.3/axonwall_0.16.3_amd64.deb.sha256"
+                  href={`https://github.com/axonwall/axonwall/releases/download/${RELEASE_TAG}/axonwall_${RELEASE_VERSION}_amd64.deb.sha256`}
                   className="py-2.5 px-2.5 rounded-lg text-[11px] font-mono bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-800"
                 >
                   .sha256
                 </a>
                 <a
-                  href="https://github.com/axonwall/axonwall/releases/download/v0.16.3/axonwall_0.16.3_amd64.deb.sha256.sig"
+                  href={`https://github.com/axonwall/axonwall/releases/download/${RELEASE_TAG}/axonwall_${RELEASE_VERSION}_amd64.deb.sha256.sig`}
                   className="py-2.5 px-2.5 rounded-lg text-[11px] font-mono bg-slate-950 hover:bg-slate-800 text-emerald-300 border border-emerald-500/30"
                 >
                   .sig
@@ -1159,7 +1160,7 @@ export default function HomePage() {
               Pre-Configured Hardware Appliances
             </h2>
             <p className="text-sm sm:text-base text-slate-400">
-              Factory burned-in, pre-loaded with Axonwall v0.16.3 (ZFSBootMenu / Btrfs + Snapper + TPM 2.0 + Custom Hardened Kernel), and tested for maximum
+              Factory burned-in, pre-loaded with Axonwall {RELEASE_TAG} (ZFSBootMenu / Btrfs + Snapper + TPM 2.0 + Custom Hardened Kernel), and tested for maximum
               thermal reliability. Ships globally with next-day advance hardware replacement.
             </p>
           </div>
@@ -1325,7 +1326,7 @@ export default function HomePage() {
                 href="/releases"
                 className="w-full py-3 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition border border-slate-700 block text-center"
               >
-                Download Community ISO (v0.16.3)
+                Download Community ISO ({RELEASE_TAG})
               </Link>
             </div>
 
@@ -1517,7 +1518,7 @@ export default function HomePage() {
 
           <div className="flex flex-wrap items-center gap-6">
             <Link href="/docs" className="hover:text-slate-300 transition">Docs (26 Guides)</Link>
-            <Link href="/releases" className="hover:text-slate-300 transition">Releases (v0.16.3)</Link>
+            <Link href="/releases" className="hover:text-slate-300 transition">Releases ({RELEASE_TAG})</Link>
             <Link href="/docs/custom-kernel" className="hover:text-slate-300 transition">Custom Kernel</Link>
             <Link href="/docs/mcp-ai-control" className="hover:text-slate-300 transition">MCP AI</Link>
             <Link href="/docs/vigilante-cyber-ops" className="hover:text-slate-300 transition">Vigilante SOC</Link>

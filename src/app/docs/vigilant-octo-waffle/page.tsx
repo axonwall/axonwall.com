@@ -3,11 +3,12 @@ import Link from 'next/link';
 import { Shield, Layers, GitBranch, Lock, Cpu, Eye, Terminal, Server } from 'lucide-react';
 import { Callout } from '../components/Callout';
 import { CodeBlock } from '../components/CodeBlock';
+import { RELEASE_TAG } from '@/lib/release';
 
 export const metadata = {
   title: 'Vigilant Octo Waffle (VOW) GitOps & DevSecOps Stack | Axonwall Documentation',
   description:
-    'Turnkey Zero-Trust K3s GitOps and DevSecOps on Axonwall v0.16.3: Argo CD / Flux, Gitea, Tekton, HashiCorp Vault, DefectDojo, Wazuh SIEM, Cilium eBPF, Tetragon, and zero-touch OpenLDAP RBAC.',
+    `Turnkey Zero-Trust K3s GitOps and DevSecOps on Axonwall ${RELEASE_TAG}: Argo CD / Flux, Gitea, Tekton, HashiCorp Vault, DefectDojo, Wazuh SIEM, Cilium eBPF, Tetragon, and zero-touch OpenLDAP RBAC.`,
 };
 
 export default function VigilantOctoWaffleDocPage() {
@@ -17,7 +18,7 @@ export default function VigilantOctoWaffleDocPage() {
       <div className="space-y-4 border-b border-slate-800/80 pb-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-          K3s SecOps &amp; DevSecOps Orchestration • Requires core-k3s • v0.16.3
+          K3s SecOps &amp; DevSecOps Orchestration • Requires core-k3s • {RELEASE_TAG}
         </div>
         <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
           Vigilant Octo Waffle (VOW) DevSecOps &amp; GitOps Platform

@@ -3,11 +3,12 @@ import Link from 'next/link';
 import { GitBranch, History, ShieldCheck, CheckCircle2, RotateCcw, FileDiff } from 'lucide-react';
 import { Callout } from '../components/Callout';
 import { CodeBlock } from '../components/CodeBlock';
+import { RELEASE_TAG } from '@/lib/release';
 
 export const metadata = {
   title: 'GitOps Configuration Versioning & Etckeeper /etc Audit | Axonwall Documentation',
   description:
-    'Git-backed declarative YAML configuration versioning (/var/lib/axonwall/gitops), unified diff inspection, 1-click rollback, and Etckeeper /etc host configuration auditing (etckeeper-audit plugin) in Axonwall v0.16.3.',
+    `Git-backed declarative YAML configuration versioning (/var/lib/axonwall/gitops), unified diff inspection, 1-click rollback, and Etckeeper /etc host configuration auditing (etckeeper-audit plugin) in Axonwall ${RELEASE_TAG}.`,
 };
 
 export default function GitOpsAuditDocPage() {
@@ -17,7 +18,7 @@ export default function GitOpsAuditDocPage() {
       <div className="space-y-4 border-b border-slate-800/80 pb-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-          Version Control &amp; Compliance Audit • v0.16.3
+          Version Control &amp; Compliance Audit • {RELEASE_TAG}
         </div>
         <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
           GitOps Configuration &amp; Etckeeper /etc Audit Trail

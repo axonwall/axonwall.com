@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Settings, RefreshCw, Building2, HardDrive, ShieldCheck, CheckCircle2, Download, GitBranch, Cpu } from 'lucide-react';
+import { RELEASE_TAG } from '@/lib/release';
 
 export function SystemView() {
   const [activeTab, setActiveTab] = useState<'ab' | 'git' | 'sso' | 'backup' | 'kernel'>('ab');
@@ -115,7 +116,7 @@ export function SystemView() {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-slate-500">OS Version:</span>
-                  <span className="text-emerald-400">Axonwall v0.16.3 (Stable)</span>
+                  <span className="text-emerald-400">Axonwall {RELEASE_TAG} (Stable)</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-slate-500">Kernel / Boot:</span>

@@ -25,6 +25,7 @@ import { TerminalView } from './views/TerminalView';
 import { SystemView } from './views/SystemView';
 import { AiCopilotView } from './views/AiCopilotView';
 import { ConvergedPlatformView } from './views/ConvergedPlatformView';
+import { RELEASE_TAG } from '@/lib/release';
 
 export function DemoShell() {
   const searchParams = useSearchParams();
@@ -131,7 +132,7 @@ export function DemoShell() {
           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
           <span className="font-semibold text-emerald-300">LIVE INTERACTIVE SANDBOX</span>
           <span className="text-slate-500">•</span>
-          <span className="hidden sm:inline">Simulated Axonwall v0.16.3 Appliance</span>
+          <span className="hidden sm:inline">Simulated Axonwall {RELEASE_TAG} Appliance</span>
           <span className="text-slate-500 hidden sm:inline">•</span>
           <span className="font-mono text-slate-400">Web Console Port 2966</span>
         </div>

@@ -2,11 +2,12 @@ import React from 'react';
 import { Cpu, Layers, ShieldCheck, RefreshCw, Terminal } from 'lucide-react';
 import { Callout } from '../components/Callout';
 import { CodeBlock } from '../components/CodeBlock';
+import { RELEASE_TAG } from '@/lib/release';
 
 export const metadata = {
   title: 'Axonwall Architecture | Linux nftables, 14-Domain YAML & Boot Engines',
   description:
-    'Deep-dive into Axonwall v0.16.3 architecture: Linux nftables + eBPF XDP multi-core scaling, Lean Router/NGFW Core defaults, 14 declarative /etc/axonwall/*.yaml domains, Junos-style commit-confirm, A/B Dual-Root, Btrfs + Snapper & ZFSBootMenu updates, and Go daemon IPC.',
+    `Deep-dive into Axonwall ${RELEASE_TAG} architecture: Linux nftables + eBPF XDP multi-core scaling, Lean Router/NGFW Core defaults, 14 declarative /etc/axonwall/*.yaml domains, Junos-style commit-confirm, A/B Dual-Root, Btrfs + Snapper & ZFSBootMenu updates, and Go daemon IPC.`,
 };
 
 export default function ArchitectureDocPage() {
@@ -16,7 +17,7 @@ export default function ArchitectureDocPage() {
       <div className="space-y-4 border-b border-slate-800/80 pb-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-          Core Subsystems • v0.16.3
+          Core Subsystems • {RELEASE_TAG}
         </div>
         <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
           System Architecture &amp; Engine

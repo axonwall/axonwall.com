@@ -15,6 +15,7 @@ import {
   ArrowUpRight,
   Sparkles,
 } from 'lucide-react';
+import { RELEASE_TAG } from '@/lib/release';
 
 export const HeroSecurityHUD: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'stream' | 'nftables' | 'threats'>('stream');
@@ -56,7 +57,7 @@ export const HeroSecurityHUD: React.FC = () => {
               LIVE TELEMETRY
             </span>
             <span className="text-xs font-mono text-slate-400 hidden sm:inline">
-              Axonwall v0.16.3 • Lean Core (47 Plugins) • Linux 6.12 LTS • Dual-Stack XDP + 5-Hook BPF-LSM + BPF_TOKEN
+              Axonwall {RELEASE_TAG} • Lean Core (47 Plugins) • Linux 6.12 LTS • Dual-Stack XDP + 5-Hook BPF-LSM + BPF_TOKEN
             </span>
           </div>
         </div>

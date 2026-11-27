@@ -444,6 +444,7 @@ export const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({
                   <a
                     href="/docs/themes"
                     target="_blank"
+                    rel="noopener noreferrer"
                     className="text-[10px] text-emerald-400 hover:underline flex items-center gap-0.5"
                   >
                     Format Docs <ExternalLink className="w-2.5 h-2.5" />
